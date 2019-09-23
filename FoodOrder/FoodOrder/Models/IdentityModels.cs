@@ -29,5 +29,7 @@ namespace FoodOrder.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<RoleViewModel> IdentityRoles { get; set; }
     }
 }

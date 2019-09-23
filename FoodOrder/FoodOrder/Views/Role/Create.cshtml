@@ -1,0 +1,15 @@
+﻿@model FoodOrder.Models.CreateRoleModel
+
+<h2>Добавление роли</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "")
+        <p>Name user role (only english):  @Html.EditorFor(model => model.Name)</p>
+        <p>Описание: @Html.EditorFor(model => model.Description)</p>
+        <p><input type="submit" value="Добавить" /></p>
+    </div>
+}

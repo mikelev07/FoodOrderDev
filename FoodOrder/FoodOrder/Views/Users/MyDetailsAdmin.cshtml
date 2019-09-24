@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FoodOrder.Models.User>
+
+@{
+    ViewBag.Title = "Личный кабинет администратора";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Личный кабинет</h2>
+
+<p>
+    @Html.ActionLink("Создать новую компанию", "CreateCompany", "Users")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Выслать пароль", "", "") |
+            @Html.ActionLink("Редактировать", "EditCompany", "Users", new { id = item.Id }) |
+            @Html.ActionLink("Детали", "Details", "Users", new { id = item.Id }) |
+            @Html.ActionLink("Удалить", "DeleteCompany", "Users", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

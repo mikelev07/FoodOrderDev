@@ -10,12 +10,35 @@ using System.Web.Mvc;
 using FoodOrder.Models;
 using Microsoft.AspNet.Identity;
 using System.Web.Security;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace FoodOrder.Controllers
 {
     public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
+
+        public UsersController()
+        {
+          
+        }
+        public UsersController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); ;
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Users
         public async Task<ActionResult> Index()
@@ -28,31 +51,18 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> MyDetails()
         {
             var username = User.Identity.GetUserName();
-            if (Roles.IsUserInRole(username, "admin"))
+
+            var uId = User.Identity.GetUserId();
+            //var roles = UserManager.rol.GetRoles(uId);
+
+            if (await UserManager.IsInRoleAsync(uId, "admin"))
             {
-                var companiesNames = Roles.GetUsersInRole("company");
-                var companies = await db.Users.Where(m => companiesNames.Contains(m.UserName)).ToListAsync();
+                var compamyRoleId = db.Roles.Where(c => c.Name == "company").FirstOrDefault().Id;
+                var companies = db.Users.Where(c => c.Roles.FirstOrDefault().RoleId == compamyRoleId);
+                //var companies = await db.Users.Where(m => companiesNames.Contains(m.UserName)).ToListAsync();
                 return View("MyDetailsAdmin", companies);
             }
-            if (Roles.IsUserInRole(username, "company"))
-            {
-                return View("MyDetailsCompany");
-            }
-            if (Roles.IsUserInRole(username, "cook"))
-            {
-                return View("MyDetailsCook");
-            }
-            if (Roles.IsUserInRole(username, "employee"))
-            {
-                return View("MyDetailsEmployee");
-            }
-            /*if (HttpContext.User.IsInRole("admin"))
-            {
-                var companiesNames = Roles.GetUsersInRole("company");
-                var companies = await db.Users.Where(m => companiesNames.Contains(m.UserName)).ToListAsync();
-                return View("MyDetailsAdmin", companies);
-            }
-            if (HttpContext.User.IsInRole("company"))
+          /*  if (HttpContext.User.IsInRole("company"))
             {
                 return View("MyDetailsCompany");
             }

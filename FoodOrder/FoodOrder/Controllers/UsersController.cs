@@ -50,30 +50,26 @@ namespace FoodOrder.Controllers
         [Authorize]
         public async Task<ActionResult> MyDetails()
         {
-            var username = User.Identity.GetUserName();
+            var userId = User.Identity.GetUserId();
 
-            var uId = User.Identity.GetUserId();
-            //var roles = UserManager.rol.GetRoles(uId);
-
-            if (await UserManager.IsInRoleAsync(uId, "admin"))
+            if (await UserManager.IsInRoleAsync(userId, "admin"))
             {
-                var compamyRoleId = db.Roles.Where(c => c.Name == "company").FirstOrDefault().Id;
-                var companies = db.Users.Where(c => c.Roles.FirstOrDefault().RoleId == compamyRoleId);
-                //var companies = await db.Users.Where(m => companiesNames.Contains(m.UserName)).ToListAsync();
+                var companyRoleId = (await db.Roles.Where(c => c.Name == "company").FirstOrDefaultAsync()).Id;
+                var companies = await db.Users.Where(c => c.Roles.FirstOrDefault().RoleId == companyRoleId).ToListAsync();
                 return View("MyDetailsAdmin", companies);
             }
-          /*  if (HttpContext.User.IsInRole("company"))
+            if (await UserManager.IsInRoleAsync(userId, "company"))
             {
                 return View("MyDetailsCompany");
             }
-            if (HttpContext.User.IsInRole("cook"))
+            if (await UserManager.IsInRoleAsync(userId, "cook"))
             {
                 return View("MyDetailsCook");
             }
-            if (HttpContext.User.IsInRole("employee"))
+            if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
                 return View("MyDetailsEmployee");
-            }*/
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -101,21 +97,28 @@ namespace FoodOrder.Controllers
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Users/CreateCompany
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateCompany([Bind(Include = "Id,SecondName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
+        public async Task<ActionResult> CreateCompany(RegisterViewModel companyViewModel)
         {
-            if (ModelState.IsValid)
+            //пока так 
+            if (/*ModelState.IsValid*/true)
             {
-                db.Users.Add(user);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var newRandomPassword = CreateRandomPassword();
+
+                var user = new User { UserName = companyViewModel.Email, Email = companyViewModel.Email };
+                var result = await UserManager.CreateAsync(user, newRandomPassword);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "company");
+                    return RedirectToAction("MyDetails", "Users");
+                }
             }
 
-            return View(user);
+            return View(companyViewModel);
         }
 
         // GET: Users/Edit/5

@@ -1,8 +1,8 @@
-﻿@model IEnumerable<FoodOrder.Models.User>
+﻿@model IEnumerable<FoodOrder.Models.Company>
 
 @{
+    Layout = null;
     ViewBag.Title = "Личный кабинет администратора";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Личный кабинет</h2>
@@ -13,35 +13,54 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.TypeOfPayment)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model.UnlimitedOrders)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Representative.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Representative.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Representative.PhoneNumber)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.ActionLink("Выслать пароль", "", "") |
-            @Html.ActionLink("Редактировать", "EditCompany", "Users", new { id = item.Id }) |
-            @Html.ActionLink("Детали", "Details", "Users", new { id = item.Id }) |
-            @Html.ActionLink("Удалить", "DeleteCompany", "Users", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnlimitedOrders)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Representative.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Representative.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Representative.PhoneNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Выслать пароль", "", "") |
+                @Html.ActionLink("Редактировать", "EditCompany", "Users", new { id = item.Id }) |
+                @Html.ActionLink("Подробнее", "Details", "Users", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "DeleteCompany", "Users", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

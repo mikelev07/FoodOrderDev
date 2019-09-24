@@ -196,9 +196,14 @@
     <Compile Include="Migrations\201909231238359_addUserModel.Designer.cs">
       <DependentUpon>201909231238359_addUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909242204088_IdentityAndCompanyMigration.cs" />
+    <Compile Include="Migrations\201909242204088_IdentityAndCompanyMigration.Designer.cs">
+      <DependentUpon>201909242204088_IdentityAndCompanyMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -379,10 +384,15 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Users\CreateCompany.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\DetailsCompany.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\MyDetailsAdmin.cshtml" />
+    <Content Include="Views\Users\MyDetailsCompany.cshtml" />
+    <Content Include="Views\Users\MyDetailsCook.cshtml" />
+    <Content Include="Views\Users\MyDetailsEmployee.cshtml" />
+    <Content Include="Views\Users\DeleteCompany.cshtml" />
+    <Content Include="Views\Users\EditCompany.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -406,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909231238359_addUserModel.resx">
       <DependentUpon>201909231238359_addUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909242204088_IdentityAndCompanyMigration.resx">
+      <DependentUpon>201909242204088_IdentityAndCompanyMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

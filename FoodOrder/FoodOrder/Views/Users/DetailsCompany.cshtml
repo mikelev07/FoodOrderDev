@@ -1,0 +1,61 @@
+﻿@model FoodOrder.Models.Company
+
+@{
+    Layout = null;
+    ViewBag.Title = "Подробная информация о компании";
+}
+
+<h2>Подробная информация</h2>
+
+<div>
+    <h4>Компания @Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfPayment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfPayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnlimitedOrders)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnlimitedOrders)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Representative.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Representative.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Representative.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Representative.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Representative.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Representative.PhoneNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "EditCompany", new { id =  Model.Id }) |
+    @Html.ActionLink("Вернуться", "MyDetails", "Users")
+</p>

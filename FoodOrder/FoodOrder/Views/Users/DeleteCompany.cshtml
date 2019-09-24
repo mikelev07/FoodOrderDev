@@ -1,0 +1,63 @@
+﻿@model FoodOrder.Models.Company
+
+@{
+    Layout = null;
+    ViewBag.Title = "Удаление компании";
+}
+
+<h3>Вы действительно хотите удалить эту компанию?</h3>
+<div>
+    <h4>Компания</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfPayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfPayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnlimitedOrders)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnlimitedOrders)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logotype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Logotype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Representative.SecondName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Representative.SecondName)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Подтвердить удаление" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться в личный кабинет", "MyDetails", "Users")
+        </div>
+    }
+</div>

@@ -178,9 +178,12 @@ namespace FoodOrder.Controllers
                 var company = new Company {
                     Id=cvm.Id,
                     Name = cvm.Name,
-                    Logotype = cvm.Logotype,
+                    Logotype = cvm?.Logotype,
                     TypeOfPayment = cvm.TypeOfPayment,
-                    UnlimitedOrders = cvm.UnlimitedOrders
+                    UnlimitedOrders = cvm.UnlimitedOrders, 
+                    Description = cvm?.Description,
+                    Whatsapp = cvm?.Whatsapp,
+                    Telegram = cvm?.Telegram
                 };
 
                 var newRandomPassword = CreateRandomPassword();

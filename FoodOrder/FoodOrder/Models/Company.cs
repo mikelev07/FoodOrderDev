@@ -13,7 +13,10 @@ namespace FoodOrder.Models
         public string Logotype { get; set; } /*= "~/Content/Custom/images/some-company-logotype.jpg";*/
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
+        public string Description { get; set; }
         public string RepresentativeLogin { get; set; }
+        public string Whatsapp { get; set; }
+        public string Telegram { get; set; }
     }
     public class Company
     {
@@ -22,6 +25,9 @@ namespace FoodOrder.Models
         public string Logotype { get; set; } /*= "~/Content/Custom/images/some-company-logotype.jpg";*/
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
+        public string Whatsapp { get; set; }
+        public string Telegram { get; set; }
+        public string Description { get; set; }
         public string RepresentativeId { get; set; }
         public virtual User Representative { get; set; }
         public List<User> Employees { get; set; }

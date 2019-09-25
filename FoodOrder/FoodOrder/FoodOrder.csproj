@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201909242204088_IdentityAndCompanyMigration.Designer.cs">
       <DependentUpon>201909242204088_IdentityAndCompanyMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909250747024_UserViewModelAndCompanyViewModel.cs" />
+    <Compile Include="Migrations\201909250747024_UserViewModelAndCompanyViewModel.Designer.cs">
+      <DependentUpon>201909250747024_UserViewModelAndCompanyViewModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -420,6 +424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909242204088_IdentityAndCompanyMigration.resx">
       <DependentUpon>201909242204088_IdentityAndCompanyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909250747024_UserViewModelAndCompanyViewModel.resx">
+      <DependentUpon>201909250747024_UserViewModelAndCompanyViewModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

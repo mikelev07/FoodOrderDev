@@ -1,66 +1,121 @@
 ﻿@model IEnumerable<FoodOrder.Models.Company>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = "Личный кабинет администратора";
 }
 
-<h2>Личный кабинет</h2>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1>Личный кабинет</h1>
 
-<p>
-    @Html.ActionLink("Создать новую компанию", "CreateCompany", "Users")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeOfPayment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnlimitedOrders)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Representative.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Representative.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Representative.PhoneNumber)
-        </th>
-        <th></th>
-    </tr>
+                <div class="separator mb-5"></div>
+            </div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfPayment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnlimitedOrders)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Representative.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Representative.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Representative.PhoneNumber)
-            </td>
-            <td>
-                @Html.ActionLink("Выслать пароль", "", "") |
-                @Html.ActionLink("Редактировать", "EditCompany", "Users", new { id = item.Id}, null) |
-                @Html.ActionLink("Подробнее", "Details", "Users", new { id = item.Id}, null) |
-                @Html.ActionLink("Удалить", "DeleteCompany", "Users", new { id = item.Id}, null)
-            </td>
-        </tr>
-    }
+            <div class="col-xl-12 mb-4">
+                <div class="row sortable">
+                    <div class="col-xl-3 col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header p-0 position-relative">
 
-</table>
+                            </div>
+                            <a href="/Users/CreateCompany">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0">Добавить компанию</h6>
+                                    <i style="font-size: 25px;" class=iconsminds-add></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12 list" data-check-all="checkAll">
+
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="card d-flex flex-row mb-3">
+                                <div class="d-flex flex-grow-1 min-width-zero">
+                                    <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="Pages.Product.Detail.html">
+                                            Компания
+                                        </a>
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">Категория</p>
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">02.04.2018</p>
+                                        <div class="w-15 w-xs-100">
+                                            <span class="badge badge-pill badge-secondary">Не подтвержено</span>
+                                        </div>
+                                    </div>
+                                    <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                        <a href="#" class="btn btn-primary btn-multiple-state btn-xs" id="successButton">
+                                            <div class="spinner d-inline-block">
+                                                <div class="bounce1"></div>
+                                                <div class="bounce2"></div>
+                                                <div class="bounce3"></div>
+                                            </div>
+                                            <span class="icon success" data-toggle="tooltip" data-placement="top"
+                                                  title="Пароль успешно сгенерирован и отправлен на почту представителю!">
+                                                <i class="simple-icon-check"></i>
+                                            </span>
+                                            <span class="icon fail" data-toggle="tooltip" data-placement="top"
+                                                  title="Неудачно!">
+                                                <i class="simple-icon-exclamation"></i>
+                                            </span>
+                                            <span class="label">Сгенерировать пароль</span>
+                                        </a>
+                                        <button class="btn btn-header-light icon-button">
+                                            <i class="simple-icon-pencil"></i>
+                                        </button>
+                                    </label>
+                                </div>
+                            </div>
+                        }
+
+
+
+                            <nav class="mt-4 mb-3">
+                                <ul class="pagination justify-content-center mb-0">
+                                    <li class="page-item ">
+                                        <a class="page-link first" href="#">
+                                            <i class="simple-icon-control-start"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item ">
+                                        <a class="page-link prev" href="#">
+                                            <i class="simple-icon-arrow-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
+                                    <li class="page-item ">
+                                        <a class="page-link" href="#">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">3</a>
+                                    </li>
+                                    <li class="page-item ">
+                                        <a class="page-link next" href="#" aria-label="Next">
+                                            <i class="simple-icon-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item ">
+                                        <a class="page-link last" href="#">
+                                            <i class="simple-icon-control-end"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                </div>
+
+            </div>
+
+           
+        </div>
+    </div>
+</main>

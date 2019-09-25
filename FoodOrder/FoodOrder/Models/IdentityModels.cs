@@ -30,7 +30,9 @@ namespace FoodOrder.Models
     public class User : IdentityUser
     {
         public string SecondName { get; set; }
-       
+        public string CompanyId { get; set; }
+        public Company Company { get; set; }
+
         public User()
         {
       
@@ -55,6 +57,11 @@ namespace FoodOrder.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Company>().HasMany(m => m.Employees);
+            modelBuilder.Entity<User>()
+                .HasOptional(m=>m.Company)
+                .WithMany(m=>m.Employees)
+                .HasForeignKey(m=>m.CompanyId)
+                .WillCascadeOnDelete(true);
         }
 
         public static ApplicationDbContext Create()

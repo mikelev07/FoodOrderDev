@@ -13,7 +13,7 @@
         <h4>Компания @Model.Name</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        @Html.HiddenFor(m=>m.Id)
         <div class="form-group">
             @Html.LabelFor(model => model.Name, "Название компании", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

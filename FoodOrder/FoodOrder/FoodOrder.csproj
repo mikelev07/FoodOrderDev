@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201909250747024_UserViewModelAndCompanyViewModel.Designer.cs">
       <DependentUpon>201909250747024_UserViewModelAndCompanyViewModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909251002100_IdentityModelBuilderMigration.cs" />
+    <Compile Include="Migrations\201909251002100_IdentityModelBuilderMigration.Designer.cs">
+      <DependentUpon>201909251002100_IdentityModelBuilderMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -398,6 +402,7 @@
     <Content Include="Views\Users\EditCompany.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\DetailsEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -427,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909250747024_UserViewModelAndCompanyViewModel.resx">
       <DependentUpon>201909250747024_UserViewModelAndCompanyViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909251002100_IdentityModelBuilderMigration.resx">
+      <DependentUpon>201909251002100_IdentityModelBuilderMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

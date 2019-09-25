@@ -1,4 +1,4 @@
-﻿@model FoodOrder.Models.Company
+﻿@model FoodOrder.Models.CompanyViewModel
 
 @{
     Layout = null;
@@ -32,30 +32,8 @@
             @Html.DisplayFor(model => model.UnlimitedOrders)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Representative.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Representative.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Representative.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Representative.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Representative.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Representative.PhoneNumber)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Редактировать", "EditCompany", new { id =  Model.Id }) |
-    @Html.ActionLink("Вернуться", "MyDetails", "Users")
+    @Html.ActionLink("Вернуться в личный кабинет", "MyDetails", "Users")
 </p>

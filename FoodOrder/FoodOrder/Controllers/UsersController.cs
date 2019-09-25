@@ -11,6 +11,7 @@ using FoodOrder.Models;
 using Microsoft.AspNet.Identity;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity.Validation;
 
 namespace FoodOrder.Controllers
 {
@@ -59,7 +60,7 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
-                var company = await db.Companies.Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
+                var company = await db.Companies.Include(c=>c.Employees).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
                 var employees = company.Employees.ToList();
                 ViewBag.CompanyName = company.Name;
                 return View("MyDetailsCompany", employees);
@@ -95,7 +96,14 @@ namespace FoodOrder.Controllers
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
                 var company = await db.Companies.Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
-                return View("DetailsCompany", company);
+                var cvm = new CompanyViewModel
+                {
+                    Name = company.Name,
+                    Logotype = company.Logotype,
+                    TypeOfPayment = company.TypeOfPayment,
+                    UnlimitedOrders = company.UnlimitedOrders
+                };
+                return View("DetailsCompany", cvm);
             }
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {
@@ -127,13 +135,16 @@ namespace FoodOrder.Controllers
             uvm.Id = Guid.NewGuid().ToString();
             if (ModelState.IsValid)
             {
+                var currentUserId = User.Identity.GetUserId();
+                var companyId = (await db.Companies.Where(c => c.RepresentativeId == currentUserId).FirstOrDefaultAsync()).Id;
                 var newRandomPassword = CreateRandomPassword();
                 var user = new User {
                     Id=uvm.Id,
                     UserName = uvm.Email,
                     SecondName = uvm.SecondName,
                     Email = uvm.Email,
-                    PhoneNumber = uvm.PhoneNumber
+                    PhoneNumber = uvm.PhoneNumber,
+                    CompanyId = companyId
                 };
 
                 var result = await UserManager.CreateAsync(user, newRandomPassword);
@@ -175,13 +186,19 @@ namespace FoodOrder.Controllers
                 var newRandomPassword = CreateRandomPassword();
                 //куда в юзера логин засунуть???
                 //создать на вьюхе могу, но как его передать в нового юзера - хз
-                var newRepresentative = new User();
+                var newRepresentative = new User {
+                    Email=cvm.RepresentativeLogin,
+                    UserName = cvm.RepresentativeLogin
+                };
 
                 var result = await UserManager.CreateAsync(newRepresentative, newRandomPassword);
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(newRepresentative.Id, "representative");
-                    company.Representative = newRepresentative;
+                    company.RepresentativeId = newRepresentative.Id;
+                    db.Companies.Add(company);
+                    await db.SaveChangesAsync();
+
                     return RedirectToAction("MyDetails", "Users");
                 }
             }
@@ -220,11 +237,11 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserName,SecondName,Email,PhoneNumber")] UserViewModel uvm)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserName,SecondName,Email,PhoneNumber")] UserViewModel uvm)
         {
             if (ModelState.IsValid)
             {
-                var user = await db.Users.Where(u => u.Email == uvm.Email).FirstOrDefaultAsync();
+                var user = await db.Users.Where(u => u.Id==uvm.Id).FirstOrDefaultAsync();
                 user.UserName = uvm.UserName;
                 user.SecondName = uvm.SecondName;
                 user.Email = uvm.Email;
@@ -255,10 +272,7 @@ namespace FoodOrder.Controllers
                 Name = company.Name,
                 Logotype = company.Logotype,
                 TypeOfPayment = company.TypeOfPayment,
-                UnlimitedOrders = company.UnlimitedOrders,
-                //откуда взять логин у юзера?? та же проблема при создании компании: см. CreateCompany
-                //пока захардкодил
-                RepresentativeLogin = "pisos"
+                UnlimitedOrders = company.UnlimitedOrders
             };
             return View(cvm);
         }
@@ -268,11 +282,11 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditCompany([Bind(Include = "Name,Logotype,TypeOfPayment,UnlimitedOrders")] CompanyViewModel cvm)
+        public async Task<ActionResult> EditCompany([Bind(Include = "Id,Name,Logotype,TypeOfPayment,UnlimitedOrders")] CompanyViewModel cvm)
         {
             if (ModelState.IsValid)
             {
-                var company = await db.Companies.Where(c => c.Name == cvm.Name).FirstOrDefaultAsync();
+                var company = await db.Companies.Where(c => c.Id == cvm.Id).FirstOrDefaultAsync();
                 company.Name = cvm.Name;
                 company.Logotype = cvm.Logotype;
                 company.TypeOfPayment = cvm.TypeOfPayment;
@@ -285,6 +299,41 @@ namespace FoodOrder.Controllers
         }
 
         // GET: Users/Delete/5
+        [Authorize(Roles = "admin, representative")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await db.Users.Where(c => c.Id == id).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var uvm = new UserViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                SecondName = user.SecondName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
+            };
+            return View(uvm);
+        }
+
+        // POST: Users/DeleteConfirmed/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            var user = await db.Users.Where(c => c.Id == id).FirstOrDefaultAsync();
+            db.Users.Remove(user);
+            await db.SaveChangesAsync();
+            return RedirectToAction("MyDetails", "Users");
+        }
+
+        // GET: Users/DeleteCompany/5
         [Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteCompany(string id)
         {
@@ -292,23 +341,31 @@ namespace FoodOrder.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = await db.Users.Where(i => id == i.Id).FirstOrDefaultAsync();
-            if (user == null)
+            var company = await db.Companies.Where(c => c.Id == id).FirstOrDefaultAsync();
+            if (company == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            var cvm = new CompanyViewModel
+            {
+                Id = company.Id,
+                Name = company.Name,
+                Logotype = company.Logotype,
+                TypeOfPayment = company.TypeOfPayment,
+                UnlimitedOrders = company.UnlimitedOrders
+            };
+            return View(cvm);
         }
 
-        // POST: Users/Delete/5
+        // POST: Users/DeleteCompanyConfirmed/5
         [HttpPost, ActionName("DeleteCompany")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteCompanyConfirmed(string id)
         {
-            User user = await db.Users.Where(i => id == i.Id).FirstOrDefaultAsync();
-            db.Users.Remove(user);
+            var company = await db.Companies.Where(c => c.Id == id).FirstOrDefaultAsync();
+            db.Companies.Remove(company);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyDetails", "Users");
         }
 
         public string CreateRandomPassword()

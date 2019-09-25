@@ -8,7 +8,7 @@
 <h2>Компания @ViewBag.CompanyName</h2>
 
 <p>
-    @Html.ActionLink("Добавить нового сотрудника", "CreateEmployee", "Users")
+    @Html.ActionLink("Добавить нового сотрудника", "Create", "Users")
 </p>
 <table class="table">
     <tr>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.ActionLink("Редактировать", "EditEmployee", "Users", new { id = item.Id }) |
-                @Html.ActionLink("Подробнее", "Details", "Users", new { id = item.Id }) |
-                @Html.ActionLink("Удалить", "DeleteEmployee", "Users", new { id = item.Id })
+                @Html.ActionLink("Редактировать", "Edit", "Users", new { id = item.Id }, null) |
+                @Html.ActionLink("Подробнее", "Details", "Users", new { id = item.Id }, null) |
+                @Html.ActionLink("Удалить", "Delete", "Users", new { id = item.Id }, null)
             </td>
         </tr>
     }

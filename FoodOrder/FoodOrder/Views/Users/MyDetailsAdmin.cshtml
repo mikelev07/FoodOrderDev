@@ -56,9 +56,9 @@
             </td>
             <td>
                 @Html.ActionLink("Выслать пароль", "", "") |
-                @Html.ActionLink("Редактировать", "EditCompany", "Users", new { id = item.Id }) |
-                @Html.ActionLink("Подробнее", "Details", "Users", new { id = item.Id }) |
-                @Html.ActionLink("Удалить", "DeleteCompany", "Users", new { id = item.Id })
+                @Html.ActionLink("Редактировать", "EditCompany", "Users", new { id = item.Id}, null) |
+                @Html.ActionLink("Подробнее", "Details", "Users", new { id = item.Id}, null) |
+                @Html.ActionLink("Удалить", "DeleteCompany", "Users", new { id = item.Id}, null)
             </td>
         </tr>
     }

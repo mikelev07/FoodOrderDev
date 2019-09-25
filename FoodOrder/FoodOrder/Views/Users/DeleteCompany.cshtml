@@ -1,4 +1,4 @@
-﻿@model FoodOrder.Models.Company
+﻿@model FoodOrder.Models.CompanyViewModel
 
 @{
     Layout = null;
@@ -10,6 +10,7 @@
     <h4>Компания</h4>
     <hr />
     <dl class="dl-horizontal">
+        @Html.HiddenFor(model=>model.Id)
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -40,14 +41,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Logotype)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Representative.SecondName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Representative.SecondName)
         </dd>
     </dl>
 

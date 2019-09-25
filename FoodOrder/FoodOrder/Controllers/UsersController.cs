@@ -124,11 +124,12 @@ namespace FoodOrder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(UserViewModel uvm)
         {
-            //пока так 
-            if (/*ModelState.IsValid*/true)
+            uvm.Id = Guid.NewGuid().ToString();
+            if (ModelState.IsValid)
             {
                 var newRandomPassword = CreateRandomPassword();
                 var user = new User {
+                    Id=uvm.Id,
                     UserName = uvm.Email,
                     SecondName = uvm.SecondName,
                     Email = uvm.Email,
@@ -160,9 +161,11 @@ namespace FoodOrder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateCompany(CompanyViewModel cvm)
         {
+            cvm.Id = Guid.NewGuid().ToString();
             if (ModelState.IsValid)
             {
                 var company = new Company {
+                    Id=cvm.Id,
                     Name = cvm.Name,
                     Logotype = cvm.Logotype,
                     TypeOfPayment = cvm.TypeOfPayment,
@@ -203,6 +206,7 @@ namespace FoodOrder.Controllers
 
             var uvm = new UserViewModel
             {
+                Id = user.Id,
                 UserName = user.UserName,
                 SecondName = user.SecondName,
                 Email = user.Email,
@@ -247,6 +251,7 @@ namespace FoodOrder.Controllers
             }
             var cvm = new CompanyViewModel
             {
+                Id = company.Id,
                 Name = company.Name,
                 Logotype = company.Logotype,
                 TypeOfPayment = company.TypeOfPayment,

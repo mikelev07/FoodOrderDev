@@ -8,6 +8,7 @@ namespace FoodOrder.Models
 {
     public class CompanyViewModel
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Logotype { get; set; } /*= "~/Content/Custom/images/some-company-logotype.jpg";*/
         public TypeOfPayment TypeOfPayment { get; set; }

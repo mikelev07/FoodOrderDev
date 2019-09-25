@@ -393,6 +393,7 @@
     <Content Include="Views\Users\DeleteCompany.cshtml" />
     <Content Include="Views\Users\EditCompany.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

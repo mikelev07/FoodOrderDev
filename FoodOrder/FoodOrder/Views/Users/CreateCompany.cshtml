@@ -1,82 +1,120 @@
 ﻿@model FoodOrder.Models.CompanyViewModel
 
 @{
-    Layout = null;
-    ViewBag.Title = "Создание новой компании";
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
+    ViewBag.Title = "Создание компании";
 }
-
-<h2>Создать компанию</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, "Название компании", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Logotype, "Логотип", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Logotype, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Logotype, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.TypeOfPayment, "Способ оплаты", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.TypeOfPayment, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.TypeOfPayment, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    <h1>Создание компании</h1>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UnlimitedOrders, "Неограниченное кол-во заказов", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.UnlimitedOrders, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UnlimitedOrders, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    <div class="separator mb-5"></div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Whatsapp, "Группа для Whatsapp", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Whatsapp, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Whatsapp, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Telegram, "Группа для Telegram", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Telegram, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Telegram, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="row">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.RepresentativeLogin, "Логин для представителя компании", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.RepresentativeLogin, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RepresentativeLogin, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="col-12 col-lg-6 mb-5">
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Подтвердить" class="btn btn-default" />
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-4">Форма создания</h5>
+                            <form class="needs-validation tooltip-label-right" novalidate>
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Название компании</label>
+                                    <input name="Name" type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Заполните название!
+                                    </div>
+                                </div>
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Почта представителя</label>
+                                    <input name="RepresentativeLogin" type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Заполните название!
+                                    </div>
+                                </div>
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Ссылка на воцап канал</label>
+                                    <input type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Заполните поле!
+                                    </div>
+                                </div>
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Ссылка на телеграм канал</label>
+                                    <input type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Заполните поле!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Описание</label>
+                                    <textarea name="Description" class="form-control" rows="2" required></textarea>
+                                    <div class="invalid-tooltip">
+                                        Детали не заполнены!
+                                    </div>
+                                </div>
+                                <div class="form-group position-relative">
+                                    <label>Способ оплаты</label>
+                                    <div>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-primary active">
+                                                <input type="radio" name="options" id="option1" checked> Кэш
+                                            </label>
+                                            <label class="btn btn-primary">
+                                                <input type="radio" name="options" id="option2"> Виза
+                                            </label>
+                                            <label class="btn btn-primary">
+                                                <input type="radio" name="options" id="option3"> Шиза
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="invalid-tooltip">
+                                        Не выбрано!
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group position-relative">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile04">
+                                            <label class="custom-file-label" for="inputGroupFile04">Выберите логотип</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="custom-control custom-checkbox mb-3 error-l-200">
+                                    <input type="checkbox" class="custom-control-input" id="customControlValidation1"
+                                           required>
+                                    <label class="custom-control-label" for="customControlValidation1">
+                                        Блокировка для сотрудников
+                                    </label>
+                                    <div class="invalid-tooltip">Check this!</div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-0">Создать</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
-    </div>
-</div>
+    </main>
+
 }
 
-<div>
-    @Html.ActionLink("Вернуться в личный кабинет", "MyDetails", "Users")
-</div>
+

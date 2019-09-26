@@ -478,7 +478,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .btn_three {
     font: 500 14px "Poppins", sans-serif;
     color: #fff;
-    background: #7444fd;
+    background: #17d85b;
     border-radius: 3px;
     padding: 15px 30px;
     border: 1px solid #2ced9d;
@@ -490,10 +490,10 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
     display: inline-block
 }
 
-.btn_three:hover {
-  color: #7444fd;
-  background: transparent;
-}
+    .btn_three:hover {
+        color: #17d85b;
+        background: transparent;
+    }
 
 .agency_banner_btn {
   font: 500 14px "Poppins", sans-serif;
@@ -21691,7 +21691,7 @@ a .h_head:hover {
         text-align: center;
         margin: 0 auto;
         font-size: 30px;
-        color: #80bb24;
+        color: #17d85b;
         font-weight: 500;
         line-height: 80px
     }

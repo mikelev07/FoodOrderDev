@@ -35,7 +35,6 @@
                 <div class="row">
                     <div class="col-12 list" data-check-all="checkAll">
 
-
                         @foreach (var item in Model)
                         {
                             <div class="card d-flex flex-row mb-3">
@@ -51,7 +50,7 @@
                                         </div>
                                     </div>
                                     <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
-                                        <a href="#" class="btn btn-primary btn-multiple-state btn-xs" id="successButton">
+                                        <a href="#" class="btn btn-primary btn-multiple-state btn-xs" onclick="sendEmail(this.id)" id="successButton-@item.Id">
                                             <div class="spinner d-inline-block">
                                                 <div class="bounce1"></div>
                                                 <div class="bounce2"></div>
@@ -67,15 +66,13 @@
                                             </span>
                                             <span class="label">Сгенерировать пароль</span>
                                         </a>
-                                        <button class="btn btn-header-light icon-button">
+                                        <a href="/Users/EditCompany/@item.Id" class="btn btn-header-light icon-button">
                                             <i class="simple-icon-pencil"></i>
-                                        </button>
+                                        </a>
                                     </label>
                                 </div>
                             </div>
                         }
-
-
 
                             <nav class="mt-4 mb-3">
                                 <ul class="pagination justify-content-center mb-0">
@@ -119,3 +116,27 @@
         </div>
     </div>
 </main>
+
+
+@section Scripts  {
+    <script>
+
+        function sendEmail(id) {
+            $(this).trigger("click");
+            var $successButton = $("#" + id).stateButton();
+              event.preventDefault();
+              $successButton.showSpinner();
+              
+              setTimeout(function () {
+                $successButton.showSuccess(true);
+                setTimeout(function () {
+                  $successButton.reset();
+                }, 2000);
+              }, 3000);   
+        }
+
+
+    </script>
+
+
+}

@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="~/Content/system/font/iconsmind-s/css/iconsminds.css" />
     <link rel="stylesheet" href="~/Content/system/font/simple-line-icons/css/simple-line-icons.css" />
-
     <link rel="stylesheet" href="~/Content/system/css/vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/system/css/vendor/bootstrap.rtl.only.min.css" />
     <link rel="stylesheet" href="~/Content/system/css/vendor/fullcalendar.min.css" />
@@ -27,6 +26,10 @@
         .theme-button {
             display: none;
         }
+
+         .custom-file-input:lang(en) ~ .custom-file-label::after {
+            Content: "Нажмите сюда"
+         }
     </style>
 
 </head>
@@ -85,7 +88,7 @@
                             <span>Пользователи</span>
                         </a>
 
-                       
+
 
                     </div>
                 </div>
@@ -104,7 +107,13 @@
                 <div class="dropdown-menu dropdown-menu-right mt-3">
                     <a class="dropdown-item" href="#">Аккаунт</a>
                     <a class="dropdown-item" href="#">Настройки</a>
-                    <a class="dropdown-item" href="#">Выйти</a>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                    }
+
+
                 </div>
             </div>
         </div>
@@ -114,9 +123,15 @@
             <div class="scroll">
                 <ul class="list-unstyled">
                     <li class="active">
-                        <a href="#dashboard">
+                        <a href="/Users/Mydetails">
                             <i class="iconsminds-male-2"></i>
                             <span>Моя страница</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#dashboard">
+                            <i class="iconsminds-bag-items"></i>
+                            <span>Заказы клиентов</span>
                         </a>
                     </li>
 
@@ -128,6 +143,8 @@
 
     @RenderBody()
 
+
+    @RenderSection("scripts", required: false)
 
     <script src="~/Scripts/system/vendor/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/system/vendor/bootstrap.bundle.min.js"></script>

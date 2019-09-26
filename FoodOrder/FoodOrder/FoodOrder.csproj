@@ -287,7 +287,16 @@
     <Content Include="Content\custom\vendors\ui-fliter\nouislider.min.css" />
     <Content Include="Content\custom\vendors\wow\wow.min.js" />
     <Content Include="Content\img\1.jpg" />
+    <Content Include="Content\img\des.png" />
     <Content Include="Content\img\first_bg.jpg" />
+    <Content Include="Content\img\icon2.png" />
+    <Content Include="Content\img\icon4.png" />
+    <Content Include="Content\img\icon5.png" />
+    <Content Include="Content\img\icon6.png" />
+    <Content Include="Content\img\icon7.png" />
+    <Content Include="Content\img\icon8.png" />
+    <Content Include="Content\img\icon_shape.png" />
+    <Content Include="Content\img\icon_shape_two.png" />
     <Content Include="Content\img\menu.png" />
     <Content Include="Content\img\mobile.png" />
     <Content Include="Content\img\setup_img1.png" />

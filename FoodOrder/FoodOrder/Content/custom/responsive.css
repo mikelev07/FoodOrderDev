@@ -4265,7 +4265,11 @@
 }
 
 @media (max-width:450px){
-    .price_tab{
+    .col-lg-5 {
+        margin-top: 60px;
+    }
+
+    .price_tab {
         max-width: 100%;
         border-radius: 3px;
     }
@@ -4350,7 +4354,7 @@
         padding-left: 0;
     }
     .mobile_img .women_img{
-        right: 80px;
+        right: 100px;
     }
     .mobile_img .mobile{
         top: -35px;

@@ -41,10 +41,33 @@ Table of Content:
 =====================================================================*/
 /*====================================================*/
 /*=== fonts ====*/
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900");
+@import url("https://fonts.googleapis.com/css?family=Yandex Sans:300,400,500,600,700,900");
 /*===== color =====*/
 /*====================================================*/
 /*====================================================*/
+
+@font-face {
+    font-family: 'Yandex Sans';
+    src: local('Yandex Sans Display Thin'), local('Yandex-Sans-Display-Thin'), url('YandexSansDisplay-Thin.woff2') format('woff2'), url('YandexSansDisplay-Thin.woff') format('woff'), url('YandexSansDisplay-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yandex Sans';
+    src: local('Yandex Sans Display Regular'), local('Yandex-Sans-Display-Regular'), url('YandexSansDisplay-Regular.woff2') format('woff2'), url('YandexSansDisplay-Regular.woff') format('woff'), url('YandexSansDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yandex Sans';
+    src: local('Yandex Sans Display Bold'), local('Yandex-Sans-Display-Bold'), url('YandexSansDisplay-Bold.woff2') format('woff2'), url('YandexSansDisplay-Bold.woff') format('woff'), url('YandexSansDisplay-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
 a {
   text-decoration: none;
 }
@@ -66,7 +89,7 @@ i:before {
 }
 
 body {
-  font: 300 15px/28px "Poppins", sans-serif;
+  font: 300 15px/28px "Yandex Sans", sans-serif;
   letter-spacing: 0px;
   color: #677294;
   padding: 0px;
@@ -195,7 +218,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .f_p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
 }
 
 /*=========== font-weight ==============*/
@@ -394,7 +417,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: inline-block;
   font-weight: 500;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   z-index: 1;
   cursor: pointer;
   -webkit-transition: all 0.3s linear;
@@ -407,7 +430,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .btn_get {
-  font: 500 14px/47px "Poppins", sans-serif;
+  font: 500 14px/47px "Yandex Sans", sans-serif;
   color: #6754e2;
   border: 2px solid #ccc5fa;
   border-radius: 4px;
@@ -448,7 +471,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .price_btn {
-  font: 500 15px/53px "Poppins", sans-serif;
+  font: 500 15px/53px "Yandex Sans", sans-serif;
   color: #6754e2;
   border-width: 1px;
   border-style: solid;
@@ -465,7 +488,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .slider_btn {
-  font: 500 14px/20px "Poppins", sans-serif;
+  font: 500 14px/20px "Yandex Sans", sans-serif;
   border-radius: 45px;
   padding: 15px 35px;
   background: #fff;
@@ -476,7 +499,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .btn_three {
-    font: 500 14px "Poppins", sans-serif;
+    font: 500 14px "Yandex Sans", sans-serif;
     color: #fff;
     background: #17d85b;
     border-radius: 3px;
@@ -496,7 +519,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
     }
 
 .agency_banner_btn {
-  font: 500 14px "Poppins", sans-serif;
+  font: 500 14px "Yandex Sans", sans-serif;
   color: #fff;
   background: #5e2ced;
   -webkit-box-shadow: 0px 20px 30px 0px rgba(12, 0, 46, 0.1);
@@ -518,7 +541,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .agency_banner_btn_two {
-  font: 500 14px "Poppins", sans-serif;
+  font: 500 14px "Yandex Sans", sans-serif;
   color: #222d39;
   position: relative;
   margin-left: 50px;
@@ -549,7 +572,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .software_banner_btn {
-  font: 500 14px "Poppins", sans-serif;
+  font: 500 14px "Yandex Sans", sans-serif;
   color: #fff;
   background: #3d64f4;
   -webkit-box-shadow: 0px 20px 30px 0px rgba(12, 0, 46, 0.1);
@@ -569,7 +592,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .video_btn {
-  font: 500 14px "Poppins", sans-serif;
+  font: 500 14px "Yandex Sans", sans-serif;
   color: #fff;
   margin-left: 30px;
 }
@@ -609,7 +632,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .btn_four {
-  font: 500 14px "Poppins", sans-serif;
+  font: 500 14px "Yandex Sans", sans-serif;
   padding: 16px 40px;
   border-radius: 45px;
   color: #fff;
@@ -666,7 +689,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .gr_btn {
-  font: 500 14px "Poppins", sans-serif;
+  font: 500 14px "Yandex Sans", sans-serif;
   color: #23b1fe;
   display: inline-block;
   padding: 15px 31px;
@@ -809,7 +832,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .ctn-preloader .animation-preloader .txt-loading {
-  font: bold 5em "Poppins", sans-serif;
+  font: bold 5em "Yandex Sans", sans-serif;
   text-align: center;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -829,7 +852,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   content: attr(data-text-preloader);
   left: 0;
   opacity: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   position: absolute;
   top: -3px;
   -webkit-transform: rotateY(-90deg);
@@ -991,7 +1014,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
     width: 8em;
   }
   .ctn-preloader .animation-preloader .txt-loading {
-    font: bold 3.5em "Poppins", sans-serif;
+    font: bold 3.5em "Yandex Sans", sans-serif;
   }
 }
 
@@ -1001,7 +1024,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
     width: 7em;
   }
   .ctn-preloader .animation-preloader .txt-loading {
-    font: bold 2em "Poppins", sans-serif;
+    font: bold 2em "Yandex Sans", sans-serif;
   }
 }
 
@@ -1042,7 +1065,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .menu > .nav-item > .nav-link {
-  font: 500 15px "Poppins", sans-serif;
+  font: 500 15px "Yandex Sans", sans-serif;
   color: #051441;
   padding: 0px;
   -webkit-transition: color 0.3s ease 0s;
@@ -1107,7 +1130,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .menu > .nav-item.submenu .dropdown-menu .nav-item .nav-link {
   padding: 0px;
   white-space: nowrap;
-  font: 400 14px/34px "Poppins", sans-serif;
+  font: 400 14px/34px "Yandex Sans", sans-serif;
   color: #051441;
   -webkit-transition: color 0.2s linear;
   -o-transition: color 0.2s linear;
@@ -1205,7 +1228,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .menu > .nav-item.submenu .dropdown-menu.mega_menu_three > .nav-item > .dropdown-menu .nav-item .nav-link .navdropdown_link .navdropdown_content h5 {
-  font: 500 16px "Poppins", sans-serif;
+  font: 500 16px "Yandex Sans", sans-serif;
   color: #13112d;
   margin-bottom: 0px;
 }
@@ -1308,7 +1331,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .menu > .nav-item.submenu.mega_menu .mega_menu_inner > .dropdown-menu > .nav-item > .nav-link {
-  font: 500 18px "Poppins", sans-serif;
+  font: 500 18px "Yandex Sans", sans-serif;
   color: #13112d;
 }
 
@@ -1405,7 +1428,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .menu > .nav-item.submenu.mega_menu.mega_menu_two .mega_menu_inner .dropdown-menu .nav-item .item .rebon_tap {
-  font: 500 12px "Poppins", sans-serif;
+  font: 500 12px "Yandex Sans", sans-serif;
   color: #1bcb1f;
   background: #fff;
   display: block;
@@ -1453,7 +1476,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .menu > .nav-item.submenu.mega_menu.mega_menu_two .mega_menu_inner .dropdown-menu .nav-item .item .text {
-  font: 500 16px/22px "Poppins", sans-serif;
+  font: 500 16px/22px "Yandex Sans", sans-serif;
   color: #13112d;
   display: block;
   margin-top: 20px;
@@ -1650,7 +1673,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-size: 15px;
   font-weight: 500;
   line-height: 22px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   margin-bottom: 10px;
   -webkit-transition: color 0.3s linear;
   -o-transition: color 0.3s linear;
@@ -1660,7 +1683,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .navbar .search_cart .shpping-cart .dropdown-menu .cart-single-item .cart-content p {
   font-size: 14px;
   line-height: 22px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   color: #333;
   font-weight: 300;
   margin-bottom: 0px;
@@ -1768,7 +1791,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .nav_right_btn .login_btn {
-  font: 500 15px "Poppins", sans-serif;
+  font: 500 15px "Yandex Sans", sans-serif;
   padding: 13px 32px;
   min-width: 120px;
   display: inline-block;
@@ -2193,7 +2216,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .header_contact_info li {
   display: inline-block;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-weight: 400;
   color: #fff;
   text-transform: capitalize;
@@ -2315,7 +2338,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .header_area_seven .header_top .header_top_menu li a {
   font-size: 12px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-weight: 300;
   color: #fff;
   -webkit-transition: opacity 0.2s linear;
@@ -2771,7 +2794,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: inline-block;
   color: #fff;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   -webkit-transform: translateY(45px);
   -ms-transform: translateY(45px);
   transform: translateY(45px);
@@ -3175,7 +3198,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   background-color: white;
   -webkit-box-shadow: 0px 30px 30px 0px rgba(0, 11, 40, 0.1);
   box-shadow: 0px 30px 30px 0px rgba(0, 11, 40, 0.1);
-  font: 400 15px/46px "Poppins", sans-serif;
+  font: 400 15px/46px "Yandex Sans", sans-serif;
   padding-left: 30px;
   color: #051441;
   z-index: 0;
@@ -3225,7 +3248,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
     background-image: -moz-linear-gradient(40deg, #17d85b 0%, #00aff0 100%);
     background-image: -webkit-linear-gradient(40deg, #17d85b 0%, #00aff0 100%);
     background-image: -ms-linear-gradient(40deg, #17d85b 0%, #00aff0 100%);
-    height: 750px;
+    height: 770px;
     background-size: cover;
     background-position: 50%;
     position: relative;
@@ -3282,11 +3305,11 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   position: relative;
 }
 
-.mobile_img .women_img {
-  top: 160px;
-  right: 245px;
-  z-index: 1;
-}
+    .mobile_img .women_img {
+        top: 270px;
+        right: 105px;
+        z-index: 1;
+    }
 
 .slider_content {
   padding-top: 150px;
@@ -3350,7 +3373,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding-left: 30px;
   -webkit-box-shadow: 0px 2px 3px 0px rgba(12, 0, 46, 0.06);
   box-shadow: 0px 2px 3px 0px rgba(12, 0, 46, 0.06);
-  font: 300 14px/28px "Poppins", sans-serif;
+  font: 300 14px/28px "Yandex Sans", sans-serif;
   border: 1px solid transparent;
 }
 
@@ -3652,7 +3675,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   background-color: white;
   -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 11, 40, 0.1);
   box-shadow: 0px 8px 16px 0px rgba(0, 11, 40, 0.1);
-  font: 300 16px/36px "Poppins", sans-serif;
+  font: 300 16px/36px "Yandex Sans", sans-serif;
   border: 0px;
   color: #a1a8be;
   height: 60px;
@@ -3681,7 +3704,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   position: absolute;
   top: 0;
   right: 0;
-  font: 400 14px/60px "Poppins", sans-serif;
+  font: 400 14px/60px "Yandex Sans", sans-serif;
   color: #fff;
   background: #1c7ce7;
   border-radius: 4px;
@@ -3834,7 +3857,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .payment_content_two h2 {
   font-size: 50px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   line-height: 66px;
   color: #fff;
   font-weight: 400;
@@ -4037,7 +4060,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .new_startup_content h2 {
-  font: 300 50px "Poppins", sans-serif;
+  font: 300 50px "Yandex Sans", sans-serif;
   line-height: 58px;
 }
 
@@ -5162,7 +5185,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .learn_btn {
-  font: 500 16px/25px "Poppins", sans-serif;
+  font: 500 16px/25px "Yandex Sans", sans-serif;
   color: #051441;
   vertical-align: middle;
   display: inline-block;
@@ -5609,7 +5632,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .agency_featured_item .agency_featured_content h3 {
-  font: 500 26px/36px "Poppins", sans-serif;
+  font: 500 26px/36px "Yandex Sans", sans-serif;
   color: #222d39;
   margin: 32px 0px 25px;
 }
@@ -5664,7 +5687,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .software_featured_item .learn_btn {
-  font: 400 14px/26px "Poppins", sans-serif;
+  font: 400 14px/26px "Yandex Sans", sans-serif;
   color: #222d39;
   position: relative;
   margin-top: 0px;
@@ -6295,7 +6318,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .payment_features_item h4 {
-  font: 600 20px/26px "Poppins", sans-serif;
+  font: 600 20px/26px "Yandex Sans", sans-serif;
   color: #051441;
   margin-bottom: 22px;
 }
@@ -7188,7 +7211,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .agency_service_item a {
-  font: 400 14px/26px "Poppins", sans-serif;
+  font: 400 14px/26px "Yandex Sans", sans-serif;
   color: #222d39;
   vertical-align: middle;
   position: relative;
@@ -7276,7 +7299,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   border: 0px;
   border-left: 4px solid #e6e8ef;
   background: transparent;
-  font: 400 16px "Poppins", sans-serif;
+  font: 400 16px "Yandex Sans", sans-serif;
   color: #677294;
   position: relative;
 }
@@ -7321,7 +7344,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .software_service_tab_content .software_service_item h5 {
-  font: 600 17px/25px "Poppins", sans-serif;
+  font: 600 17px/25px "Yandex Sans", sans-serif;
   color: #222d39;
 }
 
@@ -7351,7 +7374,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .developer_product_content .develor_tab .nav-item .nav-link {
-  font: 400 16px "Poppins", sans-serif;
+  font: 400 16px "Yandex Sans", sans-serif;
   color: #677294;
   border: 0px;
   padding: 0px 0px 10px;
@@ -7393,7 +7416,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .developer_product_content .developer_tab_content .details_btn {
-  font: 400 14px "Poppins", sans-serif;
+  font: 400 14px "Yandex Sans", sans-serif;
   color: #3d64f4;
   position: relative;
   display: inline-block;
@@ -7557,7 +7580,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .service_details ul li {
-  font: 400 16px "Poppins", sans-serif;
+  font: 400 16px "Yandex Sans", sans-serif;
   color: #677294;
   position: relative;
   padding-left: 35px;
@@ -7757,7 +7780,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .stratup_service_info .startup_service_item h3 {
   font-size: 18px;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   color: #051441;
   margin-bottom: 2px;
 }
@@ -7801,7 +7824,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-size: 20px;
   font-weight: 500;
   line-height: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
 }
 
 .progress_bar_area .progress_item p {
@@ -7818,7 +7841,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   transform: translate(-50%, -50%);
   font-size: 40px;
   color: #051441;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-weight: 400;
 }
 
@@ -7907,7 +7930,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .study_details ul li {
-  font: 400 15px "Poppins", sans-serif;
+  font: 400 15px "Yandex Sans", sans-serif;
   color: #677294;
   margin-bottom: 15px;
 }
@@ -7965,7 +7988,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .study_details_three .study_details_content ul li {
-  font: 400 15px/34px "Poppins", sans-serif;
+  font: 400 15px/34px "Yandex Sans", sans-serif;
   color: #282835;
   position: relative;
   padding-left: 25px;
@@ -8094,7 +8117,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .s_pricing-item .tag_label {
-  font: 400 16px/22px "Poppins", sans-serif;
+  font: 400 16px/22px "Yandex Sans", sans-serif;
   color: #fff;
   background: #5f2eed;
   -webkit-transform: rotate(90deg);
@@ -8249,7 +8272,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .s_subcribes .form-control {
-  font: 300 16px/100px "Poppins", sans-serif;
+  font: 300 16px/100px "Yandex Sans", sans-serif;
   color: #9ea4b7;
   height: 100px;
   padding: 0px 0px 0px 50px;
@@ -8319,7 +8342,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .price_tab .nav-item .nav-link {
   margin: 0px;
-  font: 400 16px "Poppins", sans-serif;
+  font: 400 16px "Yandex Sans", sans-serif;
   color: #677294;
   padding: 12px 30px;
   display: inline-block;
@@ -8392,7 +8415,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .price_content .price_item .tag {
   position: absolute;
-  font: 400 14px "Poppins", sans-serif;
+  font: 400 14px "Yandex Sans", sans-serif;
   color: #fff;
   background: #00aff0;
   padding: 19px 32px;
@@ -8432,7 +8455,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .price_content .price_item .p_list li {
-  font: 300 16px/40px "Poppins", sans-serif;
+  font: 300 16px/40px "Yandex Sans", sans-serif;
   color: #505975;
 }
 
@@ -8839,7 +8862,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .payment_price_item .payment_price_btn {
   font-size: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-weight: 500;
   border-radius: 45px;
   background: rgba(253, 83, 135, 0.1);
@@ -9062,7 +9085,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   opacity: 1;
   -webkit-box-shadow: 0px 20px 40px 0px rgba(12, 0, 46, 0.14);
   box-shadow: 0px 20px 40px 0px rgba(12, 0, 46, 0.14);
-  font-size: "Poppins", sans-serif;
+  font-size: "Yandex Sans", sans-serif;
   font-size: 16px;
   color: #677294;
   line-height: 26px;
@@ -9123,7 +9146,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .about_btn {
-  font: 500 14px "Poppins", sans-serif;
+  font: 500 14px "Yandex Sans", sans-serif;
   padding: 17px 28px;
   background: #fbfbfd;
   -webkit-box-shadow: 0px 20px 30px 0px rgba(12, 0, 46, 0.1);
@@ -9292,7 +9315,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .agency_testimonial_info .testimonial_slider .testimonial_item .author_description h6 {
-  font: 400 14px/26px "Poppins", sans-serif;
+  font: 400 14px/26px "Yandex Sans", sans-serif;
   color: #959cb1;
 }
 
@@ -9431,7 +9454,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .subscribe_form_info .subscribe-form .form-control {
   text-align: center;
   border: 0px;
-  font: 400 18px/28px "Poppins", sans-serif;
+  font: 400 18px/28px "Yandex Sans", sans-serif;
   color: #b4bacc;
   border-radius: 0px;
   border-bottom: 1px solid #3d64f4;
@@ -9586,7 +9609,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 /*============== saas_signup_area css ==============*/
 .saas_signup_form .input-group .form-control {
   background: transparent;
-  font: 300 14px "Poppins", sans-serif;
+  font: 300 14px "Yandex Sans", sans-serif;
   color: rgba(255, 255, 255, 0.7);
   border-radius: 0px;
   border: 0px;
@@ -10029,7 +10052,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   background-image: linear-gradient(140deg, #672dde 0%, #4069eb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-size: 200px;
   line-height: 200px;
   z-index: -1;
@@ -10183,7 +10206,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .ex_team_item h5 {
-  font: 300 14px/24px "Poppins", sans-serif;
+  font: 300 14px/24px "Yandex Sans", sans-serif;
   color: #677294;
   margin-bottom: 0px;
 }
@@ -10444,7 +10467,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   transform: rotate(180deg);
   left: -35px;
   top: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   height: 133px;
 }
 
@@ -10563,7 +10586,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .payment_subscribe_info .payment_subscribe_content h2 {
-  font: 600 26px "Poppins", sans-serif;
+  font: 600 26px "Yandex Sans", sans-serif;
   color: #fff;
 }
 
@@ -10649,7 +10672,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .testimonial_title h6 {
   font-size: 16px;
   color: #563bd1;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-style: italic;
 }
 
@@ -11125,7 +11148,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .get_content .app_btn {
-  font: 500 16px "Poppins", sans-serif;
+  font: 500 16px "Yandex Sans", sans-serif;
   padding: 12px 34px;
   border-color: #fff;
   background: #fff;
@@ -11258,7 +11281,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .job_listing .job_list_tab .list_item_tab {
-  font: 300 15px/26px "Poppins", sans-serif;
+  font: 300 15px/26px "Yandex Sans", sans-serif;
   color: #677294;
   padding: 0px 0px 10px;
   border: 0px;
@@ -11364,7 +11387,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .job_listing .listing_tab .list_item .joblisting_text ul li {
   float: left;
-  font: 300 14px/15px "Poppins", sans-serif;
+  font: 300 14px/15px "Yandex Sans", sans-serif;
   color: #677294;
   padding: 0px 10px;
   border-left: 2px solid #aeb3c3;
@@ -11392,7 +11415,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .job_listing .listing_tab .list_item .joblisting_text .jobsearch-job-userlist .apply_btn {
-  font: 300 14px/36px "Poppins", sans-serif;
+  font: 300 14px/36px "Yandex Sans", sans-serif;
   color: #5c6789;
   border: 1px solid #e7e7f6;
   border-radius: 3px;
@@ -11539,7 +11562,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .job_info .info_item h6 {
   font-size: 18px;
   color: #222d39;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-weight: 400;
   margin-bottom: 5px;
 }
@@ -11561,7 +11584,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   background-color: white;
   -webkit-box-shadow: 0px 2px 4px 0px rgba(12, 0, 46, 0.04);
   box-shadow: 0px 2px 4px 0px rgba(12, 0, 46, 0.04);
-  font: 300 15px/60px "Poppins", sans-serif;
+  font: 300 15px/60px "Yandex Sans", sans-serif;
   color: #9ca3b9;
   width: 100%;
   height: 60px;
@@ -11603,13 +11626,13 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .apply_form .upload_box {
   width: 100%;
   border: 1px dotted #e7e3f2;
-  font: 300 15px/26px "Poppins", sans-serif;
+  font: 300 15px/26px "Yandex Sans", sans-serif;
   color: #9ca3b9;
   padding: 20px 50px;
 }
 
 .apply_form .upload_box input[type="file"] {
-  font: 300 15px/26px "Poppins", sans-serif;
+  font: 300 15px/26px "Yandex Sans", sans-serif;
   color: #9ca3b9;
   display: block;
   margin-top: 45px;
@@ -11620,7 +11643,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .apply_form p {
-  font: 300 15px/26px "Poppins", sans-serif;
+  font: 300 15px/26px "Yandex Sans", sans-serif;
   color: #677294;
 }
 
@@ -11669,7 +11692,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .faq_tab .nav-item .nav-link {
-  font: 400 16px/22px "Poppins", sans-serif;
+  font: 400 16px/22px "Yandex Sans", sans-serif;
   color: #677294;
   padding: 0px;
   border: 0px;
@@ -11718,7 +11741,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: block;
   width: 100%;
   text-align: left;
-  font: 500 18px/26px "Poppins", sans-serif;
+  font: 500 18px/26px "Yandex Sans", sans-serif;
   padding: 20px 30px 20px 0px;
   position: relative;
   white-space: normal;
@@ -11753,7 +11776,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .faq_content .tab-pane .card .card-body {
   padding: 0px 0px 45px;
-  font: 400 15px/26px "Poppins", sans-serif;
+  font: 400 15px/26px "Yandex Sans", sans-serif;
   color: #677294;
 }
 
@@ -11788,7 +11811,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .portfolio_filter .work_portfolio_item {
-  font: 400 16px/22px "Poppins", sans-serif;
+  font: 400 16px/22px "Yandex Sans", sans-serif;
   color: #677294;
   display: inline-block;
   border-radius: 3px;
@@ -12268,7 +12291,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .text_box input[type="text"], .text_box textarea, .text_box input[type="password"], .text_box input[type="email"] {
-  font: 400 15px/60px "Poppins", sans-serif;
+  font: 400 15px/60px "Yandex Sans", sans-serif;
   color: #222d39;
   height: 60px;
   border-radius: 4px;
@@ -12373,7 +12396,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  font: 400 14px/30px "Poppins", sans-serif;
+  font: 400 14px/30px "Yandex Sans", sans-serif;
   margin-top: 45px;
 }
 
@@ -12434,7 +12457,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .login-form .alter-login {
-  font: 400 15px/26px "Poppins", sans-serif;
+  font: 400 15px/26px "Yandex Sans", sans-serif;
   color: #9ca3b9;
 }
 
@@ -12472,7 +12495,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .sign_info .sign_info_content ul li {
-  font: 400 16px/34px "Poppins", sans-serif;
+  font: 400 16px/34px "Yandex Sans", sans-serif;
   color: #677294;
 }
 
@@ -12486,7 +12509,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .sign_info .lead-text {
-  font: 400 14px/40px "Poppins", sans-serif;
+  font: 400 14px/40px "Yandex Sans", sans-serif;
   color: #677294;
   padding-right: 20px;
 }
@@ -12551,7 +12574,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .get_quote_form .form-group .form-control {
-  font: 300 15px "Poppins", sans-serif;
+  font: 300 15px "Yandex Sans", sans-serif;
   color: #677294;
   border-radius: 4px;
   background-color: white;
@@ -12648,7 +12671,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .saasland_container .saasland_col_content .saasland_content h2 {
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   color: #747d99;
   margin-bottom: 30px;
   font-weight: 400;
@@ -12663,7 +12686,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .saasland_container .saasland_col_content .saasland_content .car_theme_btn {
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-size: 16px;
   text-transform: capitalize;
 }
@@ -12673,7 +12696,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   left: 21%;
   position: absolute;
   width: 70%;
-  font: 400 12px/40px "Poppins", sans-serif;
+  font: 400 12px/40px "Yandex Sans", sans-serif;
   color: #7f88a6;
 }
 
@@ -13998,7 +14021,7 @@ p span {
 }
 
 .blog_content .post_date h2 {
-  font: 700 30px/20px "Poppins", sans-serif;
+  font: 700 30px/20px "Yandex Sans", sans-serif;
   margin-bottom: 0px;
   color: #5e2ced;
   padding-top: 5px;
@@ -14021,7 +14044,7 @@ p span {
 }
 
 .blog_content .learn_btn_two {
-  font: 400 14px "Poppins", sans-serif;
+  font: 400 14px "Yandex Sans", sans-serif;
   color: #282835;
 }
 
@@ -14044,7 +14067,7 @@ p span {
 }
 
 .entry_post_info {
-  font: 400 15px/25px "Poppins", sans-serif;
+  font: 400 15px/25px "Yandex Sans", sans-serif;
   color: #677294;
   padding-bottom: 5px;
 }
@@ -14082,7 +14105,7 @@ p span {
 }
 
 .post_share a {
-  font: 400 14px/26px "Poppins", sans-serif;
+  font: 400 14px/26px "Yandex Sans", sans-serif;
   color: #525c7c;
 }
 
@@ -14106,7 +14129,7 @@ p span {
 }
 
 .post-nam {
-  font: 400 15px/26px "Poppins", sans-serif;
+  font: 400 15px/26px "Yandex Sans", sans-serif;
   color: #282835;
 }
 
@@ -14119,7 +14142,7 @@ p span {
 }
 
 .post_tag a {
-  font: 400 13px/26px "Poppins", sans-serif;
+  font: 400 13px/26px "Yandex Sans", sans-serif;
   color: #595b64;
   border: 1px solid #cfcfe6;
   border-radius: 3px;
@@ -14214,7 +14237,7 @@ p span {
 }
 
 .blog-sidebar .widget.widget_search .search-form .form-control {
-  font: 300 14px "Poppins", sans-serif;
+  font: 300 14px "Yandex Sans", sans-serif;
   color: #677294;
   border-radius: 3px;
   background-color: white;
@@ -14303,7 +14326,7 @@ p span {
 }
 
 .blog-sidebar .widget.widget_categorie ul li a {
-  font: 400 16px/35px "Poppins", sans-serif;
+  font: 400 16px/35px "Yandex Sans", sans-serif;
   color: #282835;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
@@ -14334,7 +14357,7 @@ p span {
 }
 
 .blog-sidebar .widget.widget_tag_cloud .post-tags a {
-  font: 400 13px/26px "Poppins", sans-serif;
+  font: 400 13px/26px "Yandex Sans", sans-serif;
   color: #595b64;
   border: 1px solid #cfcfe6;
   border-radius: 3px;
@@ -14417,7 +14440,7 @@ p span {
 }
 
 .blog-sidebar .widget.recent_post_widget_two .post_item .media-body h3 {
-  font: 500 16px/22px "Poppins", sans-serif;
+  font: 500 16px/22px "Yandex Sans", sans-serif;
   color: #222d39;
   margin-bottom: 0;
 }
@@ -14674,7 +14697,7 @@ p span {
   line-height: 36px;
   font-weight: 600;
   color: #222d39;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   margin-bottom: 15px;
 }
 
@@ -14828,7 +14851,7 @@ p span {
 }
 
 .blog_single_info .blog_titles {
-  font: 600 20px "Poppins", sans-serif;
+  font: 600 20px "Yandex Sans", sans-serif;
   color: #282835;
   margin-bottom: 30px;
 }
@@ -14914,12 +14937,12 @@ p span {
 }
 
 .post_author_two .media-body .comment_info h3 {
-  font: 500 18px/24px "Poppins", sans-serif;
+  font: 500 18px/24px "Yandex Sans", sans-serif;
   color: #282835;
 }
 
 .post_author_two .media-body .comment_info .comment-date {
-  font: 400 14px "Poppins", sans-serif;
+  font: 400 14px "Yandex Sans", sans-serif;
   color: #677294;
 }
 
@@ -14983,7 +15006,7 @@ p span {
 
 .comment_inner .comment_box .post_comment .post_author_two .comment_reply {
   float: right;
-  font: 500 13px/26px "Poppins", sans-serif;
+  font: 500 13px/26px "Yandex Sans", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #424255;
@@ -15098,7 +15121,7 @@ p span {
   font-size: 15px;
   line-height: 26px;
   color: #282835;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   min-height: 66px;
 }
 
@@ -15151,12 +15174,12 @@ p span {
 /*============= shop_grid_area css ==============*/
 .shop_menu_left p {
   margin-bottom: 0px;
-  font: 300 16px "Poppins", sans-serif;
+  font: 300 16px "Yandex Sans", sans-serif;
   color: #282835;
 }
 
 .shop_menu_right h5 {
-  font: 500 16px "Poppins", sans-serif;
+  font: 500 16px "Yandex Sans", sans-serif;
   color: #282835;
   margin-bottom: 5px;
 }
@@ -15172,7 +15195,7 @@ p span {
 }
 
 .shop_menu_right .selectpickers .current {
-  font: 300 16px "Poppins", sans-serif;
+  font: 300 16px "Yandex Sans", sans-serif;
   color: #677294;
 }
 
@@ -15269,7 +15292,7 @@ p span {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font: 300 14px/28px "Poppins", sans-serif;
+  font: 300 14px/28px "Yandex Sans", sans-serif;
   color: #677294;
 }
 
@@ -15363,7 +15386,7 @@ p span {
 }
 
 .shop_list_item .single_product_item .single_pr_details .pr_button .cart_btn {
-  font: 400 15px/30px "Poppins", sans-serif;
+  font: 400 15px/30px "Yandex Sans", sans-serif;
   color: #677294;
   border: 1px solid #e7e7f6;
   border-radius: 45px;
@@ -15466,7 +15489,7 @@ p span {
 }
 
 .pr_details .price {
-  font: 300 20px "Poppins", sans-serif;
+  font: 300 20px "Yandex Sans", sans-serif;
   color: #677294;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -15489,7 +15512,7 @@ p span {
 }
 
 .pr_details .stock {
-  font: 400 16px "Poppins", sans-serif;
+  font: 400 16px "Yandex Sans", sans-serif;
   color: #5e2ced;
   vertical-align: middle;
   padding-top: 20px;
@@ -15551,7 +15574,7 @@ p span {
 
 .pr_details .cart_button .cart_btn {
   border-radius: 45px;
-  font: 400 15px/48px "Poppins", sans-serif;
+  font: 400 15px/48px "Yandex Sans", sans-serif;
   color: #677294;
   border: 1px solid #e7e7f6;
   background: #f8f8fc;
@@ -15589,7 +15612,7 @@ p span {
 }
 
 .pr_details .product_meta li {
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-weight: 300;
   color: #677294;
   margin-bottom: 10px;
@@ -15611,7 +15634,7 @@ p span {
 
 .pr_details .share-link label {
   margin-bottom: 0px;
-  font: 400 15px "Poppins", sans-serif;
+  font: 400 15px "Yandex Sans", sans-serif;
   color: #282835;
 }
 
@@ -15662,7 +15685,7 @@ p span {
 }
 
 .product_info_details .pr_tab .nav-item .nav-link {
-  font: 300 16px/40px "Poppins", sans-serif;
+  font: 300 16px/40px "Yandex Sans", sans-serif;
   color: #677294;
   padding: 5px 25px;
   min-width: 148px;
@@ -15706,7 +15729,7 @@ p span {
 }
 
 .product_info_details .comment-box .comment-content .comment-header {
-  font: 300 14px "Poppins", sans-serif;
+  font: 300 14px "Yandex Sans", sans-serif;
   display: inline-block;
 }
 
@@ -15746,7 +15769,7 @@ p span {
   border: 1px solid #ebebf7;
   border-radius: 4px;
   background: transparent;
-  font: 300 14px "Poppins", sans-serif;
+  font: 300 14px "Yandex Sans", sans-serif;
   color: #282835;
   padding-left: 25px;
   -webkit-box-shadow: none;
@@ -15831,7 +15854,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 .shopping_cart_area .cart_table td {
   vertical-align: middle;
-  font: 400 16px/28px "Poppins", sans-serif;
+  font: 400 16px/28px "Yandex Sans", sans-serif;
   color: #282835;
   border: 0px;
   padding-top: 0px;
@@ -15859,7 +15882,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .shopping_cart_area .cart_table .product .media .media-body h5 {
-  font: 500 16px/28px "Poppins", sans-serif;
+  font: 500 16px/28px "Yandex Sans", sans-serif;
   color: #282835;
 }
 
@@ -15959,7 +15982,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .shopping_cart_area .cart_btn {
-  font: 400 14px "Poppins", sans-serif;
+  font: 400 14px "Yandex Sans", sans-serif;
   color: #fff;
   border: 1px solid #5e2ced;
   margin: 0px;
@@ -15992,7 +16015,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .shopping_cart_area .wislist_table .add_cart {
-  font: 400 14px "Poppins", sans-serif;
+  font: 400 14px "Yandex Sans", sans-serif;
   border: 1px solid #e7e7f6;
   background: transparent;
   color: #5c6789;
@@ -16032,7 +16055,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .cart_box .shop_table tbody tr td, .cart_box .shop_table tbody tr th {
-  font: 400 16px/28px "Poppins", sans-serif;
+  font: 400 16px/28px "Yandex Sans", sans-serif;
   color: #282835;
   padding: 10px 0px;
 }
@@ -16061,7 +16084,7 @@ input[type=number]::-webkit-inner-spin-button {
   background-color: white;
   -webkit-box-shadow: 0px 2px 4px 0px rgba(12, 0, 46, 0.04);
   box-shadow: 0px 2px 4px 0px rgba(12, 0, 46, 0.04);
-  font: 300 15px "Poppins", sans-serif;
+  font: 300 15px "Yandex Sans", sans-serif;
   color: #9ca3b9;
   height: 55px;
   padding-left: 25px;
@@ -16079,7 +16102,7 @@ input[type=number]::-webkit-inner-spin-button {
   position: absolute;
   right: 4px;
   top: 50%;
-  font: 400 14px/38px "Poppins", sans-serif;
+  font: 400 14px/38px "Yandex Sans", sans-serif;
   color: #282835;
   height: 48px;
   padding: 0px 25px;
@@ -16101,7 +16124,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .checkout_button {
-  font: 500 15px/30px "Poppins", sans-serif;
+  font: 500 15px/30px "Yandex Sans", sans-serif;
   color: #fff;
   background: #5e2ced;
   border-radius: 0px;
@@ -16123,7 +16146,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 /*================== check list css ======================*/
 .return_customer {
-  font: 400 15px/25px "Poppins", sans-serif;
+  font: 400 15px/25px "Yandex Sans", sans-serif;
   color: #3d3f45;
   padding-bottom: 20px;
 }
@@ -16157,7 +16180,7 @@ input[type=number]::-webkit-inner-spin-button {
   box-shadow: 0px 2px 4px 0px rgba(12, 0, 46, 0.04);
   background: #fff;
   padding: 0px 30px;
-  font: 300 14px/60px "Poppins", sans-serif;
+  font: 300 14px/60px "Yandex Sans", sans-serif;
   color: #969ca5;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -16192,7 +16215,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .checkout_content label {
-  font: 600 16px/50px "Poppins", sans-serif;
+  font: 600 16px/50px "Yandex Sans", sans-serif;
   display: block;
   color: #282835;
   margin-bottom: 20px;
@@ -16210,7 +16233,7 @@ input[type=number]::-webkit-inner-spin-button {
   border: 0px;
   -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 11, 40, 0.06);
   box-shadow: 0px 2px 3px 0px rgba(0, 11, 40, 0.06);
-  font: 300 14px/60px "Poppins", sans-serif;
+  font: 300 14px/60px "Yandex Sans", sans-serif;
   background: #fff;
   height: 60px;
   color: #9ca3b9;
@@ -16263,7 +16286,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 .checkout_content .l_text {
   display: inline-block;
-  font: 300 15px/26px "Poppins", sans-serif;
+  font: 300 15px/26px "Yandex Sans", sans-serif;
   color: #9ca3b9;
   padding-left: 8px;
 }
@@ -16275,7 +16298,7 @@ input[type=number]::-webkit-inner-spin-button {
   -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 11, 40, 0.06);
   box-shadow: 0px 2px 3px 0px rgba(0, 11, 40, 0.06);
   height: 170px;
-  font: 300 14px/20px "Poppins", sans-serif;
+  font: 300 14px/20px "Yandex Sans", sans-serif;
   color: #b6b9be;
   padding-left: 30px;
   padding-top: 20px;
@@ -16303,7 +16326,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .checkout_content .tab_content p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-size: 15px;
   margin-bottom: 0px;
   padding: 0px 0px 25px;
@@ -16326,7 +16349,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 .checkout_content .tab_content .login_btn {
   float: right;
-  font: 400 16px/48px "Poppins", sans-serif;
+  font: 400 16px/48px "Yandex Sans", sans-serif;
   background: #5e2ced;
   border: 1px solid #5e2ced;
   color: #fff;
@@ -16379,7 +16402,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .woocommerce-checkout-review-order .shop_table tbody tr td {
-  font: 400 15px/30px "Poppins", sans-serif;
+  font: 400 15px/30px "Yandex Sans", sans-serif;
   color: #677294;
 }
 
@@ -16408,7 +16431,7 @@ input[type=number]::-webkit-inner-spin-button {
 .woocommerce-checkout-review-order h6 {
   font-size: 15px;
   color: #282835;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   font-weight: 400;
   margin: 0px;
   line-height: 30px;
@@ -16420,7 +16443,7 @@ input[type=number]::-webkit-inner-spin-button {
   line-height: 26px;
   color: #677294;
   font-weight: 300;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   margin-bottom: 25px;
 }
 
@@ -16525,7 +16548,7 @@ input[type=number]::-webkit-inner-spin-button {
   padding-left: 25px;
   font-size: 16px;
   line-height: 26px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   color: #282835;
 }
 
@@ -16566,7 +16589,7 @@ input[type=number]::-webkit-inner-spin-button {
   width: 100%;
   background: #5e2ced;
   border: 1px solid #5e2ced;
-  font: 500 16px/50px "Poppins", sans-serif;
+  font: 500 16px/50px "Yandex Sans", sans-serif;
   color: #fff;
   cursor: pointer;
   margin-top: 25px;
@@ -16625,7 +16648,7 @@ input[type=number]::-webkit-inner-spin-button {
 .pr_sidebar .filter_slider_area .filter_content {
   font-size: 16px;
   text-transform: capitalize;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   color: #282835;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -16942,7 +16965,7 @@ input[type=number]::-webkit-inner-spin-button {
   color: rgba(255, 255, 255, 0.6);
   font-size: 24px;
   padding: 0px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   outline: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
@@ -17403,7 +17426,7 @@ input[type="text"] {
   line-height: 50px;
   color: #051441;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
 }
 
 .split_title span {
@@ -19264,7 +19287,7 @@ a .h_head:hover {
   font-size: 16px;
   font-weight: 500;
   color: #4e78f4;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   border-radius: 45px;
   line-height: 26px;
   padding: 8px 27px;
@@ -19652,7 +19675,7 @@ a .h_head:hover {
 .pos_banner_text h6 {
   font-size: 14px;
   line-height: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Yandex Sans", sans-serif;
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 4px;
@@ -21960,7 +21983,7 @@ a .h_head:hover {
 }
 
 .f_widget.about-widget .f_list li a {
-  font: 300 16px/20px "Poppins", sans-serif;
+  font: 300 16px/20px "Yandex Sans", sans-serif;
   color: #677294;
   position: relative;
   -webkit-transition: color 0.2s linear;
@@ -21999,7 +22022,7 @@ a .h_head:hover {
 }
 
 .f_subscribe .form-control {
-  font: 300 14px "Poppins", sans-serif;
+  font: 300 14px "Yandex Sans", sans-serif;
   color: #333;
   border: 1px solid #e2e7f3;
   border-radius: 3px;
@@ -22699,7 +22722,7 @@ a .h_head:hover {
 }
 
 .footer_nine_bottom p {
-  font: 300 14px "Poppins", sans-serif;
+  font: 300 14px "Yandex Sans", sans-serif;
   color: #7f88a6;
 }
 
@@ -22718,7 +22741,7 @@ a .h_head:hover {
   padding: 0px;
   -webkit-box-shadow: none;
   box-shadow: none;
-  font: 400 14px "Poppins", sans-serif;
+  font: 400 14px "Yandex Sans", sans-serif;
   color: #7f88a6;
 }
 

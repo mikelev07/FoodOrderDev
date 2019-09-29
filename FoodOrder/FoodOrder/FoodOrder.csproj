@@ -192,6 +192,10 @@
     <Compile Include="Migrations\201909290918333_DbSetMigration.Designer.cs">
       <DependentUpon>201909290918333_DbSetMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909291010508_OrderModelMigration.cs" />
+    <Compile Include="Migrations\201909291010508_OrderModelMigration.Designer.cs">
+      <DependentUpon>201909291010508_OrderModelMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -710,6 +714,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201909290918333_DbSetMigration.resx">
       <DependentUpon>201909290918333_DbSetMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909291010508_OrderModelMigration.resx">
+      <DependentUpon>201909291010508_OrderModelMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

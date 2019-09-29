@@ -5,6 +5,20 @@ using System.Web;
 
 namespace FoodOrder.Models
 {
+    public class Order
+    {
+        public string Id { get; set; }
+        public DateTime DateOfCreation { get; set; }
+        public string Description { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
+        //public double Price { get; set; }
+        public ICollection<ComplexDish> Dishes { get; set; }
+        public Order()
+        {
+            Dishes = new List<ComplexDish>();
+        }
+    }
     public class Menu
     {
         public string Id { get; set; }
@@ -24,6 +38,7 @@ namespace FoodOrder.Models
         public NutritionalValue NutritionalValue { get; set; }
         public string ImagePath { get; set; }
         public bool HasGarnish { get; set; }
+        //public double Price { get; set; }
     }
 
     public class ComplexDish: Dish

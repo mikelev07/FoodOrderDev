@@ -188,9 +188,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909281252061_DishModelMigration.cs" />
-    <Compile Include="Migrations\201909281252061_DishModelMigration.Designer.cs">
-      <DependentUpon>201909281252061_DishModelMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201909290642333_andNeeew.cs" />
+    <Compile Include="Migrations\201909290642333_andNeeew.Designer.cs">
+      <DependentUpon>201909290642333_andNeeew.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,6 +268,8 @@
     <Content Include="Content\custom\vendors\ui-fliter\nouislider.min.css" />
     <Content Include="Content\custom\vendors\wow\wow.min.js" />
     <Content Include="Content\img\1.jpg" />
+    <Content Include="Content\img\briteverify.png" />
+    <Content Include="Content\img\campfire.png" />
     <Content Include="Content\img\des.png" />
     <Content Include="Content\img\first_bg.jpg" />
     <Content Include="Content\img\icon2.png" />
@@ -278,8 +280,11 @@
     <Content Include="Content\img\icon8.png" />
     <Content Include="Content\img\icon_shape.png" />
     <Content Include="Content\img\icon_shape_two.png" />
+    <Content Include="Content\img\kissmetrics.png" />
     <Content Include="Content\img\menu.png" />
+    <Content Include="Content\img\metorik.png" />
     <Content Include="Content\img\mobile.png" />
+    <Content Include="Content\img\nicereply-1.png" />
     <Content Include="Content\img\setup_img1.png" />
     <Content Include="Content\img\setup_img2.png" />
     <Content Include="Content\img\setup_img3.png" />
@@ -288,9 +293,11 @@
     <Content Include="Content\img\shape_02.png" />
     <Content Include="Content\img\shape_03.png" />
     <Content Include="Content\img\tab.png" />
+    <Content Include="Content\img\tree.png" />
     <Content Include="Content\img\triangle.png" />
     <Content Include="Content\img\un3.png" />
     <Content Include="Content\img\undraw.png" />
+    <Content Include="Content\img\webhooks.png" />
     <Content Include="Content\system\css\dore.dark.green.css" />
     <Content Include="Content\system\css\dore.dark.green.min.css" />
     <Content Include="Content\system\css\dore.light.green.css" />
@@ -701,8 +708,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909281252061_DishModelMigration.resx">
-      <DependentUpon>201909281252061_DishModelMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909290642333_andNeeew.resx">
+      <DependentUpon>201909290642333_andNeeew.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

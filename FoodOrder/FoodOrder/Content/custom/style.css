@@ -6896,13 +6896,13 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .service_item img {
-  margin-right: -12px;
+  margin-right: -10px;
   width: auto;
 }
 
-.service_item:hover {
-  border-color: #c4e7f7;
-}
+    .service_item:hover {
+        border-color: rgba(68, 253, 116, 0.2);
+    }
 
 /*================ prototype_service_info css ==============*/
 .prototype_service_area_two, .prototype_service_area_three {
@@ -7145,9 +7145,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   box-shadow: 0px 30px 40px 0px rgba(12, 0, 46, 0.1);
 }
 
-.service_carousel .owl-item .service_item:hover {
-  border-color: rgba(116, 68, 253, 0.2);
-}
+    .service_carousel .owl-item .service_item:hover {
+        border-color: rgba(68, 253, 116, 0.2);
+    }
 
 .service_carousel .owl-item .service_item img {
   width: auto;
@@ -7661,11 +7661,10 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 /*============ payment_service_area css ==============*/
 .payment_service_area {
     padding-top: 180px;
-   
     position: relative;
     z-index: 2;
-    background-image: -webkit-linear-gradient(40deg, #17d85b 0%, #00aff0 100%);
-     background-size: cover
+    background-image: -webkit-linear-gradient(40deg, #17d85b 0%, #00f0e5 100%);
+    background-size: cover
 }
 
 .payment_service_area .image_shape {
@@ -20942,21 +20941,21 @@ a .h_head:hover {
 }
 
 .btn_scroll {
-  font-size: 16px;
-  color: #fff;
-  border: 2px solid #c8c1fc;
-  padding: 9px 32px;
-  border-radius: 4px;
-  display: inline-block;
+    font-size: 16px;
+    color: #fff;
+    border: 1px solid #17d85b;
+    padding: 9px 32px;
+    border-radius: 4px;
+    display: inline-block;
 }
 
-.btn_scroll:hover {
-  background: #5f54fd;
-  border-color: #5f54fd;
-  -webkit-box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
-  box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
-  color: #fff;
-}
+    .btn_scroll:hover {
+        background: #17d85b;
+        border-color: #17d85b;
+        -webkit-box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
+        box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
+        color: #fff;
+    }
 
 /*=========== section-2 css ============*/
 .section-2 .pp_block {
@@ -21066,15 +21065,15 @@ a .h_head:hover {
   box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
 }
 
-.pp_work_content .btn_scroll:hover {
-  background: #5f54fd;
-  border-color: #5f54fd;
-  -webkit-box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
-  box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
-  -webkit-transform: translateY(-10px);
-  -ms-transform: translateY(-10px);
-  transform: translateY(-10px);
-}
+    .pp_work_content .btn_scroll:hover {
+        background: #17d85b;
+        border-color: #17d85b;
+        -webkit-box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
+        box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
+        -webkit-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
 
 /*=========== section-3 css ============*/
 .section-3 .section_one_img {
@@ -21302,18 +21301,18 @@ a .h_head:hover {
   margin-bottom: 30px;
 }
 
-.pp_contact_info .pp_contact_item .icon {
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  line-height: 60px;
-  font-size: 26px;
-  color: #5f54fd;
-  background: #fff;
-  border-radius: 3px;
-  display: block;
-  margin-right: 40px;
-}
+    .pp_contact_info .pp_contact_item .icon {
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        font-size: 26px;
+        color: #17d85b;
+        background: #fff;
+        border-radius: 3px;
+        display: block;
+        margin-right: 40px;
+    }
 
 .pp_contact_info .pp_contact_item .mmedia-body {
   font-size: 18px;
@@ -21387,12 +21386,12 @@ a .h_head:hover {
   background: transparent;
 }
 
-.pp_contact_form .btn_scroll:hover {
-  background: #5f54fd;
-  border-color: #5f54fd;
-  -webkit-box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
-  box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
-}
+    .pp_contact_form .btn_scroll:hover {
+        background: #17d85b;
+        border-color: #17d85b;
+        -webkit-box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
+        box-shadow: 0px 20px 50px 0px rgba(14, 6, 134, 0.2);
+    }
 
 /*============ home_analytics_banner_area css ============*/
 .home_analytics_banner_area {

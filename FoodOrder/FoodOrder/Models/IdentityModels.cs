@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -32,10 +34,11 @@ namespace FoodOrder.Models
         public string SecondName { get; set; }
         public string CompanyId { get; set; }
         public Company Company { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
         public User()
         {
-      
+            Orders = new List<Order>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
@@ -57,6 +60,11 @@ namespace FoodOrder.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Company>().HasMany(m => m.Employees);
+            modelBuilder.Entity<Order>()
+                .HasRequired(m => m.User)
+                .WithMany(m => m.Orders)
+                .HasForeignKey(m => m.UserId)
+                .WillCascadeOnDelete(true);
             modelBuilder.Entity<User>()
                 .HasOptional(m=>m.Company)
                 .WithMany(m=>m.Employees)
@@ -71,6 +79,9 @@ namespace FoodOrder.Models
 
         public DbSet<RoleViewModel> IdentityRoles { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Dish> Dishes { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<UserViewModel> UserViewModels { get; set; }
     }
 }

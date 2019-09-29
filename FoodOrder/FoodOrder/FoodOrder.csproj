@@ -188,9 +188,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909290642333_andNeeew.cs" />
-    <Compile Include="Migrations\201909290642333_andNeeew.Designer.cs">
-      <DependentUpon>201909290642333_andNeeew.cs</DependentUpon>
+    <Compile Include="Migrations\201909290918333_DbSetMigration.cs" />
+    <Compile Include="Migrations\201909290918333_DbSetMigration.Designer.cs">
+      <DependentUpon>201909290918333_DbSetMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909291010508_OrderModelMigration.cs" />
+    <Compile Include="Migrations\201909291010508_OrderModelMigration.Designer.cs">
+      <DependentUpon>201909291010508_OrderModelMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -718,8 +722,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909290642333_andNeeew.resx">
-      <DependentUpon>201909290642333_andNeeew.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909290918333_DbSetMigration.resx">
+      <DependentUpon>201909290918333_DbSetMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909291010508_OrderModelMigration.resx">
+      <DependentUpon>201909291010508_OrderModelMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

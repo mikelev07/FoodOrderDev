@@ -165,6 +165,12 @@ namespace FoodOrder.Controllers
             return View();
         }
 
+        public ActionResult Statistic()
+        {
+            return View();
+        }
+
+
         // POST: Users/CreateCompany
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.

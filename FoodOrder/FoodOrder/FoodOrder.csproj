@@ -183,18 +183,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909290918333_DbSetMigration.cs" />
-    <Compile Include="Migrations\201909290918333_DbSetMigration.Designer.cs">
-      <DependentUpon>201909290918333_DbSetMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909291010508_OrderModelMigration.cs" />
-    <Compile Include="Migrations\201909291010508_OrderModelMigration.Designer.cs">
-      <DependentUpon>201909291010508_OrderModelMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201909291019503_andNeeew1.cs" />
+    <Compile Include="Migrations\201909291019503_andNeeew1.Designer.cs">
+      <DependentUpon>201909291019503_andNeeew1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -275,6 +272,7 @@
     <Content Include="Content\img\briteverify.png" />
     <Content Include="Content\img\campfire.png" />
     <Content Include="Content\img\des.png" />
+    <Content Include="Content\img\fat-rascal-thumb.jpg" />
     <Content Include="Content\img\first_bg.jpg" />
     <Content Include="Content\img\icon2.png" />
     <Content Include="Content\img\icon4.png" />
@@ -289,6 +287,9 @@
     <Content Include="Content\img\metorik.png" />
     <Content Include="Content\img\mobile.png" />
     <Content Include="Content\img\nicereply-1.png" />
+    <Content Include="Content\img\pr1920.png" />
+    <Content Include="Content\img\profile-pic-l.jpg" />
+    <Content Include="Content\img\profile-pic-p.png" />
     <Content Include="Content\img\setup_img1.png" />
     <Content Include="Content\img\setup_img2.png" />
     <Content Include="Content\img\setup_img3.png" />
@@ -296,8 +297,10 @@
     <Content Include="Content\img\shape_01.png" />
     <Content Include="Content\img\shape_02.png" />
     <Content Include="Content\img\shape_03.png" />
+    <Content Include="Content\img\social-header.png" />
     <Content Include="Content\img\soup.png" />
     <Content Include="Content\img\tab.png" />
+    <Content Include="Content\img\thumb-2.jpg" />
     <Content Include="Content\img\tree.png" />
     <Content Include="Content\img\triangle.png" />
     <Content Include="Content\img\un3.png" />
@@ -704,6 +707,12 @@
     <Content Include="Scripts\system\vendor\ckeditor5-build-classic\LICENSE.md" />
     <Content Include="Scripts\system\vendor\ckeditor5-build-classic\README.md" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Users\Statistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -722,11 +731,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909290918333_DbSetMigration.resx">
-      <DependentUpon>201909290918333_DbSetMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909291010508_OrderModelMigration.resx">
-      <DependentUpon>201909291010508_OrderModelMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909291019503_andNeeew1.resx">
+      <DependentUpon>201909291019503_andNeeew1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1769,9 +1769,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding: 0px;
 }
 
-.menu_two .w_menu > .nav-item .nav-link:before {
-  background: #a5d5f5;
-}
+    .menu_two .w_menu > .nav-item .nav-link:before {
+        background: white;
+    }
 
 .menu_two .w_menu > .nav-item.submenu.mega_menu > .dropdown-menu > .nav-item > .nav-link {
   color: #13112d;
@@ -7659,7 +7659,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 /*============ payment_service_area css ==============*/
 .payment_service_area {
-    padding-top: 180px;
+    padding-top: 110px;
     position: relative;
     z-index: 2;
     background-image: -webkit-linear-gradient(40deg, #17d85b 0%, #00f0e5 100%);
@@ -12354,7 +12354,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .login_area .login_info {
-  padding: 160px 100px 160px 0px;
+  padding: 110px 100px 160px 0px;
 }
 
 .login_area .login_info:before {
@@ -21855,7 +21855,7 @@ a .h_head:hover {
 /*============ easy_setup_area css ============*/
 /*============ analytices_customers_logo_area css ============*/
 .analytices_customers_logo_area {
-  padding: 200px 0px 120px;
+  padding: 110px 0px 120px;
 }
 
 .analytices_logo {

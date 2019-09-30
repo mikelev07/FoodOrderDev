@@ -1,47 +1,148 @@
 ﻿@model IEnumerable<FoodOrder.Models.User>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = "Личный кабинет представителя компании";
 }
 
-<h2>Компания @ViewBag.CompanyName</h2>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
 
-<p>
-    @Html.ActionLink("Добавить нового сотрудника", "Create", "Users")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th></th>
-    </tr>
+                <div class="mb-2">
+                    <h1>Название компании</h1>
+                    <div class="text-zero top-right-button-container">
+                        <button type="button"
+                                class="btn btn-lg btn-outline-primary dropdown-toggle dropdown-toggle-split top-right-button top-right-button-single"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Действия
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Редактировать</a>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.ActionLink("Редактировать", "Edit", "Users", new { id = item.Id }, null) |
-                @Html.ActionLink("Подробнее", "Details", "Users", new { id = item.Id }, null) |
-                @Html.ActionLink("Удалить", "Delete", "Users", new { id = item.Id }, null)
-            </td>
-        </tr>
-    }
+                        </div>
+                    </div>
+                </div>
 
-</table>
+
+                <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
+                           aria-controls="first" aria-selected="true">ПРОФИЛЬ</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " id="second-tab" data-toggle="tab" href="#second" role="tab"
+                           aria-controls="second" aria-selected="false">СОТРУДНИКИ</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                        <div class="row">
+                            <div class="col-12 col-lg-5 col-xl-4 col-left">
+                                <div class="card mb-4">
+                                    <div class="position-absolute card-top-buttons">
+                                        <button class="btn btn-outline-white icon-button ">
+                                            <i class="simple-icon-pencil"></i>
+                                        </button>
+                                    </div>
+                                    <img src="~/Content/img/pr1920.png" alt="Detail Picture" class="card-img-top" />
+
+                                    <div class="card-body">
+                                        <p class="text-muted text-small mb-2">Информация</p>
+                                        <p class="mb-3">
+                                            Лучшая компания в мире
+                                        </p>
+
+                                        <p class="text-muted text-small mb-2">Адрес</p>
+                                        <p class="mb-3">Алматы Сейфулина</p>
+
+                                        <p class="text-muted text-small mb-2">Пункты</p>
+                                      
+                                        <p class="text-muted text-small mb-2">Контакты</p>
+                                        <div class="social-icons">
+                                            <ul class="list-unstyled list-inline">
+                                                <li class="list-inline-item">
+                                                    <a href="#"><i class="simple-icon-social-facebook"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="#"><i class="simple-icon-social-twitter"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="#"><i class="simple-icon-social-instagram"></i></a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 col-lg-7 col-xl-8 col-right">
+                                <div class="row listing-card-container">
+
+                                    <div class="col-sm-6 col-lg-6 col-xl-4 col-12 mb-4">
+                                        <div class="card">
+                                            <div class="position-relative">
+                                                <a href="">
+                                                    <img class="card-img-top"
+                                                         src="~/Content/img/profile-pic-p.png"
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <a href="">
+                                                    <h6 class="mb-3 listing-heading ellipsis">
+                                                       Представитель компании
+                                                        </h5>
+                                                </a>
+                                                <footer>
+                                                    <p class="text-muted text-small mb-0 font-weight-light">
+                                                        01.03.2019
+                                                    </p>
+                                                </footer>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="card d-flex flex-row mb-4">
+                                    <a class="d-flex" href="#">
+                                        <img alt="Профиль" src="~/Content/img/profile-pic-p.png"
+                                             class="img-thumbnail border-0 rounded-circle m-4 list-thumbnail align-self-center">
+                                    </a>
+                                    <div class=" d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                            <div class="min-width-zero">
+                                                <a href="#">
+                                                    <p class="list-item-heading mb-1 truncate">Гарольд</p>
+                                                </a>
+                                                <p class="mb-2 text-muted text-small">Представитель компании</p>
+                                                <button type="button"
+                                                        class="btn btn-xs btn-outline-primary ">
+                                                    К профилю
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                       
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>

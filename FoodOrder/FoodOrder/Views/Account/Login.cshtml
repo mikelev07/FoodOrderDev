@@ -8,9 +8,14 @@
 <section class="login_area">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-7">
+                <a style="margin-top:15px; margin-bottom:20px" href="/" class="learn_btn wow fadeInLeft" data-wow-delay="0.7s"><i class="ti-arrow-left"></i>На главную страницу</a>
                 <div class="login_info">
+
                     <h2 class="f_p f_700 f_size_40 t_color3 mb_20">Вход</h2>
+
+
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
@@ -34,7 +39,7 @@
                     }
                 </div>
             </div>
-            <div class="col-lg-4 d-flex align-items-center" >
+            <div style="margin-bottom:35px" class="col-lg-4 d-flex align-items-center" >
                 
                     <div class="mobile_img" style="background-image:linear-gradient(to top, rgba(61, 26, 22, 0), rgba(61, 26, 22, 0.6))">
                         <div class="pp-scrollable p-table section section-1" data-page-index="0">
@@ -47,7 +52,7 @@
                                 <div class="p-section-bg" style="z-index:1;background-image:url(./img/Home-color/first_bg.jpg);">
                                     
                                     <p style="margin-left: 135px;font-weight: 700;font-size:40px;margin-top: 183px;color: white;">  Личный кабинет </p>
-                                    <p style="margin-left: 195px;font-weight: 500;font-size:25px;margin-top: 0px;color: white;">  Личный кабинет </p>
+                                    <p style="margin-left: 195px;font-weight: 500;font-size:25px;margin-top: 0px;color: white;">  Вход для клиентов </p>
                                 </div>
 
                             </div>

@@ -72,27 +72,27 @@
                     <div  class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                         <ul class="navbar-nav menu w_menu">
                             <li class="nav-item dropdown submenu mega_menu mega_menu_two active">
-                                <a class="nav-link dropdown-toggle" href="#serv" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="serv" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     О сервисе
                                 </a>
                             </li>
                             <li class="dropdown submenu nav-item">
-                                <a title="Pages" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#screen">Скриншоты</a>
+                                <a title="Pages" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="screen">Скриншоты</a>
                             </li>
                             <li class="nav-item dropdown submenu mega_menu">
-                                <a class="nav-link dropdown-toggle" href="#menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Меню
                                 </a>
                             </li>
-                            <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="#ord" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Заявка
+                            <li class="nav-item dropdown submenu mega_menu">
+                                <a class="nav-link dropdown-toggle" href="preim" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Преимущества
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="nav_right_btn">
-                        <a style="margin-right:5px" href="#" class="login_btn active"><i style="margin-right:4px" class="ti-plus"></i>Подключить сервис</a>
+                        <a id="orCl" style="margin-right:5px" href="ord" class="login_btn active"><i style="margin-right:4px" class="ti-plus"></i>Подключить сервис</a>
                         <a href="/Account/Login" class="login_btn active">Войти</a>
                     </div>
                 </div>
@@ -134,6 +134,30 @@
     <script src="~/Content/custom/vendors/magnify-pop/jquery.magnific-popup.min.js"></script>
     <script src="~/Content/custom/vendors/scroll/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="~/Scripts/js/main.js"></script>
+
+    <script>
+
+    function goToByScroll(id){
+       
+        $('html,body').animate({
+            scrollTop: $("#"+id).offset().top},
+            'slow');
+        }
+
+    $("#orCl").click(function(e) { 
+        e.preventDefault(); 
+        goToByScroll($(this).attr("href"));           
+    });
+
+    $("#navbarSupportedContent > ul > li > a").click(function(e) { 
+          // Prevent a page reload when a link is pressed
+        e.preventDefault(); 
+          // Call the scroll function
+        goToByScroll($(this).attr("href"));           
+    });
+
+    </script>
+
 
 </body>
 </html>

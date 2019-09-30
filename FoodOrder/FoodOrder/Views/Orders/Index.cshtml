@@ -1,0 +1,308 @@
+﻿@model IEnumerable<FoodOrder.Models.Order>
+
+@{
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
+}
+
+<main>
+    <div class="container-fluid disable-text-selection">
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-2">
+                    <h1>Заказы клиентов</h1>
+                    <div class="top-right-button-container">
+                        <div class="btn-group">
+                            <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+                                <label class="custom-control custom-checkbox mb-0 d-inline-block">
+                                    <input type="checkbox" class="custom-control-input" id="checkAll">
+                                    <span class="custom-control-label">&nbsp;</span>
+                                </label>
+                            </div>
+                            <button type="button"
+                                    class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Приготовлено</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+               
+
+                <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
+                           aria-controls="first" aria-selected="true">НАДО ПРИГОТОВИТЬ</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " id="second-tab" data-toggle="tab" href="#second" role="tab"
+                           aria-controls="second" aria-selected="false">ПРИГОТОВЛЕНО</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                <div class="row">
+                    <div class="col-12 list" data-check-all="checkAll">
+
+
+                        <div class="card d-flex flex-row mb-3">
+                            <div class="d-flex flex-grow-1 min-width-zero">
+                                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
+                                        Заказ №1
+                                    </a>
+
+                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">LLC Aligofren Incorporated</p>
+
+                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">01.04.2018</p>
+                                    <div class="w-15 w-xs-100">
+                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
+                                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                                            Детали заказа
+                                        </a>
+                                    </div>
+                                </div>
+                                <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-label">&nbsp;</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="collapseExample">
+                            <div class="p-4 border mt-4">
+
+                                <div class="row mb-4">
+                                    <div class="col-md-12 mb-4 pl-0 pr-0">
+                                        <div class="owl-container">
+                                            <div class="owl-carousel single">
+                                                <div class="card d-flex flex-row mb-3">
+                                                    <a class="d-flex" href="#">
+                                                        <img alt="Thumbnail" src="~/Content/img/thumb-2.jpg"
+                                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                                    </a>
+                                                    <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                                            <a href="#">
+                                                                <p class="list-item-heading mb-1 truncate">
+                                                                    Бисквит от братишки
+                                                                </p>
+                                                            </a>
+                                                            <p class="mb-0 text-muted text-small">Мармелад</p>
+                                                            <p class="mb-0 text-muted text-small">09.04.2018</p>
+                                                            <div>
+                                                                <span class="badge badge-pill badge-primary">Новинка</span>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card d-flex flex-row mb-3">
+                                                    <a class="d-flex" href="#">
+                                                        <img alt="Thumbnail" src="~/Content/img/thumb-2.jpg"
+                                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                                    </a>
+                                                    <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                                            <a href="#">
+                                                                <p class="list-item-heading mb-1 truncate">
+                                                                    Домашний миндаль
+                                                                </p>
+                                                            </a>
+
+                                                            <p class="mb-0 text-muted text-small">Сладкое</p>
+                                                            <p class="mb-0 text-muted text-small">09.04.2018</p>
+                                                            <div>
+                                                                <span class="badge badge-pill badge-primary">Новинка</span>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card d-flex flex-row mb-3">
+                                                    <a class="d-flex" href="#">
+                                                        <img alt="Thumbnail" src="~/Content/img/thumb-2.jpg"
+                                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                                    </a>
+                                                    <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                                            <a href="#">
+                                                                <p class="list-item-heading mb-1 truncate">
+                                                                    Рыбное изделие
+                                                                </p>
+                                                            </a>
+                                                            <p class="mb-1 text-muted text-small">Рыба</p>
+                                                            <p class="mb-1 text-muted text-small">09.04.2018</p>
+                                                            <div>
+                                                                <span class="badge badge-pill badge-primary">Новинка</span>
+                                                                <span class="badge badge-pill badge-secondary">Нет в наличии</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" slider-nav text-center">
+                                                <a href="#" class="left-arrow owl-prev">
+                                                    <i class="simple-icon-arrow-left"></i>
+                                                </a>
+                                                <div class="slider-dot-container"></div>
+                                                <a href="#" class="right-arrow owl-next">
+                                                    <i class="simple-icon-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
+                <div class="row">
+                    <div class="col-12 list" data-check-all="checkAll">
+
+
+                        <div class="card d-flex flex-row mb-3">
+                            <div class="d-flex flex-grow-1 min-width-zero">
+                                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
+                                        Заказ №1
+                                    </a>
+
+                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">LLC Aligofren Incorporated</p>
+
+                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">01.04.2018</p>
+                                    <div class="w-15 w-xs-100">
+                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
+                                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                                            Детали заказа
+                                        </a>
+                                    </div>
+                                </div>
+                                <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-label">&nbsp;</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="collapseExample">
+                            <div class="p-4 border mt-4">
+
+                                <div class="row mb-4">
+                                    <div class="col-md-12 mb-4 pl-0 pr-0">
+                                        <div class="owl-container">
+                                            <div class="owl-carousel single">
+                                                <div class="card d-flex flex-row mb-3">
+                                                    <a class="d-flex" href="#">
+                                                        <img alt="Thumbnail" src="~/Content/img/thumb-2.jpg"
+                                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                                    </a>
+                                                    <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                                            <a href="#">
+                                                                <p class="list-item-heading mb-1 truncate">
+                                                                    Бисквит от братишки
+                                                                </p>
+                                                            </a>
+                                                            <p class="mb-0 text-muted text-small">Мармелад</p>
+                                                            <p class="mb-0 text-muted text-small">09.04.2018</p>
+                                                            <div>
+                                                                <span class="badge badge-pill badge-primary">Новинка</span>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card d-flex flex-row mb-3">
+                                                    <a class="d-flex" href="#">
+                                                        <img alt="Thumbnail" src="~/Content/img/thumb-2.jpg"
+                                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                                    </a>
+                                                    <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                                            <a href="#">
+                                                                <p class="list-item-heading mb-1 truncate">
+                                                                    Домашний миндаль
+                                                                </p>
+                                                            </a>
+
+                                                            <p class="mb-0 text-muted text-small">Сладкое</p>
+                                                            <p class="mb-0 text-muted text-small">09.04.2018</p>
+                                                            <div>
+                                                                <span class="badge badge-pill badge-primary">Новинка</span>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card d-flex flex-row mb-3">
+                                                    <a class="d-flex" href="#">
+                                                        <img alt="Thumbnail" src="~/Content/img/thumb-2.jpg"
+                                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                                    </a>
+                                                    <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                                            <a href="#">
+                                                                <p class="list-item-heading mb-1 truncate">
+                                                                    Рыбное изделие
+                                                                </p>
+                                                            </a>
+                                                            <p class="mb-1 text-muted text-small">Рыба</p>
+                                                            <p class="mb-1 text-muted text-small">09.04.2018</p>
+                                                            <div>
+                                                                <span class="badge badge-pill badge-primary">Новинка</span>
+                                                                <span class="badge badge-pill badge-secondary">Нет в наличии</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" slider-nav text-center">
+                                                <a href="#" class="left-arrow owl-prev">
+                                                    <i class="simple-icon-arrow-left"></i>
+                                                </a>
+                                                <div class="slider-dot-container"></div>
+                                                <a href="#" class="right-arrow owl-next">
+                                                    <i class="simple-icon-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+      </div>
+</main>
+
+

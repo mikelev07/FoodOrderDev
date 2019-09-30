@@ -30,6 +30,7 @@
                         </div>
                     </div>
 
+
                 </div>
 
                 <div class="row">
@@ -37,41 +38,45 @@
 
                         @foreach (var item in Model)
                         {
-                            <div class="card d-flex flex-row mb-3">
-                                <div class="d-flex flex-grow-1 min-width-zero">
-                                    <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
-                                            Компания
-                                        </a>
-                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">Категория</p>
-                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">02.04.2018</p>
-                                        <div class="w-15 w-xs-100">
-                                            <span class="badge badge-pill badge-secondary">Не подтвержено</span>
-                                        </div>
+                        <div class="card d-flex flex-row mb-3">
+                            <a class="d-flex" href="Pages.Product.Detail.html">
+                                <img src="~/Content/img/fat-rascal-thumb.jpg" alt="Fat Rascal"
+                                     class="list-thumbnail responsive border-0 card-img-left" />
+                            </a>
+                            <div class="d-flex flex-grow-1 min-width-zero">
+                                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
+                                        @item.Name
+                                    </a>
+                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">Категория</p>
+                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">02.04.2018</p>
+                                    <div class="w-15 w-xs-100">
+                                        <span class="badge badge-pill badge-secondary">Не подтвержено</span>
                                     </div>
-                                    <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
-                                        <a href="#" class="btn btn-primary btn-multiple-state btn-xs" onclick="sendEmail(this.id)" id="successButton-@item.Id">
-                                            <div class="spinner d-inline-block">
-                                                <div class="bounce1"></div>
-                                                <div class="bounce2"></div>
-                                                <div class="bounce3"></div>
-                                            </div>
-                                            <span class="icon success" data-toggle="tooltip" data-placement="top"
-                                                  title="Пароль успешно сгенерирован и отправлен на почту представителю!">
-                                                <i class="simple-icon-check"></i>
-                                            </span>
-                                            <span class="icon fail" data-toggle="tooltip" data-placement="top"
-                                                  title="Неудачно!">
-                                                <i class="simple-icon-exclamation"></i>
-                                            </span>
-                                            <span class="label">Сгенерировать пароль</span>
-                                        </a>
-                                        <a href="/Users/EditCompany/@item.Id" class="btn btn-header-light icon-button">
-                                            <i class="simple-icon-pencil"></i>
-                                        </a>
-                                    </label>
                                 </div>
+                                <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                    <a href="#" class="btn btn-primary btn-multiple-state btn-xs" onclick="sendEmail(this.id)" id="successButton-@item.Id">
+                                        <div class="spinner d-inline-block">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+                                        <span class="icon success" data-toggle="tooltip" data-placement="top"
+                                              title="Пароль успешно сгенерирован и отправлен на почту представителю!">
+                                            <i class="simple-icon-check"></i>
+                                        </span>
+                                        <span class="icon fail" data-toggle="tooltip" data-placement="top"
+                                              title="Неудачно!">
+                                            <i class="simple-icon-exclamation"></i>
+                                        </span>
+                                        <span class="label">Сгенерировать пароль</span>
+                                    </a>
+                                    <a href="/Users/EditCompany/@item.Id" class="btn btn-header-light icon-button">
+                                        <i class="simple-icon-pencil"></i>
+                                    </a>
+                                </label>
                             </div>
+                        </div>
                         }
 
                             <nav class="mt-4 mb-3">

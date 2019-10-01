@@ -21,15 +21,17 @@
     <link rel="stylesheet" href="~/Content/system/css/vendor/bootstrap-datepicker3.min.css" />
     <link rel="stylesheet" href="~/Content/system/css/vendor/component-custom-switch.min.css" />
     <link rel="stylesheet" href="~/Content/system/css/main.css" />
+    <link rel="stylesheet" href="~/Content/custom/enjoyhint.css" />
+
 
     <style>
         .theme-button {
             display: none;
         }
 
-         .custom-file-input:lang(en) ~ .custom-file-label::after {
+        .custom-file-input:lang(en) ~ .custom-file-label::after {
             Content: "Нажмите сюда"
-         }
+        }
     </style>
 
 </head>
@@ -128,7 +130,7 @@
                             <span>Моя страница</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="orderSk">
                         <a href="/Orders">
                             <i class="iconsminds-bag-items"></i>
                             <span>Заказы клиентов</span>
@@ -149,9 +151,6 @@
 
     @RenderBody()
 
-
-    @RenderSection("scripts", required: false)
-
     <script src="~/Scripts/system/vendor/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/system/vendor/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/system/vendor/Chart.bundle.min.js"></script>
@@ -170,6 +169,11 @@
     <script src="~/Scripts/system/vendor/mousetrap.min.js"></script>
     <script src="~/Scripts/system/dore.script.js"></script>
     <script src="~/Scripts/system/scripts.js"></script>
+    <script src="~/Scripts/js/enjoyhint.min.js"></script>
+   
+
+    @RenderSection("scripts", required: false)
+
 </body>
 
 </html>

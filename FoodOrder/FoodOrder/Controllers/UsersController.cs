@@ -55,7 +55,7 @@ namespace FoodOrder.Controllers
 
             if (await UserManager.IsInRoleAsync(userId, "admin"))
             {
-                var companies = await db.Companies.ToListAsync();
+                var companies = await db.Companies.Include(c => c.Representative).ToListAsync();
                 return View("MyDetailsAdmin", companies);
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
@@ -167,7 +167,17 @@ namespace FoodOrder.Controllers
 
         public ActionResult Statistic()
         {
+          
             return View();
+        }
+
+
+        public async Task<JsonResult> SendSpecEmail(string id)
+        {
+            await UserManager.SendEmailAsync(id, "Проверка электронной почты",
+            "Я в своем познании настолько преисполнился, что я как будто бы уже сто триллионов миллиардов лет проживаю на триллионах и триллионах таких же планет, как эта Земля, мне этот мир абсолютно понятен, и я здесь ищу только одного - покоя, умиротворения и вот этой гармонии, от слияния с бесконечно вечным, от созерцания великого фрактального подобия и от вот этого замечательного всеединства существа, бесконечно вечного, куда ни посмотри, хоть вглубь - бесконечно малое, хоть ввысь - бесконечное большое, понимаешь ? А ты мне опять со своим вот этим, иди суетись дальше, это твоё распределение, это твой путь и твой горизонт познания и ощущения твоей природы, он несоизмеримо мелок по сравнению с моим, понимаешь ?");
+
+            return Json(true);
         }
 
 

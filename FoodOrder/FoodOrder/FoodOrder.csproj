@@ -210,6 +210,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom\bootstrap.min.css" />
+    <Content Include="Content\custom\enjoyhint.css" />
     <Content Include="Content\custom\responsive.css" />
     <Content Include="Content\custom\rtl.css" />
     <Content Include="Content\custom\style.css" />
@@ -432,10 +433,13 @@
     <Content Include="Scripts\js\canvas.js" />
     <Content Include="Scripts\js\comming-soon.js" />
     <Content Include="Scripts\js\contact.js" />
+    <Content Include="Scripts\js\enjoyhint.css" />
+    <Content Include="Scripts\js\enjoyhint.min.js" />
     <Content Include="Scripts\js\gmaps.min.js" />
     <Content Include="Scripts\js\jquery-3.2.1.min.js" />
     <Content Include="Scripts\js\jquery.form.js" />
     <Content Include="Scripts\js\jquery.validate.min.js" />
+    <Content Include="Scripts\js\kinetic.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\mchimpsubs.js" />
     <Content Include="Scripts\js\plugins.js" />

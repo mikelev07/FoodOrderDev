@@ -8,18 +8,63 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FoodOrder.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace FoodOrder.Controllers
 {
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
 
+        public OrdersController()
+        {
+
+        }
+        public OrdersController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); ;
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        [Authorize(Roles = "admin,representative, cook")]
         // GET: Orders
         public async Task<ActionResult> Index()
         {
-            var orders = db.Orders.Include(o => o.User);
-            return View(await orders.ToListAsync());
+            var userId = User.Identity.GetUserId();
+            if (userId == null)
+            {
+                return new HttpNotFoundResult();
+            }
+
+            if (await UserManager.IsInRoleAsync(userId, "admin"))
+            {
+                var companies = await db.Companies.ToListAsync();
+                return View("IndexAdmin", companies);
+            }
+            if (await UserManager.IsInRoleAsync(userId, "representative"))
+            {
+                return View("IndexCompany");
+            }
+            if (await UserManager.IsInRoleAsync(userId, "cook"))
+            {
+                var orders = await db.Orders.Include(o => o.User).ToListAsync();
+                return View("IndexCook", orders);
+            }
+
+            return new HttpUnauthorizedResult();
         }
 
         // GET: Orders/Details/5
@@ -40,6 +85,8 @@ namespace FoodOrder.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
+            //когда дойдут руки (и другие части тела) до создания заказа
+            //нужно будет инкрементить число заказов у компании
             ViewBag.UserId = new SelectList(db.Users, "Id", "SecondName");
             return View();
         }

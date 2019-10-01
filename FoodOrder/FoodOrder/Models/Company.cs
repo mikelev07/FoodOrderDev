@@ -31,6 +31,7 @@ namespace FoodOrder.Models
         public string RepresentativeId { get; set; }
         public virtual User Representative { get; set; }
         public List<User> Employees { get; set; }
+        public int OrdersCount { get; set; }
 
         public Company()
         {

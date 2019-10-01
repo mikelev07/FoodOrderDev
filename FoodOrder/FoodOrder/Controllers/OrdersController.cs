@@ -39,7 +39,7 @@ namespace FoodOrder.Controllers
             }
         }
 
-        [Authorize(Roles = "admin,representative, cook")]
+        [Authorize(Roles = "admin,representative,cook")]
         // GET: Orders
         public async Task<ActionResult> Index()
         {
@@ -65,6 +65,19 @@ namespace FoodOrder.Controllers
             }
 
             return new HttpUnauthorizedResult();
+        }
+
+        //метод для отображения заказов по сотрудникам
+        [Authorize(Roles = "admin,representative,cook")]
+        public async Task<ActionResult> Employees(string companyId)
+        {
+            if (companyId == null)
+            {
+                return new HttpNotFoundResult("Such a company not found");
+            }
+            var employees = await db.Users.Include(u=>u.Orders).Where(u => u.CompanyId == companyId).ToListAsync();
+            ViewBag.CompanyName = (await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId)).Name;
+            return View("IndexCompany", employees);
         }
 
         // GET: Orders/Details/5

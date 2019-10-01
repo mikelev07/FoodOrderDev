@@ -130,19 +130,39 @@
                             <span>Моя страница</span>
                         </a>
                     </li>
-                    <li class="orderSk">
-                        <a href="/Orders">
-                            <i class="iconsminds-bag-items"></i>
-                            <span>Заказы клиентов</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="/users/statistic">
-                            <i class="iconsminds-statistic"></i>
-                            <span>Статистика</span>
-                        </a>
-                    </li>
-
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="">
+                            <a href="/Orders">
+                                <i class="iconsminds-bag-items"></i>
+                                <span>Заказы компаний</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="/Users/Statistic">
+                                <i class="iconsminds-statistic"></i>
+                                <span>Статистика</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("representative"))
+                    {
+                        <li class="">
+                            <a href="/Orders">
+                                <i class="iconsminds-bag-items"></i>
+                                <span>Наши заказы</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("cook"))
+                    {
+                        <li class="">
+                            <a href="/Orders">
+                                <i class="iconsminds-bag-items"></i>
+                                <span>Заказы клиентов</span>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

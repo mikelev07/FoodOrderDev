@@ -189,9 +189,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909291019503_andNeeew1.cs" />
-    <Compile Include="Migrations\201909291019503_andNeeew1.Designer.cs">
-      <DependentUpon>201909291019503_andNeeew1.cs</DependentUpon>
+    <Compile Include="Migrations\201910011140420_First.cs" />
+    <Compile Include="Migrations\201910011140420_First.Designer.cs">
+      <DependentUpon>201910011140420_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -717,6 +717,9 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Users\Statistic.cshtml" />
+    <Content Include="Views\Orders\IndexAdmin.cshtml" />
+    <Content Include="Views\Orders\IndexCompany.cshtml" />
+    <Content Include="Views\Orders\IndexCook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -735,8 +738,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909291019503_andNeeew1.resx">
-      <DependentUpon>201909291019503_andNeeew1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910011140420_First.resx">
+      <DependentUpon>201910011140420_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

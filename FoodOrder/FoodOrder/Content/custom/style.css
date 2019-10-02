@@ -68,6 +68,10 @@ Table of Content:
 }
 
 
+.pSubLog {
+    margin-left: 195px;
+}
+
 a {
   text-decoration: none;
 }
@@ -1813,8 +1817,11 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 @media (max-width: 991px) {
   .nav_right_btn {
-    display: none;
+   
   }
+    #orCl {
+        display:none;
+    }
 }
 
 .menu_four .btn_get {

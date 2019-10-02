@@ -102,7 +102,7 @@
                         aria-expanded="false">
                     <span class="name">Виктор</span>
                     <span>
-                        <img alt="Фото профиля" src="~/Content/img/profile-pic-l.jpg" />
+                        <img alt="Фото профиля" src="~/Content/img/profile-pic-p.png" />
                     </span>
                 </button>
 
@@ -124,7 +124,7 @@
         <div class="main-menu">
             <div class="scroll">
                 <ul class="list-unstyled">
-                    <li class="active">
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Mydetails" ? "active" : "")">
                         <a href="/Users/Mydetails">
                             <i class="iconsminds-male-2"></i>
                             <span>Моя страница</span>
@@ -132,13 +132,13 @@
                     </li>
                     @if (User.IsInRole("admin"))
                     {
-                        <li class="">
-                            <a href="/Orders">
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Orders" ? "active" : "")">
+                            <a class="orderSk" href="/Orders">
                                 <i class="iconsminds-bag-items"></i>
                                 <span>Заказы компаний</span>
                             </a>
                         </li>
-                        <li class="">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Statistic" ? "active" : "")">
                             <a href="/Users/Statistic">
                                 <i class="iconsminds-statistic"></i>
                                 <span>Статистика</span>

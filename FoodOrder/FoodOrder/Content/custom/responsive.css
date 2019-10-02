@@ -1100,6 +1100,11 @@
 
 
 @media (max-width:991px){
+
+    .pSubLog {
+        margin-left:105px;
+    }
+
     .s_service_section {
         margin-top: 280px;
     }
@@ -2599,7 +2604,7 @@
     }
     .mobile_img .women_img {
         top: 50px;
-        right: 200px;
+        right: 130px;
         max-width: 40%;
     }
     .design_tab_area .tab-content .tab_img{

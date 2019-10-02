@@ -10,11 +10,14 @@ namespace FoodOrder.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Logotype { get; set; } /*= "~/Content/Custom/images/some-company-logotype.jpg";*/
+        public string LogotypePath { get; set; } /*= "~/Content/Custom/images/some-company-logotype.jpg";*/
+        //public HttpPostedFileBase LogotypeFile { get; set; }
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
         public string Description { get; set; }
+        public string GeneratedPassword { get; set; }
         public string RepresentativeLogin { get; set; }
+        public string Requisites { get; set; }
         public string Whatsapp { get; set; }
         public string Telegram { get; set; }
     }
@@ -22,12 +25,15 @@ namespace FoodOrder.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Logotype { get; set; } /*= "~/Content/Custom/images/some-company-logotype.jpg";*/
+        public string LogotypePath { get; set; } /*= "~/Content/Custom/images/some-company-logotype.jpg";*/
+        //public HttpPostedFileBase LogotypeFile { get; set; }
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
         public string Whatsapp { get; set; }
         public string Telegram { get; set; }
         public string Description { get; set; }
+        public string GeneratedPassword { get; set; }
+        public string Requisites { get; set; }
         public string RepresentativeId { get; set; }
         public virtual User Representative { get; set; }
         public List<User> Employees { get; set; }

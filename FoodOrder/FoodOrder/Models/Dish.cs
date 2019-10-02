@@ -12,6 +12,7 @@ namespace FoodOrder.Models
         public string Description { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+        public OrderStatus Status { get; set; }
         //public double Price { get; set; }
         public ICollection<ComplexDish> Dishes { get; set; }
         public Order()
@@ -66,5 +67,12 @@ namespace FoodOrder.Models
         Salad,
         Drink,
         Snack
+    }
+
+    public enum OrderStatus
+    {
+        Waiting,
+        Done,
+        Cancelled
     }
 }

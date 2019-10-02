@@ -38,8 +38,16 @@
                         {
                         <div class="card d-flex flex-row mb-3">
                             <a class="d-flex" href="Pages.Product.Detail.html">
-                                <img src="~/Content/img/fat-rascal-thumb.jpg" alt="Fat Rascal"
-                                     class="list-thumbnail responsive border-0 card-img-left" />
+                                @if (item.LogotypeFile != null)
+                                {
+                                    <img src="@Url.Content(item.LogotypePath)" alt="@item.Name" 
+                                         class="list-thumbnail responsive border-0 card-img-left" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/img/fat-rascal-thumb.jpg" alt="Fat Rascal"
+                                         class="list-thumbnail responsive border-0 card-img-left" />
+                                }
                             </a>
                             <div class="d-flex flex-grow-1 min-width-zero">
                                 <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
@@ -51,11 +59,11 @@
                                     <div class="w-15 w-xs-100">
                                         @if (item.Representative.EmailConfirmed)
                                         {
-                                            <span class="badge badge-pill badge-success">Подтвержено</span>
+                                            <span class="badge badge-pill badge-success">Подтверждено</span>
                                         }
                                         else
                                         {
-                                            <span class="badge badge-pill badge-secondary">Не подтвержено</span>
+                                            <span class="badge badge-pill badge-secondary">Не подтверждено</span>
                                         }
                                     </div>
                                 </div>

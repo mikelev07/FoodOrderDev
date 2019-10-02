@@ -99,7 +99,7 @@ namespace FoodOrder.Controllers
                 var cvm = new CompanyViewModel
                 {
                     Name = company.Name,
-                    Logotype = company.Logotype,
+                    LogotypePath = company.LogotypePath,
                     TypeOfPayment = company.TypeOfPayment,
                     UnlimitedOrders = company.UnlimitedOrders
                 };
@@ -170,17 +170,6 @@ namespace FoodOrder.Controllers
             return View();
         }
 
-        
-
-
-        public async Task<JsonResult> SendSpecEmail(string id)
-        {
-            await UserManager.SendEmailAsync(id, "Проверка электронной почты",
-            "Я в своем познании настолько преисполнился, что я как будто бы уже сто триллионов миллиардов лет проживаю на триллионах и триллионах таких же планет, как эта Земля, мне этот мир абсолютно понятен, и я здесь ищу только одного - покоя, умиротворения и вот этой гармонии, от слияния с бесконечно вечным, от созерцания великого фрактального подобия и от вот этого замечательного всеединства существа, бесконечно вечного, куда ни посмотри, хоть вглубь - бесконечно малое, хоть ввысь - бесконечное большое, понимаешь ? А ты мне опять со своим вот этим, иди суетись дальше, это твоё распределение, это твой путь и твой горизонт познания и ощущения твоей природы, он несоизмеримо мелок по сравнению с моим, понимаешь ?");
-
-            return Json(true);
-        }
-
 
         // POST: Users/CreateCompany
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
@@ -192,25 +181,24 @@ namespace FoodOrder.Controllers
             cvm.Id = Guid.NewGuid().ToString();
             if (ModelState.IsValid)
             {
+                var newRandomPassword = CreateRandomPassword();
                 var company = new Company {
                     Id=cvm.Id,
                     Name = cvm.Name,
-                    Logotype = cvm?.Logotype,
+                    LogotypePath = cvm?.LogotypePath,
                     TypeOfPayment = cvm.TypeOfPayment,
                     UnlimitedOrders = cvm.UnlimitedOrders, 
                     Description = cvm?.Description,
+                    GeneratedPassword = newRandomPassword,
                     Whatsapp = cvm?.Whatsapp,
                     Telegram = cvm?.Telegram
                 };
 
-                var newRandomPassword = CreateRandomPassword();
-                //куда в юзера логин засунуть???
-                //создать на вьюхе могу, но как его передать в нового юзера - хз
                 var newRepresentative = new User {
                     Email=cvm.RepresentativeLogin,
                     UserName = cvm.RepresentativeLogin
                 };
-
+                //нужно ли будет закидывать в представителя CompanyId??
                 var result = await UserManager.CreateAsync(newRepresentative, newRandomPassword);
                 if (result.Succeeded)
                 {
@@ -226,6 +214,13 @@ namespace FoodOrder.Controllers
             return View(cvm);
         }
 
+        public async Task<JsonResult> SendSpecEmail(string id)
+        {
+            await UserManager.SendEmailAsync(id, "Проверка электронной почты",
+            "Я в своем познании настолько преисполнился, что я как будто бы уже сто триллионов миллиардов лет проживаю на триллионах и триллионах таких же планет, как эта Земля, мне этот мир абсолютно понятен, и я здесь ищу только одного - покоя, умиротворения и вот этой гармонии, от слияния с бесконечно вечным, от созерцания великого фрактального подобия и от вот этого замечательного всеединства существа, бесконечно вечного, куда ни посмотри, хоть вглубь - бесконечно малое, хоть ввысь - бесконечное большое, понимаешь ? А ты мне опять со своим вот этим, иди суетись дальше, это твоё распределение, это твой путь и твой горизонт познания и ощущения твоей природы, он несоизмеримо мелок по сравнению с моим, понимаешь ?");
+
+            return Json(true);
+        }
 
         // GET: Users/Edit/5
         [Authorize(Roles = "admin, representative")]
@@ -290,7 +285,7 @@ namespace FoodOrder.Controllers
             {
                 Id = company.Id,
                 Name = company.Name,
-                Logotype = company.Logotype,
+                LogotypePath = company.LogotypePath,
                 TypeOfPayment = company.TypeOfPayment,
                 UnlimitedOrders = company.UnlimitedOrders
             };
@@ -308,7 +303,7 @@ namespace FoodOrder.Controllers
             {
                 var company = await db.Companies.Where(c => c.Id == cvm.Id).FirstOrDefaultAsync();
                 company.Name = cvm.Name;
-                company.Logotype = cvm.Logotype;
+                company.LogotypePath = cvm.LogotypePath;
                 company.TypeOfPayment = cvm.TypeOfPayment;
                 company.UnlimitedOrders = cvm.UnlimitedOrders;
                 db.Entry(company).State = EntityState.Modified;
@@ -370,7 +365,7 @@ namespace FoodOrder.Controllers
             {
                 Id = company.Id,
                 Name = company.Name,
-                Logotype = company.Logotype,
+                LogotypePath = company.LogotypePath,
                 TypeOfPayment = company.TypeOfPayment,
                 UnlimitedOrders = company.UnlimitedOrders
             };
@@ -390,7 +385,7 @@ namespace FoodOrder.Controllers
 
         public string CreateRandomPassword()
         {
-            return Membership.GeneratePassword(12, 6);
+            return Membership.GeneratePassword(6, 2);
         }
 
         protected override void Dispose(bool disposing)

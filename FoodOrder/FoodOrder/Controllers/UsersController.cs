@@ -117,6 +117,11 @@ namespace FoodOrder.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles ="admin")]
+        public ActionResult Statistic()
+        {
+            return View();
+        }
 
         // GET: Users/Create
         [Authorize(Roles = "representative")]
@@ -165,11 +170,7 @@ namespace FoodOrder.Controllers
             return View();
         }
 
-        public ActionResult Statistic()
-        {
-          
-            return View();
-        }
+        
 
 
         public async Task<JsonResult> SendSpecEmail(string id)
@@ -389,7 +390,7 @@ namespace FoodOrder.Controllers
 
         public string CreateRandomPassword()
         {
-            return "sosiPisos";
+            return Membership.GeneratePassword(12, 6);
         }
 
         protected override void Dispose(bool disposing)

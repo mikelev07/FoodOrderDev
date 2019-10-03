@@ -72,13 +72,13 @@
                                     <div>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-primary active">
-                                                <input type="radio" name="TypeOfPayment" id="TypeOfPayment1" checked required> Наличный расчет
+                                                <input type="radio" name="TypeOfPayment" value="0" id="TypeOfPayment1" checked required> Наличный расчет
                                             </label>
                                             <label class="btn btn-primary">
-                                                <input type="radio" name="TypeOfPayment" id="TypeOfPayment2"> Банковский перевод
+                                                <input type="radio" name="TypeOfPayment" value="1" id="TypeOfPayment2"> Банковский перевод
                                             </label>
                                             <label class="btn btn-primary">
-                                                <input type="radio" name="TypeOfPayment" id="TypeOfPayment3"> Электронные деньги
+                                                <input type="radio" name="TypeOfPayment" value="2" id="TypeOfPayment3"> Электронные деньги
                                             </label>
                                         </div>
                                     </div>
@@ -98,7 +98,8 @@
                                 <br />
 
                                 <div class="custom-control custom-checkbox mb-3 error-l-200">
-                                    <input type="checkbox" name="UnlimitedOrders" class="custom-control-input" id="customControlValidation1">
+                                    @*<input type="checkbox" name="UnlimitedOrders" value="false" class="custom-control-input" id="customControlValidation1">*@
+                                    @Html.CheckBox("UnlimitedOrders", false, new { @class="custom-control-input", id="customControlValidation1" })
                                     <label class="custom-control-label" for="customControlValidation1">
                                         Неограниченные заказы для сотрудников
                                     </label>

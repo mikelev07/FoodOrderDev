@@ -715,7 +715,6 @@
     <Content Include="Views\Orders\Delete.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Users\Statistic.cshtml" />
     <Content Include="Views\Orders\IndexAdmin.cshtml" />
     <Content Include="Views\Orders\IndexCompany.cshtml" />

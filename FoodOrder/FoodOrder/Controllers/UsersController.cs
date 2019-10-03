@@ -179,17 +179,19 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> CreateCompany(CompanyViewModel cvm)
         {
             cvm.Id = Guid.NewGuid().ToString();
+            var newRandomPassword = CreateRandomPassword();
+            cvm.GeneratedPassword = newRandomPassword;
             if (ModelState.IsValid)
             {
-                var newRandomPassword = CreateRandomPassword();
                 var company = new Company {
                     Id=cvm.Id,
                     Name = cvm.Name,
                     LogotypePath = cvm?.LogotypePath,
                     TypeOfPayment = cvm.TypeOfPayment,
-                    UnlimitedOrders = cvm.UnlimitedOrders, 
+                    UnlimitedOrders = cvm.UnlimitedOrders,
                     Description = cvm?.Description,
-                    GeneratedPassword = newRandomPassword,
+                    GeneratedPassword = cvm.GeneratedPassword,
+                    Requisites=cvm.Requisites,
                     Whatsapp = cvm?.Whatsapp,
                     Telegram = cvm?.Telegram
                 };

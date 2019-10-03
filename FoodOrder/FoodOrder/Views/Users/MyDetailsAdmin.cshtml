@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
-                                    <a href="#" class="btn btn-primary btn-multiple-state btn-xs" onclick="sendEmail(this.id)" id="@item.RepresentativeId">
+                                    <a href="#" class="btn btn-primary btn-multiple-state btn-xs" onclick="sendEmail(this.id, '@item.GeneratedPassword')" id="@item.RepresentativeId">
                                         <div class="spinner d-inline-block">
                                             <div class="bounce1"></div>
                                             <div class="bounce2"></div>
@@ -201,15 +201,16 @@
           })
 
 
-        function sendEmail(id) {
+        function sendEmail(id, pass) {
             $(this).trigger("click");
             var $successButton = $("#" + id).stateButton();
               event.preventDefault();
               $successButton.showSpinner();
                   $.ajax({
                     type: 'POST',
+                    data: JSON.stringify({"id": id, "genPass": pass}),
                     contentType: "application/json",
-                    url: "/Users/SendSpecEmail/"+id,
+                    url: "/Users/SendSpecEmail",
                       success: function (data) {
                             setTimeout(function () {
                                 $successButton.showSuccess(true);

@@ -13,7 +13,7 @@ namespace FoodOrder.Models
         public string UserId { get; set; }
         public User User { get; set; }
         public OrderStatus Status { get; set; }
-        //public double Price { get; set; }
+        public double Price { get; set; }
         public ICollection<ComplexDish> Dishes { get; set; }
         public Order()
         {
@@ -25,12 +25,22 @@ namespace FoodOrder.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public DateTime DateOfCreation { get; set; }
-        public ICollection<ComplexDish> Dishes { get; set; }
+        public ICollection<Pack> Packs { get; set; }
         public Menu()
         {
-            Dishes = new List<ComplexDish>();
+            Packs = new List<Pack>();
         }
     }
+
+    public class Pack
+    {
+        public string Id { get; set; }
+        public Dish MainDish { get; set; }
+        public Dish Second { get; set; }
+        public Dish Salad { get; set; }
+        public Dish Drink { get; set; }
+    }
+
     public class Dish
     {
         public string Id { get; set; }
@@ -39,12 +49,12 @@ namespace FoodOrder.Models
         public NutritionalValue NutritionalValue { get; set; }
         public string ImagePath { get; set; }
         public bool HasGarnish { get; set; }
-        //public double Price { get; set; }
+        public double Price { get; set; }
     }
 
     public class ComplexDish: Dish
     {
-        public Dish GetDish { get; set; }
+        public Dish Garnish { get; set; }
         public ComplexDish()
         {
             HasGarnish = true;

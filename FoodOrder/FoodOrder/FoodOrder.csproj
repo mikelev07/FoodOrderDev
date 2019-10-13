@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -719,6 +720,11 @@
     <Content Include="Views\Orders\IndexAdmin.cshtml" />
     <Content Include="Views\Orders\IndexCompany.cshtml" />
     <Content Include="Views\Orders\IndexCook.cshtml" />
+    <Content Include="Views\Dishes\Create.cshtml" />
+    <Content Include="Views\Dishes\Delete.cshtml" />
+    <Content Include="Views\Dishes\Details.cshtml" />
+    <Content Include="Views\Dishes\Edit.cshtml" />
+    <Content Include="Views\Dishes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

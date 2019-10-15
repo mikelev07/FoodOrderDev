@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FoodOrder.Models.User>
+﻿@model IEnumerable<FoodOrder.Models.UserViewModel>
 
 @{
     Layout = "~/Views/Shared/_LayoutSystem.cshtml";
@@ -112,9 +112,80 @@
 
                     <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
 
+                        <div class="row">
+                            <div class="col-12 list" data-check-all="checkAll">
+
+                                @foreach (var employee in Model)
+                                {
+                                    <div class="card d-flex flex-row mb-3">
+                                        <div class="d-flex flex-grow-1 min-width-zero">
+                                            <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                                <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
+                                                    @employee.UserName
+                                                </a>
+                                                <div class="w-15 w-xs-100">
+                                                    <span>@employee.Email</span>
+                                                </div>
+                                                <div class="w-15 w-xs-100">
+                                                    @if (employee.EmailConfirmed)
+                                                    {
+                                                        <span class="badge badge-pill badge-success">Подтверждено</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-pill badge-secondary">Не подтверждено</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                                <a href="/Users/Edit/@employee.Id" class="btn btn-header-light icon-button">
+                                                    <i class="simple-icon-pencil"></i>
+                                                </a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+
+
+                                <nav class="mt-4 mb-3">
+                                    <ul class="pagination justify-content-center mb-0">
+                                        <li class="page-item ">
+                                            <a class="page-link first" href="#">
+                                                <i class="simple-icon-control-start"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item ">
+                                            <a class="page-link prev" href="#">
+                                                <i class="simple-icon-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item ">
+                                            <a class="page-link" href="#">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item ">
+                                            <a class="page-link next" href="#" aria-label="Next">
+                                                <i class="simple-icon-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item ">
+                                            <a class="page-link last" href="#">
+                                                <i class="simple-icon-control-end"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
                         <div class="col-xl-3 col-lg-6 mb-4">
                             <div class="card">
-                              
+
                                 <a id="newCompany" href="/Users/Create">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <h6 class="mb-0">Добавить сотрудника</h6>

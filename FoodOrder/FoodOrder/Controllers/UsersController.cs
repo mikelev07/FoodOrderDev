@@ -22,7 +22,7 @@ namespace FoodOrder.Controllers
 
         public UsersController()
         {
-          
+
         }
         public UsersController(ApplicationUserManager userManager)
         {
@@ -60,10 +60,27 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
-                var company = await db.Companies.Include(c=>c.Employees).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
+                var company = await db.Companies.Include(c => c.Employees).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
                 var employees = company.Employees.ToList();
                 ViewBag.CompanyName = company.Name;
-                return View("MyDetailsCompany", employees);
+
+                var employeesViewModel = (from employee in employees
+                                          select new
+                                          {
+                                              employee.Id,
+                                              employee.UserName,
+                                              employee.Email,
+                                              employee.EmailConfirmed
+                                          }).ToList().Select(async p => new UserViewModel()
+                                          {
+                                              Id = p.Id,
+                                              UserName = p.UserName,
+                                              Email = p.Email,
+                                              EmailConfirmed = p.EmailConfirmed,
+                                              HasOrderToday = await db.Orders.Where(u => u.UserId == p.Id).AnyAsync(u => DateTime.Compare(u.DateOfCreation.Date, DateTime.Today) == 0)
+                                          });
+
+                return View("MyDetailsCompany", employeesViewModel);
             }
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {
@@ -117,7 +134,7 @@ namespace FoodOrder.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult Statistic()
         {
             return View();
@@ -143,8 +160,9 @@ namespace FoodOrder.Controllers
                 var currentUserId = User.Identity.GetUserId();
                 var companyId = (await db.Companies.Where(c => c.RepresentativeId == currentUserId).FirstOrDefaultAsync()).Id;
                 var newRandomPassword = CreateRandomPassword();
-                var user = new User {
-                    Id=uvm.Id,
+                var user = new User
+                {
+                    Id = uvm.Id,
                     UserName = uvm.Email,
                     SecondName = uvm.SecondName,
                     Email = uvm.Email,
@@ -183,21 +201,23 @@ namespace FoodOrder.Controllers
             cvm.GeneratedPassword = newRandomPassword;
             if (ModelState.IsValid)
             {
-                var company = new Company {
-                    Id=cvm.Id,
+                var company = new Company
+                {
+                    Id = cvm.Id,
                     Name = cvm.Name,
                     LogotypePath = cvm?.LogotypePath,
                     TypeOfPayment = cvm.TypeOfPayment,
                     UnlimitedOrders = cvm.UnlimitedOrders,
                     Description = cvm?.Description,
                     GeneratedPassword = cvm.GeneratedPassword,
-                    Requisites=cvm.Requisites,
+                    Requisites = cvm.Requisites,
                     Whatsapp = cvm?.Whatsapp,
                     Telegram = cvm?.Telegram
                 };
 
-                var newRepresentative = new User {
-                    Email=cvm.RepresentativeLogin,
+                var newRepresentative = new User
+                {
+                    Email = cvm.RepresentativeLogin,
                     UserName = cvm.RepresentativeLogin
                 };
                 //нужно ли будет закидывать в представителя CompanyId??
@@ -258,7 +278,7 @@ namespace FoodOrder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await db.Users.Where(u => u.Id==uvm.Id).FirstOrDefaultAsync();
+                var user = await db.Users.Where(u => u.Id == uvm.Id).FirstOrDefaultAsync();
                 user.UserName = uvm.UserName;
                 user.SecondName = uvm.SecondName;
                 user.Email = uvm.Email;

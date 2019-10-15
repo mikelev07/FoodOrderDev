@@ -64,14 +64,7 @@ namespace FoodOrder.Controllers
                 var employees = company.Employees.ToList();
                 ViewBag.CompanyName = company.Name;
 
-                var employeesViewModel = (from employee in employees
-                                          select new
-                                          {
-                                              employee.Id,
-                                              employee.UserName,
-                                              employee.Email,
-                                              employee.EmailConfirmed
-                                          }).ToList().Select(async p => new UserViewModel()
+                var employeesViewModel = employees.Select(async p => new UserViewModel()
                                           {
                                               Id = p.Id,
                                               UserName = p.UserName,

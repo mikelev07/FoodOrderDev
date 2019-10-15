@@ -87,9 +87,5 @@ namespace FoodOrder.Models
         public DbSet<ComplexDish> ComplexDishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
-<<<<<<< HEAD
-=======
-       
->>>>>>> c8ae3f23280c05171b62b8d1756545f3f90923ed
     }
 }

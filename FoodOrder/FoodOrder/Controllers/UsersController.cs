@@ -64,14 +64,16 @@ namespace FoodOrder.Controllers
                 var employees = company.Employees.ToList();
                 ViewBag.CompanyName = company.Name;
 
-                var employeesViewModel = employees.Select(async p => new UserViewModel()
-                                          {
-                                              Id = p.Id,
-                                              UserName = p.UserName,
-                                              Email = p.Email,
-                                              EmailConfirmed = p.EmailConfirmed,
-                                              HasOrderToday = await db.Orders.Where(u => u.UserId == p.Id).AnyAsync(u => DateTime.Compare(u.DateOfCreation.Date, DateTime.Today) == 0)
-                                          });
+
+
+                var employeesViewModel = employees.Select(p => new UserViewModel()
+                {
+                    Id = p.Id,
+                    UserName = p.UserName,
+                    Email = p.Email,
+                    EmailConfirmed = p.EmailConfirmed,
+                    HasOrderToday = IsOrderCheck(p)
+                });
 
                 return View("MyDetailsCompany", employeesViewModel);
             }
@@ -85,6 +87,16 @@ namespace FoodOrder.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        private bool IsOrderCheck(User p)
+        {
+            return db.Orders.Where(u => u.UserId == p.Id).Any(CheckDate());
+        }
+
+        private static System.Linq.Expressions.Expression<Func<Order, bool>> CheckDate()
+        {
+            return u => u.DateOfCreation == DateTime.Today;
         }
 
         // GET: Users/Details/5

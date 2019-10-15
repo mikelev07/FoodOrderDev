@@ -190,9 +190,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910021033568_newMigra.cs" />
-    <Compile Include="Migrations\201910021033568_newMigra.Designer.cs">
-      <DependentUpon>201910021033568_newMigra.cs</DependentUpon>
+    <Compile Include="Migrations\201910151323197_new12.cs" />
+    <Compile Include="Migrations\201910151323197_new12.Designer.cs">
+      <DependentUpon>201910151323197_new12.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -285,6 +285,8 @@
     <Content Include="Content\img\icon_shape.png" />
     <Content Include="Content\img\icon_shape_two.png" />
     <Content Include="Content\img\kissmetrics.png" />
+    <Content Include="Content\img\load.gif" />
+    <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\menu.png" />
     <Content Include="Content\img\metorik.png" />
     <Content Include="Content\img\mobile.png" />
@@ -312,6 +314,8 @@
     <Content Include="Content\system\css\dore.dark.green.min.css" />
     <Content Include="Content\system\css\dore.light.green.css" />
     <Content Include="Content\system\css\dore.light.green.min.css" />
+    <Content Include="Content\system\css\logo.png" />
+    <Content Include="Content\system\css\logo1.png" />
     <Content Include="Content\system\css\main.css" />
     <Content Include="Content\system\css\vendor\baguetteBox.min.css" />
     <Content Include="Content\system\css\vendor\bootstrap-datepicker.min.css" />
@@ -743,8 +747,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910021033568_newMigra.resx">
-      <DependentUpon>201910021033568_newMigra.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910151323197_new12.resx">
+      <DependentUpon>201910151323197_new12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

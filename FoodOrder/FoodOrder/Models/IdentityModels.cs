@@ -83,6 +83,6 @@ namespace FoodOrder.Models
         public DbSet<ComplexDish> ComplexDishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<UserViewModel> UserViewModels { get; set; }
+       
     }
 }

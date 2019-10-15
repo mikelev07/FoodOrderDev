@@ -25,8 +25,12 @@ namespace FoodOrder.Models
         public string Id { get; set; }
         public string UserName { get; set; }
         public string SecondName { get; set; }
+        public string CompanyId { get; set; }
+        public Company Company { get; set; }
         public string Email { get; set; }
+        public bool EmailConfirmed { get; set; }
         public string PhoneNumber { get; set; }
+        public bool HasOrderToday { get; set; }
     }
 
     public class User : IdentityUser
@@ -83,6 +87,5 @@ namespace FoodOrder.Models
         public DbSet<ComplexDish> ComplexDishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
-       
     }
 }

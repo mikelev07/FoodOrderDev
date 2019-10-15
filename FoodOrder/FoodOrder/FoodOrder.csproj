@@ -194,6 +194,14 @@
     <Compile Include="Migrations\201910151323197_new12.Designer.cs">
       <DependentUpon>201910151323197_new12.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910151201480_WhyWeStillHereJustToSuffer.cs" />
+    <Compile Include="Migrations\201910151201480_WhyWeStillHereJustToSuffer.Designer.cs">
+      <DependentUpon>201910151201480_WhyWeStillHereJustToSuffer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910151315388_newMigra1.cs" />
+    <Compile Include="Migrations\201910151315388_newMigra1.Designer.cs">
+      <DependentUpon>201910151315388_newMigra1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -753,6 +761,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910151323197_new12.resx">
       <DependentUpon>201910151323197_new12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910151201480_WhyWeStillHereJustToSuffer.resx">
+      <DependentUpon>201910151201480_WhyWeStillHereJustToSuffer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910151315388_newMigra1.resx">
+      <DependentUpon>201910151315388_newMigra1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

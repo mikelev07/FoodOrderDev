@@ -31,15 +31,202 @@
                     </div>
                 </div>
 
-              
+
+                <div class="select-from-library-container mb-1">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-xl-4">
+                            <div class="select-from-library-button sfl-multiple mb-5"
+                                 data-library-id="#libraryModal" data-count="-1">
+                                <div class="card d-flex flex-row mb-4 media-thumb-container justify-content-center align-items-center">
+                                    Сформировать пак из блюд...
+                                </div>
+                            </div>
+
+
+                            <div class="selected-library-item sfl-selected-item mb-5">
+                                <div class="card d-flex flex-row media-thumb-container">
+                                    <a class="d-flex align-self-center">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                             alt="uploaded image"
+                                             class="list-media-thumbnail responsive border-0 sfl-selected-item-image" />
+                                    </a>
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column justify-content-between min-width-zero align-items-lg-center">
+                                            <a class="w-100">
+                                                <p class="list-item-heading mb-1 truncate sfl-selected-item-label">
+                                                </p>
+                                            </a>
+                                        </div>
+                                        <div class="pl-1 align-self-center">
+                                            <a href="#"
+                                               class="btn-link delete-library-item sfl-delete-item">
+                                                <i class="simple-icon-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
             </div>
 
-
-
-
         </div>
+
+        <div class="modal fade modal-right select-from-library" id="libraryModal" tabindex="-1" role="dialog"
+             aria-labelledby="libraryModal" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Сформируйте пак из блюд</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body scroll pt-0 pb-0 mt-4 mb-4">
+                        <div class="accordion" id="accordion">
+                            <div class="mb-2">
+                                <button class="btn btn-link p-0 folder-button-collapse" data-toggle="collapse"
+                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="icon-container">
+                                        <i class="simple-icon-arrow-down"></i>
+                                    </span>
+                                    <span class="folder-name">Горячее</span>
+                                </button>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div class="list disable-text-selection">
+                                        <div class="row">
+
+                                            <div class="col-6 mb-1 sfl-item-container"
+                                                 data-preview-path="~/Content/img/chock.jpg"
+                                                 data-path="chock.jpg"
+                                                 data-label="chock.jpg">
+                                                <div class="card d-flex mb-2 p-0 media-thumb-container">
+                                                    <div class="d-flex align-self-stretch">
+                                                        <img src="~/Content/img/chock.jpg" alt="изображение"
+                                                             class="list-media-thumbnail responsive border-0" />
+                                                    </div>
+                                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
+                                                            <div class="w-100">
+                                                                <p class="truncate mb-0">chock.jpg</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
+                                                            <label class="custom-control custom-checkbox mb-0">
+                                                                <input type="checkbox" class="custom-control-input">
+                                                                <span class="custom-control-label"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-1 sfl-item-container"
+                                                 data-preview-path="~/Content/img/chock.jpg"
+                                                 data-path="chock.jpg"
+                                                 data-label="chock.jpg">
+                                                <div class="card d-flex mb-2 p-0 media-thumb-container">
+                                                    <div class="d-flex align-self-stretch">
+                                                        <img src="~/Content/img/chock.jpg" alt="фото"
+                                                             class="list-media-thumbnail responsive border-0" />
+                                                    </div>
+                                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
+                                                            <div class="w-100">
+                                                                <p class="truncate mb-0">chocolate-cake-thumb.jpg</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
+                                                            <label class="custom-control custom-checkbox mb-0">
+                                                                <input type="checkbox" class="custom-control-input">
+                                                                <span class="custom-control-label"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <button class="btn btn-link p-0 folder-button-collapse collapsed" data-toggle="collapse"
+                                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="icon-container">
+                                        <i class="simple-icon-arrow-down"></i>
+                                    </span>
+                                    <span class="folder-name">Супы</span>
+                                </button>
+
+                                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                    <div class="list disable-text-selection">
+                                        <div class="row">
+                                            <div class="col-6 mb-1 sfl-item-container"
+                                                 data-preview-path="~/Content/img/chock.jpg"
+                                                 data-path="chock.jpg"
+                                                 data-label="chock.jpg">
+                                                <div class="card d-flex mb-2 p-0 media-thumb-container">
+                                                    <div class="d-flex align-self-stretch">
+                                                        <img src="~/Content/img/chock.jpg" alt="uploaded image"
+                                                             class="list-media-thumbnail responsive border-0" />
+                                                    </div>
+                                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
+                                                            <div class="w-100">
+                                                                <p class="truncate mb-0">chocolate-cake-thumb.jpg</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
+                                                            <label class="custom-control custom-checkbox mb-0">
+                                                                <input type="checkbox" class="custom-control-input">
+                                                                <span class="custom-control-label"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-1 sfl-item-container"
+                                                 data-preview-path="~/Content/img/chock.jpg"
+                                                 data-path="chock.jpg"
+                                                 data-label="chock.jpg">
+                                                <div class="card d-flex mb-2 p-0 media-thumb-container">
+                                                    <div class="d-flex align-self-stretch">
+                                                        <img src="~/Content/img/chock.jpg" alt="Фото"
+                                                             class="list-media-thumbnail responsive border-0" />
+                                                    </div>
+                                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                                        <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
+                                                            <div class="w-100">
+                                                                <p class="truncate mb-0">chocolate-cake-thumb.jpg</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
+                                                            <label class="custom-control custom-checkbox mb-0">
+                                                                <input type="checkbox" class="custom-control-input">
+                                                                <span class="custom-control-label"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary sfl-submit">Сформировать пак</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 </main>

@@ -281,6 +281,7 @@
     <Content Include="Content\img\1.jpg" />
     <Content Include="Content\img\briteverify.png" />
     <Content Include="Content\img\campfire.png" />
+    <Content Include="Content\img\chock.jpg" />
     <Content Include="Content\img\des.png" />
     <Content Include="Content\img\fat-rascal-thumb.jpg" />
     <Content Include="Content\img\first_bg.jpg" />
@@ -465,6 +466,7 @@
     <Content Include="Scripts\system\dore.script.js" />
     <Content Include="Scripts\system\scripts.js" />
     <Content Include="Scripts\system\scripts.single.theme.js" />
+    <Content Include="Scripts\system\select.from.library.js" />
     <Content Include="Scripts\system\vendor\baguetteBox.min.js" />
     <Content Include="Scripts\system\vendor\bootstrap-datepicker.js" />
     <Content Include="Scripts\system\vendor\bootstrap-notify.min.js" />

@@ -1,59 +1,74 @@
 ﻿@model FoodOrder.Models.UserViewModel
 
 @{
-    ViewBag.Title = "Создание сотрудника компании";
-    Layout = null;
+    ViewBag.Title = "Добавление сотрудника компании";
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Создать сотрудника</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, "Имя",  htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <h1>Добавление сотрудника</h1>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SecondName, "Фамилия", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SecondName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SecondName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="separator mb-5"></div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, "Телефон", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="row">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Создать" class="btn btn-default" />
+                <div class="col-12 col-lg-6 mb-5">
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-4">Форма создания</h5>
+                            <form class="needs-validation tooltip-label-right" novalidate>
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Фамилия сотрудника</label>
+                                    <input name="SecondName" type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Укажите фамилию!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Имя сотрудника</label>
+                                    <input name="UserName" type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Укажите имя!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Электронная почта</label>
+                                    <input name="Email" type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Укажите корректную электронную почту!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Номер телефона</label>
+                                    <input name="PhoneNumber" type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Укажите корректный номер телефона!
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-0">Подтвердить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
+
         </div>
-    </div>
+    </main>
 }
-
-<div>
-    @Html.ActionLink("Вернуться в личный кабинет", "MyDetails", "Users")
-</div>

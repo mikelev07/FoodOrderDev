@@ -70,6 +70,8 @@ namespace FoodOrder.Controllers
                 {
                     Id = p.Id,
                     UserName = p.UserName,
+                    SecondName = p.SecondName,
+                    PhoneNumber = p.PhoneNumber,
                     Email = p.Email,
                     EmailConfirmed = p.EmailConfirmed,
                     HasOrderToday = IsOrderCheck(p)
@@ -168,7 +170,7 @@ namespace FoodOrder.Controllers
                 var user = new User
                 {
                     Id = uvm.Id,
-                    UserName = uvm.Email,
+                    UserName = uvm.UserName,
                     SecondName = uvm.SecondName,
                     Email = uvm.Email,
                     PhoneNumber = uvm.PhoneNumber,

@@ -36,102 +36,112 @@
 
                         @foreach (var item in Model)
                         {
-                        <div class="card d-flex flex-row mb-3">
-                            <a class="d-flex" href="Pages.Product.Detail.html">
-                                @if (item.LogotypePath != null)
-                                {
-                                    <img src="@Url.Content(item.LogotypePath)" alt="@item.Name" 
-                                         class="list-thumbnail responsive border-0 card-img-left" />
-                                }
-                                else
-                                {
-                                    <img src="~/Content/img/fat-rascal-thumb.jpg" alt="Fat Rascal"
-                                         class="list-thumbnail responsive border-0 card-img-left" />
-                                }
-                            </a>
-                            <div class="d-flex flex-grow-1 min-width-zero">
-                                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
-                                        @item.Name
-                                    </a>
-                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">Категория</p>
-                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">02.04.2018</p>
-                                    <div class="w-15 w-xs-100">
+                            <div class="card d-flex flex-row mb-3">
+                                <a class="d-flex" href="Pages.Product.Detail.html">
+                                    @if (item.LogotypePath != null)
+                                    {
+                                        <img src="@Url.Content(item.LogotypePath)" alt="@item.Name"
+                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/img/fat-rascal-thumb.jpg" alt="Fat Rascal"
+                                             class="list-thumbnail responsive border-0 card-img-left" />
+                                    }
+                                </a>
+                                <div class="d-flex flex-grow-1 min-width-zero">
+                                    <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
+                                            @item.Name
+                                        </a>
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">Категория</p>
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">02.04.2018</p>
+                                        <div class="w-15 w-xs-100">
+                                            @if (item.Representative.EmailConfirmed)
+                                            {
+                                                <span class="badge badge-pill badge-success">Подтверждено</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-pill badge-secondary">Не подтверждено</span>
+                                            }
+                                        </div>
+                                    </div>
+                                    <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
                                         @if (item.Representative.EmailConfirmed)
                                         {
-                                            <span class="badge badge-pill badge-success">Подтверждено</span>
+                                            <a href="#" class="btn btn-multiple-state btn-xs" style="background-color:#b7bbb8; border-color:#b7bbb8" title="Генерация пароля недоступна">
+                                                <span class="label">Сгенерировать пароль</span>
+                                            </a>
                                         }
                                         else
                                         {
-                                            <span class="badge badge-pill badge-secondary">Не подтверждено</span>
+                                            <a href="#" class="btn btn-primary btn-multiple-state btn-xs" onclick="sendEmail(this.id, '@item.GeneratedPassword')" id="@item.RepresentativeId">
+                                                <div class="spinner d-inline-block">
+                                                    <div class="bounce1"></div>
+                                                    <div class="bounce2"></div>
+                                                    <div class="bounce3"></div>
+                                                </div>
+                                                <span class="icon success" data-toggle="tooltip" data-placement="top"
+                                                      title="Пароль успешно сгенерирован и отправлен на почту представителю!">
+                                                    <i class="simple-icon-check"></i>
+                                                </span>
+                                                <span class="icon fail" data-toggle="tooltip" data-placement="top"
+                                                      title="Неудачно!">
+                                                    <i class="simple-icon-exclamation"></i>
+                                                </span>
+                                                <span class="label">Сгенерировать пароль</span>
+                                            </a>
                                         }
-                                    </div>
+
+                                        <a href="/Users/EditCompany/@item.Id" class="btn btn-header-light icon-button">
+                                            <i class="simple-icon-pencil"></i>
+                                        </a>
+                                    </label>
                                 </div>
-                                <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
-                                    <a href="#" class="btn btn-primary btn-multiple-state btn-xs" onclick="sendEmail(this.id, '@item.GeneratedPassword')" id="@item.RepresentativeId">
-                                        <div class="spinner d-inline-block">
-                                            <div class="bounce1"></div>
-                                            <div class="bounce2"></div>
-                                            <div class="bounce3"></div>
-                                        </div>
-                                        <span class="icon success" data-toggle="tooltip" data-placement="top"
-                                              title="Пароль успешно сгенерирован и отправлен на почту представителю!">
-                                            <i class="simple-icon-check"></i>
-                                        </span>
-                                        <span class="icon fail" data-toggle="tooltip" data-placement="top"
-                                              title="Неудачно!">
-                                            <i class="simple-icon-exclamation"></i>
-                                        </span>
-                                        <span class="label">Сгенерировать пароль</span>
-                                    </a>
-                                    <a href="/Users/EditCompany/@item.Id" class="btn btn-header-light icon-button">
-                                        <i class="simple-icon-pencil"></i>
-                                    </a>
-                                </label>
                             </div>
-                        </div>
                         }
 
-                       
-                            <nav class="mt-4 mb-3">
-                                <ul class="pagination justify-content-center mb-0">
-                                    <li class="page-item ">
-                                        <a class="page-link first" href="#">
-                                            <i class="simple-icon-control-start"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item ">
-                                        <a class="page-link prev" href="#">
-                                            <i class="simple-icon-arrow-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item ">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item ">
-                                        <a class="page-link next" href="#" aria-label="Next">
-                                            <i class="simple-icon-arrow-right"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item ">
-                                        <a class="page-link last" href="#">
-                                            <i class="simple-icon-control-end"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+
+                        <nav class="mt-4 mb-3">
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item ">
+                                    <a class="page-link first" href="#">
+                                        <i class="simple-icon-control-start"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item ">
+                                    <a class="page-link prev" href="#">
+                                        <i class="simple-icon-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item ">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item ">
+                                    <a class="page-link next" href="#" aria-label="Next">
+                                        <i class="simple-icon-arrow-right"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item ">
+                                    <a class="page-link last" href="#">
+                                        <i class="simple-icon-control-end"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
 
             </div>
 
-           
+
         </div>
     </div>
 </main>
@@ -139,90 +149,90 @@
 
 @section Scripts  {
     <script>
-         
+
         $(document).ready(function () {
-         
-                var enjoyhint_instance = new EnjoyHint({});
 
-               
-                var enjoyhint_script_steps = [
-                 
-                 {
-                     selector:'#newCompany',
-                     event: 'next',
-                     showNext:true,
-                     description:'Вы можете добавлять новую компанию!',
-                      skipButton: {
-                          text: 'Все знаю'
-                        },
-                      nextButton: {
-                          text: 'Далее'
-                        },
+            var enjoyhint_instance = new EnjoyHint({});
 
-                      shape:'circle',
-                      radius:220
- 
+
+            var enjoyhint_script_steps = [
+
+                {
+                    selector: '#newCompany',
+                    event: 'next',
+                    showNext: true,
+                    description: 'Вы можете добавлять новую компанию!',
+                    skipButton: {
+                        text: 'Все знаю'
                     },
-                       {
-                     selector:'.icon-button',
-                     event: 'next',
-                     showNext:true,
-                     description:'Вы можете редактировать созданную компанию!',
-                      skipButton: {
-                          text: 'Все знаю'
-                        },
-                      nextButton: {
-                          text: 'Далее'
-                        },
+                    nextButton: {
+                        text: 'Далее'
+                    },
 
-                      shape:'circle',
-                      radius:80
- 
-                    }
-                    ,
-                     {
-                     selector:'.orderSk',
-                     event:'next',
-                     description:'В этом разделе находятся заказы компаний!',
-                     skipButton: {
-                          text: 'Понятно'
-                      },
-                      shape:'circle',
-                      radius:70
- 
-                    }
-                ];
+                    shape: 'circle',
+                    radius: 220
 
-              
-                enjoyhint_instance.set(enjoyhint_script_steps);
+                },
+                {
+                    selector: '.icon-button',
+                    event: 'next',
+                    showNext: true,
+                    description: 'Вы можете редактировать созданную компанию!',
+                    skipButton: {
+                        text: 'Все знаю'
+                    },
+                    nextButton: {
+                        text: 'Далее'
+                    },
 
-                
-                enjoyhint_instance.run();
-          })
+                    shape: 'circle',
+                    radius: 80
+
+                }
+                ,
+                {
+                    selector: '.orderSk',
+                    event: 'next',
+                    description: 'В этом разделе находятся заказы компаний!',
+                    skipButton: {
+                        text: 'Понятно'
+                    },
+                    shape: 'circle',
+                    radius: 70
+
+                }
+            ];
+
+
+            enjoyhint_instance.set(enjoyhint_script_steps);
+
+
+            enjoyhint_instance.run();
+        })
 
 
         function sendEmail(id, pass) {
             $(this).trigger("click");
             var $successButton = $("#" + id).stateButton();
-              event.preventDefault();
-              $successButton.showSpinner();
-                  $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify({"id": id, "genPass": pass}),
-                    contentType: "application/json",
-                    url: "/Users/SendSpecEmail",
-                      success: function (data) {
-                            setTimeout(function () {
-                                $successButton.showSuccess(true);
-                                  setTimeout(function () {
-                                      $successButton.hideTooltips();  
-                            }, 2000);
-                  }, 3000); 
+            event.preventDefault();
+            $successButton.showSpinner();
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify({ "id": id, "genPass": pass }),
+                contentType: "application/json",
+                url: "/Users/SendSpecEmail",
+                success: function (data) {
+                    setTimeout(function () {
+                        $successButton.showSuccess(true);
+                        setTimeout(function () {
+                            $successButton.hideTooltips();
+                        }, 2000);
+                    }, 3000);
                 }
             });
 
-              
-              
+
+
         }
 
 

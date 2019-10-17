@@ -1,79 +1,132 @@
 ﻿@model FoodOrder.Models.CompanyViewModel
-
+@using FoodOrder.Models
 @{
-    Layout = null;
+    //Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = "Редактирование компании";
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
 
-    <div class="form-horizontal">
-        <h4>Компания @Model.Name</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(m => m.Id)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, "Название компании", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <h1>Редактирование компании</h1>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Logotype, "Логотип", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Logotype, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Logotype, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="separator mb-5"></div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TypeOfPayment, "Способ оплаты", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.TypeOfPayment, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TypeOfPayment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UnlimitedOrders, "Неограниченное кол-во заказов", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.UnlimitedOrders)
-                    @Html.ValidationMessageFor(model => model.UnlimitedOrders, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Whatsapp, "Группа для Whatsapp", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Whatsapp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Whatsapp, "", new { @class = "text-danger" })
+            <div class="row">
+
+                <div class="col-12 col-lg-6 mb-5">
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-4">Форма редактирования</h5>
+                            <form class="needs-validation tooltip-label-right" novalidate>
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Name, "Название компании", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", required = "required" })
+                                        <div class="invalid-tooltip">
+                                            Заполните название!
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+
+                                    <label>Реквизиты компании</label>
+                                    <input name="Requisites" type="text" class="form-control" required>
+                                    <div class="invalid-tooltip">
+                                        Заполните реквизиты компании!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Whatsapp, "Группа для Whatsapp")
+                                    @Html.EditorFor(model => model.Whatsapp, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Telegram, "Группа для Telegram")
+                                    @Html.EditorFor(model => model.Telegram, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    <label>Описание</label>
+                                    <textarea name="Description" class="form-control" rows="2"></textarea>
+                                </div>
+
+                                <div class="form-group position-relative">
+                                    <label>Способ оплаты</label>
+                                    <div>
+                                        @foreach (TypeOfPayment paymentType in Enum.GetValues(typeof(TypeOfPayment)))
+                                        {
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                @if (paymentType == Model.TypeOfPayment)
+                                                {
+                                                    @Html.RadioButton(Enum.GetName(typeof(TypeOfPayment), paymentType), paymentType, new { name="TypeOfPayment", required="required", @checked="checked"})
+                                                    @Html.Label(paymentType.ToString(), new { @class="btn btn-primary active"})
+                                                }
+                                                else
+                                                {
+                                                    @Html.RadioButton(Enum.GetName(typeof(TypeOfPayment), paymentType), paymentType, new { name="TypeOfPayment"})
+                                                    @Html.Label(paymentType.ToString(), new { @class="btn btn-primary"})
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="invalid-tooltip">
+                                        Не выбран способ оплаты!
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="form-group position-relative">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="LogotypePath" id="inputGroupFile04">
+                                            <label class="custom-file-label" for="inputGroupFile04">Выберите логотип</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="custom-control custom-checkbox mb-3 error-l-200">
+                                    <div class="checkbox">
+                                        <label>@Html.CheckBoxFor(x => Model.UnlimitedOrders)&nbsp;@Html.DisplayNameFor(x => Model.UnlimitedOrders)</label>
+                                    </div>
+
+                                    @*<input type="checkbox" name="UnlimitedOrders" value="false" class="custom-control-input" id="customControlValidation1">
+                                        @Html.CheckBox("UnlimitedOrders", false, new { @class = "custom-control-input", id = "customControlValidation1" })
+                                        <label class="custom-control-label" for="customControlValidation1">
+                                            Неограниченные заказы для сотрудников
+                                        </label>*@
+                                </div>
+
+                                @Html.HiddenFor(m => m.Id)
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Подтвердить изменения" class="btn btn-default" />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Telegram, "Группа для Telegram", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Telegram, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Telegram, "", new { @class = "text-danger" })
-            </div>
         </div>
-
-        @Html.HiddenFor(m => m.Id)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Подтвердить изменения" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    </main>
 }
-
-<div>
-    @Html.ActionLink("Вернуться в личный кабинет", "MyDetails", "Users")
-</div>

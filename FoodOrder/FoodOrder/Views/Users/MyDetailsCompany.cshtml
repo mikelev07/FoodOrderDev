@@ -120,12 +120,18 @@
                                     <div class="card d-flex flex-row mb-3">
                                         <div class="d-flex flex-grow-1 min-width-zero">
                                             <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                                                <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
-                                                    @employee.UserName
+                                                <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="#">
+                                                    @employee.UserName @employee.SecondName
                                                 </a>
+
+                                                <div class="w-15 w-xs-100">
+                                                    <span>@(employee.PhoneNumber ?? "телефон не указан")</span>
+                                                </div>
+
                                                 <div class="w-15 w-xs-100">
                                                     <span>@employee.Email</span>
                                                 </div>
+
                                                 <div class="w-15 w-xs-100">
                                                     @if (employee.EmailConfirmed)
                                                     {
@@ -137,6 +143,7 @@
                                                     }
                                                 </div>
                                             </div>
+
                                             <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
                                                 <a href="/Users/Edit/@employee.Id" class="btn btn-header-light icon-button">
                                                     <i class="simple-icon-pencil"></i>

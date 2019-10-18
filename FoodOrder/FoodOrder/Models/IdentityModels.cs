@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -36,8 +37,10 @@ namespace FoodOrder.Models
     public class User : IdentityUser
     {
         public string SecondName { get; set; }
-        public string CompanyId { get; set; }
+        public string CompanyId { get; set; }   
         public Company Company { get; set; }
+        public DateTime RegistrationDate { get; set; }
+        public bool NotActual { get; set; }
         public ICollection<Order> Orders { get; set; }
 
         public User()

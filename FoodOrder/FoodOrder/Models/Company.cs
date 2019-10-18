@@ -29,6 +29,7 @@ namespace FoodOrder.Models
         //public HttpPostedFileBase LogotypeFile { get; set; }
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
+        public DateTime RegistrationDate { get; set; }
         public string Whatsapp { get; set; }
         public string Telegram { get; set; }
         public string Description { get; set; }

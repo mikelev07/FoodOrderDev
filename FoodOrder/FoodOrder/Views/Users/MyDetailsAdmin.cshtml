@@ -54,8 +54,17 @@
                                         <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
                                             @item.Name
                                         </a>
-                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">Категория</p>
-                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">02.04.2018</p>
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">
+                                            @if (item.UnlimitedOrders)
+                                            {
+                                                <span>Неограниченные заказы</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Лимитированные заказы</span>
+                                            }
+                                        </p>
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">@FoodOrder.Helpers.HelperExtensions.GetDisplayName(item.TypeOfPayment)</p>
                                         <div class="w-15 w-xs-100">
                                             @if (item.Representative.EmailConfirmed)
                                             {
@@ -70,7 +79,7 @@
                                     <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
                                         @if (item.Representative.EmailConfirmed)
                                         {
-                                            <a href="#" class="btn btn-multiple-state btn-xs" style="background-color:#b7bbb8; border-color:#b7bbb8" title="Генерация пароля недоступна">
+                                            <a class="btn btn-multiple-state btn-xs" style="background-color:#b7bbb8; border-color:#b7bbb8" title="Генерация пароля недоступна">
                                                 <span class="label">Сгенерировать пароль</span>
                                             </a>
                                         }
@@ -94,9 +103,13 @@
                                             </a>
                                         }
 
-                                        <a href="/Users/EditCompany/@item.Id" class="btn btn-header-light icon-button">
+                                        <a href="/Users/EditCompany/@item.Id" class="btn btn-header-light icon-button" title="Редактировать">
                                             <i class="simple-icon-pencil"></i>
                                         </a>
+
+                                        @*<a href="/Users/DeleteCompany/@item.Id" class="btn btn-header-light icon-button" title="Удалить">
+                                            <i class="simple-icon-trash"></i>
+                                        </a>*@
                                     </label>
                                 </div>
                             </div>

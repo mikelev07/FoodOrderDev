@@ -60,11 +60,8 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
-                var company = await db.Companies.Include(c => c.Employees).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
-                var employees = company.Employees.ToList();
-                ViewBag.CompanyName = company.Name;
-
-
+                var companyId = (await db.Companies.Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync()).Id;
+                var employees = await db.Users.Include(u => u.Company).Where(u => u.CompanyId == companyId && u.NotActual == false).ToListAsync();
 
                 var employeesViewModel = employees.Select(p => new UserViewModel()
                 {
@@ -74,7 +71,8 @@ namespace FoodOrder.Controllers
                     PhoneNumber = p.PhoneNumber,
                     Email = p.Email,
                     EmailConfirmed = p.EmailConfirmed,
-                    HasOrderToday = IsOrderCheck(p)
+                    HasOrderToday = IsOrderCheck(p),
+                    Company = p.Company
                 });
 
                 return View("MyDetailsCompany", employeesViewModel);
@@ -174,7 +172,8 @@ namespace FoodOrder.Controllers
                     SecondName = uvm.SecondName,
                     Email = uvm.Email,
                     PhoneNumber = uvm.PhoneNumber,
-                    CompanyId = companyId
+                    CompanyId = companyId,
+                    RegistrationDate = DateTime.Now
                 };
 
                 var result = await UserManager.CreateAsync(user, newRandomPassword);
@@ -208,6 +207,7 @@ namespace FoodOrder.Controllers
             cvm.GeneratedPassword = newRandomPassword;
             if (ModelState.IsValid)
             {
+                var dateTimeNow = DateTime.Now;
                 var company = new Company
                 {
                     Id = cvm.Id,
@@ -219,13 +219,16 @@ namespace FoodOrder.Controllers
                     GeneratedPassword = cvm.GeneratedPassword,
                     Requisites = cvm.Requisites,
                     Whatsapp = cvm?.Whatsapp,
-                    Telegram = cvm?.Telegram
+                    Telegram = cvm?.Telegram,
+                    RegistrationDate = dateTimeNow
                 };
 
                 var newRepresentative = new User
                 {
                     Email = cvm.RepresentativeLogin,
-                    UserName = cvm.RepresentativeLogin
+                    UserName = cvm.RepresentativeLogin,
+                    CompanyId = cvm.Id,
+                    RegistrationDate = dateTimeNow
                 };
                 //нужно ли будет закидывать в представителя CompanyId??
                 var result = await UserManager.CreateAsync(newRepresentative, newRandomPassword);
@@ -316,7 +319,11 @@ namespace FoodOrder.Controllers
                 Name = company.Name,
                 LogotypePath = company.LogotypePath,
                 TypeOfPayment = company.TypeOfPayment,
-                UnlimitedOrders = company.UnlimitedOrders
+                UnlimitedOrders = company.UnlimitedOrders,
+                Requisites = company.Requisites,
+                Whatsapp = company.Whatsapp,
+                Telegram = company.Telegram,
+                Description = company.Description
             };
             return View(cvm);
         }
@@ -372,7 +379,7 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             var user = await db.Users.Where(c => c.Id == id).FirstOrDefaultAsync();
-            db.Users.Remove(user);
+            user.NotActual = true;
             await db.SaveChangesAsync();
             return RedirectToAction("MyDetails", "Users");
         }

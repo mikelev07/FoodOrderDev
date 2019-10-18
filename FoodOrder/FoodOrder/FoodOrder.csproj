@@ -190,6 +190,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HelperExtensions.cs" />
     <Compile Include="Migrations\201910151323197_new12.cs" />
     <Compile Include="Migrations\201910151323197_new12.Designer.cs">
       <DependentUpon>201910151323197_new12.cs</DependentUpon>
@@ -201,6 +202,10 @@
     <Compile Include="Migrations\201910151315388_newMigra1.cs" />
     <Compile Include="Migrations\201910151315388_newMigra1.Designer.cs">
       <DependentUpon>201910151315388_newMigra1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910181716302_Identity&amp;CompanyChanges.cs" />
+    <Compile Include="Migrations\201910181716302_Identity&amp;CompanyChanges.Designer.cs">
+      <DependentUpon>201910181716302_Identity&amp;CompanyChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -769,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910151315388_newMigra1.resx">
       <DependentUpon>201910151315388_newMigra1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910181716302_Identity&amp;CompanyChanges.resx">
+      <DependentUpon>201910181716302_Identity&amp;CompanyChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

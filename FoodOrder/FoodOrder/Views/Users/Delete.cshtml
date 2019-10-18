@@ -1,48 +1,63 @@
 ﻿@model FoodOrder.Models.UserViewModel
 
 @{
-    Layout = null;
+    //Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = "Удаление сотрудника";
 }
 
-<h2>Удалить сотрудника</h2>
-<h3>Действительно хотите удалить?</h3>
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                    <h1>Удаление сотрудника</h1>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
+                    <div class="separator mb-5"></div>
 
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+                <div class="col-12 col-lg-6 mb-5">
 
-    </dl>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-4">Форма удаления</h5>
+                            <form class="needs-validation tooltip-label-right" novalidate>
+                                <div class="form-group position-relative">
+                                    <label>Имя сотрудника</label>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </div>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                                <div class="form-group position-relative">
+                                    <label>Фамилия сотрудника</label>
+                                    @Html.DisplayFor(model => model.SecondName)
+                                </div>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Вернуться в личный кабинет", "MyDetails", "Users")
+                                <div class="form-group position-relative">
+                                    <label>Почта сотрудника</label>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </div>
+
+                                <div class="form-group position-relative">
+                                    <label>Телефон сотрудника</label>
+                                    @Html.DisplayFor(model => model.PhoneNumber)
+                                </div>
+
+                                <input type="submit" value="Подтвердить удаление" class="btn btn-primary mb-0" />
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
-    }
-</div>
+    </main>
+}

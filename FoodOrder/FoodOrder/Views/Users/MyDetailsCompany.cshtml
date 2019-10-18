@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<FoodOrder.Models.UserViewModel>
+@using Microsoft.AspNet.Identity
 
 @{
     Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = "Личный кабинет представителя компании";
-}
 
+    var company = Model.FirstOrDefault().Company;
+    var representativeId = company.RepresentativeId;
+}
 <main>
     <div class="container-fluid">
         <div class="row">
@@ -19,8 +22,7 @@
                             Действия
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Редактировать</a>
-
+                            <a class="dropdown-item" href="/Users/EditCompany/@company.Id">Редактировать данные компании</a>
                         </div>
                     </div>
                 </div>
@@ -52,14 +54,26 @@
                                     <div class="card-body">
                                         <p class="text-muted text-small mb-2">Информация</p>
                                         <p class="mb-3">
-                                            Лучшая компания в мире
+                                            @company.Name
                                         </p>
 
-                                        <p class="text-muted text-small mb-2">Адрес</p>
-                                        <p class="mb-3">Алматы Сейфулина</p>
+                                        <p class="text-muted text-small mb-2">Реквизиты</p>
+                                        <p class="mb-3">
+                                            @company.Requisites
+                                        </p>
 
-                                     
-                                      
+                                        <p class="text-muted text-small mb-2">Заказы для сотрудников</p>
+                                        <p class="mb-3">
+                                            @if (company.UnlimitedOrders)
+                                            {
+                                                <span>Неограничены</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Лимитированы</span>
+                                            }
+                                        </p>
+
                                         <p class="text-muted text-small mb-2">Контакты</p>
                                         <div class="social-icons">
                                             <ul class="list-unstyled list-inline">
@@ -94,12 +108,12 @@
                                             <div class="card-body">
                                                 <a href="">
                                                     <h6 class="mb-3 listing-heading ellipsis">
-                                                       Представитель компании
-                                                        </h5>
+                                                        Представитель компании
+                                                    </h6>
                                                 </a>
                                                 <footer>
                                                     <p class="text-muted text-small mb-0 font-weight-light">
-                                                        01.03.2019
+                                                        @company.Representative.UserName @company.Representative.SecondName
                                                     </p>
                                                 </footer>
                                             </div>
@@ -115,7 +129,7 @@
                         <div class="row">
                             <div class="col-12 list" data-check-all="checkAll">
 
-                                @foreach (var employee in Model)
+                                @foreach (var employee in Model.Where(e=>e.Id!=representativeId))
                                 {
                                     <div class="card d-flex flex-row mb-3">
                                         <div class="d-flex flex-grow-1 min-width-zero">
@@ -145,8 +159,12 @@
                                             </div>
 
                                             <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
-                                                <a href="/Users/Edit/@employee.Id" class="btn btn-header-light icon-button">
+                                                <a href="/Users/Edit/@employee.Id" class="btn btn-header-primary-light icon-button" title="Редактировать">
                                                     <i class="simple-icon-pencil"></i>
+                                                </a>
+
+                                                <a href="/Users/Delete/@employee.Id" class="btn btn-header-primary-light icon-button" title="Удалить">
+                                                    <i class="simple-icon-trash"></i>
                                                 </a>
                                             </label>
                                         </div>

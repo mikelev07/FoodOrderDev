@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity.Validation;
+using System.IO;
 
 namespace FoodOrder.Controllers
 {
@@ -52,6 +53,8 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> MyDetails()
         {
             var userId = User.Identity.GetUserId();
+            var user = db.Users.Where(c => c.Id == userId).SingleOrDefault();
+
 
             if (await UserManager.IsInRoleAsync(userId, "admin"))
             {
@@ -202,6 +205,10 @@ namespace FoodOrder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateCompany(CompanyViewModel cvm)
         {
+
+            string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
+            string path = Server.MapPath("~/Files/" + fileName);
+
             cvm.Id = Guid.NewGuid().ToString();
             var newRandomPassword = CreateRandomPassword();
             cvm.GeneratedPassword = newRandomPassword;
@@ -220,14 +227,17 @@ namespace FoodOrder.Controllers
                     Requisites = cvm.Requisites,
                     Whatsapp = cvm?.Whatsapp,
                     Telegram = cvm?.Telegram,
-                    RegistrationDate = dateTimeNow
+                    RegistrationDate = dateTimeNow,
+                    CompanyImagePath = path
                 };
+
+                cvm.CompanyImageFile.SaveAs(path);
 
                 var newRepresentative = new User
                 {
                     Email = cvm.RepresentativeLogin,
                     UserName = cvm.RepresentativeLogin,
-                    CompanyId = cvm.Id,
+                  /// CompanyId = cvm.Id,
                     RegistrationDate = dateTimeNow
                 };
                 //нужно ли будет закидывать в представителя CompanyId??
@@ -309,6 +319,7 @@ namespace FoodOrder.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var company = await db.Companies.Where(i => i.Id == id).FirstOrDefaultAsync();
+
             if (company == null)
             {
                 return HttpNotFound();
@@ -333,8 +344,11 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditCompany([Bind(Include = "Id,Name,Logotype,TypeOfPayment,UnlimitedOrders")] CompanyViewModel cvm)
+        public async Task<ActionResult> EditCompany([Bind(Include = "Id,Name,Logotype,TypeOfPayment,UnlimitedOrders,CompanyImageFile")] CompanyViewModel cvm)
         {
+            string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
+            string path = Server.MapPath("~/Files/" + fileName);
+
             if (ModelState.IsValid)
             {
                 var company = await db.Companies.Where(c => c.Id == cvm.Id).FirstOrDefaultAsync();
@@ -342,10 +356,14 @@ namespace FoodOrder.Controllers
                 company.LogotypePath = cvm.LogotypePath;
                 company.TypeOfPayment = cvm.TypeOfPayment;
                 company.UnlimitedOrders = cvm.UnlimitedOrders;
+                company.CompanyImagePath = path;
                 db.Entry(company).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("MyDetails", "Users");
             }
+
+            cvm.CompanyImageFile.SaveAs(path);
+
             return View(cvm);
         }
 

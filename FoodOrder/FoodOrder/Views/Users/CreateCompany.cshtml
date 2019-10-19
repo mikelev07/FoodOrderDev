@@ -5,7 +5,7 @@
     ViewBag.Title = "Создание компании";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateCompany", "Users",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -13,18 +13,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
                     <h1>Создание компании</h1>
-
                     <div class="separator mb-5"></div>
-
                 </div>
             </div>
-
             <div class="row">
-
                 <div class="col-12 col-lg-6 mb-5">
-
                     <div class="card mb-4">
                         <div class="card-body">
                             <h5 class="mb-4">Форма создания</h5>
@@ -36,7 +30,6 @@
                                         Заполните название!
                                     </div>
                                 </div>
-
                                 <div class="form-group position-relative error-l-50">
                                     <label>Реквизиты компании</label>
                                     <input name="Requisites" type="text" class="form-control" required>
@@ -44,7 +37,6 @@
                                         Заполните реквизиты компании!
                                     </div>
                                 </div>
-
                                 <div class="form-group position-relative error-l-50">
                                     <label>Почта представителя</label>
                                     <input name="RepresentativeLogin" type="text" class="form-control" required>
@@ -52,12 +44,10 @@
                                         Укажите почту представителя!
                                     </div>
                                 </div>
-
                                 <div class="form-group position-relative error-l-50">
                                     <label>Ссылка на воцап канал</label>
                                     <input name="Whatsapp" type="text" class="form-control">
                                 </div>
-
                                 <div class="form-group position-relative error-l-50">
                                     <label>Ссылка на телеграм канал</label>
                                     <input name="Telegram" type="text" class="form-control">
@@ -90,13 +80,12 @@
                                 <div class="form-group position-relative">
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="LogotypePath" id="inputGroupFile04">
-                                            <label class="custom-file-label" for="inputGroupFile04">Выберите логотип</label>
+                                            <input type="file" name="CompanyImageFile" value="CompanyImageFile" class="custom-file-input" id="CompanyImageFile">
+                                            <label class="custom-file-label" for="CompanyImageFile">Выберите логотип</label>
                                         </div>
                                     </div>
                                 </div>
                                 <br />
-
                                 <div class="custom-control custom-checkbox mb-3 error-l-200">
                                     @*<input type="checkbox" name="UnlimitedOrders" value="false" class="custom-control-input" id="customControlValidation1">*@
                                     @Html.CheckBox("UnlimitedOrders", false, new { @class="custom-control-input", id="customControlValidation1" })

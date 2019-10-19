@@ -66,7 +66,7 @@ function loadStyle(href, callback) {
   $(".radius-radio[data-radius='" + radius + "']").attr("checked", true);
   $("#switchDark").attr("checked", theme.indexOf("dark") > 0 ? true : false);
 
-  loadStyle("../Content/system/css/" + theme, onStyleComplete);
+  loadStyle("/Content/system/css/" + theme, onStyleComplete);
   function onStyleComplete() {
     setTimeout(onStyleCompleteDelayed, 300);
   }

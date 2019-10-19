@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -30,6 +32,7 @@ namespace FoodOrder.Models
         public Company Company { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
+        public bool? IsVisible { get; set; }
         public string PhoneNumber { get; set; }
         public bool HasOrderToday { get; set; }
     }
@@ -37,11 +40,19 @@ namespace FoodOrder.Models
     public class User : IdentityUser
     {
         public string SecondName { get; set; }
-        public string CompanyId { get; set; }   
+        public string CompanyId { get; set; }
+
+        public bool? IsVisible { get; set; }
         public Company Company { get; set; }
         public DateTime RegistrationDate { get; set; }
         public bool NotActual { get; set; }
         public ICollection<Order> Orders { get; set; }
+
+        public string ImagePath { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
+
+  
 
         public User()
         {

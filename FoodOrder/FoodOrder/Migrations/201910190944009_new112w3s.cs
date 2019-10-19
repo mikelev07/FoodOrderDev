@@ -3,14 +3,16 @@ namespace FoodOrder.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class new12 : DbMigration
+    public partial class new112w3s : DbMigration
     {
         public override void Up()
         {
+            AddColumn("dbo.AspNetUsers", "IsVisible", c => c.Boolean());
         }
         
         public override void Down()
         {
+            DropColumn("dbo.AspNetUsers", "IsVisible");
         }
     }
 }

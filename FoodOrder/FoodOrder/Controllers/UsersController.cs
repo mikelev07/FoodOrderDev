@@ -70,7 +70,10 @@ namespace FoodOrder.Controllers
                 {
                     Id = p.Id,
                     UserName = p.UserName,
-                    SecondName = p.SecondName,
+                    Name = p.Name,
+                    Surname = p.Surname,
+                    Patronymic = p.Patronymic,
+                    Age = p.Age,
                     PhoneNumber = p.PhoneNumber,
                     Email = p.Email,
                     EmailConfirmed = p.EmailConfirmed,
@@ -120,13 +123,17 @@ namespace FoodOrder.Controllers
             var userId = user.Id;
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
-                var company = await db.Companies.Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
+                var company = await db.Companies.Include(c=>c.Requisites).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
                 var cvm = new CompanyViewModel
                 {
                     Name = company.Name,
-                    LogotypePath = company.LogotypePath,
                     TypeOfPayment = company.TypeOfPayment,
-                    UnlimitedOrders = company.UnlimitedOrders
+                    UnlimitedOrders = company.UnlimitedOrders,
+                    Description = company.Description,
+                    Requisites = company.Requisites,
+                    Whatsapp = company.Whatsapp,
+                    Telegram = company.Telegram,
+                    CompanyImagePath = company.CompanyImagePath
                 };
                 return View("DetailsCompany", cvm);
             }
@@ -171,12 +178,15 @@ namespace FoodOrder.Controllers
                 var user = new User
                 {
                     Id = uvm.Id,
-                    UserName = uvm.UserName,
-                    SecondName = uvm.SecondName,
+                    UserName = uvm.Email,
+                    Name = uvm.Name,
+                    Surname = uvm.Surname,
+                    Patronymic = uvm.Patronymic,
+                    Age = uvm.Age,
+                    RegistrationDate = DateTime.Now,
                     Email = uvm.Email,
                     PhoneNumber = uvm.PhoneNumber,
-                    CompanyId = companyId,
-                    RegistrationDate = DateTime.Now
+                    CompanyId = companyId
                 };
 
                 var result = await UserManager.CreateAsync(user, newRandomPassword);
@@ -219,15 +229,14 @@ namespace FoodOrder.Controllers
                 {
                     Id = cvm.Id,
                     Name = cvm.Name,
-                    LogotypePath = cvm?.LogotypePath,
                     TypeOfPayment = cvm.TypeOfPayment,
                     UnlimitedOrders = cvm.UnlimitedOrders,
+                    RegistrationDate = dateTimeNow,
+                    Whatsapp = cvm?.Whatsapp,
+                    Telegram = cvm?.Telegram,
                     Description = cvm?.Description,
                     GeneratedPassword = cvm.GeneratedPassword,
                     Requisites = cvm.Requisites,
-                    Whatsapp = cvm?.Whatsapp,
-                    Telegram = cvm?.Telegram,
-                    RegistrationDate = dateTimeNow,
                     CompanyImagePath = path
                 };
 
@@ -235,19 +244,36 @@ namespace FoodOrder.Controllers
 
                 var newRepresentative = new User
                 {
-                    Email = cvm.RepresentativeLogin,
-                    UserName = cvm.RepresentativeLogin,
-                  /// CompanyId = cvm.Id,
+                    Email = cvm.RepresentativeEmail,
+                    UserName = cvm.RepresentativeEmail,
+                    // CompanyId = cvm.Id,
                     RegistrationDate = dateTimeNow
                 };
                 //нужно ли будет закидывать в представителя CompanyId??
                 var result = await UserManager.CreateAsync(newRepresentative, newRandomPassword);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(newRepresentative.Id, "representative");
-                    company.RepresentativeId = newRepresentative.Id;
-                    db.Companies.Add(company);
-                    await db.SaveChangesAsync();
+                    try
+                    {
+                        await UserManager.AddToRoleAsync(newRepresentative.Id, "representative");
+                        company.RepresentativeId = newRepresentative.Id;
+                        db.Companies.Add(company);
+                        await db.SaveChangesAsync();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+                        throw;
+                    }
 
                     return RedirectToAction("MyDetails", "Users");
                 }
@@ -278,11 +304,14 @@ namespace FoodOrder.Controllers
                 return HttpNotFound();
             }
 
-            var uvm = new UserViewModel
+            var uvm = new EditUserViewModel
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                SecondName = user.SecondName,
+                Name= user.Name,
+                Surname = user.Surname,
+                Patronymic = user.Patronymic,
+                Age= user.Age,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber
             };
@@ -294,13 +323,16 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserName,SecondName,Email,PhoneNumber")] UserViewModel uvm)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserName,Name,SecondName,Patronymic,Age,Email,PhoneNumber")] EditUserViewModel uvm)
         {
             if (ModelState.IsValid)
             {
                 var user = await db.Users.Where(u => u.Id == uvm.Id).FirstOrDefaultAsync();
                 user.UserName = uvm.UserName;
-                user.SecondName = uvm.SecondName;
+                user.Name = uvm.Name;
+                user.Surname = uvm.Surname;
+                user.Patronymic = uvm.Patronymic;
+                user.Age = uvm.Age;
                 user.Email = uvm.Email;
                 user.PhoneNumber = uvm.PhoneNumber;
                 db.Entry(user).State = EntityState.Modified;
@@ -328,13 +360,13 @@ namespace FoodOrder.Controllers
             {
                 Id = company.Id,
                 Name = company.Name,
-                LogotypePath = company.LogotypePath,
                 TypeOfPayment = company.TypeOfPayment,
                 UnlimitedOrders = company.UnlimitedOrders,
+                Description = company.Description,
                 Requisites = company.Requisites,
                 Whatsapp = company.Whatsapp,
                 Telegram = company.Telegram,
-                Description = company.Description
+                CompanyImagePath = company.CompanyImagePath
             };
             return View(cvm);
         }
@@ -344,7 +376,7 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditCompany([Bind(Include = "Id,Name,Logotype,TypeOfPayment,UnlimitedOrders,CompanyImageFile")] CompanyViewModel cvm)
+        public async Task<ActionResult> EditCompany([Bind(Include = "Id,Name,TypeOfPayment,UnlimitedOrders,Description,Requisites,Whatsapp,Telegram,CompanyImagePath,CompanyImageFile")] CompanyViewModel cvm)
         {
             string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
             string path = Server.MapPath("~/Files/" + fileName);
@@ -353,9 +385,12 @@ namespace FoodOrder.Controllers
             {
                 var company = await db.Companies.Where(c => c.Id == cvm.Id).FirstOrDefaultAsync();
                 company.Name = cvm.Name;
-                company.LogotypePath = cvm.LogotypePath;
                 company.TypeOfPayment = cvm.TypeOfPayment;
                 company.UnlimitedOrders = cvm.UnlimitedOrders;
+                company.Description = cvm.Description;
+                company.Requisites = cvm.Requisites;
+                company.Whatsapp = cvm.Whatsapp;
+                company.Telegram = cvm.Telegram;
                 company.CompanyImagePath = path;
                 db.Entry(company).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -384,9 +419,10 @@ namespace FoodOrder.Controllers
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                SecondName = user.SecondName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber
+                Name= user.Name,
+                Surname = user.Surname,
+                Patronymic = user.Patronymic,
+                Email = user.Email
             };
             return View(uvm);
         }
@@ -419,9 +455,9 @@ namespace FoodOrder.Controllers
             {
                 Id = company.Id,
                 Name = company.Name,
-                LogotypePath = company.LogotypePath,
-                TypeOfPayment = company.TypeOfPayment,
-                UnlimitedOrders = company.UnlimitedOrders
+                Requisites = company.Requisites,
+                RegistrationDate = company.RegistrationDate,
+                CompanyImagePath = company.CompanyImagePath
             };
             return View(cvm);
         }

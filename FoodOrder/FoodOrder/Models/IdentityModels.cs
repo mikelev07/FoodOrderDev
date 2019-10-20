@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -18,7 +20,7 @@ namespace FoodOrder.Models
         {
             // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Здесь добавьте утверждения пользователя
+            
             return userIdentity;
         }
     }
@@ -26,29 +28,98 @@ namespace FoodOrder.Models
     public class UserViewModel
     {
         public string Id { get; set; }
+
+        /// <summary>Логин</summary>
         public string UserName { get; set; }
-        public string SecondName { get; set; }
+
+        /// <summary>Имя</summary>
+        public string Name { get; set; }
+
+        /// <summary>Фамилия</summary>
+        public string Surname { get; set; }
+
+        /// <summary>Отчество</summary>
+        public string Patronymic { get; set; }
+
+        public int Age { get; set; } //надо развернуть в обычное свойство, дабы логику с корректным возрастом задать
+
         public string CompanyId { get; set; }
+
         public Company Company { get; set; }
+
         public string Email { get; set; }
+
         public bool EmailConfirmed { get; set; }
+
         public bool? IsVisible { get; set; }
+
         public string PhoneNumber { get; set; }
+
+        /// <summary>Уже сделал заказ сегодня</summary>
         public bool HasOrderToday { get; set; }
+    }
+
+    public class EditUserViewModel
+    {
+        public string Id { get; set; }
+
+        /// <summary>Логин</summary>
+        public string UserName { get; set; }
+
+        /// <summary>Имя</summary>
+        public string Name { get; set; }
+
+        /// <summary>Фамилия</summary>
+        public string Surname { get; set; }
+
+        /// <summary>Отчество</summary>
+        public string Patronymic { get; set; }
+
+        public int Age { get; set; } //надо развернуть в обычное свойство, дабы логику с корректным возрастом задать
+
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Пароль")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Подтвердите пароль")]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают.")]
+        public string ConfirmPassword { get; set; }
     }
 
     public class User : IdentityUser
     {
-        public string SecondName { get; set; }
+        /// <summary>Имя</summary>
+        public string Name { get; set; }
+
+        /// <summary>Фамилия</summary>
+        public string Surname { get; set; }
+
+        /// <summary>Отчество</summary>
+        public string Patronymic { get; set; }
+
+        public int Age { get; set; }
+
         public string CompanyId { get; set; }
 
         public bool? IsVisible { get; set; }
+
         public Company Company { get; set; }
+
         public DateTime RegistrationDate { get; set; }
+
+        /// <summary>Указывает на то, что пользователь не используется</summary>
         public bool NotActual { get; set; }
+
         public ICollection<Order> Orders { get; set; }
 
         public string ImagePath { get; set; }
+
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; }
 
@@ -101,5 +172,7 @@ namespace FoodOrder.Models
         public DbSet<ComplexDish> ComplexDishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<FoodOrder.Models.Requisites> Requisites { get; set; }
     }
 }

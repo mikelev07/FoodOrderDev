@@ -23,6 +23,7 @@
                         <div class="card-body">
                             <h5 class="mb-4">Форма создания</h5>
                             <form class="needs-validation tooltip-label-right" novalidate>
+
                                 <div class="form-group position-relative error-l-50">
                                     <label>Название компании</label>
                                     <input name="Name" type="text" class="form-control" required>
@@ -30,26 +31,26 @@
                                         Заполните название!
                                     </div>
                                 </div>
-                                <div class="form-group position-relative error-l-50">
-                                    <label>Реквизиты компании</label>
-                                    <input name="Requisites" type="text" class="form-control" required>
-                                    <div class="invalid-tooltip">
-                                        Заполните реквизиты компании!
-                                    </div>
+
+                                <div class="form-group">
+                                    @Html.Partial("CompanyRequisites", new FoodOrder.Models.Requisites())
                                 </div>
+
                                 <div class="form-group position-relative error-l-50">
                                     <label>Почта представителя</label>
-                                    <input name="RepresentativeLogin" type="text" class="form-control" required>
+                                    <input name="RepresentativeEmail" type="text" class="form-control" required>
                                     <div class="invalid-tooltip">
                                         Укажите почту представителя!
                                     </div>
                                 </div>
+
                                 <div class="form-group position-relative error-l-50">
-                                    <label>Ссылка на воцап канал</label>
+                                    <label>Ссылка на группу Whatsapp</label>
                                     <input name="Whatsapp" type="text" class="form-control">
                                 </div>
+
                                 <div class="form-group position-relative error-l-50">
-                                    <label>Ссылка на телеграм канал</label>
+                                    <label>Ссылка на Telegram канал</label>
                                     <input name="Telegram" type="text" class="form-control">
                                 </div>
 
@@ -57,6 +58,7 @@
                                     <label>Описание</label>
                                     <textarea name="Description" class="form-control" rows="2"></textarea>
                                 </div>
+
                                 <div class="form-group position-relative">
                                     <label>Способ оплаты</label>
                                     <div>
@@ -76,7 +78,9 @@
                                         Не выбран способ оплаты!
                                     </div>
                                 </div>
+
                                 <br />
+
                                 <div class="form-group position-relative">
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -85,7 +89,9 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <br />
+
                                 <div class="custom-control custom-checkbox mb-3 error-l-200">
                                     @*<input type="checkbox" name="UnlimitedOrders" value="false" class="custom-control-input" id="customControlValidation1">*@
                                     @Html.CheckBox("UnlimitedOrders", false, new { @class="custom-control-input", id="customControlValidation1" })
@@ -93,6 +99,7 @@
                                         Неограниченные заказы для сотрудников
                                     </label>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary mb-0">Создать</button>
                             </form>
                         </div>

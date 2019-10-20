@@ -195,6 +195,22 @@
     <Compile Include="Migrations\201910190944009_new112w3s.Designer.cs">
       <DependentUpon>201910190944009_new112w3s.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910191857496_CompanyChange.cs" />
+    <Compile Include="Migrations\201910191857496_CompanyChange.Designer.cs">
+      <DependentUpon>201910191857496_CompanyChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910192003407_RequisitesChange.cs" />
+    <Compile Include="Migrations\201910192003407_RequisitesChange.Designer.cs">
+      <DependentUpon>201910192003407_RequisitesChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910200549004_AnotherOne.cs" />
+    <Compile Include="Migrations\201910200549004_AnotherOne.Designer.cs">
+      <DependentUpon>201910200549004_AnotherOne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910200601138_AndAnotherOne.cs" />
+    <Compile Include="Migrations\201910200601138_AndAnotherOne.Designer.cs">
+      <DependentUpon>201910200601138_AndAnotherOne.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -736,6 +752,7 @@
     <Content Include="Views\Dishes\Details.cshtml" />
     <Content Include="Views\Dishes\Edit.cshtml" />
     <Content Include="Views\Dishes\Index.cshtml" />
+    <Content Include="Views\Users\CompanyRequisites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -757,6 +774,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910190944009_new112w3s.resx">
       <DependentUpon>201910190944009_new112w3s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910191857496_CompanyChange.resx">
+      <DependentUpon>201910191857496_CompanyChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910192003407_RequisitesChange.resx">
+      <DependentUpon>201910192003407_RequisitesChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910200549004_AnotherOne.resx">
+      <DependentUpon>201910200549004_AnotherOne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910200601138_AndAnotherOne.resx">
+      <DependentUpon>201910200601138_AndAnotherOne.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

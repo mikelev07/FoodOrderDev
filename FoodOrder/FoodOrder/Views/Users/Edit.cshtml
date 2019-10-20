@@ -1,4 +1,4 @@
-﻿@model FoodOrder.Models.UserViewModel
+﻿@model FoodOrder.Models.EditUserViewModel
 
 @{
    
@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-12">
 
-                    <h1>Редактирование сотрудника</h1>
+                    <h1>Редактирование данных сотрудника</h1>
 
                     <div class="separator mb-5"></div>
 
@@ -29,25 +29,36 @@
                         <div class="card-body">
                             <h5 class="mb-4">Форма редактирования</h5>
                             <form class="needs-validation tooltip-label-right" novalidate>
-                                <div class="form-group position-relative error-l-50">
-                                    @Html.LabelFor(model => model.SecondName, "Имя")
-                                    @Html.EditorFor(model => model.SecondName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                                    <div class="invalid-tooltip">
-                                        Укажите фамилию!
-                                    </div>
-                                </div>
 
                                 <div class="form-group position-relative error-l-50">
-                                    @Html.LabelFor(model => model.UserName, "Имя")
-                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    @Html.LabelFor(model => model.Name, "Имя")
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                                     <div class="invalid-tooltip">
                                         Укажите имя!
                                     </div>
                                 </div>
 
                                 <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Surname, "Фамилия")
+                                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите фамилию!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Patronymic, "Отчество")
+                                    @Html.EditorFor(model => model.Patronymic, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Age, "Возраст")
+                                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
                                     @Html.LabelFor(model => model.Email, "Email")
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required="required" } })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                                     <div class="invalid-tooltip">
                                         Укажите корректную электронную почту!
                                     </div>
@@ -55,11 +66,33 @@
 
                                 <div class="form-group position-relative error-l-50">
                                     @Html.LabelFor(model => model.PhoneNumber, "Телефон")
-                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required="required"} })
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                                     <div class="invalid-tooltip">
                                         Укажите корректный номер телефона!
                                     </div>
                                 </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.UserName, "Логин")
+                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите корректный логин!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model, "Пароль")
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type="password", required = "required" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите корректный логин!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model, "Подтвердите пароль")
+                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", type="password", required = "required" } })
+                                </div>
+
                                 <button type="submit" class="btn btn-primary mb-0">Подтвердить изменения</button>
                             </form>
                         </div>

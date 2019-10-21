@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -14,10 +15,10 @@ namespace FoodOrder.Models
         public User User { get; set; }
         public OrderStatus Status { get; set; }
         public double Price { get; set; }
-        public ICollection<ComplexDish> Dishes { get; set; }
+        public ICollection<Dish> Dishes { get; set; }
         public Order()
         {
-            Dishes = new List<ComplexDish>();
+            Dishes = new List<Dish>();
         }
     }
     public class Menu
@@ -49,16 +50,14 @@ namespace FoodOrder.Models
         public NutritionalValue NutritionalValue { get; set; }
         public string ImagePath { get; set; }
         public bool HasGarnish { get; set; }
-        public double Price { get; set; }
-    }
-
-    public class ComplexDish: Dish
-    {
+        public string GarnishId { get; set; }
         public Dish Garnish { get; set; }
-        public ComplexDish()
+        public double Price { get; set; }
+        public Dish()
         {
-            HasGarnish = true;
+            NutritionalValue = new NutritionalValue();
         }
+
     }
 
     public class NutritionalValue
@@ -71,11 +70,17 @@ namespace FoodOrder.Models
 
     public enum TypeOfDish
     {
+        [Display(Name = "Первое блюдо")] 
         First,
+        [Display(Name = "Второе блюдо")]
         Second,
+        [Display(Name = "Гарнир")]
         Garnish,
+        [Display(Name = "Салат")]
         Salad,
+        [Display(Name = "Напитки")]
         Drink,
+        [Display(Name = "Закуски")]
         Snack
     }
 

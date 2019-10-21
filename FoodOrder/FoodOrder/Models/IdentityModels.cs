@@ -169,7 +169,6 @@ namespace FoodOrder.Models
         public DbSet<RoleViewModel> IdentityRoles { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Dish> Dishes { get; set; }
-        public DbSet<ComplexDish> ComplexDishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
 

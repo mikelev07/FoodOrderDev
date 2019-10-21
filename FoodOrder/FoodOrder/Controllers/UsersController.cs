@@ -85,6 +85,7 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {
+                ViewData["Dishes"] = await db.Dishes.ToListAsync();
                 return View("MyDetailsCook");
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))

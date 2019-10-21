@@ -51,23 +51,39 @@ namespace FoodOrder.Controllers
         {
             if (ModelState.IsValid)
             {
-                //если блюдо сложное, то создаем соответствующий объект и добавляем в бд
-                if (dish.HasGarnish)
-                {
-                    var complexDish = new ComplexDish();
-                    complexDish = (ComplexDish)dish;
-                    db.ComplexDishes.Add(complexDish);
-                }
-                else
-                {
-                    db.Dishes.Add(dish);
-                }
-                
+                db.Dishes.Add(dish);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
             return View(dish);
+        }
+
+        public JsonResult CreateJson(string name, int selectedType, bool hasGarnish)
+        {
+            Dish dish = new Dish()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                Name = name,
+                TypeOfDish = (TypeOfDish)selectedType
+            };
+            db.Dishes.Add(dish);
+            db.SaveChanges();
+
+            var type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish)selectedType);
+
+            return Json(new { name, type, hasGarnish }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDishes()
+        {
+            var dishList = db.Dishes.AsEnumerable().Select(d => new
+            {
+                name = d.Name,
+                type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish) d.TypeOfDish),
+                hasGarnish = d.HasGarnish
+            }).ToList();
+            return Json(dishList, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Dishes/Edit/5

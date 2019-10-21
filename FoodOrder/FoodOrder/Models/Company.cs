@@ -12,6 +12,37 @@ namespace FoodOrder.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string FullName { get; set; }
+
+        /// <summary>БИН или ИИН</summary>
+        public string BIN_IIN { get; set; }
+
+        /// <summary>ИИК</summary>
+        public string IIK { get; set; }
+
+        /// <summary>РНН</summary>
+        public string RNN { get; set; }
+
+        /// <summary>БИК</summary>
+        public string BIK { get; set; }
+
+        /// <summary>Банковские реквизиты</summary>
+        public string Bank { get; set; }
+
+        /// <summary>Юридический адрес</summary>
+        public string LegalAddress { get; set; }
+
+        /// <summary>Фактический адрес</summary>
+        public string ActualAddress { get; set; }
+
+        /// <summary>Директор</summary>
+        public string Director { get; set; }
+
+        /// <summary>Телефон</summary>
+        public string PhoneNumber { get; set; }
+
+        /// <summary>Электронная почта</summary>
+        public string Email { get; set; }
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
         public DateTime RegistrationDate { get; set; }

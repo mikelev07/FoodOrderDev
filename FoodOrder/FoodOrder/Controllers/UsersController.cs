@@ -123,7 +123,7 @@ namespace FoodOrder.Controllers
             var userId = user.Id;
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
-                var company = await db.Companies.Include(c=>c.Requisites).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
+                var company = await db.Companies.Include(c => c.Requisites).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
                 var cvm = new CompanyViewModel
                 {
                     Name = company.Name,
@@ -236,7 +236,20 @@ namespace FoodOrder.Controllers
                     Telegram = cvm?.Telegram,
                     Description = cvm?.Description,
                     GeneratedPassword = cvm.GeneratedPassword,
-                    Requisites = cvm.Requisites,
+                    Requisites = new Requisites()
+                    {
+                        FullName = cvm.FullName,
+                        BIN_IIN = cvm.BIN_IIN,
+                        IIK = cvm.IIK,
+                        RNN = cvm.RNN,
+                        BIK = cvm.BIK,
+                        Bank = cvm.Bank,
+                        LegalAddress = cvm.LegalAddress,
+                        ActualAddress = cvm.ActualAddress,
+                        Director = cvm.Director,
+                        PhoneNumber = cvm.PhoneNumber,
+                        Email = cvm.Email
+                    },
                     CompanyImagePath = path
                 };
 
@@ -253,27 +266,10 @@ namespace FoodOrder.Controllers
                 var result = await UserManager.CreateAsync(newRepresentative, newRandomPassword);
                 if (result.Succeeded)
                 {
-                    try
-                    {
-                        await UserManager.AddToRoleAsync(newRepresentative.Id, "representative");
-                        company.RepresentativeId = newRepresentative.Id;
-                        db.Companies.Add(company);
-                        await db.SaveChangesAsync();
-                    }
-                    catch (DbEntityValidationException e)
-                    {
-                        foreach (var eve in e.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                            foreach (var ve in eve.ValidationErrors)
-                            {
-                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                    ve.PropertyName, ve.ErrorMessage);
-                            }
-                        }
-                        throw;
-                    }
+                    await UserManager.AddToRoleAsync(newRepresentative.Id, "representative");
+                    company.RepresentativeId = newRepresentative.Id;
+                    db.Companies.Add(company);
+                    await db.SaveChangesAsync();
 
                     return RedirectToAction("MyDetails", "Users");
                 }
@@ -308,10 +304,10 @@ namespace FoodOrder.Controllers
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                Name= user.Name,
+                Name = user.Name,
                 Surname = user.Surname,
                 Patronymic = user.Patronymic,
-                Age= user.Age,
+                Age = user.Age,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber
             };
@@ -419,7 +415,7 @@ namespace FoodOrder.Controllers
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                Name= user.Name,
+                Name = user.Name,
                 Surname = user.Surname,
                 Patronymic = user.Patronymic,
                 Email = user.Email

@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201910211746333_DishLittleChange.Designer.cs">
       <DependentUpon>201910211746333_DishLittleChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910221250547_DishModerChanges.cs" />
+    <Compile Include="Migrations\201910221250547_DishModerChanges.Designer.cs">
+      <DependentUpon>201910221250547_DishModerChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -807,6 +811,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910211746333_DishLittleChange.resx">
       <DependentUpon>201910211746333_DishLittleChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910221250547_DishModerChanges.resx">
+      <DependentUpon>201910221250547_DishModerChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

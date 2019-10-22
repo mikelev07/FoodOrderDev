@@ -47,25 +47,16 @@ namespace FoodOrder.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public TypeOfDish TypeOfDish { get; set; }
-        public NutritionalValue NutritionalValue { get; set; }
-        public string ImagePath { get; set; }
         public bool HasGarnish { get; set; }
         public string GarnishId { get; set; }
         public Dish Garnish { get; set; }
-        public double Price { get; set; }
-        public Dish()
-        {
-            NutritionalValue = new NutritionalValue();
-        }
-
-    }
-
-    public class NutritionalValue
-    {
         public double Proteins { get; set; }
         public double Fats { get; set; }
         public double Carbonhydrates { get; set; }
         public double Kilocalories { get; set; }
+        public string ImagePath { get; set; }
+        public double Price { get; set; }
+
     }
 
     public enum TypeOfDish

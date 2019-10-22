@@ -59,32 +59,70 @@ namespace FoodOrder.Controllers
             return View(dish);
         }
 
-        public JsonResult CreateJson(string name, int selectedType, bool hasGarnish)
+        public JsonResult CreateJson(string name, int selectedType, bool hasGarnish, string garnishId,
+            double proteins, double fats, double carbonhydrates, double kilocalories)
         {
+            var type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish)selectedType);
+            var dateOfCreation = DateTime.Now;
+
             Dish dish = new Dish()
             {
                 Id = Guid.NewGuid().ToString("N"),
                 Name = name,
-                TypeOfDish = (TypeOfDish)selectedType
+                TypeOfDish = (TypeOfDish)selectedType,
+                HasGarnish = hasGarnish,
+                Proteins = proteins,
+                Fats = fats,
+                Carbonhydrates = carbonhydrates,
+                Kilocalories = kilocalories
             };
+
+            if (hasGarnish)
+            {
+                var currentGarnish = db.Dishes.Where(d => d.Id == garnishId).FirstOrDefault();
+                dish.GarnishId = currentGarnish.Id;
+                db.Dishes.Add(dish);
+                db.SaveChanges();
+
+                return Json(new {
+                    id = dish.Id,
+                    name,
+                    type,
+                    hasGarnish,
+                    garnish = currentGarnish.Name,
+                    garnishId = currentGarnish.Id,
+                    proteins,
+                    fats,
+                    carbonhydrates,
+                    kilocalories
+                }, JsonRequestBehavior.AllowGet);
+            }
+
             db.Dishes.Add(dish);
             db.SaveChanges();
 
-            var type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish)selectedType);
-
-            return Json(new { name, type, hasGarnish }, JsonRequestBehavior.AllowGet);
+            return Json(new {
+                id = dish.Id,
+                name,
+                type,
+                hasGarnish,
+                proteins,
+                fats,
+                carbonhydrates,
+                kilocalories
+            }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetDishes()
-        {
-            var dishList = db.Dishes.AsEnumerable().Select(d => new
-            {
-                name = d.Name,
-                type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish) d.TypeOfDish),
-                hasGarnish = d.HasGarnish
-            }).ToList();
-            return Json(dishList, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult GetDishes()
+        //{
+        //    var dishList = db.Dishes.AsEnumerable().Select(d => new
+        //    {
+        //        name = d.Name,
+        //        type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish) d.TypeOfDish),
+        //        hasGarnish = d.HasGarnish
+        //    }).ToList();
+        //    return Json(dishList, JsonRequestBehavior.AllowGet);
+        //}
 
         // GET: Dishes/Edit/5
         public async Task<ActionResult> Edit(string id)
@@ -141,6 +179,14 @@ namespace FoodOrder.Controllers
             db.Dishes.Remove(dish);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public async Task<JsonResult> DeleteJson(string id)
+        {
+            var dish = await db.Dishes.Where(d => d.Id == id).FirstOrDefaultAsync();
+            db.Dishes.Remove(dish);
+            await db.SaveChangesAsync();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

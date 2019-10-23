@@ -15,6 +15,7 @@
 
                 <div class="mb-2">
                     <h1>Название компании</h1>
+
                     <div class="text-zero top-right-button-container">
                         <button type="button"
                                 class="btn btn-lg btn-outline-primary dropdown-toggle dropdown-toggle-split top-right-button top-right-button-single"
@@ -23,10 +24,11 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/Users/EditCompany/@company.Id">Редактировать данные компании</a>
+                            <a class="dropdown-item" href="/Manage/ChangePassword">Изменить пароль</a>
                         </div>
                     </div>
                 </div>
-
+                <p class="text-success">@ViewBag.StatusMessage</p>
 
                 <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
                     <li class="nav-item">
@@ -129,7 +131,7 @@
                         <div class="row">
                             <div class="col-12 list" data-check-all="checkAll">
 
-                                @foreach (var employee in Model.Where(e=>e.Id!=representativeId))
+                                @foreach (var employee in Model.Where(e => e.Id != representativeId))
                                 {
                                     <div class="card d-flex flex-row mb-3">
                                         <div class="d-flex flex-grow-1 min-width-zero">

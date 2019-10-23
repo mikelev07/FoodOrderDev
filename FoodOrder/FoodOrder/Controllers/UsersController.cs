@@ -13,6 +13,7 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity.Validation;
 using System.IO;
+using static FoodOrder.Controllers.ManageController;
 
 namespace FoodOrder.Controllers
 {
@@ -48,9 +49,20 @@ namespace FoodOrder.Controllers
             return View(await db.Users.ToListAsync());
         }
 
+        public enum ManageMessageId
+        {
+            AddPhoneSuccess,
+            ChangePasswordSuccess,
+            SetTwoFactorSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+            RemovePhoneSuccess,
+            Error
+        }
+
         // Get: Users/MyDetails
         [Authorize]
-        public async Task<ActionResult> MyDetails()
+        public async Task<ActionResult> MyDetails(ManageMessageId? message)
         {
             var userId = User.Identity.GetUserId();
             var user = db.Users.Where(c => c.Id == userId).SingleOrDefault();
@@ -63,6 +75,10 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
+                ViewBag.StatusMessage =
+                       message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
+                       : "";
+
                 var companyId = (await db.Companies.Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync()).Id;
                 var employees = await db.Users.Include(u => u.Company).Where(u => u.CompanyId == companyId && u.NotActual == false).ToListAsync();
 

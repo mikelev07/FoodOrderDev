@@ -143,17 +143,27 @@ namespace FoodOrder.Controllers
             var userId = user.Id;
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
-                var company = await db.Companies.Include(c => c.Requisites).Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
+                var company = await db.Companies.Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
                 var cvm = new CompanyViewModel
                 {
                     Name = company.Name,
                     TypeOfPayment = company.TypeOfPayment,
                     UnlimitedOrders = company.UnlimitedOrders,
                     Description = company.Description,
-                    Requisites = company.Requisites,
                     Whatsapp = company.Whatsapp,
                     Telegram = company.Telegram,
-                    CompanyImagePath = company.CompanyImagePath
+                    CompanyImagePath = company.CompanyImagePath,
+                    FullName = company.FullName,
+                    BIN_IIN = company.BIN_IIN,
+                    IIK = company.IIK,
+                    RNN = company.RNN,
+                    BIK = company.BIK,
+                    Bank = company.Bank,
+                    LegalAddress = company.LegalAddress,
+                    ActualAddress = company.ActualAddress,
+                    Director = company.Director,
+                    PhoneNumber = company.PhoneNumber,
+                    Email = company.Email
                 };
                 return View("DetailsCompany", cvm);
             }
@@ -256,21 +266,18 @@ namespace FoodOrder.Controllers
                     Telegram = cvm?.Telegram,
                     Description = cvm?.Description,
                     GeneratedPassword = cvm.GeneratedPassword,
-                    Requisites = new Requisites()
-                    {
-                        FullName = cvm.FullName,
-                        BIN_IIN = cvm.BIN_IIN,
-                        IIK = cvm.IIK,
-                        RNN = cvm.RNN,
-                        BIK = cvm.BIK,
-                        Bank = cvm.Bank,
-                        LegalAddress = cvm.LegalAddress,
-                        ActualAddress = cvm.ActualAddress,
-                        Director = cvm.Director,
-                        PhoneNumber = cvm.PhoneNumber,
-                        Email = cvm.Email
-                    },
-                    CompanyImagePath = path
+                    CompanyImagePath = path,
+                    FullName = cvm.FullName,
+                    BIN_IIN = cvm.BIN_IIN,
+                    IIK = cvm.IIK,
+                    RNN = cvm.RNN,
+                    BIK = cvm.BIK,
+                    Bank = cvm.Bank,
+                    LegalAddress = cvm.LegalAddress,
+                    ActualAddress = cvm.ActualAddress,
+                    Director = cvm.Director,
+                    PhoneNumber = cvm.PhoneNumber,
+                    Email = cvm.Email
                 };
 
                 cvm.CompanyImageFile.SaveAs(path);
@@ -320,7 +327,7 @@ namespace FoodOrder.Controllers
                 return HttpNotFound();
             }
 
-            var uvm = new EditUserViewModel
+            var euvm = new EditUserViewModel
             {
                 Id = user.Id,
                 UserName = user.UserName,
@@ -331,7 +338,7 @@ namespace FoodOrder.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber
             };
-            return View(uvm);
+            return View(euvm);
         }
 
         // POST: Users/Edit/5
@@ -379,10 +386,20 @@ namespace FoodOrder.Controllers
                 TypeOfPayment = company.TypeOfPayment,
                 UnlimitedOrders = company.UnlimitedOrders,
                 Description = company.Description,
-                Requisites = company.Requisites,
                 Whatsapp = company.Whatsapp,
                 Telegram = company.Telegram,
-                CompanyImagePath = company.CompanyImagePath
+                CompanyImagePath = company.CompanyImagePath,
+                FullName = company.FullName,
+                BIN_IIN = company.BIN_IIN,
+                IIK = company.IIK,
+                RNN = company.RNN,
+                BIK = company.BIK,
+                Bank = company.Bank,
+                LegalAddress = company.LegalAddress,
+                ActualAddress = company.ActualAddress,
+                Director = company.Director,
+                PhoneNumber = company.PhoneNumber,
+                Email = company.Email
             };
             return View(cvm);
         }
@@ -392,7 +409,9 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditCompany([Bind(Include = "Id,Name,TypeOfPayment,UnlimitedOrders,Description,Requisites,Whatsapp,Telegram,CompanyImagePath,CompanyImageFile")] CompanyViewModel cvm)
+        public async Task<ActionResult> EditCompany([Bind(Include = 
+            "Id,Name,TypeOfPayment,UnlimitedOrders,Description,Whatsapp,Telegram,CompanyImagePath,CompanyImageFile," +
+            "FullName,BIN_IIN, IIK, RNN,BIK,Bank,LegalAddress,ActualAddress,Director,PhoneNumber,Email")] CompanyViewModel cvm)
         {
             string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
             string path = Server.MapPath("~/Files/" + fileName);
@@ -404,10 +423,20 @@ namespace FoodOrder.Controllers
                 company.TypeOfPayment = cvm.TypeOfPayment;
                 company.UnlimitedOrders = cvm.UnlimitedOrders;
                 company.Description = cvm.Description;
-                company.Requisites = cvm.Requisites;
                 company.Whatsapp = cvm.Whatsapp;
                 company.Telegram = cvm.Telegram;
                 company.CompanyImagePath = path;
+                company.FullName = cvm.FullName;
+                company.BIN_IIN = cvm.BIN_IIN;
+                company.IIK = cvm.IIK;
+                company.RNN = cvm.RNN;
+                company.BIK = cvm.BIK;
+                company.Bank = cvm.Bank;
+                company.LegalAddress = cvm.LegalAddress;
+                company.ActualAddress = cvm.ActualAddress;
+                company.Director = cvm.Director;
+                company.PhoneNumber = cvm.PhoneNumber;
+                company.Email = cvm.Email;
                 db.Entry(company).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("MyDetails", "Users");
@@ -471,9 +500,19 @@ namespace FoodOrder.Controllers
             {
                 Id = company.Id,
                 Name = company.Name,
-                Requisites = company.Requisites,
                 RegistrationDate = company.RegistrationDate,
-                CompanyImagePath = company.CompanyImagePath
+                CompanyImagePath = company.CompanyImagePath,
+                FullName = company.FullName,
+                BIN_IIN = company.BIN_IIN,
+                IIK = company.IIK,
+                RNN = company.RNN,
+                BIK = company.BIK,
+                Bank = company.Bank,
+                LegalAddress = company.LegalAddress,
+                ActualAddress = company.ActualAddress,
+                Director = company.Director,
+                PhoneNumber = company.PhoneNumber,
+                Email = company.Email
             };
             return View(cvm);
         }

@@ -36,7 +36,6 @@
                             <form class="needs-validation tooltip-label-right" novalidate>
                                 <div class="form-group position-relative error-l-50">
                                     @Html.LabelFor(model => model.Name, "Название компании", htmlAttributes: new { @class = "control-label " })
-
                                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                                     <div class="invalid-tooltip">
                                         Заполните название!
@@ -44,12 +43,99 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.Partial("CompanyRequisites", Model.Requisites)
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.FullName, "Полное наименование компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите полное наименование компании!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.BIN_IIN, "БИН/ИИН компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.BIN_IIN, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите БИН или ИИН!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.IIK, "ИИК компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.IIK, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите ИИК!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.RNN, "РНН компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.RNN, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите РНН!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.BIK, "БИК компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.BIK, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите БИК!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.Bank, "Банковские реквизиты", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.Bank, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите реквизиты Банка!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.LegalAddress, "Юридический адрес компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.LegalAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите юридический адрес!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.ActualAddress, "Фактический адрес компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.ActualAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите фактический адрес!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.Director, "Директор компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.Director, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите директора компании!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.PhoneNumber, "Телефон компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите телефон компании!
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group position-relative error-l-50">
+                                        @Html.LabelFor(model => model.Email, "Электронная почта компании", htmlAttributes: new { @class = "control-label " })
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        <div class="invalid-tooltip">
+                                            Укажите электронную почту компании!
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="form-group position-relative error-l-50">
-                                    <label>Описание</label>
-                                    <textarea name="Description" class="form-control" rows="2"></textarea>
+                                    @Html.LabelFor(model => model.Description, "Описание", htmlAttributes: new { @class = "control-label " })
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "2" })
                                 </div>
 
                                 <div class="form-group position-relative error-l-50">

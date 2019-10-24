@@ -53,7 +53,7 @@
 
                                 <div class="form-group position-relative error-l-50">
                                     @Html.LabelFor(model => model.Age, "Возраст")
-                                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                                    <input type="number" name="Age" class="form-control"  min="0" max="100" step="1" oninput="validity.valid||(value='');"/>
                                 </div>
 
                                 <div class="form-group position-relative error-l-50">

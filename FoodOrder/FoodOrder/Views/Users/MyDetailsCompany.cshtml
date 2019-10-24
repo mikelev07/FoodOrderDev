@@ -24,6 +24,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/Users/EditCompany/@company.Id">Редактировать данные компании</a>
+                            <a class="dropdown-item" href="/Users/Edit/@company.RepresentativeId">Редактировать данные представителя</a>
                             <a class="dropdown-item" href="/Manage/ChangePassword">Изменить пароль</a>
                         </div>
                     </div>
@@ -54,14 +55,23 @@
                                     <img src="~/Content/img/pr1920.png" alt="Detail Picture" class="card-img-top" />
 
                                     <div class="card-body">
-                                        <p class="text-muted text-small mb-2">Информация</p>
-                                        <p class="mb-3">
-                                            @company.Name
-                                        </p>
+                                        <h6 class="mb-3 listing-heading ellipsis">
+                                            <strong>Компания @company.Name</strong>
+                                        </h6>
 
                                         <p class="text-muted text-small mb-2">Реквизиты</p>
                                         <p class="mb-3">
-                                            @company.Requisites
+                                            <strong>Полное название:</strong> @company.FullName<br />
+                                            <strong>БИН или ИИН:</strong> @company.BIN_IIN<br />
+                                            <strong>ИИК:</strong> @company.IIK<br />
+                                            <strong>РНН:</strong> @company.RNN<br />
+                                            <strong>ИИК:</strong> @company.BIK<br />
+                                            <strong>Банк:</strong> @company.Bank<br />
+                                            <strong>Юридический адрес:</strong> @company.LegalAddress<br />
+                                            <strong>Фактический адрес:</strong> @company.ActualAddress<br />
+                                            <strong>Директор:</strong> @company.Director<br />
+                                            <strong>Телефон:</strong> @company.PhoneNumber<br />
+                                            <strong>Email:</strong> @company.Email<br />
                                         </p>
 
                                         <p class="text-muted text-small mb-2">Заказы для сотрудников</p>
@@ -110,12 +120,33 @@
                                             <div class="card-body">
                                                 <a href="">
                                                     <h6 class="mb-3 listing-heading ellipsis">
-                                                        Представитель компании
+                                                        <strong>Представитель компании</strong>
                                                     </h6>
                                                 </a>
                                                 <footer>
-                                                    <p class="text-muted text-small mb-0 font-weight-light">
-                                                        @company.Representative.UserName @company.Representative.Surname
+                                                    <p class="text-muted text-small mb-0">ФИО</p>
+                                                    <p class="mb-3">
+                                                        @company.Representative.Surname @company.Representative.Name @company.Representative.Patronymic
+                                                    </p>
+
+                                                    <p class="text-muted text-small mb-0">Возраст</p>
+                                                    <p class="mb-3">
+                                                        @company.Representative.Age
+                                                    </p>
+
+                                                    <p class="text-muted text-small mb-0">Email</p>
+                                                    <p class="mb-3">
+                                                        @company.Representative.Email
+                                                    </p>
+
+                                                    <p class="text-muted text-small mb-0">Телефон</p>
+                                                    <p class="mb-3">
+                                                        @company.Representative.PhoneNumber
+                                                    </p>
+
+                                                    <p class="text-muted text-small mb-0">Логин</p>
+                                                    <p class="mb-3">
+                                                        @company.Representative.UserName
                                                     </p>
                                                 </footer>
                                             </div>
@@ -234,7 +265,7 @@
                                         <div class="card-body pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                                             <div class="min-width-zero">
                                                 <a href="#">
-                                                    <p class="list-item-heading mb-1 truncate">Гарольд</p>
+                                                    <p class="list-item-heading mb-1 truncate">@company.Representative.UserName</p>
                                                 </a>
                                                 <p class="mb-2 text-muted text-small">Представитель компании</p>
                                                 <button type="button"

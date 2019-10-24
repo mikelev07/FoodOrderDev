@@ -310,7 +310,7 @@ namespace FoodOrder.Controllers
                 {
                     Email = cvm.RepresentativeEmail,
                     UserName = cvm.RepresentativeEmail,
-                    // CompanyId = cvm.Id,
+                    CompanyId = cvm.Id,
                     RegistrationDate = dateTimeNow
                 };
                 //нужно ли будет закидывать в представителя CompanyId??
@@ -370,7 +370,7 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserName,Name,SecondName,Patronymic,Age,Email,PhoneNumber")] EditUserViewModel uvm)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserName,Name,Surname,Patronymic,Age,Email,PhoneNumber")] EditUserViewModel uvm)
         {
             if (ModelState.IsValid)
             {

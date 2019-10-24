@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201910231340416_CompanyModelChange.Designer.cs">
       <DependentUpon>201910231340416_CompanyModelChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910240654298_addNewMigra.cs" />
+    <Compile Include="Migrations\201910240654298_addNewMigra.Designer.cs">
+      <DependentUpon>201910240654298_addNewMigra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -820,6 +824,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910231340416_CompanyModelChange.resx">
       <DependentUpon>201910231340416_CompanyModelChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910240654298_addNewMigra.resx">
+      <DependentUpon>201910240654298_addNewMigra.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

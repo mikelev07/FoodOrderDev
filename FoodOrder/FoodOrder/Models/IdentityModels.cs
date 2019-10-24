@@ -57,6 +57,8 @@ namespace FoodOrder.Models
 
         /// <summary>Уже сделал заказ сегодня</summary>
         public bool HasOrderToday { get; set; }
+
+        public bool IsCheckInstruction { get; set; }
     }
 
     public class EditUserViewModel
@@ -104,6 +106,8 @@ namespace FoodOrder.Models
         public string Patronymic { get; set; }
 
         public int Age { get; set; }
+
+        public bool IsCheckInstruction { get; set; }
 
         public string CompanyId { get; set; }
 

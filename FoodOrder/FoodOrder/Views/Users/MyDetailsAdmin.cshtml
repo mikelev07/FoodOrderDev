@@ -163,13 +163,23 @@
 @section Scripts  {
     <script>
 
-        $(document).ready(function () {
+    function getInstruction() {
+        var enjoyhint_instance = new EnjoyHint({
 
-            var enjoyhint_instance = new EnjoyHint({});
+            onEnd:function(){
+		      $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                url: "/Users/CheckInstruction",
+                success: function (data) {
+                  
+                }
+            });
+          }
 
+        });
 
             var enjoyhint_script_steps = [
-
                 {
                     selector: '#newCompany',
                     event: 'next',
@@ -181,10 +191,8 @@
                     nextButton: {
                         text: 'Далее'
                     },
-
                     shape: 'circle',
                     radius: 220
-
                 },
                 {
                     selector: '.icon-button',
@@ -197,12 +205,10 @@
                     nextButton: {
                         text: 'Далее'
                     },
-
                     shape: 'circle',
                     radius: 80
 
-                }
-                ,
+                },
                 {
                     selector: '.orderSk',
                     event: 'next',
@@ -221,7 +227,16 @@
 
 
             enjoyhint_instance.run();
-        })
+    }
+
+
+    $('#makeInstruction').on('click', function () {
+        getInstruction();
+     });
+
+    $(document).ready(function () {
+        getInstruction();
+    })
 
 
         function sendEmail(id, pass) {

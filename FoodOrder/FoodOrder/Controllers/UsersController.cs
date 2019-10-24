@@ -60,6 +60,17 @@ namespace FoodOrder.Controllers
             Error
         }
 
+        
+        public async Task<bool> CheckInstruction()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = await db.Users.Where(c => c.Id == userId).SingleOrDefaultAsync();
+
+            user.IsCheckInstruction = true;
+
+            return true;
+        }
+
         // Get: Users/MyDetails
         [Authorize]
         public async Task<ActionResult> MyDetails(ManageMessageId? message)
@@ -307,7 +318,7 @@ namespace FoodOrder.Controllers
 
         public async Task<JsonResult> SendSpecEmail(string id, string genPass)
         {
-            var res = "Заходите на сайт foodorder.somee.com,Ваш логин на сайте такой же как и ваша почта, Ваш пароль: " + genPass;
+            var res = "Заходите на сайт foodorder.somee.com, Ваш логин на сайте такой же как и ваша почта, Ваш пароль: " + genPass;
             await UserManager.SendEmailAsync(id, "Проверка электронной почты", res);
 
             return Json(true);

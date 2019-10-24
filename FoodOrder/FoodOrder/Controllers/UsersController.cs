@@ -64,12 +64,24 @@ namespace FoodOrder.Controllers
         public async Task<bool> CheckInstruction()
         {
             var userId = User.Identity.GetUserId();
-            var user = await db.Users.Where(c => c.Id == userId).SingleOrDefaultAsync();
+            var user = await db.Users.Include(C=>C.Company).Where(c => c.Id == userId).SingleOrDefaultAsync();
 
             user.IsCheckInstruction = true;
-
+            db.Entry(user).State = EntityState.Modified;
+            await db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> IsCheckInstruction()
+        {
+
+            var userId = User.Identity.GetUserId();
+            var user = await db.Users.Include(C => C.Company).Where(c => c.Id == userId).SingleOrDefaultAsync();
+            return user.IsCheckInstruction;
+        }
+
+
+
 
         // Get: Users/MyDetails
         [Authorize]
@@ -82,6 +94,7 @@ namespace FoodOrder.Controllers
             if (await UserManager.IsInRoleAsync(userId, "admin"))
             {
                 var companies = await db.Companies.Include(c => c.Representative).ToListAsync();
+               // ViewBag.IsCheck = user.IsCheckInstruction;
                 return View("MyDetailsAdmin", companies);
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
@@ -277,7 +290,7 @@ namespace FoodOrder.Controllers
                     Telegram = cvm?.Telegram,
                     Description = cvm?.Description,
                     GeneratedPassword = cvm.GeneratedPassword,
-                    CompanyImagePath = path,
+                    CompanyImagePath = "~/Files/" + fileName,
                     FullName = cvm.FullName,
                     BIN_IIN = cvm.BIN_IIN,
                     IIK = cvm.IIK,

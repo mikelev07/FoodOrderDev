@@ -191,49 +191,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperExtensions.cs" />
-    <Compile Include="Migrations\201910190944009_new112w3s.cs" />
-    <Compile Include="Migrations\201910190944009_new112w3s.Designer.cs">
-      <DependentUpon>201910190944009_new112w3s.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910191857496_CompanyChange.cs" />
-    <Compile Include="Migrations\201910191857496_CompanyChange.Designer.cs">
-      <DependentUpon>201910191857496_CompanyChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910192003407_RequisitesChange.cs" />
-    <Compile Include="Migrations\201910192003407_RequisitesChange.Designer.cs">
-      <DependentUpon>201910192003407_RequisitesChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910200549004_AnotherOne.cs" />
-    <Compile Include="Migrations\201910200549004_AnotherOne.Designer.cs">
-      <DependentUpon>201910200549004_AnotherOne.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910200601138_AndAnotherOne.cs" />
-    <Compile Include="Migrations\201910200601138_AndAnotherOne.Designer.cs">
-      <DependentUpon>201910200601138_AndAnotherOne.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910201516277_newMigra.cs" />
-    <Compile Include="Migrations\201910201516277_newMigra.Designer.cs">
-      <DependentUpon>201910201516277_newMigra.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910211711437_DeletionOfComplexDishModel.cs" />
-    <Compile Include="Migrations\201910211711437_DeletionOfComplexDishModel.Designer.cs">
-      <DependentUpon>201910211711437_DeletionOfComplexDishModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910211746333_DishLittleChange.cs" />
-    <Compile Include="Migrations\201910211746333_DishLittleChange.Designer.cs">
-      <DependentUpon>201910211746333_DishLittleChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910221250547_DishModerChanges.cs" />
-    <Compile Include="Migrations\201910221250547_DishModerChanges.Designer.cs">
-      <DependentUpon>201910221250547_DishModerChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910231340416_CompanyModelChange.cs" />
-    <Compile Include="Migrations\201910231340416_CompanyModelChange.Designer.cs">
-      <DependentUpon>201910231340416_CompanyModelChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910240654298_addNewMigra.cs" />
-    <Compile Include="Migrations\201910240654298_addNewMigra.Designer.cs">
-      <DependentUpon>201910240654298_addNewMigra.cs</DependentUpon>
+    <Compile Include="Migrations\201910241032593_asdas12s.cs" />
+    <Compile Include="Migrations\201910241032593_asdas12s.Designer.cs">
+      <DependentUpon>201910241032593_asdas12s.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -795,38 +755,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910190944009_new112w3s.resx">
-      <DependentUpon>201910190944009_new112w3s.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910191857496_CompanyChange.resx">
-      <DependentUpon>201910191857496_CompanyChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910192003407_RequisitesChange.resx">
-      <DependentUpon>201910192003407_RequisitesChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910200549004_AnotherOne.resx">
-      <DependentUpon>201910200549004_AnotherOne.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910200601138_AndAnotherOne.resx">
-      <DependentUpon>201910200601138_AndAnotherOne.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910201516277_newMigra.resx">
-      <DependentUpon>201910201516277_newMigra.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910211711437_DeletionOfComplexDishModel.resx">
-      <DependentUpon>201910211711437_DeletionOfComplexDishModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910211746333_DishLittleChange.resx">
-      <DependentUpon>201910211746333_DishLittleChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910221250547_DishModerChanges.resx">
-      <DependentUpon>201910221250547_DishModerChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910231340416_CompanyModelChange.resx">
-      <DependentUpon>201910231340416_CompanyModelChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910240654298_addNewMigra.resx">
-      <DependentUpon>201910240654298_addNewMigra.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910241032593_asdas12s.resx">
+      <DependentUpon>201910241032593_asdas12s.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -165,8 +165,9 @@
 
     function getInstruction() {
         var enjoyhint_instance = new EnjoyHint({
-
-            onEnd:function(){
+           
+            onStart: function () {
+               
 		      $.ajax({
                 type: 'POST',
                 contentType: "application/json",
@@ -234,9 +235,20 @@
         getInstruction();
      });
 
-    $(document).ready(function () {
-        getInstruction();
-    })
+        $(document).ready(function () {
+              $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                url: "/Users/IsCheckInstruction",
+                  success: function (data) {
+                      if (data == "False") {
+                          
+                          getInstruction();
+                      }
+                }
+            });
+               
+        })
 
 
         function sendEmail(id, pass) {

@@ -114,6 +114,8 @@ namespace FoodOrder.Models
         /// <summary>Электронная почта</summary>
         public string Email { get; set; }
 
+      
+
         public Company()
         {
             //Requisites = new Requisites();

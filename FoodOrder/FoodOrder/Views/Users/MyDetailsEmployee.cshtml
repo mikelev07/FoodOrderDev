@@ -1,4 +1,5 @@
-﻿@{
+﻿@model FoodOrder.Models.UserViewModel
+@{
     Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = "Личный кабинет сотрудника";
 }
@@ -16,11 +17,12 @@
                                 Действия
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Редактировать</a>
+                                <a class="dropdown-item" href="/Users/Edit/@Model.Id">Редактировать</a>
                             </div>
                         </div>
 
                     </div>
+                    <p class="text-success">@ViewBag.StatusMessage</p>
                     <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
@@ -43,14 +45,23 @@
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <div class="text-center pt-4">
-                                                <p class="list-item-heading pt-2">Имя пользователя</p>
+                                                <p class="list-item-heading pt-2">@Model.Surname @Model.Name @Model.Patronymic</p>
                                             </div>
                                             <p class="mb-3">
                                                 Описание пользователя
                                             </p>
 
                                             <p class="text-muted text-small mb-2">Название компании</p>
-                                            <p class="mb-3">Рога и копыта</p>
+                                            <p class="mb-3">@Model.Company.Name</p>
+
+                                            <p class="text-muted text-small mb-2">Логин</p>
+                                            <p class="mb-3">@Model.UserName</p>
+
+                                            <p class="text-muted text-small mb-2">Email</p>
+                                            <p class="mb-3">@Model.Email</p>
+
+                                            <p class="text-muted text-small mb-2">Телефон</p>
+                                            <p class="mb-3">@Model.PhoneNumber</p>
 
 
                                             <p class="text-muted text-small mb-2">Контакты</p>

@@ -736,6 +736,7 @@
     <Content Include="Views\Dishes\Details.cshtml" />
     <Content Include="Views\Dishes\Edit.cshtml" />
     <Content Include="Views\Dishes\Index.cshtml" />
+    <Content Include="Views\Users\EmployeeProfileCreation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

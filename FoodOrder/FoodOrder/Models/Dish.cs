@@ -36,6 +36,7 @@ namespace FoodOrder.Models
     public class Pack
     {
         public string Id { get; set; }
+        public DateTime DateOfCreation { get; set; }
         public Dish MainDish { get; set; }
         public Dish Second { get; set; }
         public Dish Salad { get; set; }
@@ -48,6 +49,7 @@ namespace FoodOrder.Models
         public string Id { get; set; }
 
         public string Name { get; set; }
+        public DateTime DateOfCreation { get; set; }
 
         public ICollection<Dish> Dishes { get; set; }
 
@@ -63,9 +65,9 @@ namespace FoodOrder.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public DateTime DateOfCreation { get; set; }
         public DishCategory DishCategory { get; set; }
         public string DishCategoryId { get; set; }
-        public TypeOfDish TypeOfDish { get; set; }
         public bool HasGarnish { get; set; }
         public string GarnishId { get; set; }
         public Dish Garnish { get; set; }
@@ -76,22 +78,6 @@ namespace FoodOrder.Models
         public string ImagePath { get; set; }
         public double Price { get; set; }
 
-    }
-
-    public enum TypeOfDish
-    {
-        [Display(Name = "Первое блюдо")] 
-        First,
-        [Display(Name = "Второе блюдо")]
-        Second,
-        [Display(Name = "Гарнир")]
-        Garnish,
-        [Display(Name = "Салат")]
-        Salad,
-        [Display(Name = "Напитки")]
-        Drink,
-        [Display(Name = "Закуски")]
-        Snack
     }
 
     public enum OrderStatus

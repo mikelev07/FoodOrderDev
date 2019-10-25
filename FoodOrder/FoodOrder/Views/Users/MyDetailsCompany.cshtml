@@ -17,7 +17,7 @@
                     <h1>Название компании</h1>
 
                     <div class="text-zero top-right-button-container">
-                        <button type="button"
+                        <button id="butAct" type="button"
                                 class="btn btn-lg btn-outline-primary dropdown-toggle dropdown-toggle-split top-right-button top-right-button-single"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Действия
@@ -38,7 +38,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " id="second-tab" data-toggle="tab" href="#second" role="tab"
+                        <a id="sotr" class="nav-link " id="second-tab" data-toggle="tab" href="#second" role="tab"
                            aria-controls="second" aria-selected="false">СОТРУДНИКИ</a>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@
                                     <img src="~/Content/img/pr1920.png" alt="Detail Picture" class="card-img-top" />
 
                                     <div class="card-body">
-                                        <h6 class="mb-3 listing-heading ellipsis">
+                                        <h6 id="nameComp" class="mb-3 listing-heading ellipsis">
                                             <strong>Компания @company.Name</strong>
                                         </h6>
 
@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <a href="">
-                                                    <h6 class="mb-3 listing-heading ellipsis">
+                                                    <h6 id="predName" class="mb-3 listing-heading ellipsis">
                                                         <strong>Представитель компании</strong>
                                                     </h6>
                                                 </a>
@@ -160,6 +160,20 @@
                     <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
 
                         <div class="row">
+
+                            <div class="col-xl-3 col-lg-6 mb-4">
+                                <div class="card">
+
+                                    <a id="newCompany" href="/Users/Create">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Добавить сотрудника</h6>
+                                            <i style="font-size: 25px;" class=iconsminds-add></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+
                             <div class="col-12 list" data-check-all="checkAll">
 
                                 @foreach (var employee in Model.Where(e => e.Id != representativeId))
@@ -205,83 +219,9 @@
                                 }
 
 
-                                <nav class="mt-4 mb-3">
-                                    <ul class="pagination justify-content-center mb-0">
-                                        <li class="page-item ">
-                                            <a class="page-link first" href="#">
-                                                <i class="simple-icon-control-start"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item ">
-                                            <a class="page-link prev" href="#">
-                                                <i class="simple-icon-arrow-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item active">
-                                            <a class="page-link" href="#">1</a>
-                                        </li>
-                                        <li class="page-item ">
-                                            <a class="page-link" href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">3</a>
-                                        </li>
-                                        <li class="page-item ">
-                                            <a class="page-link next" href="#" aria-label="Next">
-                                                <i class="simple-icon-arrow-right"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item ">
-                                            <a class="page-link last" href="#">
-                                                <i class="simple-icon-control-end"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-6 mb-4">
-                            <div class="card">
-
-                                <a id="newCompany" href="/Users/Create">
-                                    <div class="card-body d-flex justify-content-between align-items-center">
-                                        <h6 class="mb-0">Добавить сотрудника</h6>
-                                        <i style="font-size: 25px;" class=iconsminds-add></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card d-flex flex-row mb-4">
-                                    <a class="d-flex" href="#">
-                                        <img alt="Профиль" src="~/Content/img/profile-pic-p.png"
-                                             class="img-thumbnail border-0 rounded-circle m-4 list-thumbnail align-self-center">
-                                    </a>
-                                    <div class=" d-flex flex-grow-1 min-width-zero">
-                                        <div class="card-body pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
-                                            <div class="min-width-zero">
-                                                <a href="#">
-                                                    <p class="list-item-heading mb-1 truncate">@company.Representative.UserName</p>
-                                                </a>
-                                                <p class="mb-2 text-muted text-small">Представитель компании</p>
-                                                <button type="button"
-                                                        class="btn btn-xs btn-outline-primary ">
-                                                    К профилю
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
-                        </div>
                     </div>
                 </div>
 
@@ -290,3 +230,113 @@
     </div>
 
 </main>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+
+    function getInstruction() {
+        var enjoyhint_instance = new EnjoyHint({
+
+            onStart: function () {
+
+		      $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                url: "/Users/CheckInstruction",
+                success: function (data) {
+
+                }
+            });
+          }
+
+        });
+
+            var enjoyhint_script_steps = [
+                {
+                    selector: '#nameComp',
+                    event: 'next',
+                    showNext: true,
+                    description: 'Здесь отображается краткая информация по вашему профилю!',
+                    skipButton: {
+                        text: 'Все знаю'
+                    },
+                    nextButton: {
+                        text: 'Далее'
+                    },
+                    shape: 'circle',
+                    radius: 220
+                },
+                  {
+                    selector: '#butAct',
+                    event: 'next',
+                    showNext: true,
+                    description: 'Вы можете редактировать информацию по профилям!',
+                    skipButton: {
+                        text: 'Все знаю'
+                    },
+                    nextButton: {
+                        text: 'Далее'
+                    },
+                    shape: 'circle',
+                    radius: 220
+                },
+                   {
+                    selector: '#sotr',
+                    event: 'next',
+                    showNext: true,
+                    description: 'Переходите во вкладку сотрудники и добавляйте их в таблицу!',
+                    skipButton: {
+                        text: 'Все знаю'
+                    },
+                    nextButton: {
+                        text: 'Далее'
+                    },
+                    shape: 'circle',
+                    radius: 220
+                },
+                {
+                    selector: '#predName',
+                    event: 'next',
+                    description: 'Это профиль вашего представителя!',
+                    skipButton: {
+                        text: 'Понятно'
+                    },
+                    shape: 'circle',
+                    radius: 70
+
+                }
+            ];
+
+
+            enjoyhint_instance.set(enjoyhint_script_steps);
+
+
+            enjoyhint_instance.run();
+    }
+
+
+    $('#makeInstruction').on('click', function () {
+        getInstruction();
+     });
+
+        $(document).ready(function () {
+              $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                url: "/Users/IsCheckInstruction",
+                  success: function (data) {
+                      if (data == "False") {
+                          getInstruction();
+                      }
+                }
+            });
+
+        })
+
+
+    </script>
+}

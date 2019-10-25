@@ -76,30 +76,39 @@ namespace FoodOrder.Controllers
             }
             var user = await UserManager.FindByEmailAsync(model.Email);
 
-            if (user.EmailConfirmed == false)
+            if (user == null)
             {
-                user.EmailConfirmed = true;
-                await UserManager.UpdateAsync(user);
+                ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
             }
-
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-
-            switch (result)
+            else
             {
-                case SignInStatus.Success:
-                    if (returnUrl == null)
-                        return RedirectToAction("MyDetails", "Users");
-                    else 
-                        return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
-                    return View(model);
+
+                if (user.EmailConfirmed == false)
+                {
+                    user.EmailConfirmed = true;
+                    await UserManager.UpdateAsync(user);
+                }
+
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        if (returnUrl == null)
+                            return RedirectToAction("MyDetails", "Users");
+                        else
+                            return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Неудачная попытка входа.");
+                        return View(model);
+                }
             }
+            return View(model);
         }
 
         //
@@ -392,6 +401,7 @@ namespace FoodOrder.Controllers
                 }
                 AddErrors(result);
             }
+
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);

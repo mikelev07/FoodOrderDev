@@ -11,108 +11,107 @@ using FoodOrder.Models;
 
 namespace FoodOrder.Controllers
 {
-    public class MenuController : Controller
+    public class DishCategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Menu
+        // GET: DishCategories
         public async Task<ActionResult> Index()
         {
-            return View(await db.Menus.ToListAsync());
+            return View(await db.DishCategories.ToListAsync());
         }
 
-        // GET: Menu/Details/5
+        // GET: DishCategories/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = await db.Menus.FindAsync(id);
-            if (menu == null)
+            DishCategory dishCategory = await db.DishCategories.FindAsync(id);
+            if (dishCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(menu);
+            return View(dishCategory);
         }
 
-        // GET: Menu/Create
+        // GET: DishCategories/Create
         public ActionResult Create()
         {
-            ViewBag.Dishes = db.DishCategories.Include(c => c.Dishes).ToList();
             return View();
         }
 
-        // POST: Menu/Create
+        // POST: DishCategories/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateOfCreation")] Menu menu)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] DishCategory dishCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Menus.Add(menu);
+                db.DishCategories.Add(dishCategory);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(menu);
+            return View(dishCategory);
         }
 
-        // GET: Menu/Edit/5
+        // GET: DishCategories/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = await db.Menus.FindAsync(id);
-            if (menu == null)
+            DishCategory dishCategory = await db.DishCategories.FindAsync(id);
+            if (dishCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(menu);
+            return View(dishCategory);
         }
 
-        // POST: Menu/Edit/5
+        // POST: DishCategories/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,DateOfCreation")] Menu menu)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] DishCategory dishCategory)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(menu).State = EntityState.Modified;
+                db.Entry(dishCategory).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(menu);
+            return View(dishCategory);
         }
 
-        // GET: Menu/Delete/5
+        // GET: DishCategories/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = await db.Menus.FindAsync(id);
-            if (menu == null)
+            DishCategory dishCategory = await db.DishCategories.FindAsync(id);
+            if (dishCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(menu);
+            return View(dishCategory);
         }
 
-        // POST: Menu/Delete/5
+        // POST: DishCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            Menu menu = await db.Menus.FindAsync(id);
-            db.Menus.Remove(menu);
+            DishCategory dishCategory = await db.DishCategories.FindAsync(id);
+            db.DishCategories.Remove(dishCategory);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

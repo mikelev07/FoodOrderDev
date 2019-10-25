@@ -227,11 +227,12 @@ namespace FoodOrder.Controllers
 
 
         //для перехода сотрудника по ссылке, которую он получает от представителя, на форму создания своего профиля
-        public ActionResult EmployeeProfileCreation(string userId)
+        public ActionResult EmployeeProfileCreation(string userId, string name)
         {
             var nemv = new NewEmployeeViewModel()
             {
-                Id = userId
+                Id = userId,
+                Name = name
             };
 
             return View(nemv);
@@ -299,6 +300,11 @@ namespace FoodOrder.Controllers
                 var result = await UserManager.CreateAsync(user, newRandomPassword);
                 if (result.Succeeded)
                 {
+                    var callbackUrl = Url.Action("EmployeeProfileCreation", "Users", new { userId = user.Id, name=user.Name },
+                      protocol: Request.Url.Scheme);
+                    var res = "Представитель компании создал ваш профиль на сайте foodorder.somee.com - для завершения регистрации перейдите по ссылке: <a href=\""
+                                                       + callbackUrl + "\">завершить регистрацию</a>";
+                    await UserManager.SendEmailAsync(user.Id, "Заполнить профиль", res);
                     await UserManager.AddToRoleAsync(user.Id, "employee");
                     return RedirectToAction("MyDetails", "Users");
                 }

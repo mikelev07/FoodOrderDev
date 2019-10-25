@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DishCategoriesController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -195,6 +196,14 @@
     <Compile Include="Migrations\201910241032593_asdas12s.cs" />
     <Compile Include="Migrations\201910241032593_asdas12s.Designer.cs">
       <DependentUpon>201910241032593_asdas12s.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910251149400_asd.cs" />
+    <Compile Include="Migrations\201910251149400_asd.Designer.cs">
+      <DependentUpon>201910251149400_asd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910251151175_asd1.cs" />
+    <Compile Include="Migrations\201910251151175_asd1.Designer.cs">
+      <DependentUpon>201910251151175_asd1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -739,6 +748,11 @@
     <Content Include="Views\Dishes\Index.cshtml" />
     <Content Include="Views\Users\EmployeeProfileCreation.cshtml" />
     <Content Include="Views\Menu\Create.cshtml" />
+    <Content Include="Views\DishCategories\Create.cshtml" />
+    <Content Include="Views\DishCategories\Delete.cshtml" />
+    <Content Include="Views\DishCategories\Details.cshtml" />
+    <Content Include="Views\DishCategories\Edit.cshtml" />
+    <Content Include="Views\DishCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -760,6 +774,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910241032593_asdas12s.resx">
       <DependentUpon>201910241032593_asdas12s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910251149400_asd.resx">
+      <DependentUpon>201910251149400_asd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910251151175_asd1.resx">
+      <DependentUpon>201910251151175_asd1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

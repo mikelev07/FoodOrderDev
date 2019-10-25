@@ -42,10 +42,29 @@ namespace FoodOrder.Models
         public Dish Drink { get; set; }
     }
 
+
+    public class DishCategory
+    {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
+        public ICollection<Dish> Dishes { get; set; }
+
+        public DishCategory()
+        {
+            Dishes = new List<Dish>();
+        }
+
+    }
+
+
     public class Dish
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public DishCategory DishCategory { get; set; }
+        public string DishCategoryId { get; set; }
         public TypeOfDish TypeOfDish { get; set; }
         public bool HasGarnish { get; set; }
         public string GarnishId { get; set; }

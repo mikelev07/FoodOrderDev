@@ -194,6 +194,7 @@ namespace FoodOrder.Models
             return new ApplicationDbContext();
         }
 
+        public DbSet<DishCategory> DishCategories { get; set; }
         public DbSet<RoleViewModel> IdentityRoles { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Dish> Dishes { get; set; }

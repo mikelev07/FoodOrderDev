@@ -47,7 +47,7 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,TypeOfDish,NutritionalValue,ImagePath,HasGarnish")] Dish dish)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DishCategory,NutritionalValue,ImagePath,HasGarnish")] Dish dish)
         {
             if (ModelState.IsValid)
             {
@@ -59,17 +59,18 @@ namespace FoodOrder.Controllers
             return View(dish);
         }
 
-        public JsonResult CreateJson(string name, int selectedType, bool hasGarnish, string garnishId,
+        public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, string garnishId,
             double proteins, double fats, double carbonhydrates, double kilocalories)
         {
-            var type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish)selectedType);
             var dateOfCreation = DateTime.Now;
+            var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
+            var categoryName = category.Name;
 
             Dish dish = new Dish()
             {
                 Id = Guid.NewGuid().ToString("N"),
                 Name = name,
-                TypeOfDish = (TypeOfDish)selectedType,
+                DishCategoryId = selectedType,
                 HasGarnish = hasGarnish,
                 Proteins = proteins,
                 Fats = fats,
@@ -79,7 +80,7 @@ namespace FoodOrder.Controllers
 
             if (hasGarnish)
             {
-                var currentGarnish = db.Dishes.Where(d => d.Id == garnishId).FirstOrDefault();
+                var currentGarnish = await db.Dishes.Where(d => d.Id == garnishId).FirstOrDefaultAsync();
                 dish.GarnishId = currentGarnish.Id;
                 db.Dishes.Add(dish);
                 db.SaveChanges();
@@ -87,7 +88,7 @@ namespace FoodOrder.Controllers
                 return Json(new {
                     id = dish.Id,
                     name,
-                    type,
+                    type=categoryName,
                     hasGarnish,
                     garnish = currentGarnish.Name,
                     garnishId = currentGarnish.Id,
@@ -99,12 +100,12 @@ namespace FoodOrder.Controllers
             }
 
             db.Dishes.Add(dish);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return Json(new {
                 id = dish.Id,
                 name,
-                type,
+                type = categoryName,
                 hasGarnish,
                 proteins,
                 fats,
@@ -113,16 +114,6 @@ namespace FoodOrder.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult GetDishes()
-        //{
-        //    var dishList = db.Dishes.AsEnumerable().Select(d => new
-        //    {
-        //        name = d.Name,
-        //        type = Helpers.HelperExtensions.GetDisplayName((TypeOfDish) d.TypeOfDish),
-        //        hasGarnish = d.HasGarnish
-        //    }).ToList();
-        //    return Json(dishList, JsonRequestBehavior.AllowGet);
-        //}
 
         // GET: Dishes/Edit/5
         public async Task<ActionResult> Edit(string id)

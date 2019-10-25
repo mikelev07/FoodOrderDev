@@ -1,5 +1,4 @@
-﻿@using FoodOrder.Helpers;
-@using FoodOrder.Models;
+﻿@using FoodOrder.Models;
 @{
     Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = " ";
@@ -173,7 +172,7 @@
                                                             <a href="">
                                                                 <p class="list-item-heading mb-4 pt-1"><strong>@dish.Name</strong></p>
                                                             </a>
-                                                            <p class="list-item-heading mb-4 pt-1">@HelperExtensions.GetDisplayName(dish.TypeOfDish)</p>
+                                                            <p class="list-item-heading mb-4 pt-1">@dish.DishCategory.Name</p>
                                                             @if (dish.HasGarnish)
                                                             {
                                                                 <p class="list-item-heading mb-4 pt-1">C гарниром : @dish.Garnish.Name</p>
@@ -698,9 +697,9 @@
                                             <label>Категория блюда</label>
                                             <select id="dish-creation-select-type" class="form-control select2-single">
                                                 <option value="" label="&nbsp;">&nbsp;</option>
-                                                @foreach (TypeOfDish typeOfDish in Enum.GetValues(typeof(TypeOfDish)))
+                                                @foreach (var category in (List<FoodOrder.Models.DishCategory>)ViewData["Categories"])
                                                 {
-                                                    <option value="@((int)typeOfDish)">@HelperExtensions.GetDisplayName(typeOfDish)</option>
+                                                    <option value="@category.Id">@category.Name</option>
                                                 }
                                             </select>
                                         </div>
@@ -835,14 +834,14 @@
 
         $("#create-new-dish").on('click', function () {
             var dishName = $("#dish-creation-name").val();
-            var selectedTypeOfDish = $("#dish-creation-select-type").children("option:selected").val();
+            var selectedCategory = $("#dish-creation-select-type").children("option:selected").val();
             var hasGarnish = $("#dish-creation-garnish-checkbox").is(":checked");
             var garnishId = $("#dish-creation-select-garnish").children("option:selected").val();
             var proteins = $("#dish-creation-proteins").val();
             var fats = $("#dish-creation-fats").val();
             var carbonhydrates = $("#dish-creation-carbonhydrates").val();
             var kilocalories = $("#dish-creation-kilocalories").val();
-            if (dishName && selectedTypeOfDish) {
+            if (dishName && selectedCategory) {
                 $.ajax({
                     type: "GET",
                     url: '/Dishes/CreateJson',
@@ -850,7 +849,7 @@
                     dataType: "json",
                     data: {
                         "name": dishName,
-                        "selectedType": selectedTypeOfDish,
+                        "selectedType": selectedCategory,
                         "hasGarnish": hasGarnish,
                         "garnishId": garnishId,
                         "proteins": proteins,

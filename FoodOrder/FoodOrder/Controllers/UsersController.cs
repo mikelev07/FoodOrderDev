@@ -363,7 +363,7 @@ namespace FoodOrder.Controllers
                 {
                     Email = cvm.RepresentativeEmail,
                     UserName = cvm.RepresentativeEmail,
-                    CompanyId = cvm.Id,
+                    //CompanyId = cvm.Id,
                     RegistrationDate = dateTimeNow
                 };
                 //нужно ли будет закидывать в представителя CompanyId??
@@ -372,6 +372,7 @@ namespace FoodOrder.Controllers
                 {
                     await UserManager.AddToRoleAsync(newRepresentative.Id, "representative");
                     company.RepresentativeId = newRepresentative.Id;
+                    newRepresentative.CompanyId = company.Id;
                     db.Companies.Add(company);
                     await db.SaveChangesAsync();
 

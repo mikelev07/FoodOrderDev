@@ -88,7 +88,7 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> MyDetails(ManageMessageId? message)
         {
             var userId = User.Identity.GetUserId();
-            var user = db.Users.Where(c => c.Id == userId).SingleOrDefault();
+            var user = db.Users.Include(u=>u.Company).Where(c => c.Id == userId).SingleOrDefault();
 
 
             if (await UserManager.IsInRoleAsync(userId, "admin"))
@@ -133,7 +133,23 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
-                return View("MyDetailsEmployee");
+                ViewBag.StatusMessage =
+                       message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
+                       : "";
+
+                var uvm = new UserViewModel
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Patronymic = user.Patronymic,
+                    Age = user.Age,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Company = user.Company
+                };
+                return View("MyDetailsEmployee", uvm);
             }
 
             return RedirectToAction("Index", "Home");
@@ -207,6 +223,43 @@ namespace FoodOrder.Controllers
         public ActionResult Statistic()
         {
             return View();
+        }
+
+
+        //для перехода сотрудника по ссылке, которую он получает от представителя, на форму создания своего профиля
+        public ActionResult EmployeeProfileCreation(string userId)
+        {
+            var nemv = new NewEmployeeViewModel()
+            {
+                Id = userId
+            };
+
+            return View(nemv);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EmployeeProfileCreation(NewEmployeeViewModel nevm)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = await db.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+
+                user.Name = nevm.Name;
+                user.Surname = nevm.Surname;
+                user.Patronymic = nevm.Patronymic;
+                user.Age = nevm.Age;
+                user.UserName = nevm.UserName;
+                user.PhoneNumber = nevm.PhoneNumber;
+
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), nevm.OldPassword, nevm.NewPassword);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("MyDetails", "Users", new { Message = ManageMessageId.ChangePasswordSuccess });
+                }
+            }
+
+            return View(nevm);
         }
 
         // GET: Users/Create

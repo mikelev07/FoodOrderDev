@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity.Validation;
 using System.IO;
 using static FoodOrder.Controllers.ManageController;
+using System.Text.RegularExpressions;
 
 namespace FoodOrder.Controllers
 {
@@ -21,14 +22,27 @@ namespace FoodOrder.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
+        private ApplicationSignInManager _signInManager;
 
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
         public UsersController()
         {
 
         }
-        public UsersController(ApplicationUserManager userManager)
+        public UsersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
+            SignInManager = signInManager;
         }
 
         public ApplicationUserManager UserManager
@@ -227,12 +241,13 @@ namespace FoodOrder.Controllers
 
 
         //для перехода сотрудника по ссылке, которую он получает от представителя, на форму создания своего профиля
-        public ActionResult EmployeeProfileCreation(string userId, string name)
+        public ActionResult EmployeeProfileCreation(string userId, string name, string oldpass)
         {
             var nemv = new NewEmployeeViewModel()
             {
                 Id = userId,
-                Name = name
+                Name = name,
+                OldPassword = oldpass
             };
 
             return View(nemv);
@@ -243,7 +258,7 @@ namespace FoodOrder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = User.Identity.GetUserId();
+                var userId = nevm.Id;
                 var user = await db.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
 
                 user.Name = nevm.Name;
@@ -253,10 +268,15 @@ namespace FoodOrder.Controllers
                 user.UserName = nevm.UserName;
                 user.PhoneNumber = nevm.PhoneNumber;
 
-                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), nevm.OldPassword, nevm.NewPassword);
+                var result = await UserManager.ChangePasswordAsync(user.Id, nevm.OldPassword, nevm.NewPassword);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("MyDetails", "Users", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    var userSign = await UserManager.FindByIdAsync(user.Id);
+                    if (user != null)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
+                    return RedirectToAction("MyDetails", "Users");
                 }
             }
 
@@ -300,7 +320,7 @@ namespace FoodOrder.Controllers
                 var result = await UserManager.CreateAsync(user, newRandomPassword);
                 if (result.Succeeded)
                 {
-                    var callbackUrl = Url.Action("EmployeeProfileCreation", "Users", new { userId = user.Id, name=user.Name },
+                    var callbackUrl = Url.Action("EmployeeProfileCreation", "Users", new { userId = user.Id, name=user.Name, oldpass = newRandomPassword },
                       protocol: Request.Url.Scheme);
                     var res = "Представитель компании создал ваш профиль на сайте foodorder.somee.com - для завершения регистрации перейдите по ссылке: <a href=\""
                                                        + callbackUrl + "\">завершить регистрацию</a>";
@@ -620,7 +640,8 @@ namespace FoodOrder.Controllers
 
         public string CreateRandomPassword()
         {
-            return Membership.GeneratePassword(6, 2);
+            string a = Membership.GeneratePassword(6, 0);
+            return Regex.Replace(a, @"[^a-zA-Z0-9]", m => "9");
         }
 
         protected override void Dispose(bool disposing)

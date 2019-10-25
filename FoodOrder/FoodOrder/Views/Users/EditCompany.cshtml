@@ -31,7 +31,7 @@
                         {
                             @Html.AntiForgeryToken()
 
-                            @Html.HiddenFor(m => m.Id)
+                            @Html.HiddenFor(m => m.Id, new { name = Model.Id, id = "Id"})
 
                             <form class="needs-validation tooltip-label-right" novalidate>
                                 <div class="form-group position-relative error-l-50">

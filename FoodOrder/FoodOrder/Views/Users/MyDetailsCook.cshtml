@@ -731,14 +731,14 @@
                 contentType: "application/json",
                 url: "/Users/IsCheckInstruction",
                   success: function (data) {
-                       
+                      if (data == "False") {
                           getInstruction();
+                      }
                       
                 }
             });
                
         })
-
 
 
         $("#create-new-dish").on('click', function () {

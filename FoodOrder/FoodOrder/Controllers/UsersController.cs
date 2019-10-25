@@ -322,7 +322,6 @@ namespace FoodOrder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateCompany(CompanyViewModel cvm)
         {
-
             string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
             string path = Server.MapPath("~/Files/" + fileName);
 
@@ -366,15 +365,22 @@ namespace FoodOrder.Controllers
                     //CompanyId = cvm.Id,
                     RegistrationDate = dateTimeNow
                 };
+
                 //нужно ли будет закидывать в представителя CompanyId??
                 var result = await UserManager.CreateAsync(newRepresentative, newRandomPassword);
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(newRepresentative.Id, "representative");
                     company.RepresentativeId = newRepresentative.Id;
-                    newRepresentative.CompanyId = company.Id;
+                    
                     db.Companies.Add(company);
+
+                    var user = await db.Users.Where(u => u.Id == newRepresentative.Id).FirstOrDefaultAsync();
+                    user.CompanyId = company.Id;
+
                     await db.SaveChangesAsync();
+
+
 
                     return RedirectToAction("MyDetails", "Users");
                 }

@@ -59,7 +59,7 @@
                                 @foreach (var i in Model.DishCategories)
                                 {
 
-                                    <div class="border" data-toggle="collapse" data-target="#collapseOne-@i.Id"
+                                    <div class="border" data-toggle="collapse1" data-target="#collapseOne-@i.Id"
                                          aria-expanded="true" aria-controls="collapseOne">
                                         <button class="btn btn-link">
                                             @i.Name
@@ -70,55 +70,55 @@
                                                 @foreach (var a in i.Dishes)
                                                 {
 
-                                                   
-                                                <div id="dish-card-" class="col-xl-4 col-lg-3 col-4 col-sm-6 mb-4">
-                                                    <div class="p-4">
-                                                        <div class="card">
-                                                            <div class="position-relative">
-                                                                <a href="">
-                                                                    <img class="card-img-top" src="~/Content/img/1.jpg"
-                                                                         alt="Фото блюда">
-                                                                </a>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="row">
 
-                                                                    <div class="col-10">
-                                                                        <a href="">
-                                                                            <p class="list-item-heading mb-4 pt-1"><strong>@a.Name</strong></p>
-                                                                        </a>
+                                                    <div id="dish-card-" class="col-xl-4 col-lg-3 col-4 col-sm-6 mb-4">
+                                                        <div class="p-4">
+                                                            <div class="card">
+                                                                <div class="position-relative">
+                                                                    <a href="">
+                                                                        <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                             alt="Фото блюда">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row">
 
-                                                                        <p class="list-item-heading mb-4 pt-1">Без гарнира</p>
+                                                                        <div class="col-10">
+                                                                            <a href="">
+                                                                                <p class="list-item-heading mb-4 pt-1"><strong>@a.Name</strong></p>
+                                                                            </a>
 
-                                                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-@a.Id-n"
-                                                                           role="button" aria-expanded="true" aria-controls="collapseExample-@a.Id-n">
-                                                                            Кратко
-                                                                        </a>
-                                                                        <div class="collapse" id="collapseExample-@a.Id-n">
-                                                                            <div class="p-4 border mt-4">
-                                                                                <p class="mb-0">
-                                                                                <p class="list-item-heading mb-4 pt-1">
-                                                                                    Пищевая ценность (на 100г):<br />
-                                                                                    Белки - 100 г<br />
-                                                                                    Жиры - 200 г<br />
-                                                                                    Углеводы - 300 г<br />
-                                                                                    400 ккал
-                                                                                </p>
-                                                                                </p>
+                                                                            <p class="list-item-heading mb-4 pt-1">Без гарнира</p>
+
+                                                                            <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-@a.Id-n"
+                                                                               role="button" aria-expanded="true" aria-controls="collapseExample-@a.Id-n">
+                                                                                Кратко
+                                                                            </a>
+                                                                            <div class="collapse" id="collapseExample-@a.Id-n">
+                                                                                <div class="p-4 border mt-4">
+                                                                                    <p class="mb-0">
+                                                                                    <p class="list-item-heading mb-4 pt-1">
+                                                                                        Пищевая ценность (на 100г):<br />
+                                                                                        Белки - 100 г<br />
+                                                                                        Жиры - 200 г<br />
+                                                                                        Углеводы - 300 г<br />
+                                                                                        400 ккал
+                                                                                    </p>
+                                                                                    </p>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
                                                 }
                                             </div>
                                         </div>
-                                            </div>
+                                    </div>
                                 }
 
 
@@ -139,6 +139,383 @@
             }
 
 
+            <br />
+
+            <h2 class="mb-4">Раздел блюд</h2>
+
+            <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
+                <li class="nav-item">
+                    <a id="adad" class="nav-link active" id="first-tab" data-toggle="tab" href="#first" role="tab"
+                       aria-controls="first" aria-selected="true">БЛЮДА</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " id="second-tab" data-toggle="tab" href="#second" role="tab"
+                       aria-controls="second" aria-selected="false">НАБОРЫ БЛЮД (ПАКИ)</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="row list disable-text-selection" data-check-all="checkAll" id="dish-cards">
+                                @foreach (var dish in (List<Dish>)ViewData["Dishes"])
+                                {
+                                    <div id="dish-card-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                        <div class="card">
+                                            <div class="position-relative">
+                                                <div class="position-absolute card-top-buttons">
+                                                    <button class="btn btn-outline-white icon-button ">
+                                                        <i class="simple-icon-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-white icon-button" onclick="DeleteDish('@dish.Id')" title="Удалить">
+                                                        <i class="simple-icon-trash"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="">
+                                                    <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                         alt="Фото блюда">
+
+                                                </a>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+
+                                                    <div class="col-10">
+                                                        <a href="">
+                                                            <p class="list-item-heading mb-4 pt-1"><strong>@dish.Name</strong></p>
+                                                        </a>
+                                                        <p class="list-item-heading mb-4 pt-1">@dish.DishCategory.Name</p>
+                                                        @if (dish.HasGarnish)
+                                                        {
+                                                            <p class="list-item-heading mb-4 pt-1">C гарниром : @dish.Garnish.Name</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="list-item-heading mb-4 pt-1">Без гарнира</p>
+                                                        }
+                                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
+                                                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                            Кратко
+                                                        </a>
+                                                        <div class="collapse" id="collapseExample">
+                                                            <div class="p-4 border mt-4">
+                                                                <p class="mb-0">
+                                                                <p class="list-item-heading mb-4 pt-1">
+                                                                    Пищевая ценность (на 100г):<br />
+                                                                    Белки - @dish.Proteins г<br />
+                                                                    Жиры - @dish.Fats г<br />
+                                                                    Углеводы - @dish.Carbonhydrates г<br />
+                                                                    @dish.Kilocalories ккал
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <footer style="margin-top:10px">
+                                                            <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                        </footer>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
+                    <div class="row">
+                        <div class="select-from-library-container mb-1">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-xl-4">
+                                    <div class="select-from-library-button sfl-multiple mb-5"
+                                         data-library-id="#libraryModal" data-count="-1">
+                                        <div class="card d-flex flex-row mb-4 media-thumb-container justify-content-center align-items-center">
+                                            Сформировать пак из блюд...
+                                        </div>
+                                    </div>
+
+                                    <div class="selected-library-item sfl-selected-item mb-5">
+                                        <div class="card d-flex flex-row media-thumb-container">
+                                            <a class="d-flex align-self-center">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                     alt="uploaded image"
+                                                     class="list-media-thumbnail responsive border-0 sfl-selected-item-image" />
+                                            </a>
+                                            <div class="d-flex flex-grow-1 min-width-zero">
+                                                <div class="card-body align-self-center d-flex flex-column justify-content-between min-width-zero align-items-lg-center">
+                                                    <a class="w-100">
+                                                        <p class="list-item-heading mb-1 truncate sfl-selected-item-label">
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                                <div class="pl-1 align-self-center">
+                                                    <a href="#"
+                                                       class="btn-link delete-library-item sfl-delete-item">
+                                                        <i class="simple-icon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 list" data-check-all="checkAll">
+                                    <div class="row list disable-text-selection" data-check-all="checkAll">
+                                        <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                            <div class="card">
+                                                <div class="position-relative">
+                                                    <a href="Pages.Product.Detail.html">
+                                                        <img class="card-img-top" src="img/.jpg"
+                                                             alt="Фото блюда">
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <div class="custom-control custom-checkbox pl-1">
+                                                                <label class="custom-control custom-checkbox  mb-0">
+                                                                    <input type="checkbox" class="custom-control-input">
+                                                                    <span class="custom-control-label">&nbsp;</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <a href="Pages.Product.Detail.html">
+                                                                <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
+                                                            </a>
+                                                            <footer>
+                                                                <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                            </footer>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                            <div class="card">
+                                                <div class="position-relative">
+                                                    <a href="">
+                                                        <img class="card-img-top" src="img/.jpg"
+                                                             alt="Фото блюда">
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <div class="custom-control custom-checkbox pl-1">
+                                                                <label class="custom-control custom-checkbox  mb-0">
+                                                                    <input type="checkbox" class="custom-control-input">
+                                                                    <span class="custom-control-label">&nbsp;</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <a href="Pages.Product.Detail.html">
+                                                                <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
+                                                            </a>
+                                                            <footer>
+                                                                <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                            </footer>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                            <div class="card">
+                                                <div class="position-relative">
+                                                    <a href="Pages.Product.Detail.html">
+                                                        <img class="card-img-top" src="img/.jpg"
+                                                             alt="Фото блюда">
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <div class="custom-control custom-checkbox pl-1">
+                                                                <label class="custom-control custom-checkbox  mb-0">
+                                                                    <input type="checkbox" class="custom-control-input">
+                                                                    <span class="custom-control-label">&nbsp;</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <a href="Pages.Product.Detail.html">
+                                                                <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
+                                                            </a>
+                                                            <footer>
+                                                                <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                            </footer>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-6 mb-4">
+                                <div class="card">
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="collapse" id="collapseExample1">
+                        <div class="p-4 border mt-4">
+                            <div class="row list disable-text-selection" data-check-all="checkAll">
+                                <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                    <div class="card">
+                                        <div class="position-relative">
+                                            <a href="Pages.Product.Detail.html">
+                                                <img class="card-img-top" src="img/.jpg"
+                                                     alt="Фото блюда">
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="custom-control custom-checkbox pl-1">
+                                                        <label class="custom-control custom-checkbox  mb-0">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <a href="Pages.Product.Detail.html">
+                                                        <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
+                                                    </a>
+                                                    <footer>
+                                                        <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                    <div class="card">
+                                        <div class="position-relative">
+                                            <a href="Pages.Product.Detail.html">
+                                                <img class="card-img-top" src="img/.jpg"
+                                                     alt="Фото блюда">
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="custom-control custom-checkbox pl-1">
+                                                        <label class="custom-control custom-checkbox  mb-0">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <a href="Pages.Product.Detail.html">
+                                                        <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
+                                                    </a>
+                                                    <footer>
+                                                        <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                    <div class="card">
+                                        <div class="position-relative">
+                                            <a href="Pages.Product.Detail.html">
+                                                <img class="card-img-top" src="img/.jpg"
+                                                     alt="Фото блюда">
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="custom-control custom-checkbox pl-1">
+                                                        <label class="custom-control custom-checkbox  mb-0">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <a href="Pages.Product.Detail.html">
+                                                        <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
+                                                    </a>
+                                                    <footer>
+                                                        <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                    <div class="card">
+                                        <div class="position-relative">
+                                            <a href="Pages.Product.Detail.html">
+                                                <img class="card-img-top" src="img/.jpg"
+                                                     alt="Фото блюда">
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <div class="custom-control custom-checkbox pl-1">
+                                                        <label class="custom-control custom-checkbox  mb-0">
+                                                            <input type="checkbox" class="custom-control-input">
+                                                            <span class="custom-control-label">&nbsp;</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <a href="Pages.Product.Detail.html">
+                                                        <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
+                                                    </a>
+                                                    <footer>
+                                                        <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
             <div class="container-fluid">

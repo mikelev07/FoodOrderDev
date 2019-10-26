@@ -21,15 +21,28 @@ namespace FoodOrder.Models
             Dishes = new List<Dish>();
         }
     }
+
+    public class MenuViewModel
+    {
+        public Menu Menu { get; set; }
+        public ICollection<DishCategory> DishCategories { get; set; }
+        public MenuViewModel()
+        {
+            DishCategories = new List<DishCategory>();
+        }
+    }
+
     public class Menu
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public DateTime DateOfCreation { get; set; }
+        public ICollection<Dish> Dishes { get; set; }
         public ICollection<Pack> Packs { get; set; }
         public Menu()
         {
             Packs = new List<Pack>();
+            Dishes = new List<Dish>();
         }
     }
 

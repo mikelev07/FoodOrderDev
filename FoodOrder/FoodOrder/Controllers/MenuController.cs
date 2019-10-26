@@ -39,7 +39,7 @@ namespace FoodOrder.Controllers
         // GET: Menu/Create
         public ActionResult Create()
         {
-            ViewBag.Dishes = db.DishCategories.Include(c => c.Dishes).ToList();
+            ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
             return View();
         }
 
@@ -48,13 +48,23 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateOfCreation")] Menu menu)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateOfCreation,Dishes,Packs")] Menu menu, ICollection<string> ints)
         {
             if (ModelState.IsValid)
             {
-                db.Menus.Add(menu);
+
+                List<Dish> dishes = db.Dishes.Where(c => ints.Contains(c.Id)).ToList();
+
+                Menu menuObject = new Menu
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    DateOfCreation = DateTime.Now,
+                    Dishes = dishes
+                };
+
+                db.Menus.Add(menuObject);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyDetails", "Users");
             }
 
             return View(menu);

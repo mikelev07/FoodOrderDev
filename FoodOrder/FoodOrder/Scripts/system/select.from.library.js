@@ -103,7 +103,15 @@ $.selectFromLibrary = function(element, options) {
       $itemTemp = $self.parent().find(plugin.settings.selectedItemClass).clone();
       $itemTemp.find(plugin.settings.selectedItemImageClass).attr("src", selectedItems[i].previewPath);
       $itemTemp.find(plugin.settings.selectedItemLabelClass).html(selectedItems[i].label);
-      $itemTemp.css("display", "block");
+        $itemTemp.css("display", "block");
+          $itemTemp.append(
+              $('<input>', {
+                    name: "ints",
+                    id: "ints",
+                    type: 'hidden',
+                    val: selectedItems[i].path
+                })
+         );
       $itemTemp.addClass(plugin.settings.selectedItemClassActive.replace(".", ""));
       $emptyParent.append($itemTemp);
       $grandParent.prepend($emptyParent);

@@ -10,17 +10,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Личный кабинет повара</h1>
-            <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
-                <ol class="breadcrumb pt-0">
-                    <li class="breadcrumb-item">
-                        <a href="#">Раз</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="#">Два</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Три</li>
-                </ol>
-            </nav>
+         
             <div class="separator mb-5"></div>
         </div>
         <div id="create-dish-popup" class="col-md-6 col-lg-4 mb-4">
@@ -59,13 +49,14 @@
                                 @foreach (var i in Model.DishCategories)
                                 {
 
-                                    <div class="border" data-toggle="collapse1" data-target="#collapseOne-@i.Id"
+                                    <div class="border" data-toggle="collapse" data-target="#collapseOne-@i.Id"
                                          aria-expanded="true" aria-controls="collapseOne">
                                         <button class="btn btn-link">
                                             @i.Name
+                                            <span style="color:green" class="badge badge-light">@i.Dishes.Count</span>
                                         </button>
 
-                                        <div id="collapseOne-@i.Id" class="collapse show " data-parent="#accordion">
+                                        <div id="collapseOne-@i.Id" class="collapse " data-parent="#accordion">
                                             <div class="row list disable-text-selection" data-check-all="checkAll">
                                                 @foreach (var a in i.Dishes)
                                                 {

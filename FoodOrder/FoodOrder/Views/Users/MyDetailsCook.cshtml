@@ -691,7 +691,7 @@
 
                                         <div class="form-group">
                                             <label>Категория блюда</label>
-                                            <select id="dish-creation-select-type" class="form-control select2-single">
+                                            <select id="dish-creation-select-type" class="form-control select2-single" autocomplete="off">
                                                 <option value="" label="&nbsp;">&nbsp;</option>
                                                 @foreach (var category in (List<FoodOrder.Models.DishCategory>)ViewData["Categories"])
                                                 {
@@ -708,7 +708,7 @@
 
                                         <div class="form-group">
                                             <label>Вид гарнира</label>
-                                            <select id="dish-creation-select-garnish" class="form-control select2-single">
+                                            <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
                                                 <option value="" label="&nbsp;">&nbsp;</option>
                                                 @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
                                                 {
@@ -963,18 +963,18 @@
                         type: 'GET',
                         success: function (result) {
                             var dishCardDiv = "#dish-card-" + editingDishId;
-                            $(dishCardDiv + ".dish-name").text(dishName);
-                            $(dishCardDiv + ".dish-category-name").text(categoryName);
+                            $(dishCardDiv + " .dish-name").text(dishName);
+                            $(dishCardDiv + " .dish-category-name").text(categoryName);
                             if (hasGarnish) {
-                                $(dishCardDiv + ".dish-garnish").text('С гарниром :' + garnishName);
+                                $(dishCardDiv + " .dish-garnish").text('С гарниром :' + garnishName);
                             }
                             else {
-                                $(dishCardDiv + ".dish-garnish").text('Без гарнира');
+                                $(dishCardDiv + " .dish-garnish").text('Без гарнира');
                             }
-                            $(dishCardDiv + ".dish-proteins").text(proteins);
-                            $(dishCardDiv + ".dish-fats").text(fats);
-                            $(dishCardDiv + ".dish-carbonhydrates").text(carbonhydrates);
-                            $(dishCardDiv + ".dish-kilocalories").text(kilocalories);
+                            $(dishCardDiv + " .dish-proteins").text(proteins);
+                            $(dishCardDiv + " .dish-fats").text(fats);
+                            $(dishCardDiv + " .dish-carbonhydrates").text(carbonhydrates);
+                            $(dishCardDiv + " .dish-kilocalories").text(kilocalories);
 
                             //для скрытия модального окна
                             $('#cancell-dish-creation').click();

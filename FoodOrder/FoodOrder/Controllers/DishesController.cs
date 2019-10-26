@@ -60,62 +60,6 @@ namespace FoodOrder.Controllers
             return View(dish);
         }
 
-        public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, string garnishId,
-            double proteins, double fats, double carbonhydrates, double kilocalories)
-        {
-            var dateOfCreation = DateTime.UtcNow;
-            var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
-            var categoryName = category.Name;
-
-            Dish dish = new Dish()
-            {
-                Id = Guid.NewGuid().ToString("N"),
-                Name = name,
-                DateOfCreation = dateOfCreation,
-                DishCategoryId = selectedType,
-                HasGarnish = hasGarnish,
-                Proteins = proteins,
-                Fats = fats,
-                Carbonhydrates = carbonhydrates,
-                Kilocalories = kilocalories
-            };
-
-            if (hasGarnish)
-            {
-                var currentGarnish = await db.Dishes.Where(d => d.Id == garnishId).FirstOrDefaultAsync();
-                dish.GarnishId = currentGarnish.Id;
-                db.Dishes.Add(dish);
-                db.SaveChanges();
-
-                return Json(new {
-                    id = dish.Id,
-                    name,
-                    type=categoryName,
-                    hasGarnish,
-                    garnish = currentGarnish.Name,
-                    garnishId = currentGarnish.Id,
-                    proteins,
-                    fats,
-                    carbonhydrates,
-                    kilocalories
-                }, JsonRequestBehavior.AllowGet);
-            }
-
-            db.Dishes.Add(dish);
-            await db.SaveChangesAsync();
-
-            return Json(new {
-                id = dish.Id,
-                name,
-                type = categoryName,
-                hasGarnish,
-                proteins,
-                fats,
-                carbonhydrates,
-                kilocalories
-            }, JsonRequestBehavior.AllowGet);
-        }
-
 
         // GET: Dishes/Edit/5
         public async Task<ActionResult> Edit(string id)
@@ -172,6 +116,67 @@ namespace FoodOrder.Controllers
             db.Dishes.Remove(dish);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+
+        public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, string garnishId,
+            double proteins, double fats, double carbonhydrates, double kilocalories)
+        {
+            var dateOfCreation = DateTime.UtcNow;
+            var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
+            var categoryName = category.Name;
+
+            Dish dish = new Dish()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                Name = name,
+                DateOfCreation = dateOfCreation,
+                DishCategoryId = selectedType,
+                HasGarnish = hasGarnish,
+                Proteins = proteins,
+                Fats = fats,
+                Carbonhydrates = carbonhydrates,
+                Kilocalories = kilocalories
+            };
+
+            if (hasGarnish)
+            {
+                dish.GarnishId = garnishId;
+            }
+
+            db.Dishes.Add(dish);
+            await db.SaveChangesAsync();
+
+            return Json(new
+            {
+                id = dish.Id,
+                dateOfCreation
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> EditJson(string id, string name, string selectedType, bool hasGarnish, string garnishId,
+            double proteins, double fats, double carbonhydrates, double kilocalories)
+        {
+            var dish = await db.Dishes.Where(d => d.Id == id).FirstOrDefaultAsync();
+            var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
+            var categoryName = category.Name;
+
+            db.Entry(dish).State = EntityState.Modified;
+
+            dish.Name = name;
+            dish.DishCategoryId = category.Id;
+            dish.HasGarnish = hasGarnish;
+            if (hasGarnish)
+            {
+                dish.GarnishId = garnishId;
+            }
+            dish.Proteins = proteins;
+            dish.Fats = fats;
+            dish.Carbonhydrates = carbonhydrates;
+            dish.Kilocalories = kilocalories;
+
+            await db.SaveChangesAsync();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> DeleteJson(string id)

@@ -51,6 +51,7 @@ namespace FoodOrder.Controllers
         {
             if (ModelState.IsValid)
             {
+                dish.DateOfCreation = DateTime.UtcNow;
                 db.Dishes.Add(dish);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -62,7 +63,7 @@ namespace FoodOrder.Controllers
         public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, string garnishId,
             double proteins, double fats, double carbonhydrates, double kilocalories)
         {
-            var dateOfCreation = DateTime.Now;
+            var dateOfCreation = DateTime.UtcNow;
             var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
             var categoryName = category.Name;
 
@@ -70,6 +71,7 @@ namespace FoodOrder.Controllers
             {
                 Id = Guid.NewGuid().ToString("N"),
                 Name = name,
+                DateOfCreation = dateOfCreation,
                 DishCategoryId = selectedType,
                 HasGarnish = hasGarnish,
                 Proteins = proteins,

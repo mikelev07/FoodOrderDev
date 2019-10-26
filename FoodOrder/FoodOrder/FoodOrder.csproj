@@ -205,9 +205,9 @@
     <Compile Include="Migrations\201910251151175_asd1.Designer.cs">
       <DependentUpon>201910251151175_asd1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910251525536_asdasdasd.cs" />
-    <Compile Include="Migrations\201910251525536_asdasdasd.Designer.cs">
-      <DependentUpon>201910251525536_asdasdasd.cs</DependentUpon>
+    <Compile Include="Migrations\201910251427266_DishChanges.cs" />
+    <Compile Include="Migrations\201910251427266_DishChanges.Designer.cs">
+      <DependentUpon>201910251427266_DishChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -785,8 +785,8 @@
     <EmbeddedResource Include="Migrations\201910251151175_asd1.resx">
       <DependentUpon>201910251151175_asd1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910251525536_asdasdasd.resx">
-      <DependentUpon>201910251525536_asdasdasd.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910251427266_DishChanges.resx">
+      <DependentUpon>201910251427266_DishChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

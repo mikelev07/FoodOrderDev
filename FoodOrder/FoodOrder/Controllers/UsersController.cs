@@ -165,7 +165,7 @@ namespace FoodOrder.Controllers
                 ViewData["Dishes"] = dishes;
                 ViewData["Categories"] = categories;
                 ViewData["Garnishes"] = garnishes;
-                return View("MyDetailsCook", menu);
+                return View("MyDetailsCook", menuViewModel);
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {

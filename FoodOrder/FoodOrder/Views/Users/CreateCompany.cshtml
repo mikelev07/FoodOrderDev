@@ -5,7 +5,7 @@
     ViewBag.Title = "Создание компании";
 }
 
-@using (Html.BeginForm("CreateCompany", "Users",FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreateCompany", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -32,98 +32,107 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>Полное наименование компании</label>
-                                        <input name="FullName" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите полное наименование компании!
-                                        </div>
-                                    </div>
+                                <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
+                                   role="button" aria-expanded="true" aria-controls="collapseExample">
+                                    <i class="iconsminds-folder-add--"></i> Заполнить все реквезиты
+                                </a>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>БИН/ИИН компании</label>
-                                        <input name="BIN_IIN" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите БИН или ИИН!
+                                <div class="collapse" id="collapseExample">
+                                    <div class="form-group">
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>Полное наименование компании</label>
+                                            <input name="FullName" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите полное наименование компании!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>ИИК компании</label>
-                                        <input name="IIK" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите ИИК!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>БИН/ИИН компании</label>
+                                            <input name="BIN_IIN" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите БИН или ИИН!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>РНН компании</label>
-                                        <input name="RNN" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите РНН!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>ИИК компании</label>
+                                            <input name="IIK" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите ИИК!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>БИК компании</label>
-                                        <input name="BIK" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите БИК!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>РНН компании</label>
+                                            <input name="RNN" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите РНН!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>Банковские реквизиты</label>
-                                        <input name="Bank" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите реквизиты Банка!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>БИК компании</label>
+                                            <input name="BIK" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите БИК!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>Юридический адрес компании</label>
-                                        <input name="LegalAddress" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите юридический адрес!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>Банковские реквизиты</label>
+                                            <input name="Bank" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите реквизиты Банка!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>Фактический адрес компании</label>
-                                        <input name="ActualAddress" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите фактический адрес!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>Юридический адрес компании</label>
+                                            <input name="LegalAddress" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите юридический адрес!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>Директор компании</label>
-                                        <input name="Director" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите директора компании!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>Фактический адрес компании</label>
+                                            <input name="ActualAddress" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите фактический адрес!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>Телефон компании</label>
-                                        <input name="PhoneNumber" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите телефон компании!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>Директор компании</label>
+                                            <input name="Director" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите директора компании!
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group position-relative error-l-50">
-                                        <label>Электронная почта компании</label>
-                                        <input name="Email" type="text" class="form-control" required>
-                                        <div class="invalid-tooltip">
-                                            Укажите электронную почту компании!
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>Телефон компании</label>
+                                            <input name="PhoneNumber" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите телефон компании!
+                                            </div>
                                         </div>
-                                    </div>
 
+                                        <div class="form-group position-relative error-l-50">
+                                            <label>Электронная почта компании</label>
+                                            <input name="Email" type="text" class="form-control">
+                                            <div class="invalid-tooltip">
+                                                Укажите электронную почту компании!
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
 
-                                <div class="form-group position-relative error-l-50">
+
+
+                                <div style="margin-top:10px" class="form-group position-relative error-l-50">
                                     <label>Почта представителя</label>
                                     <input name="RepresentativeEmail" type="text" class="form-control" required>
                                     <div class="invalid-tooltip">
@@ -181,7 +190,7 @@
 
                                 <div class="custom-control custom-checkbox mb-3 error-l-200">
                                     @*<input type="checkbox" name="UnlimitedOrders" value="false" class="custom-control-input" id="customControlValidation1">*@
-                                    @Html.CheckBox("UnlimitedOrders", false, new { @class="custom-control-input", id="customControlValidation1" })
+                                    @Html.CheckBox("UnlimitedOrders", false, new { @class = "custom-control-input", id = "customControlValidation1" })
                                     <label class="custom-control-label" for="customControlValidation1">
                                         Неограниченные заказы для сотрудников
                                     </label>
@@ -201,4 +210,15 @@
 
 }
 
+
+@section Scripts  {
+    <script>
+        $('#CompanyImageFile').change(function () {
+            var i = $(this).next('label').clone();
+          var file = $('#CompanyImageFile')[0].files[0].name;
+          $(this).next('label').text(file);
+        });
+
+    </script>
+    }
 

@@ -4531,27 +4531,27 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   height: 14px;
 }
 
-.home_bubble .bubble.b_one {
-  background: #00c99c;
-  top: 40%;
-  left: 85px;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -webkit-animation: spin2 2s infinite alternate;
-  animation: spin2 2s infinite alternate;
-}
+    .home_bubble .bubble.b_one {
+        background: #17d85b;
+        top: 40%;
+        left: 85px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-animation: spin2 2s infinite alternate;
+        animation: spin2 2s infinite alternate;
+    }
 
-.home_bubble .bubble.b_two {
-  background: #fca249;
-  top: 50%;
-  left: 155px;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -webkit-animation: spin1 2s infinite alternate;
-  animation: spin1 2s infinite alternate;
-}
+    .home_bubble .bubble.b_two {
+        background: #17d85b;
+        top: 50%;
+        left: 155px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-animation: spin1 2s infinite alternate;
+        animation: spin1 2s infinite alternate;
+    }
 
 .home_bubble .bubble.b_three {
   background: #7d95fa;
@@ -5646,21 +5646,21 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-size: 15px;
 }
 
-.agency_featured_item .agency_featured_content .icon {
-  width: 46px;
-  height: 46px;
-  line-height: 46px;
-  border-radius: 50%;
-  background-image: -moz-linear-gradient(40deg, #5e2ced 0%, #a485fd 100%);
-  background-image: -webkit-linear-gradient(40deg, #5e2ced 0%, #a485fd 100%);
-  background-image: -ms-linear-gradient(40deg, #5e2ced 0%, #a485fd 100%);
-  -webkit-box-shadow: 0px 10px 20px 0px rgba(94, 44, 237, 0.2);
-  box-shadow: 0px 10px 20px 0px rgba(94, 44, 237, 0.2);
-  font-size: 20px;
-  color: #fff;
-  display: inline-block;
-  text-align: center;
-}
+    .agency_featured_item .agency_featured_content .icon {
+        width: 46px;
+        height: 46px;
+        line-height: 46px;
+        border-radius: 50%;
+        background-image: -moz-linear-gradient(40deg, #17d85b 0%, #00aff0 100%);
+        background-image: -webkit-linear-gradient(40deg, #17d85b 0%, #00aff0 100%);
+        background-image: -ms-linear-gradient(40deg, #17d85b 0%, #00aff0 100%);
+        -webkit-box-shadow: 0px 10px 20px 0px rgba(94, 44, 237, 0.2);
+        box-shadow: 0px 10px 20px 0px rgba(94, 44, 237, 0.2);
+        font-size: 20px;
+        color: #fff;
+        display: inline-block;
+        text-align: center;
+    }
 
 .agency_featured_item.agency_featured_item_two .agency_featured_content .dot {
   left: 30px;
@@ -10931,7 +10931,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .seo_fact_info:before {
   content: "";
-  background: url("../img/seo/shap.png") no-repeat scroll center center;
+  background: url("../img/shap.png") no-repeat scroll center center;
   position: absolute;
   left: 0;
   width: 100%;
@@ -10965,21 +10965,21 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-bottom: 15px;
 }
 
-.seo_fact_info .seo_fact_item .counter.one {
-  color: #15b2ec;
-}
+    .seo_fact_info .seo_fact_item .counter.one {
+        color: #17d85b;
+    }
 
-.seo_fact_info .seo_fact_item .counter.two {
-  color: #f5a416;
-}
+    .seo_fact_info .seo_fact_item .counter.two {
+        color: #17d85b;
+    }
 
-.seo_fact_info .seo_fact_item .counter.three {
-  color: #00c99c;
-}
+    .seo_fact_info .seo_fact_item .counter.three {
+        color: #17d85b;
+    }
 
-.seo_fact_info .seo_fact_item .counter.four {
-  color: #f12699;
-}
+    .seo_fact_info .seo_fact_item .counter.four {
+        color: #17d85b;
+    }
 
 .seo_fact_info .seo_fact_item p {
   margin-bottom: 0;

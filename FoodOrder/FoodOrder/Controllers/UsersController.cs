@@ -255,6 +255,34 @@ namespace FoodOrder.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "admin, representative")]
+        public async Task<ActionResult> DetailsRepresentative(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = await db.Users.Where(i => id == i.Id).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var userId = user.Id;
+
+            var uvm = new UserViewModel()
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Patronymic = user.Patronymic,
+                Age = user.Age,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
+            };
+
+            return View(uvm);
+        }
+
+
         [Authorize(Roles = "admin")]
         public ActionResult Statistic()
         {

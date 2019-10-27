@@ -200,5 +200,7 @@ namespace FoodOrder.Models
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<FoodOrder.Models.UserViewModel> UserViewModels { get; set; }
     }
 }

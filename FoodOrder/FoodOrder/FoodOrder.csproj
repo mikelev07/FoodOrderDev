@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201910261227552_bullshit.Designer.cs">
       <DependentUpon>201910261227552_bullshit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910270639548_NewMigra.cs" />
+    <Compile Include="Migrations\201910270639548_NewMigra.Designer.cs">
+      <DependentUpon>201910270639548_NewMigra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -769,6 +773,7 @@
     <Content Include="Views\DishCategories\Details.cshtml" />
     <Content Include="Views\DishCategories\Edit.cshtml" />
     <Content Include="Views\DishCategories\Index.cshtml" />
+    <Content Include="Views\Users\DetailsRepresentative.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -808,6 +813,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910261227552_bullshit.resx">
       <DependentUpon>201910261227552_bullshit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910270639548_NewMigra.resx">
+      <DependentUpon>201910270639548_NewMigra.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

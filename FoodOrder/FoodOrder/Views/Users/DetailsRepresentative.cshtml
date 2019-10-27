@@ -1,0 +1,191 @@
+﻿@model FoodOrder.Models.UserViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
+    ViewBag.Title = "Подробная информация";
+}
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <h1>Информация о представителе</h1>
+
+                <div class="separator mb-5"></div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 col-lg-6 mb-5">
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        @*<h5 class="mb-4">Форма редактирования</h5>*@
+                        <form class="needs-validation tooltip-label-right" novalidate>
+
+                            <div class="form-group position-relative">
+                                @Html.LabelFor(model => model.Name, "Имя")
+                                @Html.DisplayFor(model => model.Name)
+                                @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })*@
+                            </div>
+
+                            <div class="form-group position-relative">
+                                @Html.LabelFor(model => model.Surname, "Фамилия")
+                                @Html.DisplayFor(model=>model.Surname)
+                                @*@Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", required = "required" } })*@
+                                @*<div class="invalid-tooltip">
+                                    Укажите фамилию!
+                                </div>*@
+                            </div>
+
+                            <div class="form-group position-relative">
+                                @Html.LabelFor(model => model.Patronymic, "Отчество")
+                                @Html.DisplayFor(model=>model.Patronymic)
+                                @*@Html.EditorFor(model => model.Patronymic, new { htmlAttributes = new { @class = "form-control" } })*@
+                            </div>
+
+                            <div class="form-group position-relative">
+                                @Html.LabelFor(model => model.Age, "Возраст")
+                                @Html.DisplayFor(model=>model.Age)
+                                @*<input type="number" name="Age" class="form-control" min="0" max="100" step="1" oninput="validity.valid||(value='');" />*@
+                            </div>
+
+                            <div class="form-group position-relative">
+                                @Html.LabelFor(model => model.Email, "Email")
+                                @Html.DisplayFor(model=>model.Email)
+                                @*@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "required" } })*@
+                            </div>
+
+                            <div class="form-group position-relative">
+                                @Html.LabelFor(model => model.PhoneNumber, "Телефон")
+                                @Html.DisplayFor(model=>model.PhoneNumber)
+                                @*@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })*@
+                            </div>
+
+                            <div class="form-group position-relative">
+                                @Html.LabelFor(model => model.UserName, "Логин")
+                                @Html.DisplayFor(model=>model.UserName)
+                                @*@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", required = "required" } })*@
+                            </div>
+
+                            <a href="/Users/MyDetails" class="btn btn-primary mb-0">К списку компаний</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</main>
+
+<div>
+    <h4>UserViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVisible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVisible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasOrderToday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasOrderToday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCheckInstruction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCheckInstruction)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

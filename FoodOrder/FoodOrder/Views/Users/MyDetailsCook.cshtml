@@ -60,7 +60,7 @@
                                             <div class="row list disable-text-selection" data-check-all="checkAll">
                                                 @foreach (var dish in i.Dishes)
                                                 {
-                                                    <div id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4 pl-5 pt-4">
+                                                    <div id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
                                                         <div class="card">
                                                             <div class="position-relative">
                                                                 <div class="position-absolute card-top-buttons">
@@ -705,7 +705,7 @@
                                     <div class="form-group">
                                         <label>Категория блюда</label>
                                         <select  id="dish-creation-select-type" class="form-control select2-single" autocomplete="off">
-                                            <option value="Введите категорию" label="&nbsp;">Введите категорию</option>
+                                            <option value="0" label="&nbsp;">Введите категорию</option>
                                             @foreach (var category in (List<FoodOrder.Models.DishCategory>)ViewData["Categories"])
                                             {
                                                 <option value="@category.Id">@category.Name</option>
@@ -722,7 +722,7 @@
                                     <div class="form-group" id="dish-creation-select-garnish" style="display:none">
                                         <label>Вид гарнира</label>
                                         <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
-                                            <option value="" label="&nbsp;">&nbsp;</option>
+                                            <option value="0" label="&nbsp;">Выберите гарнир</option>
                                             @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
                                             {
                                                 <option value="@garnish.Id">@garnish.Name</option>
@@ -1014,12 +1014,11 @@
             $('#create-or-edit-dish').text('Создать');
 
             $("#dish-creation-name").val('');
-
-            $("#dish-creation-select-type option").prop('selectedIndex', 0);
+            $("#dish-creation-select-type").val(0);
 
             $("#dish-creation-garnish-checkbox").prop('checked', false);
-            $("#dish-creation-select-garnish option").hide();
-            $("#dish-creation-select-garnish option").prop('selectedIndex', 0);
+            $("#dish-creation-select-garnish").hide();
+            $("#dish-creation-select-garnish").val(0);
 
             $("#dish-creation-proteins").val('');
             $("#dish-creation-fats").val('');
@@ -1056,17 +1055,17 @@
             //подтягиваем их на форму создания
             $("#dish-creation-name").val(dishName);
 
-            $('#dish-creation-select-type option').filter(function () { return $(this).html() == dishCategoryName; }).prop('selected', true);
+            $('#dish-creation-select-type option').filter(function () { return $(this).html() == dishCategoryName; }).prop('selected', 'selected');
 
             $("#dish-creation-garnish-checkbox").prop('checked', hasGarnish);
             if (hasGarnish) {
-                $("#dish-creation-select-garnish option").show();
+                $("#dish-creation-select-garnish").show();
             }
             else {
-                $("#dish-creation-select-garnish option").hide();
+                $("#dish-creation-select-garnish").hide();
             }
 
-            $("#dish-creation-select-garnish option").filter(function () { return $(this).html() == dishGarnishName; }).prop('selected', true);
+            $("#dish-creation-select-garnish option").filter(function () { return $(this).html() == dishGarnishName; }).prop('selected', 'selected');
 
             $("#dish-creation-proteins").val(dishProteins);
             $("#dish-creation-fats").val(dishFats);

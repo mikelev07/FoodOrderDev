@@ -1,7 +1,7 @@
 ﻿@model FoodOrder.Models.UserViewModel
 
 @{
-    //Layout = "~/Views/Shared/_LayoutSystem.cshtml";
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
     ViewBag.Title = "Удаление сотрудника";
 }
 
@@ -29,22 +29,22 @@
                             <h5 class="mb-4">Форма удаления</h5>
                             <form class="needs-validation tooltip-label-right" novalidate>
                                 <div class="form-group position-relative">
-                                    <label>Имя сотрудника</label>
+                                    <label><strong>Имя сотрудника</strong></label>
                                     @Html.DisplayNameFor(model => model.Name)
                                 </div>
 
                                 <div class="form-group position-relative">
-                                    <label>Фамилия сотрудника</label>
+                                    <label><strong>Фамилия сотрудника</strong></label>
                                     @Html.DisplayFor(model => model.Surname)
                                 </div>
 
                                 <div class="form-group position-relative">
-                                    <label>Почта сотрудника</label>
+                                    <label><strong>Почта сотрудника</strong></label>
                                     @Html.DisplayNameFor(model => model.Email)
                                 </div>
 
                                 <div class="form-group position-relative">
-                                    <label>Телефон сотрудника</label>
+                                    <label><strong>Телефон сотрудника</strong></label>
                                     @Html.DisplayFor(model => model.PhoneNumber)
                                 </div>
 

@@ -291,12 +291,17 @@ namespace FoodOrder.Controllers
 
 
         //для перехода сотрудника по ссылке, которую он получает от представителя, на форму создания своего профиля
-        public ActionResult EmployeeProfileCreation(string userId, string name, string oldpass)
+        public ActionResult EmployeeProfileCreation(string userId, string name, string surname, string patronymic, 
+            int age, string phoneNumber, string oldpass)
         {
             var nemv = new NewEmployeeViewModel()
             {
                 Id = userId,
                 Name = name,
+                Surname = surname,
+                Patronymic = patronymic,
+                Age = age,
+                PhoneNumber = phoneNumber,
                 OldPassword = oldpass
             };
 
@@ -370,7 +375,15 @@ namespace FoodOrder.Controllers
                 var result = await UserManager.CreateAsync(user, newRandomPassword);
                 if (result.Succeeded)
                 {
-                    var callbackUrl = Url.Action("EmployeeProfileCreation", "Users", new { userId = user.Id, name=user.Name, oldpass = newRandomPassword },
+                    var callbackUrl = Url.Action("EmployeeProfileCreation", "Users", new {
+                        userId = user.Id,
+                        name =user.Name,
+                        surname = user.Surname,
+                        patronymic = user.Patronymic,
+                        age = user.Age,
+                        phoneNumber = user.PhoneNumber,
+                        oldpass = newRandomPassword
+                    },
                       protocol: Request.Url.Scheme);
                     var res = "Представитель компании создал ваш профиль на сайте foodorder.somee.com - для завершения регистрации перейдите по ссылке: <a href=\""
                                                        + callbackUrl + "\">завершить регистрацию</a>";
@@ -585,7 +598,7 @@ namespace FoodOrder.Controllers
                 company.Description = cvm.Description;
                 company.Whatsapp = cvm.Whatsapp;
                 company.Telegram = cvm.Telegram;
-                company.CompanyImagePath = path;
+                company.CompanyImagePath = "~/Files/" + fileName;
                 company.FullName = cvm.FullName;
                 company.BIN_IIN = cvm.BIN_IIN;
                 company.IIK = cvm.IIK;
@@ -597,6 +610,7 @@ namespace FoodOrder.Controllers
                 company.Director = cvm.Director;
                 company.PhoneNumber = cvm.PhoneNumber;
                 company.Email = cvm.Email;
+                cvm.CompanyImageFile.SaveAs(path);
                 db.Entry(company).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("MyDetails", "Users");
@@ -627,7 +641,8 @@ namespace FoodOrder.Controllers
                 Name = user.Name,
                 Surname = user.Surname,
                 Patronymic = user.Patronymic,
-                Email = user.Email
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
             };
             return View(uvm);
         }

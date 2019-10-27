@@ -255,7 +255,7 @@ namespace FoodOrder.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin, representative")]
         public async Task<ActionResult> DetailsRepresentative(string id)
         {
             if (id == null)

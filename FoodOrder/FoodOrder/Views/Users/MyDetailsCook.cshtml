@@ -49,62 +49,81 @@
                                 @foreach (var i in Model.DishCategories)
                                 {
 
-                                    <div class="border" data-toggle="collapse" data-target="#collapseOne-@i.Id"
+                                    <div class="border" >
+                                        <button style="" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne-@i.Id"
                                          aria-expanded="true" aria-controls="collapseOne">
-                                        <button class="btn btn-link">
-                                            @i.Name
+                                            <span >@i.Name</span>
                                             <span style="color:green" class="badge badge-light">@i.Dishes.Count</span>
                                         </button>
 
-                                        <div id="collapseOne-@i.Id" class="collapse " data-parent="#accordion">
+                                        <div id="collapseOne-@i.Id" class="collapse" data-parent="#accordion">
                                             <div class="row list disable-text-selection" data-check-all="checkAll">
-                                                @foreach (var a in i.Dishes)
+                                                @foreach (var dish in i.Dishes)
                                                 {
+                                                    <div id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                                        <div class="card">
+                                                            <div class="position-relative">
+                                                                <div class="position-absolute card-top-buttons">
 
+                                                                    <button class="btn btn-outline-white icon-button" title="Редактировать"
+                                                                            data-toggle="modal" data-backdrop="static" data-target="#exampleModal" onclick="EditDish('@dish.Id', '@dish.HasGarnish'=='@true')">
+                                                                        <i class="simple-icon-pencil"></i>
+                                                                    </button>
 
-                                                    <div id="dish-card-" class="col-xl-4 col-lg-3 col-4 col-sm-6 mb-4">
-                                                        <div class="p-4">
-                                                            <div class="card">
-                                                                <div class="position-relative">
-                                                                    <a href="">
-                                                                        <img class="card-img-top" src="~/Content/img/1.jpg"
-                                                                             alt="Фото блюда">
-                                                                    </a>
+                                                                    <button class="btn btn-outline-white icon-button" onclick="DeleteDish('@dish.Id')" title="Удалить">
+                                                                        <i class="simple-icon-trash"></i>
+                                                                    </button>
                                                                 </div>
-                                                                <div class="card-body">
-                                                                    <div class="row">
+                                                                <a href="">
+                                                                    <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                         alt="Фото блюда">
 
-                                                                        <div class="col-10">
-                                                                            <a href="">
-                                                                                <p class="list-item-heading mb-4 pt-1"><strong>@a.Name</strong></p>
-                                                                            </a>
+                                                                </a>
 
-                                                                            <p class="list-item-heading mb-4 pt-1">Без гарнира</p>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
 
-                                                                            <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-@a.Id-n"
-                                                                               role="button" aria-expanded="true" aria-controls="collapseExample-@a.Id-n">
-                                                                                Кратко
-                                                                            </a>
-                                                                            <div class="collapse" id="collapseExample-@a.Id-n">
-                                                                                <div class="p-4 border mt-4">
-                                                                                    <p class="mb-0">
-                                                                                    <p class="list-item-heading mb-4 pt-1">
-                                                                                        Пищевая ценность (на 100г):<br />
-                                                                                        Белки - 100 г<br />
-                                                                                        Жиры - 200 г<br />
-                                                                                        Углеводы - 300 г<br />
-                                                                                        400 ккал
-                                                                                    </p>
-                                                                                    </p>
-                                                                                </div>
+                                                                    <div class="col-10">
+                                                                        <a>
+                                                                            <p class="list-item-heading mb-4 pt-1"><strong class="dish-name">@dish.Name</strong></p>
+                                                                        </a>
+                                                                        <p class="list-item-heading mb-4 pt-1 dish-category-name">@dish.DishCategory.Name</p>
+                                                                        @if (dish.HasGarnish)
+                                                                        {
+                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром : @dish.Garnish.Name</p>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">Без гарнира</p>
+                                                                        }
+                                                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                            Подробнее
+                                                                        </a>
+                                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                            <div class="mt-4">
+                                                                                <p class="mb-0">
+                                                                                <p class="list-item-heading mb-4 pt-1">
+                                                                                    Пищевая ценность (на 100г):<br />
+                                                                                    Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                                                                                    Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                                                                                    Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                                                                                    <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                                </p>
                                                                             </div>
-
                                                                         </div>
+
+                                                                        <footer style="margin-top:10px">
+                                                                            <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                        </footer>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+
 
                                                 }
                                             </div>
@@ -190,12 +209,12 @@
                                                         {
                                                             <p class="list-item-heading mb-4 pt-1 dish-garnish">Без гарнира</p>
                                                         }
-                                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
+                                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
                                                            role="button" aria-expanded="true" aria-controls="collapseExample">
                                                             Подробнее
                                                         </a>
-                                                        <div class="collapse" id="collapseExample">
-                                                            <div class="p-4 border mt-4">
+                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                            <div class="mt-4">
                                                                 <p class="mb-0">
                                                                 <p class="list-item-heading mb-4 pt-1">
                                                                     Пищевая ценность (на 100г):<br />
@@ -685,8 +704,8 @@
 
                                     <div class="form-group">
                                         <label>Категория блюда</label>
-                                        <select id="dish-creation-select-type" class="form-control select2-single" autocomplete="off">
-                                            <option value="" label="&nbsp;">&nbsp;</option>
+                                        <select  id="dish-creation-select-type" class="form-control select2-single" autocomplete="off">
+                                            <option value="Введите категорию" label="&nbsp;">Введите категорию</option>
                                             @foreach (var category in (List<FoodOrder.Models.DishCategory>)ViewData["Categories"])
                                             {
                                                 <option value="@category.Id">@category.Name</option>

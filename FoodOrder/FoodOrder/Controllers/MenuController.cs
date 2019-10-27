@@ -58,6 +58,7 @@ namespace FoodOrder.Controllers
                 Menu menuObject = new Menu
                 {
                     Id = Guid.NewGuid().ToString(),
+                    Name = menu.Name,
                     DateOfCreation = DateTime.Now,
                     Dishes = dishes
                 };

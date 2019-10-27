@@ -719,7 +719,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="form-group" id="dish-creation-select-garnish">
+                                    <div class="form-group" id="dish-creation-select-garnish" style="display:none">
                                         <label>Вид гарнира</label>
                                         <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
                                             <option value="" label="&nbsp;">&nbsp;</option>
@@ -1014,11 +1014,13 @@
             $('#create-or-edit-dish').text('Создать');
 
             $("#dish-creation-name").val('');
-            $("#dish-creation-select-type option").prop('selectedIndex', 0);
-            $("#dish-creation-garnish-checkbox").prop('checked', false);
 
+            $("#dish-creation-select-type option").prop('selectedIndex', 0);
+
+            $("#dish-creation-garnish-checkbox").prop('checked', false);
             $("#dish-creation-select-garnish option").hide();
             $("#dish-creation-select-garnish option").prop('selectedIndex', 0);
+
             $("#dish-creation-proteins").val('');
             $("#dish-creation-fats").val('');
             $("#dish-creation-carbonhydrates").val('');
@@ -1057,6 +1059,12 @@
             $('#dish-creation-select-type option').filter(function () { return $(this).html() == dishCategoryName; }).prop('selected', true);
 
             $("#dish-creation-garnish-checkbox").prop('checked', hasGarnish);
+            if (hasGarnish) {
+                $("#dish-creation-select-garnish option").show();
+            }
+            else {
+                $("#dish-creation-select-garnish option").hide();
+            }
 
             $("#dish-creation-select-garnish option").filter(function () { return $(this).html() == dishGarnishName; }).prop('selected', true);
 

@@ -487,7 +487,7 @@ namespace FoodOrder.Controllers
         }
 
         // GET: Users/Edit/5
-        [Authorize(Roles = "admin, representative")]
+        [Authorize(Roles = "admin,representative,employee")]
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)

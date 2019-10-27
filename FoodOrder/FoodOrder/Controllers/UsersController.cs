@@ -142,7 +142,7 @@ namespace FoodOrder.Controllers
                 var dishes = await db.Dishes.Include(d => d.Garnish).Include(d => d.DishCategory).ToListAsync();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
                 var garnishes = dishes.Where(d => d.DishCategoryId == "ZdesDolzhenBitGarnir");
-                var menu = await db.Menus.Include(m => m.Dishes).FirstOrDefaultAsync();
+                var menu = db.Menus.Include(m => m.Dishes).FirstOrDefault();
 
                 string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
 

@@ -111,14 +111,17 @@
                                     <div class="col-sm-6 col-lg-6 col-xl-4 col-12 mb-4">
                                         <div class="card">
                                             <div class="position-relative">
-                                                <a href="">
+                                                <a>
                                                     <img class="card-img-top"
                                                          src="~/Content/img/profile-pic-p.png"
                                                          alt="">
                                                 </a>
                                             </div>
+                                            <a href="/Users/Edit/@company.RepresentativeId" class="btn btn-outline-primary icon-button" title="Редактировать">
+                                                <i class="simple-icon-pencil"></i>
+                                            </a>
                                             <div class="card-body">
-                                                <a href="">
+                                                <a>
                                                     <h6 id="predName" class="mb-3 listing-heading ellipsis">
                                                         <strong>Представитель компании</strong>
                                                     </h6>
@@ -238,22 +241,22 @@
 
 
 
-    function getInstruction() {
-        var enjoyhint_instance = new EnjoyHint({
+        function getInstruction() {
+            var enjoyhint_instance = new EnjoyHint({
 
-            onStart: function () {
+                onStart: function () {
 
-		      $.ajax({
-                type: 'POST',
-                contentType: "application/json",
-                url: "/Users/CheckInstruction",
-                success: function (data) {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: "application/json",
+                        url: "/Users/CheckInstruction",
+                        success: function (data) {
 
+                        }
+                    });
                 }
-            });
-          }
 
-        });
+            });
 
             var enjoyhint_script_steps = [
                 {
@@ -270,7 +273,7 @@
                     shape: 'circle',
                     radius: 220
                 },
-                  {
+                {
                     selector: '#butAct',
                     event: 'next',
                     showNext: true,
@@ -284,7 +287,7 @@
                     shape: 'circle',
                     radius: 220
                 },
-                   {
+                {
                     selector: '#sotr',
                     event: 'next',
                     showNext: true,
@@ -316,22 +319,22 @@
 
 
             enjoyhint_instance.run();
-    }
+        }
 
 
-    $('#makeInstruction').on('click', function () {
-        getInstruction();
-     });
+        $('#makeInstruction').on('click', function () {
+            getInstruction();
+        });
 
         $(document).ready(function () {
-              $.ajax({
+            $.ajax({
                 type: 'POST',
                 contentType: "application/json",
                 url: "/Users/IsCheckInstruction",
-                  success: function (data) {
-                      if (data == "False") {
-                          getInstruction();
-                      }
+                success: function (data) {
+                    if (data == "False") {
+                        getInstruction();
+                    }
                 }
             });
 

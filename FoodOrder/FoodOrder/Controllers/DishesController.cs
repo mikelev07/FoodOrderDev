@@ -118,6 +118,13 @@ namespace FoodOrder.Controllers
             return RedirectToAction("Index");
         }
 
+        //проверка, существует ли уже в бд блюдо с таким названием
+        public async Task<JsonResult> DishAlreadyExists(string dishName)
+        {
+            var dishAlreadyExist = await db.Dishes.AnyAsync(d => d.Name == dishName);
+            return Json(dishAlreadyExist, JsonRequestBehavior.AllowGet);
+        }
+
 
         public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, string garnishId,
             double proteins, double fats, double carbonhydrates, double kilocalories)

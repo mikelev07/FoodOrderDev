@@ -39,7 +39,7 @@ namespace FoodOrder.Controllers
             }
         }
 
-        [Authorize(Roles = "admin,representative,cook")]
+        [Authorize(Roles = "admin,representative,cook, employee")]
         // GET: Orders
         public async Task<ActionResult> Index()
         {
@@ -57,6 +57,28 @@ namespace FoodOrder.Controllers
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
                 return View("IndexCompany");
+            }
+            if (await UserManager.IsInRoleAsync(userId, "employee"))
+            {
+                var menu = db.Menus.Include(m => m.Dishes).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
+                var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
+                string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
+
+                var dishCategories = categories.Select(c => new DishCategory()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    DateOfCreation = c.DateOfCreation,
+                    Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
+                });
+
+                MenuViewModel menuViewModel = new MenuViewModel
+                {
+                    Menu = menu,
+                    DishCategories = dishCategories.ToList()
+                };
+
+                return View("IndexEmployee", menuViewModel);
             }
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {

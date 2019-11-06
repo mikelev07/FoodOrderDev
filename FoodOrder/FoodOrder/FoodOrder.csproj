@@ -786,6 +786,7 @@
     <Content Include="Views\DishCategories\Edit.cshtml" />
     <Content Include="Views\DishCategories\Index.cshtml" />
     <Content Include="Views\Users\DetailsRepresentative.cshtml" />
+    <Content Include="Views\Orders\IndexEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

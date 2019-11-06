@@ -161,6 +161,15 @@
                             </a>
                         </li>
                     }
+                    @if (User.IsInRole("employee"))
+                    {
+                        <li class="">
+                            <a href="/Orders">
+                                <i class="iconsminds-chef-hat"></i>
+                                <span>Меню на сегодня</span>
+                            </a>
+                        </li>
+                    }
                     @if (User.IsInRole("cook"))
                     {
                         <li class="">
@@ -192,6 +201,7 @@
     <script src="~/Scripts/system/vendor/select2.full.js"></script>
     <script src="~/Scripts/system/vendor/nouislider.min.js"></script>
     <script src="~/Scripts/system/vendor/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/system/vendor/bootstrap-notify.min.js"></script>
     <script src="~/Scripts/system/vendor/Sortable.js"></script>
     <script src="~/Scripts/system/vendor/mousetrap.min.js"></script>
     <script src="~/Scripts/system/dore.script.js"></script>

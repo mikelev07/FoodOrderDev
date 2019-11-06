@@ -332,6 +332,7 @@ namespace FoodOrder.Controllers
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
                     user.EmailConfirmed = true;
+                    await UserManager.UpdateAsync(userSign);
                     await db.SaveChangesAsync();
                     return RedirectToAction("MyDetails", "Users");
                 }

@@ -30,6 +30,7 @@ Table of Contents
   03.23. Modal Passing Content
   03.24. Scrollbar
   03.25. Progress
+
   03.26. Rating
   03.27. Tags Input
   03.28. Sortable
@@ -3139,8 +3140,8 @@ $.dore = function (element, options) {
     function showNotification(placementFrom, placementAlign, type) {
       $.notify(
         {
-          title: "Bootstrap Notify",
-          message: "Here is a notification!",
+          title: '<a id="togmod" class="select-from-library-button sfl-multiple" data-library-id="#libraryModal" data-count="-1" style="border-bottom:1px dashed green; height:35px" >Перейти в заказу</a>',
+          message: "Блюдо добавлено в заказ",
           target: "_blank"
         },
         {
@@ -3149,7 +3150,7 @@ $.dore = function (element, options) {
           type: type,
           allow_dismiss: true,
           newest_on_top: false,
-          showProgressbar: false,
+          showProgressbar: true,
           placement: {
             from: placementFrom,
             align: placementAlign
@@ -3187,7 +3188,8 @@ $.dore = function (element, options) {
 
     $("body").on("click", ".notify-btn", function (event) {
       event.preventDefault();
-      showNotification($(this).data("from"), $(this).data("align"), "primary");
+        showNotification($(this).data("from"), $(this).data("align"), "primary");
+
     });
 
     /* 03.13. Owl carousel */

@@ -142,30 +142,38 @@ namespace FoodOrder.Controllers
                 var dishes = await db.Dishes.Include(d => d.Garnish).Include(d => d.DishCategory).ToListAsync();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
                 var garnishes = dishes.Where(d => d.DishCategoryId == "ZdesDolzhenBitGarnir");
-                var menu = db.Menus.Include(m => m.Dishes).Where(c => c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
-
-                string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
-
-                var dishCategories = categories.Select(c => new DishCategory()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    DateOfCreation = c.DateOfCreation,
-                    Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
-
-                });
-
-                MenuViewModel menuViewModel = new MenuViewModel
-                {
-                    Menu = menu,
-                    DishCategories = dishCategories.ToList()
-                };
-
 
                 ViewData["Dishes"] = dishes;
                 ViewData["Categories"] = categories;
                 ViewData["Garnishes"] = garnishes;
-                return View("MyDetailsCook", menuViewModel);
+
+                var menu = db.Menus.Include(m => m.Dishes).Where(c => c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
+
+                if (menu != null)
+                {
+                    string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
+
+                    var dishCategories = categories.Select(c => new DishCategory()
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        DateOfCreation = c.DateOfCreation,
+                        Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
+
+                    });
+
+                    MenuViewModel menuViewModel = new MenuViewModel
+                    {
+                        Menu = menu,
+                        DishCategories = dishCategories.ToList()
+                    };
+
+                    return View("MyDetailsCook", menuViewModel);
+                }
+                else
+                {
+                    return View("MyDetailsCook");
+                }
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {

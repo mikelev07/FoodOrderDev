@@ -787,6 +787,7 @@
     <Content Include="Views\DishCategories\Index.cshtml" />
     <Content Include="Views\Users\DetailsRepresentative.cshtml" />
     <Content Include="Views\Orders\IndexEmployee.cshtml" />
+    <Content Include="Views\Shared\_LayoutSystemCourt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

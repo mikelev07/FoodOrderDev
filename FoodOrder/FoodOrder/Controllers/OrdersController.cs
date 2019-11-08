@@ -62,23 +62,31 @@ namespace FoodOrder.Controllers
             {
                 var menu = db.Menus.Include(m => m.Dishes).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
-                string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
 
-                var dishCategories = categories.Select(c => new DishCategory()
+                if (menu != null)
                 {
-                    Id = c.Id,
-                    Name = c.Name,
-                    DateOfCreation = c.DateOfCreation,
-                    Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
-                });
+                    string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
 
-                MenuViewModel menuViewModel = new MenuViewModel
+                    var dishCategories = categories.Select(c => new DishCategory()
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        DateOfCreation = c.DateOfCreation,
+                        Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
+                    });
+
+                    MenuViewModel menuViewModel = new MenuViewModel
+                    {
+                        Menu = menu,
+                        DishCategories = dishCategories.ToList()
+                    };
+
+                    return View("IndexEmployee", menuViewModel);
+                }
+                else
                 {
-                    Menu = menu,
-                    DishCategories = dishCategories.ToList()
-                };
-
-                return View("IndexEmployee", menuViewModel);
+                    return View("IndexEmployee");
+                }
             }
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {

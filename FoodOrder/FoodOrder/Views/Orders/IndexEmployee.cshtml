@@ -1,7 +1,7 @@
 ﻿@model FoodOrder.Models.MenuViewModel
 
 @{
-    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
+    Layout = "~/Views/Shared/_LayoutSystemCourt.cshtml";
     ViewBag.Title = "Меню на сегодня";
 }
     <main>
@@ -70,7 +70,7 @@
                                                                                     Подробнее
                                                                                 </a>
                                                                                
-                                                                                <a href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
+                                                                                <a onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
                                                                                     <i class="iconsminds-add-cart"></i>
                                                                                     Добавить
                                                                                 </a>
@@ -116,7 +116,7 @@
                         <div class="card-body">
                             <h2 class="mb-4">Меню на сегодня</h2>
                             <p class="text-muted  mb-0 font-weight-light">
-                                Вы не создавали еще меню на сегодня...
+                               Меню на сегодня отсутсвует...
                             </p>
 
                         </div>
@@ -139,91 +139,13 @@
                     </div>
 
                     <div class="modal-body scroll pt-0 pb-0 mt-4 mb-4">
-                        <div class="accordion" id="accordion">
-                            <div class="mb-2">
-                                <button class="btn btn-link p-0 folder-button-collapse" data-toggle="collapse"
-                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <span class="icon-container">
-                                        <i class="simple-icon-arrow-down"></i>
-                                    </span>
-                                    <span class="folder-name">Горячее</span>
-                                </button>
-                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                    <div class="list disable-text-selection">
-                                        <div class="row">
+                        <div class="accordion" id="accordionSet">
 
-                                            <div class="col-6 mb-1 sfl-item-container"
-                                                 data-preview-path="~/Content/img/chock.jpg"
-                                                 data-path="chock.jpg"
-                                                 data-label="chock.jpg">
-                                                <div class="card d-flex mb-2 p-0 media-thumb-container">
-                                                    <div class="d-flex align-self-stretch">
-                                                        <img src="~/Content/img/chock.jpg" alt="изображение"
-                                                             class="list-media-thumbnail responsive border-0" />
-                                                    </div>
-                                                    <div class="d-flex flex-grow-1 min-width-zero">
-                                                        <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
-                                                            <div class="w-100">
-                                                                <p class="truncate mb-0">chock.jpg</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
-                                                            <label class="custom-control custom-checkbox mb-0">
-                                                                <input type="checkbox" class="custom-control-input">
-                                                                <span class="custom-control-label"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <button class="btn btn-link p-0 folder-button-collapse collapsed" data-toggle="collapse"
-                                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <span class="icon-container">
-                                        <i class="simple-icon-arrow-down"></i>
-                                    </span>
-                                    <span class="folder-name">Супы</span>
-                                </button>
+                         
 
-                                <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                    <div class="list disable-text-selection">
-                                        <div class="row">
-                                            <div class="col-6 mb-1 sfl-item-container"
-                                                 data-preview-path="~/Content/img/chock.jpg"
-                                                 data-path="chock.jpg"
-                                                 data-label="chock.jpg">
-                                                <div class="card d-flex mb-2 p-0 media-thumb-container">
-                                                    <div class="d-flex align-self-stretch">
-                                                        <img src="~/Content/img/chock.jpg" alt="uploaded image"
-                                                             class="list-media-thumbnail responsive border-0" />
-                                                    </div>
-                                                    <div class="d-flex flex-grow-1 min-width-zero">
-                                                        <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
-                                                            <div class="w-100">
-                                                                <p class="truncate mb-0">chocolate-cake-thumb.jpg</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
-                                                            <label class="custom-control custom-checkbox mb-0">
-                                                                <input type="checkbox" class="custom-control-input">
-                                                                <span class="custom-control-label"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
                         <button type="button" class="btn btn-primary sfl-submit">Завершить заказ</button>
@@ -245,8 +167,81 @@
             
         }).modal('show');
 
-   
         });
+
+        function addInCart(id, catName, dishName, dishId) {
+
+           
+            var constCol = 'collapse-cat-' + dishId;
+
+
+            alert(catName)
+            var isEqual = $('.folder-name').text() != catName;
+            alert(isEqual)
+
+            if (isEqual) {
+
+                var buttonCollapse = '<button class="btn btn-link p-0 folder-button-collapse" data-toggle="' + constCol + '"  data-target="#' + constCol + '" aria-expanded="true" aria-controls="' + constCol + '"><span class="icon-container"> <i class="simple-icon-arrow-down"></i></span><span class="folder-name">' + catName + '</span></button>';
+
+                var contentCollapse = '<div id="' + constCol + '" class="collapse show" data-parent="#accordionSet"> <div class="list disable-text-selection"><div id="content-'+constCol+'" class="row"> </div></div></div>';
+
+                var mb2 = '<div class="mb-2">' + buttonCollapse + contentCollapse + '</div>';
+
+                var specId = 'content-' + constCol;
+
+                $('#accordionSet').append(mb2);
+
+                var imageDish = '<div class="d-flex align-self-stretch"> <img src="~/Content/img/chock.jpg" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
+
+                var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">'+ dishName +'</p></div></div>'
+                var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
+                var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
+
+                var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
+                var dishContainer = '<div id="di' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + '</div>'
+
+                $('#' + specId).append(dishContainer)
+               
+
+            } else {
+
+                var specId = 'content-' + constCol;
+                var imageDish = '<div class="d-flex align-self-stretch"> <img src="~/Content/img/chock.jpg" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
+
+                var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">'+ dishName +'</p></div></div>'
+                var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
+                var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
+
+                var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
+                var dishContainer = '<div id="di' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + '</div>'
+
+                alert(id)
+                var dId = 'di' + id;
+                if ($('#' + dId).length == 0) {
+                    $('#' + specId).append(dishContainer)
+                } else {
+                    alert("Блюдо уже добавлено в заказ")
+                }
+            }
+            /*
+          $.ajax({
+                type: "GET",
+                url: '/Dishes/DeleteJson',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                data: {
+                    "id": dishId
+                },
+                type: 'GET',
+                success: function (result) {
+                    $('#dish-card-' + dishId).remove();
+                },
+                error: function () {
+                    console.log("Error while calling method '/Dishes/DeleteJson'");
+                }
+            }); */
+
+        }
 
     </script>
     

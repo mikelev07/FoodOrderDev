@@ -73,6 +73,11 @@ namespace FoodOrder.Models
 
     }
 
+    public class ChoosenDish
+    {
+        public Dish Dish { get; set; }
+        public Dish Garinsh { get; set; }
+    }
 
     public class Dish
     {

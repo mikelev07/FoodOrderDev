@@ -612,10 +612,12 @@ $.dore = function (element, options) {
     });
 
     $(".main-menu").on("click", "a", function (event) {
-      event.preventDefault();
-      var link = $(this)
-        .attr("href")
-        .replace("#", "");
+        event.preventDefault();
+        
+            var link = $(this)
+                .attr("href")
+                .replace("#", "");
+        
       if ($(".sub-menu ul[data-link='" + link + "']").length == 0) {
         var target = $(this).attr("target");
         if ($(this).attr("target") == null) {

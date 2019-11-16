@@ -40,6 +40,9 @@ namespace FoodOrder.Controllers
         public ActionResult Create()
         {
             ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
+            DishCategory Granishlist = db.DishCategories.Include(d => d.Dishes).Where(c => c.Id == "ZdesDolzhenBitGarnir").FirstOrDefault();
+            ViewBag.Garnishes = Granishlist.Dishes.Select(c => c.Name).ToList();
+
             return View();
         }
 

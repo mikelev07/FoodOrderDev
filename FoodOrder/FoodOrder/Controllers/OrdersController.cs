@@ -134,6 +134,11 @@ namespace FoodOrder.Controllers
             return View();
         }
 
+        public ActionResult SucessOrder()
+        {
+            return View();
+        }
+
         // POST: Orders/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -151,6 +156,32 @@ namespace FoodOrder.Controllers
             ViewBag.UserId = new SelectList(db.Users, "Id", "SecondName", order.UserId);
             return View(order);
         }
+
+
+
+        public async Task<ActionResult> CreateJson(string[] IDs)
+        {
+            List<Dish> dishes = db.Dishes.Where(c => IDs.Contains(c.Id)).ToList();
+            var dateOfCreation = DateTime.UtcNow;
+            string uid = User.Identity.GetUserId();
+            Order order = new Order()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                Dishes = dishes,
+                DateOfCreation = dateOfCreation,
+                UserId = uid,
+                Status = OrderStatus.Done
+            };
+
+           
+            db.Orders.Add(order);
+            await db.SaveChangesAsync();
+
+            var redirectUrl = new UrlHelper(Request.RequestContext).Action("SucessOrder", "Orders");
+            return Json(new { Url = redirectUrl });
+        }
+
+
 
         // GET: Orders/Edit/5
         public async Task<ActionResult> Edit(string id)

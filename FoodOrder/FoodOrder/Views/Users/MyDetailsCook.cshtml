@@ -91,7 +91,7 @@
                                                                         <p class="list-item-heading mb-4 pt-1 dish-category-name">@dish.DishCategory.Name</p>
                                                                         @if (dish.HasGarnish)
                                                                         {
-                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром : @dish.Garnish.Name</p>
+                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром : </p>
                                                                         }
                                                                         else
                                                                         {
@@ -977,11 +977,7 @@
             var carbonhydrates = $("#dish-creation-carbonhydrates").val();
             var kilocalories = $("#dish-creation-kilocalories").val();
 
-            //если что-то не ввели, то бог нам судья
-            if (!dishName || !categoryName || (!hasGarnish && !garnishName) || !proteins || !fats || !carbonhydrates || !kilocalories) {
-                alert('Заполните все поля!');//нужен снэкбар
-            }
-            else {
+         
                 //проверяем, существует ли уже блюдо с таким названием
                 $.ajax({
                     type: "GET",
@@ -1126,7 +1122,7 @@
                 });
 
 
-            }
+            
 
         });
 

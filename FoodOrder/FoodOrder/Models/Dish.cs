@@ -96,7 +96,15 @@ namespace FoodOrder.Models
         public string ImagePath { get; set; }
         public double Price { get; set; }
 
+        public List<Dish> Garnishes { get; set; }
+
+        public Dish()
+        {
+            Garnishes = new List<Dish>();
+        }
+
     }
+
 
     public enum OrderStatus
     {

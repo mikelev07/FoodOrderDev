@@ -41,7 +41,7 @@ namespace FoodOrder.Controllers
         {
             ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
             DishCategory Granishlist = db.DishCategories.Include(d => d.Dishes).Where(c => c.Id == "ZdesDolzhenBitGarnir").FirstOrDefault();
-            ViewBag.Garnishes = Granishlist.Dishes.Select(c => c.Name).ToList();
+            ViewBag.Garnishes = Granishlist.Dishes.ToList();
 
             return View();
         }
@@ -51,13 +51,56 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateOfCreation,Dishes,Packs")] Menu menu, ICollection<string> ints)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateOfCreation,Dishes,Packs")] Menu menu, ICollection<string> ints, ICollection<string> intsGar)
         {
             if (ModelState.IsValid)
             {
 
-                List<Dish> dishes = db.Dishes.Where(c => ints.Contains(c.Id)).ToList();
+               var keyValuePairs = ints.Zip(intsGar, (s, i) => new { s, i })
+                          .ToDictionary(item => item.s, item => item.i);
 
+
+                List<Dish> dishes = db.Dishes.Include(c =>c.Garnishes).Where(c => keyValuePairs.Keys.Contains(c.Id)).ToList();
+
+
+                
+                for (var i = 0; i < dishes.Count; )
+                {
+                    foreach (var garn in keyValuePairs)
+                    {
+                        var tValues = garn.Value.Split(',');
+                        db.Entry(dishes[i]).State = EntityState.Modified;
+                        dishes[i].Garnishes.Clear();
+                        dishes[i].Garnishes.AddRange(db.Dishes.Where(c => tValues.Contains(c.Id)).ToList());
+                        db.SaveChanges();
+                        i++;
+                        
+                    }
+                   
+                }
+
+
+               // List<Dish> garns = db.Dishes.Where(c => intsGar.Contains(c.Id)).ToList();
+
+                /*  var withGarnishes = dishes.Select(y => new Dish
+                  {
+                      Id = y.Id,
+                      Name= y.Name,
+                      DateOfCreation = y.DateOfCreation,
+                      DishCategory = y.DishCategory,
+                      DishCategoryId = y.DishCategoryId,
+                      HasGarnish = y.HasGarnish,
+                      GarnishId = y.GarnishId,
+                      Garnish = y.Garnish,
+                      Proteins = y.Proteins,
+                      Fats = y.Fats,
+                      Carbonhydrates = y.Carbonhydrates,
+                      Kilocalories = y.Kilocalories,
+                      ImagePath = y.ImagePath,
+                      Price = y.Price,
+                      Garnishes = 
+                  }); 
+                  */
                 Menu menuObject = new Menu
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -65,7 +108,7 @@ namespace FoodOrder.Controllers
                     DateOfCreation = DateTime.Now,
                     Dishes = dishes
                 };
-
+                //await db.SaveChangesAsync();
                 db.Menus.Add(menuObject);
                 await db.SaveChangesAsync();
                 return RedirectToAction("MyDetails", "Users");

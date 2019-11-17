@@ -193,37 +193,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperExtensions.cs" />
-    <Compile Include="Migrations\201910241032593_asdas12s.cs" />
-    <Compile Include="Migrations\201910241032593_asdas12s.Designer.cs">
-      <DependentUpon>201910241032593_asdas12s.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910251149400_asd.cs" />
-    <Compile Include="Migrations\201910251149400_asd.Designer.cs">
-      <DependentUpon>201910251149400_asd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910251151175_asd1.cs" />
-    <Compile Include="Migrations\201910251151175_asd1.Designer.cs">
-      <DependentUpon>201910251151175_asd1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910251427266_DishChanges.cs" />
-    <Compile Include="Migrations\201910251427266_DishChanges.Designer.cs">
-      <DependentUpon>201910251427266_DishChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910260652298_asdasdasd.cs" />
-    <Compile Include="Migrations\201910260652298_asdasdasd.Designer.cs">
-      <DependentUpon>201910260652298_asdasdasd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910260720432_123qwe.cs" />
-    <Compile Include="Migrations\201910260720432_123qwe.Designer.cs">
-      <DependentUpon>201910260720432_123qwe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910261227552_bullshit.cs" />
-    <Compile Include="Migrations\201910261227552_bullshit.Designer.cs">
-      <DependentUpon>201910261227552_bullshit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910270639548_NewMigra.cs" />
-    <Compile Include="Migrations\201910270639548_NewMigra.Designer.cs">
-      <DependentUpon>201910270639548_NewMigra.cs</DependentUpon>
+    <Compile Include="Migrations\201911171201549_asdas.cs" />
+    <Compile Include="Migrations\201911171201549_asdas.Designer.cs">
+      <DependentUpon>201911171201549_asdas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -808,29 +780,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910241032593_asdas12s.resx">
-      <DependentUpon>201910241032593_asdas12s.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910251149400_asd.resx">
-      <DependentUpon>201910251149400_asd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910251151175_asd1.resx">
-      <DependentUpon>201910251151175_asd1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910251427266_DishChanges.resx">
-      <DependentUpon>201910251427266_DishChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910260652298_asdasdasd.resx">
-      <DependentUpon>201910260652298_asdasdasd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910260720432_123qwe.resx">
-      <DependentUpon>201910260720432_123qwe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910261227552_bullshit.resx">
-      <DependentUpon>201910261227552_bullshit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910270639548_NewMigra.resx">
-      <DependentUpon>201910270639548_NewMigra.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911171201549_asdas.resx">
+      <DependentUpon>201911171201549_asdas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,7 +12,7 @@
                 <h1>Создание меню</h1>
                 <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                     <ol class="breadcrumb pt-0">
-                       
+
                         <li class="breadcrumb-item">
                             <a href="/Users/MyDetails">Личный кабинет</a>
                         </li>
@@ -124,7 +124,10 @@
                                                             <div class="col-6 mb-1 sfl-item-container"
                                                                  data-preview-path="../Content/img/chock.jpg"
                                                                  data-path="@a.Id"
-                                                                 data-label="@a.Name">
+                                                                 data-label="@a.Name"
+                                                                 data-inp=""
+                                                                 id="bigCard-@a.Id"
+                                                                 >
                                                                 <div class="card d-flex mb-2 p-0 media-thumb-container">
                                                                     <div class="d-flex align-self-stretch">
                                                                         <img src="~/Content/img/chock.jpg" alt="изображение"
@@ -136,14 +139,15 @@
                                                                                 <p class="truncate mb-0">@a.Name</p>
                                                                                 @if (a.HasGarnish)
                                                                                 {
-                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm"> + Гарнир</a>
-                                                                                } else
+                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> + Гарнир</a>
+                                                                                }
+                                                                                else
                                                                                 {
                                                                                     <p style="color:red" class="truncate mb-0">Нет гарнира</p>
                                                                                 }
                                                                             </div>
                                                                         </div>
-                                                                      
+                                                                        <div id="garn-@a.Id" style="display:none"></div>
                                                                         <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
                                                                             <label class="custom-control custom-checkbox mb-0">
                                                                                 <input type="checkbox" class="custom-control-input">
@@ -176,30 +180,56 @@
 
             </div>
 
-            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Гарнир для блюда</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                @foreach (string i in ViewBag.Garnishes)
-                                {
-                                    <label for="dish-creation-garnish-checkbox">
-                                        <span>@i <input id="dish-creation-garnish-checkbox" type="checkbox" /></span>
-                                    </label>
-                                }
+            @foreach (FoodOrder.Models.DishCategory i in ViewBag.DishCategory)
+            {
+
+                foreach (var a in i.Dishes)
+                {
+                    <div class="modal fade bd-example-modal-sm-@a.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Гарнир для блюда</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
+                                <div class="modal-body">
+                                    <div id="table-@a.Id" class="form-group">
+                                        @foreach (FoodOrder.Models.Dish n in ViewBag.Garnishes)
+                                        {
+                                            <label for="dish-creation-garnish-checkbox">
+                                                <span> <input id="dish-creation-garnish-checkbox" value="@n.Id" type="checkbox" /> @n.Name </span>
+                                            </label> <br />
+                                        }
+
+                                    </div>
+                                    <button onclick="isCheckBoxedArray('@a.Id')" class="btn btn-outline-primary" data-dismiss="modal" aria-label="Close">Сохранить выбранные гарниры</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
+                }
+            }
 
 </main>
+
+@section Scripts  {
+    <script>
+
+        function isCheckBoxedArray(id) {
+
+            var searchingTable = '#table-' + id;
+            var searchIDs = $(searchingTable + " input:checkbox:checked").map(function () {
+                return $(this).val();
+            }).get();
+
+            var garn = '#bigCard-' + id;
+            $(garn).attr('data-inp', searchIDs)
+    
+        }
+
+    </script>
+}
 
 

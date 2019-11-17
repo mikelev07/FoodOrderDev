@@ -148,7 +148,7 @@ namespace FoodOrder.Controllers
 
             if (hasGarnish)
             {
-                dish.GarnishId = garnishId;
+               // dish.GarnishId = garnishId;
             }
 
             db.Dishes.Add(dish);
@@ -175,7 +175,7 @@ namespace FoodOrder.Controllers
             dish.HasGarnish = hasGarnish;
             if (hasGarnish)
             {
-                dish.GarnishId = garnishId;
+                //dish.GarnishId = garnishId;
             }
             dish.Proteins = proteins;
             dish.Fats = fats;

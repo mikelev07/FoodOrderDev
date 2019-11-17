@@ -63,19 +63,37 @@ namespace FoodOrder.Controllers
                 List<Dish> dishes = db.Dishes.Include(c =>c.Garnishes).Where(c => keyValuePairs.Keys.Contains(c.Id)).ToList();
 
 
-                
+               
                 for (var i = 0; i < dishes.Count; i++)
                 {
                     var d = dishes[i]; 
                     var garn = keyValuePairs[d.Id]; // цепочка гарниров для блюда
                     var tValues = garn.Split(','); // делаем массив
                     var changeList = db.Dishes.Where(c => tValues.Contains(c.Id)).ToList();
-                       
-                    db.Entry(d).State = EntityState.Modified;
+                    var clist = new List<Garnish>();
+                    for (var a = 0; a < changeList.Count; a++)
+                    {
+                        var ret = changeList[a].Id;
+                        if (db.Garnishes.Where(c => c.Id == ret).FirstOrDefault()!=null)
+                        {
+                            clist.Add(db.Garnishes.Where(c => ret == c.Id).FirstOrDefault());
+                        }
+                        else
+                        {
+                            var obj = new Garnish();
+                            obj.Id = changeList[a].Id;
+                            obj.Name = changeList[a].Name;
+                            obj.Dishes.Add(d);
+                            db.Garnishes.Add(obj);
+                            db.SaveChanges();
+                            clist.Add(obj);
+                        }
+                    }
+                   // db.Entry(d).State = EntityState.Modified;
                         //d.Garnishes.Clear();
-                    d.Garnishes = changeList; 
+                    d.Garnishes = clist; 
                 }
-                db.SaveChanges();
+               
                 var dishesFix = dishes;
 
 

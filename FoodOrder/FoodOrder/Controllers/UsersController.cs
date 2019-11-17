@@ -139,7 +139,7 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {
-                var dishes = await db.Dishes.Include(d => d.Garnish).Include(d => d.DishCategory).ToListAsync();
+                var dishes = await db.Dishes.Include(d => d.DishCategory).ToListAsync();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
                 var garnishes = dishes.Where(d => d.DishCategoryId == "ZdesDolzhenBitGarnir");
 
@@ -147,7 +147,7 @@ namespace FoodOrder.Controllers
                 ViewData["Categories"] = categories;
                 ViewData["Garnishes"] = garnishes;
 
-                var menu = db.Menus.Include(m => m.Dishes).Where(c => c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
+                var menu = db.Menus.Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c => c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
 
                 if (menu != null)
                 {

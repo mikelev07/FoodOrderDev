@@ -42,7 +42,7 @@
 
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="mb-4">Веганское меню</h5>
+                            <h5 class="mb-4">@Model.Menu.Name</h5>
                             <p style="margin-top:-15px;margin-bottom:10px" class="text-muted text-small mb-0 font-weight-light">18.08.2019</p>
                             <div style="margin-top: 20px;" id="accordion">
 
@@ -91,7 +91,12 @@
                                                                         <p class="list-item-heading mb-4 pt-1 dish-category-name">@dish.DishCategory.Name</p>
                                                                         @if (dish.HasGarnish)
                                                                         {
-                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром : </p>
+                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром : 
+                                                                                @foreach (var a in dish.Garnishes)
+                                                                                {
+                                                                                    @a.Name
+                                                                                }
+                                                                        </p>
                                                                         }
                                                                         else
                                                                         {

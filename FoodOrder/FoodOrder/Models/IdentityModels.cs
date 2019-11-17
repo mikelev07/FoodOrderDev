@@ -177,6 +177,7 @@ namespace FoodOrder.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Company>().HasMany(m => m.Employees);
+  
             modelBuilder.Entity<Order>()
                 .HasRequired(m => m.User)
                 .WithMany(m => m.Orders)
@@ -187,6 +188,13 @@ namespace FoodOrder.Models
                 .WithMany(m=>m.Employees)
                 .HasForeignKey(m=>m.CompanyId)
                 .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Dish>().HasMany(c => c.Garnishes)
+                  .WithMany(s => s.Dishes)
+                  .Map(t => t.MapLeftKey("DishId")
+                  .MapRightKey("GarnishId")
+                  .ToTable("DishGarnish"));
+
         }
 
         public static ApplicationDbContext Create()
@@ -198,6 +206,7 @@ namespace FoodOrder.Models
         public DbSet<RoleViewModel> IdentityRoles { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Dish> Dishes { get; set; }
+        public DbSet<Garnish> Garnishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
 

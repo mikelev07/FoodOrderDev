@@ -87,8 +87,8 @@ namespace FoodOrder.Models
         public DishCategory DishCategory { get; set; }
         public string DishCategoryId { get; set; }
         public bool HasGarnish { get; set; }
-        public string GarnishId { get; set; }
-        public Dish Garnish { get; set; }
+      //  public string GarnishId { get; set; }
+      //  public Dish Garnish { get; set; }
         public double Proteins { get; set; }
         public double Fats { get; set; }
         public double Carbonhydrates { get; set; }
@@ -96,11 +96,23 @@ namespace FoodOrder.Models
         public string ImagePath { get; set; }
         public double Price { get; set; }
 
-        public List<Dish> Garnishes { get; set; }
+        public ICollection<Garnish> Garnishes { get; set; }
 
         public Dish()
         {
-            Garnishes = new List<Dish>();
+            Garnishes = new List<Garnish>();
+        }
+
+    }
+
+    public class Garnish
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<Dish> Dishes { get; set; }
+        public Garnish()
+        {
+            Dishes = new List<Dish>();
         }
 
     }

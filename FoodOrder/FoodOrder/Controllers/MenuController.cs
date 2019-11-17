@@ -64,20 +64,19 @@ namespace FoodOrder.Controllers
 
 
                 
-                for (var i = 0; i < dishes.Count; )
+                for (var i = 0; i < dishes.Count; i++)
                 {
-                    foreach (var garn in keyValuePairs)
-                    {
-                        var tValues = garn.Value.Split(',');
-                        db.Entry(dishes[i]).State = EntityState.Modified;
-                        dishes[i].Garnishes.Clear();
-                        dishes[i].Garnishes.AddRange(db.Dishes.Where(c => tValues.Contains(c.Id)).ToList());
-                        db.SaveChanges();
-                        i++;
-                        
-                    }
-                   
+                    var d = dishes[i]; 
+                    var garn = keyValuePairs[d.Id]; // цепочка гарниров для блюда
+                    var tValues = garn.Split(','); // делаем массив
+                    var changeList = db.Dishes.Where(c => tValues.Contains(c.Id)).ToList();
+                       
+                    db.Entry(d).State = EntityState.Modified;
+                        //d.Garnishes.Clear();
+                    d.Garnishes = changeList; 
                 }
+                db.SaveChanges();
+                var dishesFix = dishes;
 
 
                // List<Dish> garns = db.Dishes.Where(c => intsGar.Contains(c.Id)).ToList();
@@ -106,7 +105,7 @@ namespace FoodOrder.Controllers
                     Id = Guid.NewGuid().ToString(),
                     Name = menu.Name,
                     DateOfCreation = DateTime.Now,
-                    Dishes = dishes
+                    Dishes = dishesFix
                 };
                 //await db.SaveChangesAsync();
                 db.Menus.Add(menuObject);

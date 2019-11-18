@@ -71,35 +71,30 @@
                                                                             @if (dish.HasGarnish)
                                                                             {
                                                                                 @* <p class="list-item-heading  dish-garnish">C гарниром : @dish.Garnish.Name</p>*@
-                                                                                <div class="form-group col-md-4">
-                                                                                    <label for="inputState">State</label>
-                                                                                    <select id="inputState" class="form-control">
-                                                                                        <option selected>Гарнир...</option>
-                                                                                    </select>
-                                                                                </div>
 
+                                                                                <div style="margin-bottom:5px">
+                                                                                <select id="gch-@dish.Id"  class="form-control select2-single">
+                                                                                    <option label="&nbsp;">Выберите гарнир...</option>
 
+                                                                                    @foreach (var a in dish.Garnishes)
+                                                                                    {
+                                                                                        <option value="@a.Id">@a.Name</option>
+                                                                                    }
+
+                                                                                </select>
+                                                                               </div>
                                                                             }
                                                                             else
                                                                             {
                                                                                 <p class="list-item-heading  dish-garnish">Без гарнира</p>
-                                                                                <div style="margin-bottom:5px">
-                                                                                    <select style="margin-bottom:5px" class="form-control select2-single">
-                                                                                        <option label="&nbsp;">Выберите гарнир...</option>
-                                                                                        <option value="CA">California</option>
-                                                                                        <option value="NV">Nevada</option>
-                                                                                        <option value="OR">Oregon</option>
-                                                                                        <option value="WA">Washington</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                
+
                                                                             }
                                                                             <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
                                                                                role="button" aria-expanded="true" aria-controls="collapseExample">
                                                                                 Подробнее
                                                                             </a>
 
-                                                                            <a onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
+                                                                            <a onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId', this)" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
                                                                                 <i class="iconsminds-add-cart"></i>
                                                                                 Добавить
                                                                             </a>
@@ -164,7 +159,7 @@
                                                                             <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
                                                                             @if (dish.HasGarnish)
                                                                             {
-                                                                                <p class="list-item-heading  dish-garnish">C гарниром : @dish.Garnish.Name</p>
+                                                                              
                                                                             }
                                                                             else
                                                                             {
@@ -272,8 +267,12 @@
         });
 
       
-        function addInCart(id, catName, dishName, dishId) {
-           
+        function addInCart(id, catName, dishName, dishId, el) {
+
+            var chg = "#gch-" + id;
+            var garId = $(chg).find(":selected").val();
+            var garName = $(chg).find(":selected").text();
+
             var constCol = 'collapse-cat-' + dishId;
 
             //alert(catName)
@@ -297,12 +296,16 @@
 
                 var imageDish = '<div class="d-flex align-self-stretch"> <img src="~/Content/img/chock.jpg" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
 
-                var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">'+ dishName +'</p></div></div>'
+                var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dishName +'</p><p>'+ 'Гарнир: '+ garName +'</p></div></div>'
                 var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
                 var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
 
                 var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
-                var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + '</div>'
+
+                 var c = '<input class="certain" id="garr-' + garId + '" type="hidden" value="' + garId + '"></input>'
+                var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + c + '</div>'
+               
+               // cardDish.append(c);
 
                 $('#' + specId).append(dishContainer)
             } else {
@@ -310,12 +313,15 @@
                 var specId = 'content-' + constCol;
                 var imageDish = '<div class="d-flex align-self-stretch"> <img src="~/Content/img/chock.jpg" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
 
-                var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">'+ dishName +'</p></div></div>'
+                var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dishName + '</p><p>'+ 'Гарнир: '+ garName +'</p></div></div>'
                 var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
                 var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
 
                 var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
-                var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + '</div>'
+
+                var c = '<input class="certain" id="garr-' + garId + '" type="hidden" value="' + garId + '"></input>'
+                var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + c + '</div>'
+
 
                 var dId = 'di-' + id;
                 if ($('#' + dId).length == 0) {
@@ -348,17 +354,22 @@
         $("#endOrder").on('click', function () { 
 
             var IDs = [];
+            var GarIds = [];
             $("#accordionSet .sfl-item-container").each(function () { IDs.push(this.id.split('-')[1]); });
 
-            alert(IDs)
+            $("#accordionSet .certain").each(function () { GarIds.push(this.id.split('-')[1]); });
 
+            //alert(GarIds)
+
+            alert(IDs)
             
               $.ajax({
                 url: '/Orders/CreateJson',
                 type: 'POST',
                 dataType: "json",
                 data: {
-                    "IDs": IDs
+                    'IDs': IDs,
+                    'GarIds': GarIds
                 },
                 success: function (result) {
                   window.location.href = result.Url;

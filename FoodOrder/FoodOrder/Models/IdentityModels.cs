@@ -205,6 +205,7 @@ namespace FoodOrder.Models
         public DbSet<DishCategory> DishCategories { get; set; }
         public DbSet<RoleViewModel> IdentityRoles { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<ChoosenDish> ChoosenDishes { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Garnish> Garnishes { get; set; }
         public DbSet<Menu> Menus { get; set; }

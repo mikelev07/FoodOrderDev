@@ -60,7 +60,7 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
-                var menu = db.Menus.Include(m => m.Dishes).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
+                var menu = db.Menus.Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
 
                 if (menu != null)
@@ -159,15 +159,40 @@ namespace FoodOrder.Controllers
 
 
 
-        public async Task<ActionResult> CreateJson(string[] IDs)
+        public async Task<ActionResult> CreateJson(string[] IDs, string[] GarIds)
         {
             List<Dish> dishes = db.Dishes.Where(c => IDs.Contains(c.Id)).ToList();
+            List<Garnish> garnishes = db.Garnishes.Where(c => GarIds.Contains(c.Id)).ToList();
+
+
+            List<ChoosenDish> choosenDishes = new List<ChoosenDish>();
+            
+            for (var i =0; i < dishes.Count;)
+            {
+                for (var a = 0; a < garnishes.Count; a++)
+                {
+                    var d = dishes[i];
+                    var g = garnishes[a];
+                    var obj = new ChoosenDish();
+                    obj.Id = Guid.NewGuid().ToString();
+                    obj.Dish = d;
+                    obj.GarinshName = g.Name;
+                    
+                    db.ChoosenDishes.Add(obj);
+                    db.SaveChanges();
+                    choosenDishes.Add(obj);
+                    i++;
+                }
+            }
+
+
+
             var dateOfCreation = DateTime.UtcNow;
             string uid = User.Identity.GetUserId();
             Order order = new Order()
             {
                 Id = Guid.NewGuid().ToString("N"),
-                Dishes = dishes,
+                ChoosenDishes = choosenDishes,
                 DateOfCreation = dateOfCreation,
                 UserId = uid,
                 Status = OrderStatus.Done

@@ -213,6 +213,14 @@
     <Compile Include="Migrations\201911171809239_asdasdasdas.Designer.cs">
       <DependentUpon>201911171809239_asdasdasdas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911180809282_asdasdasd.cs" />
+    <Compile Include="Migrations\201911180809282_asdasdasd.Designer.cs">
+      <DependentUpon>201911180809282_asdasdasd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911180823303_asdasdasdads.cs" />
+    <Compile Include="Migrations\201911180823303_asdasdasdads.Designer.cs">
+      <DependentUpon>201911180823303_asdasdasdads.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -810,6 +818,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911171809239_asdasdasdas.resx">
       <DependentUpon>201911171809239_asdasdasdas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911180809282_asdasdasd.resx">
+      <DependentUpon>201911180809282_asdasdasd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911180823303_asdasdasdads.resx">
+      <DependentUpon>201911180823303_asdasdasdads.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

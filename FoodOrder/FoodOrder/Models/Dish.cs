@@ -15,10 +15,10 @@ namespace FoodOrder.Models
         public User User { get; set; }
         public OrderStatus Status { get; set; }
         public double Price { get; set; }
-        public ICollection<Dish> Dishes { get; set; }
+        public ICollection<ChoosenDish> ChoosenDishes { get; set; }
         public Order()
         {
-            Dishes = new List<Dish>();
+            ChoosenDishes = new List<ChoosenDish>();
         }
     }
 
@@ -75,8 +75,11 @@ namespace FoodOrder.Models
 
     public class ChoosenDish
     {
+        public string Id { get; set; }
         public Dish Dish { get; set; }
-        public Dish Garinsh { get; set; }
+        public string GarinshName { get; set; }
+        public string OrderId { get; set; }
+        public Order Order { get; set; }
     }
 
     public class Dish

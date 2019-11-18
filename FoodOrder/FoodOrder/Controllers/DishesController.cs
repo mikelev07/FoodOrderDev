@@ -126,7 +126,7 @@ namespace FoodOrder.Controllers
         }
 
 
-        public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, string garnishId,
+        public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, 
             double proteins, double fats, double carbonhydrates, double kilocalories)
         {
             var dateOfCreation = DateTime.UtcNow;
@@ -146,11 +146,6 @@ namespace FoodOrder.Controllers
                 Kilocalories = kilocalories
             };
 
-            if (hasGarnish)
-            {
-               // dish.GarnishId = garnishId;
-            }
-
             db.Dishes.Add(dish);
             await db.SaveChangesAsync();
 
@@ -161,7 +156,7 @@ namespace FoodOrder.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> EditJson(string id, string name, string selectedType, bool hasGarnish, string garnishId,
+        public async Task<JsonResult> EditJson(string id, string name, string selectedType, bool hasGarnish, 
             double proteins, double fats, double carbonhydrates, double kilocalories)
         {
             var dish = await db.Dishes.Where(d => d.Id == id).FirstOrDefaultAsync();
@@ -173,10 +168,6 @@ namespace FoodOrder.Controllers
             dish.Name = name;
             dish.DishCategoryId = category.Id;
             dish.HasGarnish = hasGarnish;
-            if (hasGarnish)
-            {
-                //dish.GarnishId = garnishId;
-            }
             dish.Proteins = proteins;
             dish.Fats = fats;
             dish.Carbonhydrates = carbonhydrates;

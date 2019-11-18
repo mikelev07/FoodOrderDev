@@ -91,12 +91,13 @@
                                                                         <p class="list-item-heading mb-4 pt-1 dish-category-name">@dish.DishCategory.Name</p>
                                                                         @if (dish.HasGarnish)
                                                                         {
-                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром : 
+                                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">
+                                                                                C гарниром :
                                                                                 @foreach (var a in dish.Garnishes)
                                                                                 {
                                                                                     @a.Name
                                                                                 }
-                                                                        </p>
+                                                                            </p>
                                                                         }
                                                                         else
                                                                         {
@@ -208,7 +209,7 @@
                                                         <p class="list-item-heading mb-4 pt-1 dish-category-name">@dish.DishCategory.Name</p>
                                                         @if (dish.HasGarnish)
                                                         {
-                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром : </p>
+                                                            <p class="list-item-heading mb-4 pt-1 dish-garnish">C гарниром</p>
                                                         }
                                                         else
                                                         {
@@ -299,7 +300,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="row">
-                                                      
+
                                                         <div class="col-10">
                                                             <a href="Pages.Product.Detail.html">
                                                                 <p class="list-item-heading mb-4 pt-1">Рыба с мясом</p>
@@ -816,22 +817,22 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div id="garnish-checkbox" class="form-group">
                                         <label for="dish-creation-garnish-checkbox">
                                             <span>Наличие гарнира   <input id="dish-creation-garnish-checkbox" type="checkbox" /></span>
                                         </label>
                                     </div>
 
-                                    <div class="form-group" id="dish-creation-select-garnish" style="display:none">
-                                        <label>Вид гарнира</label>
-                                        <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
-                                            <option value="0" label="&nbsp;">Выберите гарнир</option>
-                                            @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
-                                            {
-                                                <option value="@garnish.Id">@garnish.Name</option>
-                                            }
-                                        </select>
-                                    </div>
+                                    @*<div class="form-group" id="dish-creation-select-garnish" style="display:none">
+                                            <label>Вид гарнира</label>
+                                            <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
+                                                <option value="0" label="&nbsp;">Выберите гарнир</option>
+                                                @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
+                                                {
+                                                    <option value="@garnish.Id">@garnish.Name</option>
+                                                }
+                                            </select>
+                                        </div>*@
 
                                     <div class="form-group">
                                         <p>Пищевая ценность (на 100г) :</p>
@@ -946,22 +947,36 @@
                 }
             });
 
-        })
+        });
 
 
-        $('#dish-creation-garnish-checkbox').on('change', function () {
-            if ($(this).prop('checked')) {
-                $('#dish-creation-select-garnish').show();
+        //При выборе типа блюда "Второе блюдо" должна появиться галочка "Наличие гарнира".
+        //В остальных случаях она должна наоборот скрыться
+        $('#dish-creation-select-type').on('change', function () {
+            var categoryElement = $(this).children("option:selected");
+            var categoryName = categoryElement.text();
+            if (categoryName == 'Второе блюдо') {
+                $('#garnish-checkbox').show();
             }
             else {
-                $('#dish-creation-select-garnish').hide();
+                $('#garnish-checkbox').hide();
+                $("#dish-creation-garnish-checkbox").prop("checked", false);
             }
         });
+
+        //$('#dish-creation-garnish-checkbox').on('change', function () {
+        //    if ($(this).prop('checked')) {
+        //        $('#dish-creation-select-garnish').show();
+        //    }
+        //    else {
+        //        $('#dish-creation-select-garnish').hide();
+        //    }
+        //});
 
 
         var editingDishId;
 
-        //Создаем или редактируем блюдо
+        //Создаем или редактируем блюдо (собственно нажатие кнопки в правом поп-апе)
         $("#create-or-edit-dish").on('click', function () {
             var buttonName = $(this).text();
 
@@ -973,107 +988,112 @@
 
             var hasGarnish = $("#dish-creation-garnish-checkbox").is(":checked");
 
-            var garnishElement = $("#dish-creation-select-garnish").children("option:selected");
-            var garnishId = garnishElement.val();
-            var garnishName = garnishElement.text();
+            //var garnishElement = $("#dish-creation-select-garnish").children("option:selected");
+            //var garnishId = garnishElement.val();
+            //var garnishName = garnishElement.text();
 
             var proteins = $("#dish-creation-proteins").val();
             var fats = $("#dish-creation-fats").val();
             var carbonhydrates = $("#dish-creation-carbonhydrates").val();
             var kilocalories = $("#dish-creation-kilocalories").val();
 
-         
-                //проверяем, существует ли уже блюдо с таким названием
-                $.ajax({
-                    type: "GET",
-                    url: '/Dishes/DishAlreadyExists',
-                    contentType: "application/json;charset=utf-8",
-                    dataType: "json",
-                    data: {
-                        "dishName": dishName
-                    },
-                    type: 'GET',
-                    success: function (result) {
-                        //с функции придет true, если такое блюдо уже есть, false - иначе
-                        if (!result) {
-                            //В зависимости от названия кнопки будет срабатывать создание или редактирование
-                            if (buttonName == "Создать") {
-                                $.ajax({
-                                    type: "GET",
-                                    url: '/Dishes/CreateJson',
-                                    contentType: "application/json;charset=utf-8",
-                                    dataType: "json",
-                                    data: {
-                                        "name": dishName,
-                                        "selectedType": selectedCategory,
-                                        "hasGarnish": hasGarnish,
-                                        "garnishId": garnishId,
-                                        "proteins": proteins,
-                                        "fats": fats,
-                                        "carbonhydrates": carbonhydrates,
-                                        "kilocalories": kilocalories
-                                    },
-                                    type: 'GET',
-                                    success: function (newDish) {
 
-                                        var dishHTML = '<div id="dish-card-' + newDish.id + '" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">' +
-                                            '<div class="card">' +
-                                            '<div class="position-relative">' +
-                                            '<div class="position-absolute card-top-buttons">' +
-                                            '<button class="btn btn-outline-white icon-button " data-toggle="modal" data-backdrop="static" data-target="#exampleModal" onclick="EditDish(' + "'" + newDish.id + "'" + ')" title="Редактировать">' +
-                                            '<i class="simple-icon-pencil"></i></button>' +
-                                            '<button class="btn btn-outline-white icon-button" onclick="DeleteDish(' + "'" + newDish.id + "'" + ')" title="Удалить">' +
-                                            '<i class="simple-icon-trash"></i></button></div>' +
-                                            '<a>' +
-                                            '<img class="card-img-top" src="/Content/img/1.jpg"' +
-                                            ' alt="Фото блюда">' +
-                                            '</a>' +
-                                            '</div>' +
-                                            '<div class="card-body">' +
-                                            '<div class="row">' +
-                                            '<div class="col-10">' +
-                                            '<a>' +
-                                            '<p class="list-item-heading mb-4 pt-1"><strong class="dish-name">' + dishName + '</strong></p>' +
-                                            '</a>' +
-                                            '<p class="list-item-heading mb-4 pt-1 dish-category-name">' + categoryName + '</p>';
+            //проверяем, существует ли уже блюдо с таким названием
+            $.ajax({
+                type: "GET",
+                url: '/Dishes/DishAlreadyExists',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                data: {
+                    "dishName": dishName
+                },
+                type: 'GET',
+                success: function (result) {
+                    //с функции придет true, если такое блюдо уже есть, false - иначе
+                    if (!result) {
+                        //В зависимости от названия кнопки будет срабатывать создание или редактирование
+                        if (buttonName == "Создать") {
+                            $.ajax({
+                                type: "GET",
+                                url: '/Dishes/CreateJson',
+                                contentType: "application/json;charset=utf-8",
+                                dataType: "json",
+                                data: {
+                                    "name": dishName,
+                                    "selectedType": selectedCategory,
+                                    "hasGarnish": hasGarnish,
+                                    "proteins": proteins,
+                                    "fats": fats,
+                                    "carbonhydrates": carbonhydrates,
+                                    "kilocalories": kilocalories
+                                },
+                                type: 'GET',
+                                success: function (newDish) {
 
-                                        if (!hasGarnish) {
-                                            dishHTML += '<p class="list-item-heading mb-4 pt-1 dish-garnish">' + "Без гарнира" + '</p>';
-                                        }
-                                        else {
-                                            dishHTML += dishHTML += '<p class="list-item-heading mb-4 pt-1 dish-garnish">' + "С гарниром : " + garnishName + '</p>';
-                                        }
+                                    var dishHTML = '<div id="dish-card-' + newDish.id + '" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">' +
+                                        '<div class="card">' +
+                                        '<div class="position-relative">' +
+                                        '<div class="position-absolute card-top-buttons">' +
+                                        '<button class="btn btn-outline-white icon-button " data-toggle="modal" data-backdrop="static" data-target="#exampleModal" onclick="EditDish(' + "'" + newDish.id + "'" + ')" title="Редактировать">' +
+                                        '<i class="simple-icon-pencil"></i></button>' +
+                                        '<button class="btn btn-outline-white icon-button" onclick="DeleteDish(' + "'" + newDish.id + "'" + ')" title="Удалить">' +
+                                        '<i class="simple-icon-trash"></i></button></div>' +
+                                        '<a>' +
+                                        '<img class="card-img-top" src="/Content/img/1.jpg"' +
+                                        ' alt="Фото блюда">' +
+                                        '</a>' +
+                                        '</div>' +
+                                        '<div class="card-body">' +
+                                        '<div class="row">' +
+                                        '<div class="col-10">' +
+                                        '<a>' +
+                                        '<p class="list-item-heading mb-4 pt-1"><strong class="dish-name">' + dishName + '</strong></p>' +
+                                        '</a>' +
+                                        '<p class="list-item-heading mb-4 pt-1 dish-category-name">' + categoryName + '</p>';
 
-                                        if (categoryName == "Гарнир") {
-                                            //добавляем в список имеющихся гарниров только что созданный
-                                            $('#dish-creation-select-garnish').append($("<option></option>").attr("value", newDish.id).text(garnishName));
-                                        }
-
-                                        dishHTML +=
-                                            '<a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">' +
-                                            'Подробнее</a>' +
-                                            '<div class="collapse" id="collapseExample"><div class="p-4 border mt-4"><p class="mb-0">' +
-                                            '<p class="list-item-heading mb-4 pt-1">Пищевая ценность (на 100г):<br />' +
-                                            'Белки - <span class="dish-proteins">' + proteins + '</span> г<br />' +
-                                            'Жиры - <span class="dish-fats">' + fats + '</span> г<br />' +
-                                            'Углеводы - <span class="dish-carbonhydrates">' + carbonhydrates + '</span> г<br />' +
-                                            '<span class="dish-kilocalories">' + kilocalories + '</span> ккал </p>' +
-                                            '</div></div><footer>' +
-                                            '<p class="text-muted text-small mb-0 font-weight-light">' + newDish.dateOfCreation + '</p>' +
-                                            '</footer></div></div></div></div></div>';
-
-                                        $('#dish-cards').append(dishHTML);
-
-                                        //для скрытия модального окна
-                                        $('#cancell-dish-creation').click();
-                                    },
-                                    error: function () {
-                                        console.log("Error while calling method '/Dishes/CreateJson'");
+                                    if (!hasGarnish) {
+                                        dishHTML += '<p class="list-item-heading mb-4 pt-1 dish-garnish">' + "Без гарнира" + '</p>';
                                     }
-                                });
-                            }
+                                    else {
+                                        dishHTML += '<p class="list-item-heading mb-4 pt-1 dish-garnish">' + "С гарниром" + '</p>';
+                                    }
+
+                                    //if (categoryName == "Гарнир") {
+                                    //    //добавляем в список имеющихся гарниров только что созданный
+                                    //    $('#dish-creation-select-garnish').append($("<option></option>").attr("value", newDish.id).text(garnishName));
+                                    //}
 
 
+                                    var dateToday = new Date();
+                                    var dd = String(dateToday.getDate()).padStart(2, '0');
+                                    var mm = String(dateToday.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                    var yyyy = dateToday.getFullYear();
+                                    dateToday = dd + '.' + mm + '.' + yyyy;
+
+                                    dishHTML +=
+                                        '<a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-' + newDish.id + '" role="button" aria-expanded="true" aria-controls="collapseExample">' +
+                                        'Подробнее</a>' +
+                                        '<div class="collapse" id="collapseExample-d-' + newDish.id + '"><div class="mt-4"><p class="mb-0">' +
+                                        '<p class="list-item-heading mb-4 pt-1">Пищевая ценность (на 100г):<br />' +
+                                        'Белки - <span class="dish-proteins">' + proteins + '</span> г<br />' +
+                                        'Жиры - <span class="dish-fats">' + fats + '</span> г<br />' +
+                                        'Углеводы - <span class="dish-carbonhydrates">' + carbonhydrates + '</span> г<br />' +
+                                        '<span class="dish-kilocalories">' + kilocalories + '</span> ккал </p>' +
+                                        '</div></div><footer style="margin-top:10px">' +
+                                        '<p class="text-muted text-small mb-0 font-weight-light">' + dateToday + '</p>' +
+                                        '</footer></div></div></div></div></div>';
+
+                                    $('#dish-cards').append(dishHTML);
+
+                                    //для скрытия модального окна
+                                    $('#cancell-dish-creation').click();
+                                },
+                                error: function () {
+                                    console.log("Error while calling method '/Dishes/CreateJson'");
+                                }
+                            });
+                        }
+                        else {
                             //Скрипт редактирования блюда
                             if (buttonName == "Редактировать") {
                                 $.ajax({
@@ -1086,7 +1106,7 @@
                                         "name": dishName,
                                         "selectedType": selectedCategory,
                                         "hasGarnish": hasGarnish,
-                                        "garnishId": garnishId,
+                                        //"garnishId": garnishId,
                                         "proteins": proteins,
                                         "fats": fats,
                                         "carbonhydrates": carbonhydrates,
@@ -1098,7 +1118,7 @@
                                         $(dishCardDiv + " .dish-name").text(dishName);
                                         $(dishCardDiv + " .dish-category-name").text(categoryName);
                                         if (hasGarnish) {
-                                            $(dishCardDiv + " .dish-garnish").text('С гарниром :' + garnishName);
+                                            $(dishCardDiv + " .dish-garnish").text('С гарниром');
                                         }
                                         else {
                                             $(dishCardDiv + " .dish-garnish").text('Без гарнира');
@@ -1117,31 +1137,33 @@
                                 });
                             }
                         }
-                        else {
-                            alert('Блюдо с таким названием уже существует!');//нужен снэкбар
-                        }
-                    },
-                    error: function () {
-                        console.log("Error while calling method '/Dishes/DishAlreadyExists'");
                     }
-                });
+                    else {
+                        alert('Блюдо с таким названием уже существует!');//нужен снэкбар
+                    }
+                },
+                error: function () {
+                    console.log("Error while calling method '/Dishes/DishAlreadyExists'");
+                }
+            });
 
 
-            
+
 
         });
 
-        //для сброса полей формы создания блюда, и переименования заголовка и кнопки формы
+        //При создании нового блюда сбрасываем все опции на форме
         $('#create-dish-popup').on('click', function () {
             $('#exampleModalLabel').text('Создание блюда');
             $('#create-or-edit-dish').text('Создать');
 
             $("#dish-creation-name").val('');
-            $("#dish-creation-select-type").val(0);
+            $("#dish-creation-select-type").val(0); // не пашет
 
+            $("#garnish-checkbox").hide();
             $("#dish-creation-garnish-checkbox").prop('checked', false);
-            $("#dish-creation-select-garnish").hide();
-            $("#dish-creation-select-garnish").val(0);
+            //$("#dish-creation-select-garnish").hide();
+            //$("#dish-creation-select-garnish").val(0);
 
             $("#dish-creation-proteins").val('');
             $("#dish-creation-fats").val('');
@@ -1166,9 +1188,9 @@
             var dishCategoryName = $(currentDish + " .dish-category-name").text();
 
             var dishGarnishName = $(currentDish + " .dish-garnish").text();
-            if (hasGarnish) {
-                dishGarnishName = dishGarnishName.substring(13);
-            }
+            //if (hasGarnish) {
+            //    dishGarnishName = dishGarnishName.substring(13);
+            //}
 
             var dishProteins = $(currentDish + " .dish-proteins").text();
             var dishFats = $(currentDish + " .dish-fats").text();
@@ -1181,14 +1203,14 @@
             $('#dish-creation-select-type option').filter(function () { return $(this).html() == dishCategoryName; }).prop('selected', 'selected');
 
             $("#dish-creation-garnish-checkbox").prop('checked', hasGarnish);
-            if (hasGarnish) {
-                $("#dish-creation-select-garnish").show();
-            }
-            else {
-                $("#dish-creation-select-garnish").hide();
-            }
+            //if (hasGarnish) {
+            //    $("#dish-creation-select-garnish").show();
+            //}
+            //else {
+            //    $("#dish-creation-select-garnish").hide();
+            //}
 
-            $("#dish-creation-select-garnish option").filter(function () { return $(this).html() == dishGarnishName; }).prop('selected', 'selected');
+            //$("#dish-creation-select-garnish option").filter(function () { return $(this).html() == dishGarnishName; }).prop('selected', 'selected');
 
             $("#dish-creation-proteins").val(dishProteins);
             $("#dish-creation-fats").val(dishFats);

@@ -161,7 +161,7 @@ namespace FoodOrder.Controllers
 
         public async Task<ActionResult> CreateJson(string[] IDs, string[] GarIds)
         {
-            List<Dish> dishes = db.Dishes.Where(c => IDs.Contains(c.Id)).ToList();
+            List<Dish> dishes = db.Dishes.Include(c=>c.DishCategory).Where(c => IDs.Contains(c.Id)).ToList();
             List<Garnish> garnishes = db.Garnishes.Where(c => GarIds.Contains(c.Id)).ToList();
 
 
@@ -175,9 +175,13 @@ namespace FoodOrder.Controllers
                     var g = garnishes[a];
                     var obj = new ChoosenDish();
                     obj.Id = Guid.NewGuid().ToString();
-                    obj.Dish = d;
-                    obj.GarinshName = g.Name;
-                    
+                    obj.DishName = d.Name;
+                    obj.DishCategoryName = d.DishCategory.Name;
+                    obj.Kilocalories = d.Kilocalories;
+                    obj.ImagePath = d.ImagePath;
+                    obj.Fats = d.Fats;
+                    obj.Carbonhydrates = d.Carbonhydrates;
+                    obj.GarinshName = g.Name;      
                     db.ChoosenDishes.Add(obj);
                     db.SaveChanges();
                     choosenDishes.Add(obj);

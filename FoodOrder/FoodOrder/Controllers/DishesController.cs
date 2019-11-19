@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FoodOrder.Models;
+using System.IO;
 
 namespace FoodOrder.Controllers
 {
@@ -126,9 +127,27 @@ namespace FoodOrder.Controllers
         }
 
 
-        public async Task<JsonResult> CreateJson(string name, string selectedType, bool hasGarnish, 
-            double proteins, double fats, double carbonhydrates, double kilocalories)
+        public async Task<ActionResult> CreateJson()
         {
+            string dbImagePath;
+            if (Request.Files.Get(0).FileName != null)
+            {
+                string fileName = Path.GetFileName(Request.Files.Get(0).FileName);
+                string path = Server.MapPath("~/Files/" + fileName);
+                Request.Files.Get(0).SaveAs(path);
+                dbImagePath = "~/Files/" + fileName;
+            } else {
+                dbImagePath = "~/Content/img/1.jpg";
+            }
+
+            string name = Request.Form.Get("name");
+            string selectedType = Request.Form.Get("selectedType");
+            bool hasGarnish = Convert.ToBoolean(Request.Form.Get("hasGarnish"));
+            double proteins = Convert.ToDouble(Request.Form.Get("proteins"));
+            double fats = Convert.ToDouble(Request.Form.Get("fats"));
+            double carbonhydrates = Convert.ToDouble(Request.Form.Get("carbonhydrates"));
+            double kilocalories = Convert.ToDouble(Request.Form.Get("kilocalories"));
+
             var dateOfCreation = DateTime.UtcNow;
             var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
             var categoryName = category.Name;
@@ -139,6 +158,7 @@ namespace FoodOrder.Controllers
                 Name = name,
                 DateOfCreation = dateOfCreation,
                 DishCategoryId = selectedType,
+                ImagePath = dbImagePath,
                 HasGarnish = hasGarnish,
                 Proteins = proteins,
                 Fats = fats,
@@ -146,12 +166,15 @@ namespace FoodOrder.Controllers
                 Kilocalories = kilocalories
             };
 
+           
+
             db.Dishes.Add(dish);
             await db.SaveChangesAsync();
 
             return Json(new
             {
                 id = dish.Id,
+                path = dish.ImagePath,
                 dateOfCreation
             }, JsonRequestBehavior.AllowGet);
         }

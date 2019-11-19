@@ -39,7 +39,7 @@
                                 </div>
 
 
-                                <div class="select-from-library-container mb-1">
+                                <div style="margin-left:15px" class="select-from-library-container mb-1">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 col-xl-4">
 
@@ -130,7 +130,7 @@
                                                                  >
                                                                 <div class="card d-flex mb-2 p-0 media-thumb-container">
                                                                     <div class="d-flex align-self-stretch">
-                                                                        <img src="~/Content/img/chock.jpg" alt="изображение"
+                                                                        <img src="@Url.Content(a.ImagePath ?? "~/Content/img/chock.jpg")" alt="изображение"
                                                                              class="list-media-thumbnail responsive border-0" />
                                                                     </div>
                                                                     <div class="d-flex flex-grow-1 min-width-zero">
@@ -139,7 +139,7 @@
                                                                                 <p class="truncate mb-0">@a.Name</p>
                                                                                 @if (a.HasGarnish)
                                                                                 {
-                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> + Гарнир</a>
+                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
                                                                                 }
                                                                                 else
                                                                                 {

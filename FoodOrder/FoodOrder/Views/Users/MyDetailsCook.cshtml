@@ -193,7 +193,7 @@
                                                     </button>
                                                 </div>
                                                 <a href="">
-                                                    <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                    <img style="height:196.69px" class="card-img-top" src="@Url.Content(dish.ImagePath ?? "~/Content/img/1.jpg")"
                                                          alt="Фото блюда">
 
                                                 </a>
@@ -850,6 +850,10 @@
                                         <input id="dish-creation-kilocalories" name="Kilocalories" type="number" min="0" max="10000" oninput="validity.valid||(value='');" step="0.5" class="form-control" placeholder="0">
                                     </div>
 
+                                    <div class="form-group">
+                                        <input type="file" name="upload" id="uploadFile" />
+                                    </div>
+
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -997,6 +1001,28 @@
             var carbonhydrates = $("#dish-creation-carbonhydrates").val();
             var kilocalories = $("#dish-creation-kilocalories").val();
 
+            var files = document.getElementById('uploadFile').files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+
+                    data.append('name', dishName);
+
+                    data.append('selectedType', selectedCategory);
+                    data.append('hasGarnish', hasGarnish);
+                    data.append('proteins', proteins);
+                    data.append('fats', fats);
+                    data.append('carbonhydrates', carbonhydrates);
+                    data.append('kilocalories', kilocalories);
+
+                }
+            }
+
+            
+
 
             //проверяем, существует ли уже блюдо с таким названием
             $.ajax({
@@ -1014,21 +1040,23 @@
                         //В зависимости от названия кнопки будет срабатывать создание или редактирование
                         if (buttonName == "Создать") {
                             $.ajax({
-                                type: "GET",
+                                type: "POST",
                                 url: '/Dishes/CreateJson',
-                                contentType: "application/json;charset=utf-8",
+                                contentType: false,
+                                processData: false,
                                 dataType: "json",
-                                data: {
-                                    "name": dishName,
-                                    "selectedType": selectedCategory,
-                                    "hasGarnish": hasGarnish,
-                                    "proteins": proteins,
-                                    "fats": fats,
-                                    "carbonhydrates": carbonhydrates,
-                                    "kilocalories": kilocalories
-                                },
-                                type: 'GET',
+                                data: data,
                                 success: function (newDish) {
+
+                                    var path = '';
+                                    if (newDish.path != null) {
+                                        path = newDish.path.substr(1);
+                                        alert(path)
+                                       
+                                    } else {
+                                        path = "/Content/img/1.jpg";
+                                        alert(path)
+                                    }
 
                                     var dishHTML = '<div id="dish-card-' + newDish.id + '" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">' +
                                         '<div class="card">' +
@@ -1039,7 +1067,7 @@
                                         '<button class="btn btn-outline-white icon-button" onclick="DeleteDish(' + "'" + newDish.id + "'" + ')" title="Удалить">' +
                                         '<i class="simple-icon-trash"></i></button></div>' +
                                         '<a>' +
-                                        '<img class="card-img-top" src="/Content/img/1.jpg"' +
+                                        '<img style="height:196px" class="card-img-top" src="'+path+'"' +
                                         ' alt="Фото блюда">' +
                                         '</a>' +
                                         '</div>' +

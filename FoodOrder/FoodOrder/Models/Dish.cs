@@ -76,7 +76,13 @@ namespace FoodOrder.Models
     public class ChoosenDish
     {
         public string Id { get; set; }
-        public Dish Dish { get; set; }
+        public string DishName { get; set; }
+        public string DishCategoryName { get; set; }
+        public double Proteins { get; set; }
+        public double Fats { get; set; }
+        public double Carbonhydrates { get; set; }
+        public double Kilocalories { get; set; }
+        public string ImagePath { get; set; }
         public string GarinshName { get; set; }
         public string OrderId { get; set; }
         public Order Order { get; set; }

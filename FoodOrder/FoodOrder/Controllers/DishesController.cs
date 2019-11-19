@@ -143,10 +143,10 @@ namespace FoodOrder.Controllers
             string name = Request.Form.Get("name");
             string selectedType = Request.Form.Get("selectedType");
             bool hasGarnish = Convert.ToBoolean(Request.Form.Get("hasGarnish"));
-            double proteins = Convert.ToDouble(Request.Form.Get("proteins"));
-            double fats = Convert.ToDouble(Request.Form.Get("fats"));
-            double carbonhydrates = Convert.ToDouble(Request.Form.Get("carbonhydrates"));
-            double kilocalories = Convert.ToDouble(Request.Form.Get("kilocalories"));
+            double proteins = Convert.ToDouble(Request.Form.Get("proteins").Replace('.', ','));
+            double fats = Convert.ToDouble(Request.Form.Get("fats").Replace('.', ','));
+            double carbonhydrates = Convert.ToDouble(Request.Form.Get("carbonhydrates").Replace('.', ','));
+            double kilocalories = Convert.ToDouble(Request.Form.Get("kilocalories").Replace('.', ','));
 
             var dateOfCreation = DateTime.UtcNow;
             var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
@@ -198,10 +198,10 @@ namespace FoodOrder.Controllers
             string name = Request.Form.Get("name");
             string selectedType = Request.Form.Get("selectedType");
             bool hasGarnish = Convert.ToBoolean(Request.Form.Get("hasGarnish"));
-            double proteins = Convert.ToDouble(Request.Form.Get("proteins"));
-            double fats = Convert.ToDouble(Request.Form.Get("fats"));
-            double carbonhydrates = Convert.ToDouble(Request.Form.Get("carbonhydrates"));
-            double kilocalories = Convert.ToDouble(Request.Form.Get("kilocalories"));
+            double proteins = Convert.ToDouble(Request.Form.Get("proteins").Replace('.', ','));
+            double fats = Convert.ToDouble(Request.Form.Get("fats").Replace('.', ','));
+            double carbonhydrates = Convert.ToDouble(Request.Form.Get("carbonhydrates").Replace('.', ','));
+            double kilocalories = Convert.ToDouble(Request.Form.Get("kilocalories").Replace('.', ','));
 
             var dish = await db.Dishes.Where(d => d.Id == id).FirstOrDefaultAsync();
             var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();

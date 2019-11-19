@@ -1220,7 +1220,8 @@
             $('#create-or-edit-dish').text('Создать');
 
             $("#dish-creation-name").val('');
-            $("#dish-creation-select-type").val(0); // не пашет
+           // $("#dish-creation-select-type").val(0); // не пашет
+            $("#dish-creation-select-type").val('').trigger('change')
 
             $("#garnish-checkbox").hide();
             $("#dish-creation-garnish-checkbox").prop('checked', false);

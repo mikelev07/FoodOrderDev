@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-12">
                     <h1>Меню на сегодня</h1>
-                    <div class="separator mb-5"></div>
+                    
                 </div>
 
                 <div class="col-12">
@@ -48,85 +48,97 @@
                                         <div class="row">
                                             <div class="col-12 list" data-check-all="checkAll">
                                                 <div class="row list disable-text-selection" data-check-all="checkAll">
-                                                    @foreach (var dish in i.Dishes)
+                                                    @if (i.Dishes.Count != 0)
                                                     {
-                                                        <div style="padding-right:0; padding-left:25px" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
-                                                            <div class="card">
-                                                                <div class="position-relative">
-                                                                    <div class="position-absolute card-top-buttons">
+                                                        foreach (var dish in i.Dishes)
+                                                        {
+                                                            <div style="padding-right:0; padding-left:25px" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                                                <div class="card">
+                                                                    <div class="position-relative">
+                                                                        <div class="position-absolute card-top-buttons">
 
+                                                                        </div>
+                                                                        <a href="">
+                                                                            <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                                 alt="Фото блюда">
+                                                                        </a>
                                                                     </div>
-                                                                    <a href="">
-                                                                        <img class="card-img-top" src="~/Content/img/1.jpg"
-                                                                             alt="Фото блюда">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <a>
-                                                                                <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
-                                                                            </a>
-                                                                            <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
-                                                                            @if (dish.HasGarnish)
-                                                                            {
-                                                                                @* <p class="list-item-heading  dish-garnish">C гарниром : @dish.Garnish.Name</p>*@
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-10">
+                                                                                <a>
+                                                                                    <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
+                                                                                </a>
+                                                                                <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
+                                                                                @if (dish.HasGarnish)
+                                                                                {
+                                                                                    @* <p class="list-item-heading  dish-garnish">C гарниром : @dish.Garnish.Name</p>*@
 
-                                                                                <div style="margin-bottom:5px">
-                                                                                <select id="gch-@dish.Id"  class="form-control select2-single">
-                                                                                    <option label="&nbsp;">Выберите гарнир...</option>
+                                                                                    <div style="margin-bottom:5px">
+                                                                                        <select id="gch-@dish.Id" class="form-control select2-single">
+                                                                                            <option label="&nbsp;">Выберите гарнир...</option>
 
-                                                                                    @foreach (var a in dish.Garnishes)
-                                                                                    {
-                                                                                        <option value="@a.Id">@a.Name</option>
-                                                                                    }
+                                                                                            @foreach (var a in dish.Garnishes)
+                                                                                            {
+                                                                                                <option value="@a.Id">@a.Name</option>
+                                                                                            }
 
-                                                                                </select>
-                                                                               </div>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <p class="list-item-heading  dish-garnish">Без гарнира</p>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <p class="list-item-heading  dish-garnish">Без гарнира</p>
 
-                                                                            }
-                                                                            <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
-                                                                               role="button" aria-expanded="true" aria-controls="collapseExample">
-                                                                                Подробнее
-                                                                            </a>
+                                                                                }
+                                                                                <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                                                   role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                                    Подробнее
+                                                                                </a>
 
-                                                                            <a onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId', this)" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
-                                                                                <i class="iconsminds-add-cart"></i>
-                                                                                Добавить
-                                                                            </a>
+                                                                                <a onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId', this)" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
+                                                                                    <i class="iconsminds-add-cart"></i>
+                                                                                    Добавить
+                                                                                </a>
 
-                                                                            <div class="collapse" id="collapseExample-d-@dish.Id">
-                                                                                <div class="mt-4">
-                                                                                    <p class="mb-0">
-                                                                                    <p class="list-item-heading mb-4 pt-1">
-                                                                                        Пищевая ценность (на 100г):<br />
-                                                                                        Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
-                                                                                        Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
-                                                                                        Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
-                                                                                        <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
-                                                                                    </p>
+                                                                                <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                                    <div class="mt-4">
+                                                                                        <p class="mb-0">
+                                                                                        <p class="list-item-heading mb-4 pt-1">
+                                                                                            Пищевая ценность (на 100г):<br />
+                                                                                            Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                                                                                            Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                                                                                            Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                                                                                            <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                                        </p>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
 
-                                                                            <footer style="margin-top:10px">
-                                                                                <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
-                                                                            </footer>
+                                                                                <footer style="margin-top:10px">
+                                                                                    <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                </footer>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
 
 
+                                                        }
                                                     }
+                                                    else
+                                                    {
+                                                       
+                                                        <div class="card-body">
+                                                            <h2 class="mb-4 font-weight-light">Блюд в этой категории нет...</h2>
+                                                            
+                                                        </div>
+                                                    }
+
                                                 </div>
-                                            </div>
-                                        </div>
+                                                        </div>
+                                                    </div>
 
                                     </div>
                                 }
@@ -137,69 +149,91 @@
                                         <div class="row">
                                             <div class="col-12 list" data-check-all="checkAll">
                                                 <div class="row list disable-text-selection" data-check-all="checkAll">
-                                                    @foreach (var dish in i.Dishes)
+                                                    @if (i.Dishes.Count != 0)
                                                     {
-                                                        <div style="" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
-                                                            <div class="card">
-                                                                <div class="position-relative">
-                                                                    <div class="position-absolute card-top-buttons">
+                                                        foreach (var dish in i.Dishes)
+                                                        {
+                                                            <div style="" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                                                <div class="card">
+                                                                    <div class="position-relative">
+                                                                        <div class="position-absolute card-top-buttons">
 
+                                                                        </div>
+                                                                        <a href="">
+                                                                            <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                                 alt="Фото блюда">
+                                                                        </a>
                                                                     </div>
-                                                                    <a href="">
-                                                                        <img class="card-img-top" src="~/Content/img/1.jpg"
-                                                                             alt="Фото блюда">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <a>
-                                                                                <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
-                                                                            </a>
-                                                                            <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
-                                                                            @if (dish.HasGarnish)
-                                                                            {
-                                                                              
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <p class="list-item-heading  dish-garnish">Без гарнира</p>
-                                                                            }
-                                                                            <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
-                                                                               role="button" aria-expanded="true" aria-controls="collapseExample">
-                                                                                Подробнее
-                                                                            </a>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-10">
+                                                                                <a>
+                                                                                    <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
+                                                                                </a>
+                                                                                <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
+                                                                                @if (dish.HasGarnish)
+                                                                                {
+                                                                                    <div style="margin-bottom:5px">
+                                                                                        <select id="gch-@dish.Id" class="form-control select2-single">
+                                                                                            <option label="&nbsp;">Выберите гарнир...</option>
 
-                                                                            <a onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
-                                                                                <i class="iconsminds-add-cart"></i>
-                                                                                Добавить
-                                                                            </a>
+                                                                                            @foreach (var a in dish.Garnishes)
+                                                                                            {
+                                                                                                <option value="@a.Id">@a.Name</option>
+                                                                                            }
 
-                                                                            <div class="collapse" id="collapseExample-d-@dish.Id">
-                                                                                <div class="mt-4">
-                                                                                    <p class="mb-0">
-                                                                                    <p class="list-item-heading mb-4 pt-1">
-                                                                                        Пищевая ценность (на 100г):<br />
-                                                                                        Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
-                                                                                        Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
-                                                                                        Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
-                                                                                        <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
-                                                                                    </p>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <p class="list-item-heading  dish-garnish">Без гарнира</p>
+                                                                                }
+                                                                                <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                                                   role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                                    Подробнее
+                                                                                </a>
+
+                                                                                <a onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="top" data-align="center">
+                                                                                    <i class="iconsminds-add-cart"></i>
+                                                                                    В корзину
+                                                                                </a>
+
+                                                                                <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                                    <div class="mt-4">
+                                                                                        <p class="mb-0">
+                                                                                        <p class="list-item-heading mb-4 pt-1">
+                                                                                            Пищевая ценность (на 100г):<br />
+                                                                                            Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                                                                                            Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                                                                                            Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                                                                                            <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                                        </p>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
 
-                                                                            <footer style="margin-top:10px">
-                                                                                <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
-                                                                            </footer>
+                                                                                <footer style="margin-top:10px">
+                                                                                    <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                </footer>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
 
 
+                                                        }
                                                     }
+                                                    else
+                                                    {
+
+                                                        <div class="card-body">
+                                                            <h2 class="mb-4 font-weight-light">Блюд в этой категории нет...</h2>
+
+                                                        </div>
+                                                    }
+
                                                 </div>
                                             </div>
                                         </div>

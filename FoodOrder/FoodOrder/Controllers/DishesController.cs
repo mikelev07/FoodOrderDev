@@ -179,9 +179,30 @@ namespace FoodOrder.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public async Task<JsonResult> EditJson(string id, string name, string selectedType, bool hasGarnish, 
-            double proteins, double fats, double carbonhydrates, double kilocalories)
+        public async Task<JsonResult> EditJson()
         {
+            string dbImagePath;
+            if (Request.Files.Get(0).FileName != null)
+            {
+                string fileName = Path.GetFileName(Request.Files.Get(0).FileName);
+                string path = Server.MapPath("~/Files/" + fileName);
+                Request.Files.Get(0).SaveAs(path);
+                dbImagePath = "~/Files/" + fileName;
+            }
+            else
+            {
+                dbImagePath = "~/Content/img/1.jpg";
+            }
+
+            string id = Request.Form.Get("id");
+            string name = Request.Form.Get("name");
+            string selectedType = Request.Form.Get("selectedType");
+            bool hasGarnish = Convert.ToBoolean(Request.Form.Get("hasGarnish"));
+            double proteins = Convert.ToDouble(Request.Form.Get("proteins"));
+            double fats = Convert.ToDouble(Request.Form.Get("fats"));
+            double carbonhydrates = Convert.ToDouble(Request.Form.Get("carbonhydrates"));
+            double kilocalories = Convert.ToDouble(Request.Form.Get("kilocalories"));
+
             var dish = await db.Dishes.Where(d => d.Id == id).FirstOrDefaultAsync();
             var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
             var categoryName = category.Name;
@@ -195,6 +216,7 @@ namespace FoodOrder.Controllers
             dish.Fats = fats;
             dish.Carbonhydrates = carbonhydrates;
             dish.Kilocalories = kilocalories;
+            dish.ImagePath = dbImagePath;
 
             await db.SaveChangesAsync();
             return Json(true, JsonRequestBehavior.AllowGet);

@@ -833,7 +833,7 @@
                                     <div class="form-group">
                                         <label>Категория блюда</label>
                                         <select id="dish-creation-select-type" class="form-control select2-single" autocomplete="off">
-                                            <option value="0" label="&nbsp;">Введите категорию</option>
+                                            @*<option value="0" label="&nbsp;">Введите категорию</option>*@
                                             @foreach (var category in (List<FoodOrder.Models.DishCategory>)ViewData["Categories"])
                                             {
                                                 <option value="@category.Id">@category.Name</option>
@@ -1232,6 +1232,8 @@
             $("#dish-creation-fats").val('');
             $("#dish-creation-carbonhydrates").val('');
             $("#dish-creation-kilocalories").val('');
+
+            $("#uploadFile").val("");
         });
 
 

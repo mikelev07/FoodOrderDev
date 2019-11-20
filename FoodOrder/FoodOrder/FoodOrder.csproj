@@ -225,6 +225,14 @@
     <Compile Include="Migrations\201911190723484_asdaasda.Designer.cs">
       <DependentUpon>201911190723484_asdaasda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911200639208_asdasdasd1.cs" />
+    <Compile Include="Migrations\201911200639208_asdasdasd1.Designer.cs">
+      <DependentUpon>201911200639208_asdasdasd1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911201321554_asdasda.cs" />
+    <Compile Include="Migrations\201911201321554_asdasda.Designer.cs">
+      <DependentUpon>201911201321554_asdasda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -789,6 +797,7 @@
     <Content Include="Views\Orders\IndexEmployee.cshtml" />
     <Content Include="Views\Shared\_LayoutSystemCourt.cshtml" />
     <Content Include="Views\Orders\SucessOrder.cshtml" />
+    <Content Include="Views\Orders\MyOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -831,6 +840,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911190723484_asdaasda.resx">
       <DependentUpon>201911190723484_asdaasda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911200639208_asdasdasd1.resx">
+      <DependentUpon>201911200639208_asdasdasd1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911201321554_asdasda.resx">
+      <DependentUpon>201911201321554_asdasda.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -39,6 +39,17 @@ namespace FoodOrder.Controllers
             }
         }
 
+
+        public async Task<ActionResult> MyOrders()
+        {
+            string userId = User.Identity.GetUserId();
+          
+            var companies = await db.Companies.Include(c => c.Employees.Select(b => b.Orders)).ToListAsync();
+            var company = companies.Where(c => c.RepresentativeId == userId).FirstOrDefault();
+
+            return View(company.Employees);
+        }
+
         [Authorize(Roles = "admin,representative,cook, employee")]
         // GET: Orders
         public async Task<ActionResult> Index()
@@ -56,12 +67,20 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
-                return View("IndexCompany");
+                var companies = await db.Companies.Include(c=>c.Employees).ToListAsync();
+                var company = companies.Where(c => c.RepresentativeId == userId).FirstOrDefault();
+
+                return View("IndexCompany", company);
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
                 var menu = db.Menus.Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
+
+                var user = db.Users.Include(c=>c.Company).Where(c => c.Id == userId).FirstOrDefault();
+
+
+                ViewBag.Unlimited = user.Company.UnlimitedOrders;
 
                 if (menu != null)
                 {
@@ -91,7 +110,12 @@ namespace FoodOrder.Controllers
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {
                 var orders = await db.Orders.Include(o => o.User).ToListAsync();
-                return View("IndexCook", orders);
+
+                var st = db.DishStatistics.ToList();
+                CookStatisticViewModel cookStatisticViewModel = new CookStatisticViewModel();
+                cookStatisticViewModel.DishStatistics = st;
+
+                return View("IndexCook", cookStatisticViewModel);
             }
 
             return new HttpUnauthorizedResult();
@@ -159,12 +183,10 @@ namespace FoodOrder.Controllers
 
 
 
-        public async Task<ActionResult> CreateJson(string[] IDs, string[] GarIds)
+        public async Task<ActionResult> CreateJson(string[] IDs, string[] GarIds, string descr)
         {
             List<Dish> dishes = db.Dishes.Include(c=>c.DishCategory).Where(c => IDs.Contains(c.Id)).ToList();
             List<Garnish> garnishes = db.Garnishes.Where(c => GarIds.Contains(c.Id)).ToList();
-
-
             List<ChoosenDish> choosenDishes = new List<ChoosenDish>();
             
             for (var i =0; i < dishes.Count;)
@@ -173,41 +195,99 @@ namespace FoodOrder.Controllers
                 {
                     var d = dishes[i];
                     var g = garnishes[a];
-                    var obj = new ChoosenDish();
-                    obj.Id = Guid.NewGuid().ToString();
-                    obj.DishName = d.Name;
-                    obj.DishCategoryName = d.DishCategory.Name;
-                    obj.Kilocalories = d.Kilocalories;
-                    obj.ImagePath = d.ImagePath;
-                    obj.Fats = d.Fats;
-                    obj.Carbonhydrates = d.Carbonhydrates;
-                    obj.GarinshName = g.Name;      
-                    db.ChoosenDishes.Add(obj);
+                    ChoosenDish obj = CreateChoosenDish(d, g);
+
+                    DishStatistic dishStatistic = new DishStatistic();
+                    if (db.DishStatistics.Where(c => c.DishName == d.Name).FirstOrDefault() == null)
+                    {
+                        SetValue(d, dishStatistic);
+                        db.DishStatistics.Add(dishStatistic);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        var st = db.DishStatistics.Where(c => c.DishName == d.Name).FirstOrDefault();
+                        db.Entry(st).State = EntityState.Modified;
+                        st.Count++;
+                        db.SaveChanges();
+                    }
+
+                    if (d.HasGarnish)
+                    {
+                        SetStatisticGarnish(g);
+                    }
+
                     db.SaveChanges();
                     choosenDishes.Add(obj);
                     i++;
                 }
             }
 
-
-
             var dateOfCreation = DateTime.UtcNow;
             string uid = User.Identity.GetUserId();
+            User user = db.Users.Include(c=>c.Company).Where(c => c.Id == uid).FirstOrDefault();
+            user.Company.OrdersCount++;
+
             Order order = new Order()
             {
                 Id = Guid.NewGuid().ToString("N"),
                 ChoosenDishes = choosenDishes,
                 DateOfCreation = dateOfCreation,
                 UserId = uid,
+                Description = descr,
                 Status = OrderStatus.Done
             };
 
-           
             db.Orders.Add(order);
             await db.SaveChangesAsync();
-
             var redirectUrl = new UrlHelper(Request.RequestContext).Action("SucessOrder", "Orders");
             return Json(new { Url = redirectUrl });
+        }
+
+        private ChoosenDish CreateChoosenDish(Dish d, Garnish g)
+        {
+            var obj = new ChoosenDish();
+            obj.Id = Guid.NewGuid().ToString();
+            obj.DishName = d.Name;
+            obj.DishCategoryName = d.DishCategory.Name;
+            obj.Kilocalories = d.Kilocalories;
+            obj.ImagePath = d.ImagePath;
+            obj.Fats = d.Fats;
+            obj.Carbonhydrates = d.Carbonhydrates;
+            obj.GarinshName = g.Name;
+            db.ChoosenDishes.Add(obj);
+            return obj;
+        }
+
+        private static void SetValue(Dish d, DishStatistic dishStatistic)
+        {
+            dishStatistic.Id = Guid.NewGuid().ToString();
+            dishStatistic.DishName = d.Name;
+            dishStatistic.Count = 1;
+            dishStatistic.DishCategoryName = d.DishCategory.Name;
+            dishStatistic.IsReady = false;
+        }
+
+        private void SetStatisticGarnish(Garnish g)
+        {
+            DishStatistic garnStatistic = new DishStatistic();
+            if (db.DishStatistics.Where(c => c.DishName == g.Name).FirstOrDefault() == null)
+            {
+                garnStatistic.Id = Guid.NewGuid().ToString();
+                garnStatistic.DishName = g.Name;
+                garnStatistic.Count = 1;
+                garnStatistic.DishCategoryName = "Гарнир";
+                garnStatistic.IsReady = false;
+                db.DishStatistics.Add(garnStatistic);
+                db.SaveChanges();
+            }
+            else
+            {
+                var st = db.DishStatistics.Where(c => c.DishName == g.Name).FirstOrDefault();
+                db.Entry(st).State = EntityState.Modified;
+                st.Count++;
+                db.SaveChanges();
+            }
         }
 
 

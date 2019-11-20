@@ -154,8 +154,8 @@
                     }
                     @if (User.IsInRole("representative"))
                     {
-                        <li class="">
-                            <a href="/Orders">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "MyOrders" ? "active" : "")">
+                            <a href="/Orders/MyOrders">
                                 <i class="iconsminds-bag-items"></i>
                                 <span>Наши заказы</span>
                             </a>
@@ -163,7 +163,7 @@
                     }
                     @if (User.IsInRole("employee"))
                     {
-                        <li class="">
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Orders" ? "active" : "")">
                             <a href="/Orders">
                                 <i class="iconsminds-chef-hat"></i>
                                 <span>Меню на сегодня</span>
@@ -172,7 +172,7 @@
                     }
                     @if (User.IsInRole("cook"))
                     {
-                        <li class="">
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Orders" ? "active" : "")">
                             <a href="/Orders">
                                 <i class="iconsminds-bag-items"></i>
                                 <span>Заказы клиентов</span>

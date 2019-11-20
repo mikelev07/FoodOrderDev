@@ -150,7 +150,9 @@
             }
 
 
-            @foreach (var i in Model.DishCategories)
+            @if (Model != null)
+            {
+            foreach (var i in Model.DishCategories)
             {
                 foreach (var dish in i.Dishes)
                 {
@@ -167,9 +169,9 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         @foreach (var g in dish.Garnishes)
-                                        {
+            {
                                             <p>@g.Name</p>
-                                        }
+            }
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +179,7 @@
                     </div>
                 }
             }
-
+            }
 
             <br />
 

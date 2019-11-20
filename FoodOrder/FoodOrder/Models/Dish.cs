@@ -6,6 +6,12 @@ using System.Web;
 
 namespace FoodOrder.Models
 {
+
+    public class CookStatisticViewModel {
+        public List<DishStatistic> DishStatistics { get; set; }
+
+    }
+
     public class Order
     {
         public string Id { get; set; }
@@ -20,6 +26,15 @@ namespace FoodOrder.Models
         {
             ChoosenDishes = new List<ChoosenDish>();
         }
+    }
+
+    public class DishStatistic
+    {
+        public string Id { get; set; }
+        public string DishName { get; set; }
+        public int Count { get; set; }
+        public string DishCategoryName { get; set; }
+        public bool IsReady { get; set; }
     }
 
     public class MenuViewModel

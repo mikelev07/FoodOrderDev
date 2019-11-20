@@ -9,49 +9,49 @@
             <div class="row">
                 <div class="col-12">
                     <h1>Меню на сегодня</h1>
-                    
                 </div>
 
+
                 <div class="col-12">
-
-                    @if (Model != null)
-                    {
+                  @if (ViewBag.Unlimited)
+                  {
+                      if (Model != null)
+                      {
                         <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
-
                             @foreach (var i in Model.DishCategories)
-                            {
-                                if (i == Model.DishCategories.FirstOrDefault())
-                                {
+                  {
+                      if (i == Model.DishCategories.FirstOrDefault())
+                      {
                                     <li class="nav-item">
                                         <a class="nav-link active" id="tab-@i.Id" data-toggle="tab" href="#first-@i.Id" role="tab"
                                            aria-controls="first-@i.Id" aria-selected="true">@i.Name</a>
                                     </li>
-                                }
-                                else
-                                {
+                      }
+                      else
+                      {
                                     <li class="nav-item">
                                         <a class="nav-link" id="tab-@i.Id" data-toggle="tab" href="#first-@i.Id" role="tab"
                                            aria-controls="first-@i.Id" aria-selected="false">@i.Name</a>
                                     </li>
-                                }
-                            }
+                      }
+                  }
 
                         </ul>
 
                         <div class="tab-content">
 
                             @foreach (var i in Model.DishCategories)
-                            {
-                                if (i == Model.DishCategories.FirstOrDefault())
-                                {
+                  {
+                      if (i == Model.DishCategories.FirstOrDefault())
+                      {
                                     <div class="tab-pane show active" id="first-@i.Id" role="tabpanel" aria-labelledby="tab-@i.Id">
                                         <div class="row">
                                             <div class="col-12 list" data-check-all="checkAll">
                                                 <div class="row list disable-text-selection" data-check-all="checkAll">
                                                     @if (i.Dishes.Count != 0)
-                                                    {
-                                                        foreach (var dish in i.Dishes)
-                                                        {
+                  {
+                      foreach (var dish in i.Dishes)
+                      {
                                                             <div style="padding-right:0; padding-left:25px" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
                                                                 <div class="card">
                                                                     <div class="position-relative">
@@ -71,7 +71,7 @@
                                                                                 </a>
                                                                                 <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
                                                                                 @if (dish.HasGarnish)
-                                                                                {
+                  {
                                                                                     @* <p class="list-item-heading  dish-garnish">C гарниром : @dish.Garnish.Name</p>*@
 
                                                                                     <div style="margin-bottom:5px">
@@ -79,18 +79,18 @@
                                                                                             <option label="&nbsp;">Выберите гарнир...</option>
 
                                                                                             @foreach (var a in dish.Garnishes)
-                                                                                            {
+                  {
                                                                                                 <option value="@a.Id">@a.Name</option>
-                                                                                            }
+                  }
 
                                                                                         </select>
                                                                                     </div>
-                                                                                }
-                                                                                else
-                                                                                {
+                  }
+                  else
+                  {
                                                                                     <p class="list-item-heading  dish-garnish">Без гарнира</p>
 
-                                                                                }
+                  }
                                                                                 <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
                                                                                    role="button" aria-expanded="true" aria-controls="collapseExample">
                                                                                     Подробнее
@@ -125,34 +125,34 @@
 
 
 
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                       
+                      }
+                  }
+                  else
+                  {
+
                                                         <div class="card-body">
                                                             <h2 class="mb-4 font-weight-light">Блюд в этой категории нет...</h2>
                                                             
                                                         </div>
-                                                    }
+                  }
 
                                                 </div>
                                                         </div>
                                                     </div>
 
                                     </div>
-                                }
+                      }
 
-                                else
-                                {
+                      else
+                      {
                                     <div class="tab-pane fade" id="first-@i.Id" role="tabpanel" aria-labelledby="tab-@i.Id">
                                         <div class="row">
                                             <div class="col-12 list" data-check-all="checkAll">
                                                 <div class="row list disable-text-selection" data-check-all="checkAll">
                                                     @if (i.Dishes.Count != 0)
-                                                    {
-                                                        foreach (var dish in i.Dishes)
-                                                        {
+                  {
+                      foreach (var dish in i.Dishes)
+                      {
                                                             <div style="" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
                                                                 <div class="card">
                                                                     <div class="position-relative">
@@ -172,23 +172,23 @@
                                                                                 </a>
                                                                                 <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
                                                                                 @if (dish.HasGarnish)
-                                                                                {
+                  {
                                                                                     <div style="margin-bottom:5px">
                                                                                         <select id="gch-@dish.Id" class="form-control select2-single">
                                                                                             <option label="&nbsp;">Выберите гарнир...</option>
 
                                                                                             @foreach (var a in dish.Garnishes)
-                                                                                            {
+                  {
                                                                                                 <option value="@a.Id">@a.Name</option>
-                                                                                            }
+                  }
 
                                                                                         </select>
                                                                                     </div>
-                                                                                }
-                                                                                else
-                                                                                {
+                  }
+                  else
+                  {
                                                                                     <p class="list-item-heading  dish-garnish">Без гарнира</p>
-                                                                                }
+                  }
                                                                                 <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
                                                                                    role="button" aria-expanded="true" aria-controls="collapseExample">
                                                                                     Подробнее
@@ -223,30 +223,30 @@
 
 
 
-                                                        }
-                                                    }
-                                                    else
-                                                    {
+                      }
+                  }
+                  else
+                  {
 
                                                         <div class="card-body">
                                                             <h2 class="mb-4 font-weight-light">Блюд в этой категории нет...</h2>
 
                                                         </div>
-                                                    }
+                  }
 
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
-                                }
+                      }
 
-                            }
+                  }
 
                         </div>
-                    }
-                    else
-                    {
+                      }
+                      else
+                      {
                         <div class="card-body">
                             <h2 class="mb-4">Меню на сегодня</h2>
                             <p class="text-muted  mb-0 font-weight-light">
@@ -254,8 +254,11 @@
                             </p>
 
                         </div>
-                    }
-
+                      }
+                  } else
+                  {
+                      <p>Вы не можете совершать больше заказов</p>
+                  }
                 </div>
 
             </div>
@@ -276,14 +279,18 @@
                         <div class="accordion" id="accordionSet">
 
                         </div>
-                    </div>
 
+                    </div>
+                    
+                    <div style="margin-left:10px;margin-right:10px" class="form-group pt-0 pb-0 mt-4 mb-4">
+                        <label>Комментарий</label>
+                        <textarea id="desc" class="form-control" rows="2"></textarea>
+                    </div>
                     <div class="modal-footer">
+
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
 
-
                         <button id="endOrder" type="button" class="btn btn-primary sfl-submit">Завершить заказ</button>
-
                     </div>
                 </div>
             </div>
@@ -393,9 +400,10 @@
 
             $("#accordionSet .certain").each(function () { GarIds.push(this.id.split('-')[1]); });
 
+            var descr = $("#desc").val();
             //alert(GarIds)
 
-            alert(IDs)
+           // alert(IDs)
             
               $.ajax({
                 url: '/Orders/CreateJson',
@@ -403,13 +411,14 @@
                 dataType: "json",
                 data: {
                     'IDs': IDs,
-                    'GarIds': GarIds
+                    'GarIds': GarIds,
+                    'descr': descr
                 },
                 success: function (result) {
                   window.location.href = result.Url;
                 },
                 error: function () {
-                    console.log("Error while calling method '/Dishes/DeleteJson'");
+                    console.log("Error while calling method '/Dishes/CreateJson'");
                 }
             }); 
         });

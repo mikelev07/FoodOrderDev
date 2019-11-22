@@ -195,6 +195,12 @@ namespace FoodOrder.Models
                   .MapRightKey("GarnishId")
                   .ToTable("DishGarnish"));
 
+            modelBuilder.Entity<Dish>().HasMany(c => c.Packs)
+              .WithMany(s => s.Dishes)
+              .Map(t => t.MapLeftKey("DishId")
+              .MapRightKey("PackId")
+              .ToTable("DishPack"));
+
         }
 
         public static ApplicationDbContext Create()
@@ -208,6 +214,7 @@ namespace FoodOrder.Models
         public DbSet<DishStatistic> DishStatistics { get; set; }
         public DbSet<ChoosenDish> ChoosenDishes { get; set; }
         public DbSet<Dish> Dishes { get; set; }
+        public DbSet<Pack> Packs { get; set; }
         public DbSet<Garnish> Garnishes { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }

@@ -9,6 +9,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+              
                 <h1>Создание меню</h1>
                 <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                     <ol class="breadcrumb pt-0">
@@ -23,6 +24,9 @@
             </div>
         </div>
         <div class="row">
+
+
+
             <div class="col-12 col-lg-12 mb-5">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -31,58 +35,64 @@
                         @using (Html.BeginForm("Create", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
-                            <form class="needs-validation tooltip-label-right" novalidate>
+                    <form class="needs-validation tooltip-label-right" novalidate>
 
-                                <div class="form-group position-relative col-xl-4 error-l-50">
-                                    <label>Название меню</label>
-                                    <input name="Name" type="text" class="form-control">
-                                </div>
+                        <div class="form-group position-relative col-xl-4 error-l-50">
+                            <label>Название меню</label>
+                            <input name="Name" type="text" class="form-control">
+                        </div>
 
-
-                                <div style="margin-left:15px" class="select-from-library-container mb-1">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6 col-xl-4">
-
-                                            <div class="select-from-library-button sfl-multiple mb-5"
-                                                 data-library-id="#libraryModal" data-count="-1">
-                                                <div class="card d-flex flex-row mb-4 media-thumb-container justify-content-center align-items-center">
-                                                    Добавьте блюда в меню
-                                                </div>
-                                            </div>
-
-                                            <div class="selected-library-item sfl-selected-item mb-5">
-                                                <div class="card d-flex flex-row media-thumb-container">
-                                                    <a class="d-flex align-self-center">
-                                                        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                                             alt="uploaded image"
-                                                             class="list-media-thumbnail responsive border-0 sfl-selected-item-image" />
-                                                    </a>
-
-                                                    <div class="d-flex flex-grow-1 min-width-zero">
-                                                        <div class="card-body align-self-center d-flex flex-column justify-content-between min-width-zero align-items-lg-center">
-                                                            <a class="w-100">
-                                                                <p class="list-item-heading mb-1 truncate sfl-selected-item-label">
-
-                                                                </p>
-                                                            </a>
-                                                        </div>
-                                                        <div class="pl-1 align-self-center">
-                                                            <a href="#"
-                                                               class="btn-link delete-library-item sfl-delete-item">
-                                                                <i class="simple-icon-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <div class="form-group position-relative col-xl-4 error-l-50">
+                            
+                            <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-pack"> <span style="font-size:18px; border-bottom:1px dotted black">+ Добавить паки в меню</span></a>
+                        </div>
 
 
+                        <div style="margin-left:15px" class="select-from-library-container mb-1">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-xl-4">
+
+                                    <div class="select-from-library-button sfl-multiple mb-5"
+                                         data-library-id="#libraryModal" data-count="-1">
+                                        <div class="card d-flex flex-row mb-4 media-thumb-container justify-content-center align-items-center">
+                                            Добавьте блюда в меню
                                         </div>
                                     </div>
-                                </div>
 
-                                <button type="submit" class="btn btn-primary mb-0">Создать</button>
-                            </form>
+                                    <div class="selected-library-item sfl-selected-item mb-5">
+                                        <div class="card d-flex flex-row media-thumb-container">
+                                            <a class="d-flex align-self-center">
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                     alt="uploaded image"
+                                                     class="list-media-thumbnail responsive border-0 sfl-selected-item-image" />
+                                            </a>
+
+                                            <div class="d-flex flex-grow-1 min-width-zero">
+                                                <div class="card-body align-self-center d-flex flex-column justify-content-between min-width-zero align-items-lg-center">
+                                                    <a class="w-100">
+                                                        <p class="list-item-heading mb-1 truncate sfl-selected-item-label">
+
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                                <div class="pl-1 align-self-center">
+                                                    <a href="#"
+                                                       class="btn-link delete-library-item sfl-delete-item">
+                                                        <i class="simple-icon-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mb-0">Создать</button>
+                    </form>
                         }
                     </div>
                 </div>
@@ -126,8 +136,7 @@
                                                                  data-path="@a.Id"
                                                                  data-label="@a.Name"
                                                                  data-inp=""
-                                                                 id="bigCard-@a.Id"
-                                                                 >
+                                                                 id="bigCard-@a.Id">
                                                                 <div class="card d-flex mb-2 p-0 media-thumb-container">
                                                                     <div class="d-flex align-self-stretch">
                                                                         <img src="@Url.Content(a.ImagePath ?? "~/Content/img/chock.jpg")" alt="изображение"
@@ -143,7 +152,7 @@
                                                                                 }
                                                                                 else
                                                                                 {
-                                                                                    <p style="color:red" class="truncate mb-0">Нет гарнира</p>
+                                                                                    @*<p style="color:red" class="truncate mb-0">Нет гарнира</p>*@
                                                                                 }
                                                                             </div>
                                                                         </div>
@@ -211,6 +220,35 @@
                     </div>
                 }
             }
+
+            <div class="modal fade bd-example-modal-sm-pack" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Паки</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="table-pack" class="form-group">
+                                @foreach (FoodOrder.Models.Pack i in ViewBag.Packs)
+                                {
+                                    <label for="dish-creation-garnish-checkbox">
+                                        <span> <input id="dish-creation-garnish-checkbox" value="pack" type="checkbox" /> Пак </span>
+
+                                    </label> <br />
+                                    foreach (var d in i.Dishes)
+                                    {
+                                        <p>- @d.Name  </p>
+                                    }
+                                }
+                            </div>
+                            <button onclick="" class="btn btn-outline-primary" data-dismiss="modal" aria-label="Close">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 </main>
 

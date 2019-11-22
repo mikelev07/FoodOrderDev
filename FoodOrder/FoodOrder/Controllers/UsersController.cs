@@ -143,6 +143,11 @@ namespace FoodOrder.Controllers
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
                 var garnishes = dishes.Where(d => d.DishCategoryId == "ZdesDolzhenBitGarnir");
 
+                ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
+                var l = db.Packs.Include(c => c.Dishes).ToList();
+                ViewBag.Packs = l;
+                ViewBag.Count = l.Count;
+
                 ViewData["Dishes"] = dishes;
                 ViewData["Categories"] = categories;
                 ViewData["Garnishes"] = garnishes;
@@ -162,6 +167,7 @@ namespace FoodOrder.Controllers
 
                     });
 
+                   
                     MenuViewModel menuViewModel = new MenuViewModel
                     {
                         Menu = menu,

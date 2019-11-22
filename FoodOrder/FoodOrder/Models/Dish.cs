@@ -65,10 +65,14 @@ namespace FoodOrder.Models
     {
         public string Id { get; set; }
         public DateTime DateOfCreation { get; set; }
-        public Dish MainDish { get; set; }
-        public Dish Second { get; set; }
-        public Dish Salad { get; set; }
-        public Dish Drink { get; set; }
+        public Menu Menu { get; set; }
+        public string MenuId { get; set; }
+        public ICollection<Dish> Dishes { get; set; }
+
+        public Pack()
+        {
+            Dishes = new List<Dish>();
+        }
     }
 
 
@@ -121,10 +125,12 @@ namespace FoodOrder.Models
         public double Price { get; set; }
 
         public ICollection<Garnish> Garnishes { get; set; }
+        public ICollection<Pack> Packs { get; set; }
 
         public Dish()
         {
             Garnishes = new List<Garnish>();
+            Packs = new List<Pack>();
         }
 
     }

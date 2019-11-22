@@ -127,7 +127,22 @@ namespace FoodOrder.Controllers
         }
 
 
-        public async Task<ActionResult> CreateJson()
+        public async Task<ActionResult> CreatePack(string[] idDs)
+        {
+            Pack pack = new Pack();
+
+            var dishes = await db.Dishes.Where(b => idDs.Contains(b.Id)).ToListAsync();
+            pack.Id = Guid.NewGuid().ToString("N");
+            pack.DateOfCreation = DateTime.Now;
+            pack.Dishes = dishes;
+
+            db.Packs.Add(pack);
+            db.SaveChanges();
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+            public async Task<ActionResult> CreateJson()
         {
             string dbImagePath;
             if (Request.Files.Get(0).FileName != null)

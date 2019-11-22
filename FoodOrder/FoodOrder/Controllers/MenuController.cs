@@ -42,7 +42,8 @@ namespace FoodOrder.Controllers
             ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
             DishCategory Granishlist = db.DishCategories.Include(d => d.Dishes).Where(c => c.Id == "ZdesDolzhenBitGarnir").FirstOrDefault();
             ViewBag.Garnishes = Granishlist.Dishes.ToList();
-
+            var l = db.Packs.Include(c => c.Dishes).ToList();
+            ViewBag.Packs = l;
             return View();
         }
 

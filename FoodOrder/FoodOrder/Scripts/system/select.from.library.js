@@ -33,7 +33,8 @@ $.selectFromLibrary = function(element, options) {
     // Selected item delete class
     selectedItemDeleteClass: ".sfl-delete-item"
   };
-  var $self = $(element);
+    var $self = $(element);
+  //  alert($self.html())
   plugin.settings = $.extend({}, defaults, options, $self.data());
 
   var $modal =

@@ -52,19 +52,23 @@ namespace FoodOrder.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateOfCreation,Dishes,Packs")] Menu menu, ICollection<string> ints, ICollection<string> intsGar)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,DateOfCreation,Dishes,Packs")] Menu menu, ICollection<string> ints, ICollection<string> intsGar, string packsIn)
         {
             if (ModelState.IsValid)
             {
+                var packs = new List<Pack>();
+                if (packsIn != null)
+                {
+                    var idPacks = packsIn.Split(',');
+                    packs = db.Packs.Where(c => idPacks.Contains(c.Id)).ToList();
+                }
 
-               var keyValuePairs = ints.Zip(intsGar, (s, i) => new { s, i })
-                          .ToDictionary(item => item.s, item => item.i);
+                var keyValuePairs = ints.Zip(intsGar, (s, i) => new { s, i })
+                                        .ToDictionary(item => item.s, item => item.i);
 
 
                 List<Dish> dishes = db.Dishes.Include(c =>c.Garnishes).Where(c => keyValuePairs.Keys.Contains(c.Id)).ToList();
 
-
-               
                 for (var i = 0; i < dishes.Count; i++)
                 {
                     var d = dishes[i]; 
@@ -90,41 +94,19 @@ namespace FoodOrder.Controllers
                             clist.Add(obj);
                         }
                     }
-                   // db.Entry(d).State = EntityState.Modified;
-                        //d.Garnishes.Clear();
+                  
                     d.Garnishes = clist; 
                 }
                
                 var dishesFix = dishes;
 
-
-               // List<Dish> garns = db.Dishes.Where(c => intsGar.Contains(c.Id)).ToList();
-
-                /*  var withGarnishes = dishes.Select(y => new Dish
-                  {
-                      Id = y.Id,
-                      Name= y.Name,
-                      DateOfCreation = y.DateOfCreation,
-                      DishCategory = y.DishCategory,
-                      DishCategoryId = y.DishCategoryId,
-                      HasGarnish = y.HasGarnish,
-                      GarnishId = y.GarnishId,
-                      Garnish = y.Garnish,
-                      Proteins = y.Proteins,
-                      Fats = y.Fats,
-                      Carbonhydrates = y.Carbonhydrates,
-                      Kilocalories = y.Kilocalories,
-                      ImagePath = y.ImagePath,
-                      Price = y.Price,
-                      Garnishes = 
-                  }); 
-                  */
                 Menu menuObject = new Menu
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = menu.Name,
                     DateOfCreation = DateTime.Now,
-                    Dishes = dishesFix
+                    Dishes = dishesFix,
+                    Packs = packs
                 };
                 //await db.SaveChangesAsync();
                 db.Menus.Add(menuObject);

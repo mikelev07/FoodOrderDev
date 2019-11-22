@@ -33,153 +33,293 @@
             </a>
         </div>
 
+        <div id="create-menu-popup" class="col-md-6 col-lg-4 mb-4">
+            <a id="datcl">
+                <div style="height:180px" class="card dashboard-sq-banner justify-content-end">
+                    <div style="width:330px" class="card-body justify-content-end d-flex flex-column">
+                        <span style="background-color:#9fc867 !important" class="badge badge-pill badge-theme-3 align-self-start mb-3"><i style="font-size: 23px; color: white" class=iconsminds-add></i></span>
+                        <p class="lead text-white"><i style=" color: white" class="iconsminds-chef-hat"></i> Собрать пак  </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
         <div class="col-12">
+            <div class="row">
+                @if (Model != null)
+                {
+                    <div class="col-md-6 col-sm-12 ">
 
-            @if (Model != null)
-{
-                <div class="card-body">
-                    <h2 class="mb-4">Меню на сегодня</h2>
-
-                    <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="mb-4">@Model.Menu.Name</h5>
-                            <p style="margin-top:-15px;margin-bottom:10px" class="text-muted text-small mb-0 font-weight-light">@Model.Menu.DateOfCreation.ToShortDateString()</p>
-                            <div style="margin-top: 20px;" id="accordion">
 
-                                @foreach (var i in Model.DishCategories)
-{
+                            <h2 class="mb-4">Меню на сегодня</h2>
 
-                                    <div style="border:none">
-                                        <button style="" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne-@i.Id"
-                                                aria-expanded="true" aria-controls="collapseOne">
-                                            <span>@i.Name</span>
-                                            <span style="color:green" class="badge badge-light">@i.Dishes.Count</span>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="btn-group float-right float-none-xs mt-2">
+                                        <button class="btn btn-outline-primary btn-xs dropdown-toggle" type="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Действия
                                         </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Редактировать</a>
+                                            <a class="dropdown-item" href="#">Удалить</a>
+                                        </div>
+                                    </div>
+                                    <h5 class="mb-4">@Model.Menu.Name</h5>
+                                    <p style="margin-top:-15px;margin-bottom:10px" class="text-muted text-small mb-0 font-weight-light">@Model.Menu.DateOfCreation.ToShortDateString()</p>
+                                    <div style="margin-top: 20px;" id="accordion">
 
-                                        <div id="collapseOne-@i.Id" class="collapse" data-parent="#accordion">
-                                            <div class="row list disable-text-selection" data-check-all="checkAll">
-                                                @foreach (var dish in i.Dishes)
-{
-                                                    <div style="margin-left:5px" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
-                                                        <div class="card">
-                                                            <div class="position-relative">
-                                                                <div class="position-absolute card-top-buttons">
+                                        @foreach (var i in Model.DishCategories)
+                                        {
 
-                                                                    <button class="btn btn-outline-white icon-button" title="Редактировать"
-                                                                            data-toggle="modal" data-backdrop="static" data-target="#exampleModal" onclick="EditDish('@dish.Id', '@dish.HasGarnish'=='@true')">
-                                                                        <i class="simple-icon-pencil"></i>
-                                                                    </button>
+                                            <div style="border-bottom:1px solid #0080000f">
+                                                <button style="" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne-@i.Id"
+                                                        aria-expanded="true" aria-controls="collapseOne">
+                                                    <span>@i.Name</span>
+                                                    <span style="color:green" class="badge badge-light">@i.Dishes.Count</span>
+                                                </button>
 
-                                                                    <button class="btn btn-outline-white icon-button" onclick="DeleteDish('@dish.Id')" title="Удалить">
-                                                                        <i class="simple-icon-trash"></i>
-                                                                    </button>
-                                                                </div>
-                                                                <a href="">
-                                                                    <img class="card-img-top" src="~/Content/img/1.jpg"
-                                                                         alt="Фото блюда">
+                                                <div id="collapseOne-@i.Id" class="collapse" data-parent="#accordion">
+                                                    <div class="row list disable-text-selection" data-check-all="checkAll">
+                                                        @foreach (var dish in i.Dishes)
+                                                        {
+                                                            <div style="margin-left:5px" id="dish-card-n-@dish.Id" class="col-xl-4 col-lg-4 col-12 col-sm-6 mb-4">
+                                                                <div class="card">
+                                                                    <div class="position-relative">
+                                                                        <div class="position-absolute card-top-buttons">
 
-                                                                </a>
+                                                                            <button class="btn btn-outline-white icon-button" title="Редактировать"
+                                                                                    data-toggle="modal" data-backdrop="static" data-target="#exampleModal" onclick="EditDish('@dish.Id', '@dish.HasGarnish'=='@true')">
+                                                                                <i class="simple-icon-pencil"></i>
+                                                                            </button>
 
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="row">
+                                                                            <button class="btn btn-outline-white icon-button" onclick="DeleteDish('@dish.Id')" title="Удалить">
+                                                                                <i class="simple-icon-trash"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <a href="">
+                                                                            <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                                 alt="Фото блюда">
 
-                                                                    <div class="col-10">
-                                                                        <a>
-                                                                            <p class="list-item-heading"><strong class="dish-name">@dish.Name</strong></p>
                                                                         </a>
-                                                                        <p class="list-item-heading dish-category-name">@dish.DishCategory.Name</p>
-                                                                        @if (dish.HasGarnish)
-{
 
-                                                                            <p class="list-item-heading  dish-garnish"><a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@dish.Id"> <span style="border-bottom:1px dotted black">Гарниры</span></a></p>
-}
-else
-{
-                                                                            <p class="list-item-heading  dish-garnish">Без гарнира</p>
-}
-                                                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
-                                                                           role="button" aria-expanded="true" aria-controls="collapseExample">
-                                                                            Подробнее
-                                                                        </a>
-                                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
-                                                                            <div class="mt-4">
-                                                                                <p class="mb-0">
-                                                                                <p class="list-item-heading mb-4 pt-1">
-                                                                                    Пищевая ценность (на 100г):<br />
-                                                                                    Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
-                                                                                    Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
-                                                                                    Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
-                                                                                    <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
-                                                                                </p>
+                                                                    </div>
+                                                                    <div class="card-body">
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-12">
+                                                                                <a>
+                                                                                    <p class="list-item-heading"><strong class="dish-name">@dish.Name</strong></p>
+                                                                                </a>
+                                                                                <p class="list-item-heading dish-category-name">@dish.DishCategory.Name</p>
+                                                                                @if (dish.HasGarnish)
+                                                                                {
+
+                                                                                    <p class="list-item-heading  dish-garnish"><a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@dish.Id"> <span style="border-bottom:1px dotted black">Гарниры</span></a></p>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <p class="list-item-heading  dish-garnish">Без гарнира</p>
+                                                                                }
+                                                                                <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                                                   role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                                    <span style="border-bottom:1px dotted black">Состав</span>
+                                                                                </a>
+                                                                                <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                                    <div class="mt-4">
+                                                                                        <p class="mb-0">
+                                                                                        <p class="list-item-heading mb-4 pt-1">
+                                                                                            Пищевая ценность (на 100г):<br />
+                                                                                            Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                                                                                            Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                                                                                            Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                                                                                            <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <footer style="margin-top:10px">
+                                                                                    <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                </footer>
                                                                             </div>
                                                                         </div>
-
-                                                                        <footer style="margin-top:10px">
-                                                                            <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
-                                                                        </footer>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+
+                                                        }
                                                     </div>
-
-
-
-}
+                                                </div>
                                             </div>
+                                        }
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 mb-4">
+
+                        <div class="card-body">
+                            <h2 class="mb-4">Наборы паков к меню</h2>
+
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="btn-group float-right float-none-xs mt-2">
+                                        <button class="btn btn-outline-primary btn-xs dropdown-toggle" type="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Действия
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Редактировать</a>
+                                            <a class="dropdown-item" href="#">Удалить</a>
                                         </div>
                                     </div>
-}
+                                    <h5 class="mb-4">Паки</h5>
+                                    <p style="margin-top:-15px;margin-bottom:10px" class="text-muted text-small mb-0 font-weight-light">@Model.Menu.DateOfCreation.ToShortDateString()</p>
+                                    <div style="margin-top: 20px;" id="accordion">
+
+                                        @foreach (var i in Model.Menu.Packs)
+                                        {
+
+                                            <div style="border-bottom:1px solid #0080000f">
+                                                <button style="" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne-@i.Id"
+                                                        aria-expanded="true" aria-controls="collapseOne">
+                                                    <span>Пак </span>
+                                                    <span style="color:green" class="badge badge-light">@i.Dishes.Count</span>
+                                                </button>
+
+                                                <div id="collapseOne-@i.Id" class="collapse" data-parent="#accordion">
+                                                    <div class="row list disable-text-selection" data-check-all="checkAll">
+                                                        @foreach (var dish in i.Dishes)
+                                                        {
+                                                            <div style="margin-left:5px" id="dish-card-n-@dish.Id" class="col-xl-4 col-lg-4 col-12 col-sm-6 mb-4">
+                                                                <div class="card">
+                                                                    <div class="position-relative">
+                                                                        <div class="position-absolute card-top-buttons">
+
+                                                                            <button class="btn btn-outline-white icon-button" title="Редактировать"
+                                                                                    data-toggle="modal" data-backdrop="static" data-target="#exampleModal" onclick="EditDish('@dish.Id', '@dish.HasGarnish'=='@true')">
+                                                                                <i class="simple-icon-pencil"></i>
+                                                                            </button>
+
+                                                                            <button class="btn btn-outline-white icon-button" onclick="DeleteDish('@dish.Id')" title="Удалить">
+                                                                                <i class="simple-icon-trash"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <a href="">
+                                                                            <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                                 alt="Фото блюда">
+
+                                                                        </a>
+
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+
+                                                                            <div class="col-12">
+                                                                                <a>
+                                                                                    <p class="list-item-heading "><strong class="dish-name ">@dish.Name</strong></p>
+                                                                                </a>
+                                                                                <p class="list-item-heading dish-category-name">@dish.DishCategory.Name</p>
+                                                                                @if (dish.HasGarnish)
+                                                                                {
+
+                                                                                    <p class="list-item-heading  dish-garnish"><a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@dish.Id"> <span style="border-bottom:1px dotted black">Гарниры</span></a></p>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <p class="list-item-heading  dish-garnish">Без гарнира</p>
+                                                                                }
+                                                                                <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                                                   role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                                    <span style="border-bottom:1px dotted black">Состав</span>
+                                                                                </a>
+                                                                                <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                                    <div class="mt-4">
+                                                                                        <p class="mb-0">
+                                                                                        <p class="list-item-heading mb-4 pt-1">
+                                                                                            Пищевая ценность (на 100г):<br />
+                                                                                            Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                                                                                            Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                                                                                            Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                                                                                            <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <footer style="margin-top:10px">
+                                                                                    <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                </footer>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
 
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-}
-else
-{
-                <div class="card-body">
-                    <h2 class="mb-4">Меню на сегодня</h2>
-                    <p class="text-muted  mb-0 font-weight-light">
-                        Вы не создавали еще меню на сегодня...
-                    </p>
-
-                </div>
-}
-
-
-            @if (Model != null)
-{
-    foreach (var i in Model.DishCategories)
-    {
-        foreach (var dish in i.Dishes)
-        {
-
-                    <div class="modal fade bd-example-modal-sm-@dish.Id" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Гарниры для блюда</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        @foreach (var g in dish.Garnishes)
-            {
-                                            <p>@g.Name</p>
-}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-        }
-    }
-}
+
+                }
+                else
+                {
+                    <div class="card-body">
+                        <h2 class="mb-4">Меню на сегодня</h2>
+                        <p class="text-muted  mb-0 font-weight-light">
+                            Вы не создавали еще меню на сегодня...
+                        </p>
+
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-12">
+
+            @if (Model != null)
+            {
+                foreach (var i in Model.DishCategories)
+                {
+                    foreach (var dish in i.Dishes)
+                    {
+
+                        <div class="modal fade bd-example-modal-sm-@dish.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Гарниры для блюда</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            @foreach (var g in dish.Garnishes)
+                                            {
+                                                <p>@g.Name</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
 
             <br />
 
@@ -203,7 +343,7 @@ else
                         <div class="col-12 ">
                             <div class="row list disable-text-selection" data-check-all="checkAll" id="dish-cards">
                                 @foreach (var dish in (List<Dish>)ViewData["Dishes"])
-{
+                                {
                                     <div id="dish-card-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
                                         <div class="card">
                                             <div class="position-relative">
@@ -230,20 +370,20 @@ else
 
                                                     <div class="col-10">
                                                         <a>
-                                                            <p class="list-item-heading "><strong class="dish-name">@dish.Name</strong></p>
+                                                            <p class="list-item-heading  "><strong class="dish-name">@dish.Name</strong></p>
                                                         </a>
                                                         <p class="list-item-heading dish-category-name">@dish.DishCategory.Name</p>
                                                         @if (dish.HasGarnish)
-{
+                                                        {
                                                             <p class="list-item-heading  dish-garnish">C гарниром</p>
-}
-else
-{
+                                                        }
+                                                        else
+                                                        {
                                                             <p class="list-item-heading  dish-garnish">Без гарнира</p>
-}
-                                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                        }
+                                                        <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
                                                            role="button" aria-expanded="true" aria-controls="collapseExample">
-                                                            Подробнее
+                                                            <span style="font-size:16px;border-bottom:1px dotted black">Состав</span>
                                                         </a>
                                                         <div class="collapse" id="collapseExample-d-@dish.Id">
                                                             <div class="mt-4">
@@ -266,7 +406,7 @@ else
                                             </div>
                                         </div>
                                     </div>
-}
+                                }
                             </div>
                         </div>
 
@@ -311,56 +451,56 @@ else
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                                <h2>Количество паков: <span style="font-weight:600" id="cPack">@ViewBag.Count</span></h2>
-                                    <br />
-                                    <div id="allPacks" class="col-12">
-                                        @{var a = 1; 
-                                        foreach (FoodOrder.Models.Pack i in ViewBag.Packs)
-                                        {
-                                           
-                                            <div class="pack">
-                                                <h3>Пак №@a</h3>
+                            </div>
+                            <h2>Количество паков: <span style="font-weight:600" id="cPack">@ViewBag.Count</span></h2>
+                            <br />
+                            <div id="allPacks" class="col-12">
+                                @{var a = 1;
+                                    foreach (FoodOrder.Models.Pack i in ViewBag.Packs)
+                                    {
 
-                                                <div class="row list disable-text-selection">
-                                                    @foreach (var d in i.Dishes)
-                                                    {
+                                        <div class="pack">
+                                            <h3>Пак №@a</h3>
 
-                                                        <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
-                                                            <div class="card">
-                                                                <div class="position-relative">
-                                                                    <a href="">
-                                                                        <img class="card-img-top" src="@Url.Content(d.ImagePath ?? "~/Content/img/1.jpg") "
-                                                                             alt="Фото блюда">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <a href="Pages.Product.Detail.html">
-                                                                                <p class="list-item-heading mb-4 pt-1">@d.Name</p>
-                                                                            </a>
-                                                                            <footer>
-                                                                                <p class="text-muted text-small mb-0 font-weight-light">@d.DateOfCreation</p>
-                                                                            </footer>
-                                                                        </div>
+                                            <div class="row list disable-text-selection">
+                                                @foreach (var d in i.Dishes)
+                                                {
+
+                                                    <div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                                        <div class="card">
+                                                            <div class="position-relative">
+                                                                <a href="">
+                                                                    <img class="card-img-top" src="@Url.Content(d.ImagePath ?? "~/Content/img/1.jpg") "
+                                                                         alt="Фото блюда">
+                                                                </a>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-10">
+                                                                        <a href="Pages.Product.Detail.html">
+                                                                            <p class="list-item-heading mb-4 pt-1">@d.Name</p>
+                                                                        </a>
+                                                                        <footer>
+                                                                            <p class="text-muted text-small mb-0 font-weight-light">@d.DateOfCreation</p>
+                                                                        </footer>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                    }
-                                                </div>
+                                                }
                                             </div>
-                                            <br />
-                                            a = a + 1;
-                                        }
-                                            }
+                                        </div>
+                                        <br />
+                                        a = a + 1;
+                                    }
+                                }
 
-                                    </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 
@@ -412,7 +552,7 @@ else
                                                                         <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
                                                                             <div class="w-100">
                                                                                 <p class="truncate mb-0">@b.Name</p>
-                                                                             @*  @if (a.HasGarnish)
+                                                                                @*  @if (a.HasGarnish)
                                                                                 {
                                                                                     <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
                                                                                 }
@@ -446,7 +586,7 @@ else
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
-                                <button type="button" class="btn btn-primary sfl-submit-pack" >Сформировать пак</button>
+                                <button type="button" class="btn btn-primary sfl-submit-pack">Сформировать пак</button>
                             </div>
                         </div>
                     </div>
@@ -487,15 +627,15 @@ else
                                     </div>
 
                                     @*<div class="form-group" id="dish-creation-select-garnish" style="display:none">
-                                            <label>Вид гарнира</label>
-                                            <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
-                                                <option value="0" label="&nbsp;">Выберите гарнир</option>
-                                                @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
-                                                {
-                                                    <option value="@garnish.Id">@garnish.Name</option>
-                                                }
-                                            </select>
-                                        </div>*@
+                                        <label>Вид гарнира</label>
+                                        <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
+                                            <option value="0" label="&nbsp;">Выберите гарнир</option>
+                                            @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
+                                            {
+                                                <option value="@garnish.Id">@garnish.Name</option>
+                                            }
+                                        </select>
+                                    </div>*@
 
                                     <div class="form-group">
                                         <p><strong>Пищевая ценность (на 100г) :</strong></p>
@@ -631,6 +771,7 @@ else
         //        $('#dish-creation-select-garnish').hide();
         //    }
         //});
+
 
 
         var editingDishId;
@@ -843,7 +984,11 @@ else
                         return selectedItems || [];
                       }
 
-       
+
+        $("#datcl").on('click', function () {
+            $("#pch").trigger("click")
+        });
+
         //Создаем или редактируем блюдо (собственно нажатие кнопки в правом поп-апе)
         $("#create-or-edit-dish").on('click', function () {
             var buttonName = $(this).text();

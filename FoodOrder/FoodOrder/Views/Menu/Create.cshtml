@@ -42,12 +42,12 @@
                             <input name="Name" type="text" class="form-control">
                         </div>
 
-                        <div class="form-group position-relative col-xl-4 error-l-50">
+                        <div class="form-group position-relative col-xl-6 error-l-50">
                             
-                            <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-pack"> <span style="font-size:18px; border-bottom:1px dotted black">+ Добавить паки в меню</span></a>
+                            <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-pack"> <span style="font-size:18px; border-bottom:1px dotted black">+ Добавить паки в меню <span style="color:black" id="pacCo"></span></span></a>
                         </div>
 
-
+                        <input name="packsIn" id="packsIn" value="" type="hidden" />
                         <div style="margin-left:15px" class="select-from-library-container mb-1">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-xl-4">
@@ -225,7 +225,8 @@
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Паки</h5>
+                            
+                            <button onclick="isCheckBoxedArrayPack()" class="btn btn-outline-primary" data-dismiss="modal" aria-label="Close">Сохранить</button>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -235,7 +236,7 @@
                                 @foreach (FoodOrder.Models.Pack i in ViewBag.Packs)
                                 {
                                     <label for="dish-creation-garnish-checkbox">
-                                        <span> <input id="dish-creation-garnish-checkbox" value="pack" type="checkbox" /> Пак </span>
+                                        <span> <input id="dish-creation-garnish-checkbox" value="@i.Id" type="checkbox" /> Пак </span>
 
                                     </label> <br />
                                     foreach (var d in i.Dishes)
@@ -244,7 +245,7 @@
                                     }
                                 }
                             </div>
-                            <button onclick="" class="btn btn-outline-primary" data-dismiss="modal" aria-label="Close">Сохранить</button>
+                          
                         </div>
                     </div>
                 </div>
@@ -265,6 +266,19 @@
             var garn = '#bigCard-' + id;
             $(garn).attr('data-inp', searchIDs)
     
+        }
+
+        function isCheckBoxedArrayPack() {
+            var searchingTable = '#table-pack';
+            var searchIDs = $(searchingTable + " input:checkbox:checked").map(function () {
+                return $(this).val();
+            }).get();
+
+            
+
+            $('#pacCo').text('(' + searchIDs.length + ' выбрано)');
+            $('#packsIn').val(searchIDs);
+           
         }
 
     </script>

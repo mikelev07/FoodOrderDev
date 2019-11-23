@@ -14,6 +14,9 @@ namespace FoodOrder.Models
         public string Name { get; set; }
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
+        public bool SingleChoice { get; set; }
+        public bool MultiChoice { get; set; }
+        public bool PacksPicker { get; set; }
         public DateTime RegistrationDate { get; set; }
         public string Description { get; set; }
         public string GeneratedPassword { get; set; }
@@ -68,6 +71,9 @@ namespace FoodOrder.Models
         public bool? IsVisible { get; set; }
         public TypeOfPayment TypeOfPayment { get; set; }
         public bool UnlimitedOrders { get; set; }
+        public bool SingleChoice { get; set; }
+        public bool MultiChoice { get; set; }
+        public bool PacksPicker { get; set; }
         public DateTime RegistrationDate { get; set; }
         public string Whatsapp { get; set; }
         public string Telegram { get; set; }

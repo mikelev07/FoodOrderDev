@@ -52,6 +52,62 @@ Table of Contents
   03.44. Dropdown Select
 */
 
+var isNot = true;
+var isSingle = true;
+
+function showNotificationText(text) {
+
+    var placementFrom = "bottom"
+    var placementAlign = "center"
+    var type = "primary"
+    $.notify(
+        {
+            title: '<a id="togmod" class="select-from-library-button sfl-multiple" data-library-id="#libraryModal" data-count="-1" style="border-bottom:1px dashed green; height:35px" >Перейти в заказу</a>',
+            message: text,
+            target: "_blank"
+        },
+        {
+            element: "body",
+            position: null,
+            type: type,
+            allow_dismiss: true,
+            newest_on_top: false,
+            showProgressbar: true,
+            placement: {
+                from: placementFrom,
+                align: placementAlign
+            },
+            offset: 20,
+            spacing: 10,
+            z_index: 1031,
+            delay: 4000,
+            timer: 2000,
+            url_target: "_blank",
+            mouse_over: null,
+            animate: {
+                enter: "animated fadeInDown",
+                exit: "animated fadeOutUp"
+            },
+            onShow: null,
+            onShown: null,
+            onClose: null,
+            onClosed: null,
+            icon_type: "class",
+            template:
+                '<div style="background-color:white; box-shadow:0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04)" data-notify="container" class="col-11 col-sm-3 alert  alert-{0} " role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                '<span data-notify="icon"></span> ' +
+                '<span data-notify="title">{1}</span> ' +
+                '<span style="color:red" data-notify="message">{2}</span>' +
+                '<div class="progress" data-notify="progressbar">' +
+                '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;background-color:red"></div>' +
+                "</div>" +
+                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                "</div>"
+        }
+    );
+}
+
 /* 01. Utils */
 $.fn.addCommas = function (nStr) {
   nStr += "";
@@ -3174,7 +3230,7 @@ $.dore = function (element, options) {
           onClosed: null,
           icon_type: "class",
           template:
-            '<div data-notify="container" class="col-11 col-sm-3 alert  alert-{0} " role="alert">' +
+            '<div style="background-color:white; box-shadow:0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04)" data-notify="container" class="col-11 col-sm-3 alert  alert-{0} " role="alert">' +
             '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
             '<span data-notify="icon"></span> ' +
             '<span data-notify="title">{1}</span> ' +
@@ -3188,9 +3244,13 @@ $.dore = function (element, options) {
       );
     }
 
+ 
+
     $("body").on("click", ".notify-btn", function (event) {
-      event.preventDefault();
-        showNotification($(this).data("from"), $(this).data("align"), "primary");
+        event.preventDefault();
+        if (isNot && isSingle) {
+            showNotification($(this).data("from"), $(this).data("align"), "primary");
+        }
 
     });
 

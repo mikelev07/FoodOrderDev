@@ -60,13 +60,13 @@
                     <rect x="0.5" y="15.5" width="25" height="1" />
                 </svg>
             </a>
-
+            @*
             <div class="search" data-search-path="search?q=">
                 <input placeholder="Поиск пока не рабочий...">
                 <span class="search-icon">
                     <i class="simple-icon-magnifier"></i>
                 </span>
-            </div>
+            </div>*@
 
             <a style="color:forestgreen" class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block"
                id="makeInstruction">ИНСТРУКЦИЯ</a>
@@ -108,9 +108,7 @@
                 <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                     <span class="name">Виктор</span>
-                    <span>
-                        <img alt="Фото профиля" src="~/Content/img/profile-pic-p.png" />
-                    </span>
+                   
                 </button>
 
                 <div class="dropdown-menu dropdown-menu-right mt-3">
@@ -169,9 +167,10 @@
                                 <span>Меню на сегодня</span>
                             </a>
                         </li>
-                        <li class="select-from-library-button sfl-multiple" data-library-id="#libraryModal" data-count="-1">
-                            <a >
-                                <i class="iconsminds-cart-quantity"></i>
+                        <li id="cart-or" style="border:0" class="select-from-library-button sfl-multiple" data-library-id="#libraryModal" data-count="-1">
+                            <a href="#">
+                                <i class="iconsminds-shopping-cart"></i>
+                                <span style="background-color: limegreen;color: white;padding: 2px 2px 2px 2px;" class="scount">3</span>
                                 <span>Корзина для заказа</span>
                             </a>
                         </li>
@@ -194,6 +193,7 @@
     @RenderBody()
 
     <script src="~/Scripts/system/vendor/jquery-3.3.1.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
     <script src="~/Scripts/system/vendor/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/system/vendor/Chart.bundle.min.js"></script>
     <script src="~/Scripts/system/vendor/chartjs-plugin-datalabels.js"></script>

@@ -74,38 +74,105 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
-                var menu = db.Menus.Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
+                var menu = db.Menus.Include(c=>c.Packs).Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
 
                 var user = db.Users.Include(c=>c.Company).Where(c => c.Id == userId).FirstOrDefault();
 
-
-                ViewBag.Unlimited = user.Company.UnlimitedOrders;
-
-                if (menu != null)
+                if (user.Company.MultiChoice)
                 {
-                    string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
 
-                    var dishCategories = categories.Select(c => new DishCategory()
+                    ViewBag.Unlimited = user.Company.UnlimitedOrders;
+
+                    if (menu != null)
                     {
-                        Id = c.Id,
-                        Name = c.Name,
-                        DateOfCreation = c.DateOfCreation,
-                        Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
-                    });
+                        string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
 
-                    MenuViewModel menuViewModel = new MenuViewModel
+                        var dishCategories = categories.Select(c => new DishCategory()
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            DateOfCreation = c.DateOfCreation,
+                            Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
+                        });
+
+                        MenuViewModel menuViewModel = new MenuViewModel
+                        {
+                            Menu = menu,
+                            DishCategories = dishCategories.ToList()
+                        };
+
+                        return View("IndexEmployee", menuViewModel);
+                    }
+                    else
                     {
-                        Menu = menu,
-                        DishCategories = dishCategories.ToList()
-                    };
-
-                    return View("IndexEmployee", menuViewModel);
+                        return View("IndexEmployee");
+                    }
                 }
-                else
+
+                if (user.Company.SingleChoice)
                 {
-                    return View("IndexEmployee");
+                    ViewBag.Unlimited = user.Company.UnlimitedOrders;
+
+                    if (menu != null)
+                    {
+                        string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
+
+                        var dishCategories = categories.Select(c => new DishCategory()
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            DateOfCreation = c.DateOfCreation,
+                            Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
+                        });
+
+                        MenuViewModel menuViewModel = new MenuViewModel
+                        {
+                            Menu = menu,
+                            DishCategories = dishCategories.ToList()
+                        };
+
+                        return View("IndexEmployeeSingle", menuViewModel);
+                    }
+                    else
+                    {
+                        return View("IndexEmployeeSingle");
+                    }
+
                 }
+
+                if (user.Company.PacksPicker)
+                {
+                    ViewBag.Unlimited = user.Company.UnlimitedOrders;
+
+                    if (menu != null)
+                    {
+                        string[] hs = menu.Dishes.Select(c => c.Id).ToArray();
+
+                        var dishCategories = categories.Select(c => new DishCategory()
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            DateOfCreation = c.DateOfCreation,
+                            Dishes = c.Dishes.Where(b => hs.Contains(b.Id)).ToList()
+                        });
+
+                        MenuViewModel menuViewModel = new MenuViewModel
+                        {
+                            Menu = menu,
+                            DishCategories = dishCategories.ToList()
+                        };
+
+                        return View("IndexEmployeePacks", menuViewModel);
+                    }
+                    else
+                    {
+                        return View("IndexEmployeePacks");
+                    }
+
+                }
+
+
             }
             if (await UserManager.IsInRoleAsync(userId, "cook"))
             {

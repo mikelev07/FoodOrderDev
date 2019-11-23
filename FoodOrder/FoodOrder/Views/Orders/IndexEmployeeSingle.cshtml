@@ -1,0 +1,482 @@
+﻿@model FoodOrder.Models.MenuViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSystemCourt.cshtml";
+    ViewBag.Title = "Меню на сегодня";
+}
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Меню на сегодня</h1>
+                </div>
+
+
+                <div class="col-12">
+                  @if (ViewBag.Unlimited)
+                  {
+                      if (Model != null)
+                      {
+                        <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
+                            @foreach (var i in Model.DishCategories)
+                  {
+                      if (i == Model.DishCategories.FirstOrDefault())
+                      {
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="tab-@i.Id" data-toggle="tab" href="#first-@i.Id" role="tab"
+                                           aria-controls="first-@i.Id" aria-selected="true">@i.Name</a>
+                                    </li>
+                      }
+                      else
+                      {
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="tab-@i.Id" data-toggle="tab" href="#first-@i.Id" role="tab"
+                                           aria-controls="first-@i.Id" aria-selected="false">@i.Name</a>
+                                    </li>
+                      }
+                  }
+
+                        </ul>
+
+                        <div class="tab-content">
+
+                            @foreach (var i in Model.DishCategories)
+                  {
+                      if (i == Model.DishCategories.FirstOrDefault())
+                      {
+                                    <div class="tab-pane show active" id="first-@i.Id" role="tabpanel" aria-labelledby="tab-@i.Id">
+                                        <div class="row">
+                                            <div class="col-12 list" data-check-all="checkAll">
+                                                <div class="row list disable-text-selection" data-check-all="checkAll">
+                                                    @if (i.Dishes.Count != 0)
+                  {
+                      foreach (var dish in i.Dishes)
+                      {
+                                                            <div style="padding-right:0; padding-left:25px" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                                                <div class="card">
+                                                                    <div class="position-relative">
+                                                                        <div class="position-absolute card-top-buttons">
+
+                                                                        </div>
+                                                                        <a href="">
+                                                                            <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                                 alt="Фото блюда">
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-10">
+                                                                                <a>
+                                                                                    <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
+                                                                                </a>
+                                                                                <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
+                                                                                @if (dish.Garnishes.Count != 0)
+                                                                                {
+                                                                                    <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                                                       role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                                        <span style="font-size:14px;border-bottom:1px dotted black">+ Добавить гарнир</span> <br />
+                                                                                    </a>
+                                                                                }
+                                                                                    <a style="margin-top:15px" onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId', this, '@dish.ImagePath')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="bottom" data-align="center">
+                                                                                        <i class="iconsminds-add-cart"></i>
+                                                                                        В корзину
+                                                                                    </a>
+                                                                                    @if (dish.Garnishes.Count != 0)
+                                                                                    {
+                                                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                                            <div class="mt-4">
+                                                                                                <p class="mb-0">
+                                                                                                    <div style="margin-bottom:5px">
+                                                                                                        <select id="gch-@dish.Id" class="form-control select2-single">
+                                                                                                            <option value="0" label="&nbsp;">Выберите гарнир...</option>
+
+                                                                                                            @foreach (var a in dish.Garnishes)
+                                                                                                            {
+                                                                                                                <option value="@a.Id">@a.Name</option>
+                                                                                                            }
+
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                <p class="list-item-heading mb-4 pt-1">
+                                                                                                    @*
+                            Пищевая ценность (на 100г):<br />
+                            Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                            Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                            Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                            <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                                                    *@
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    }
+
+                                                                                    <footer style="margin-top:10px">
+                                                                                        <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                    </footer>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                      }
+                  }
+                  else
+                  {
+
+                                                        <div class="card-body">
+                                                            <h2 class="mb-4 font-weight-light">Блюд в этой категории нет...</h2>
+                                                            
+                                                        </div>
+                  }
+
+                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                    </div>
+                      }
+
+                      else
+                      {
+                                    <div class="tab-pane fade" id="first-@i.Id" role="tabpanel" aria-labelledby="tab-@i.Id">
+                                        <div class="row">
+                                            <div class="col-12 list" data-check-all="checkAll">
+                                                <div class="row list disable-text-selection" data-check-all="checkAll">
+                                                    @if (i.Dishes.Count != 0)
+                  {
+                      foreach (var dish in i.Dishes)
+                      {
+                                                            <div style="" id="dish-card-n-@dish.Id" class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">
+                                                                <div class="card">
+                                                                    <div class="position-relative">
+                                                                        <div class="position-absolute card-top-buttons">
+
+                                                                        </div>
+                                                                        <a href="">
+                                                                            <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                                 alt="Фото блюда">
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-10">
+                                                                                <a>
+                                                                                    <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
+                                                                                </a>
+                                                                                <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
+
+                                                                                @if (dish.Garnishes.Count != 0)
+                                                                                {
+                                                                                    <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                                                       role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                                        <span style="font-size:14px;border-bottom:1px dotted black">+ Добавить гарнир</span> <br />
+                                                                                    </a>
+                                                                                }
+
+                                                                                <a style="margin-top:15px" onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId',this,'@dish.ImagePath')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="bottom" data-align="center">
+                                                                                    <i class="iconsminds-add-cart"></i>
+                                                                                    В корзину
+                                                                                </a>
+                                                                                @if (dish.Garnishes.Count != 0)
+                                                                                {
+                                                                                    <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                                        <div class="mt-4">
+                                                                                            <p class="mb-0">
+                                                                                                <select id="gch-@dish.Id" class="form-control select2-single">
+                                                                                                    <option value="0" label="&nbsp;">Выберите гарнир...</option>
+
+                                                                                                    @foreach (var a in dish.Garnishes)
+                                                                                                    {
+                                                                                                        <option value="@a.Id">@a.Name</option>
+                                                                                                    }
+
+                                                                                                </select>
+                                                                                                @*
+                        <p class="list-item-heading mb-4 pt-1">
+                            Пищевая ценность (на 100г):<br />
+                            Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                            Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                            Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                            <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                        </p>*@
+                                                                                        </div>
+                                                                                    </div>
+                                                                                }
+
+                                                                                    <footer style="margin-top:10px">
+                                                                                        <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                    </footer>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                      }
+                  }
+                  else
+                  {
+
+                                                        <div class="card-body">
+                                                            <h2 class="mb-4 font-weight-light">Блюд в этой категории нет...</h2>
+
+                                                        </div>
+                  }
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                      }
+
+                  }
+
+                        </div>
+                      }
+                      else
+                      {
+                        <div class="card-body">
+                            <h2 class="mb-4">Меню на сегодня</h2>
+                            <p class="text-muted  mb-0 font-weight-light">
+                                Меню на сегодня отсутсвует...
+                            </p>
+
+                        </div>
+                      }
+                  } else
+                  {
+                      <p>Вы не можете совершать больше заказов</p>
+                  }
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade modal-right select-from-library" id="libraryModal" tabindex="-1" role="dialog"
+             aria-labelledby="libraryModal" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Завершите свой заказ</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body scroll pt-0 pb-0 mt-4 mb-4">
+                        <div class="accordion" id="accordionSet">
+
+                        </div>
+
+                    </div>
+                    <div class="separator"></div>
+                    <div style="margin-left:15px;margin-right:15px" class="form-group pt-0 pb-0 mt-4 ">
+                        <label>Итого БЖУ</label>
+                        <h3 class=""><span>100</span> г.</h3>
+                    </div>
+                    <div style="margin-left:15px;margin-right:15px" class="form-group pt-0 pb-0 mb-4">
+                        <label>Комментарий</label>
+                        <textarea id="desc" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
+
+                        <button id="endOrder" type="button" class="btn btn-primary sfl-submit">Завершить заказ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+@section Scripts {
+    
+    <script>
+
+
+        $("body").on('click', '#togmod', function () { 
+             $("#libraryModal").on("shown.bs.modal", function () { }).modal('show');
+        });
+
+       
+        function addInCart(id, catName, dishName, dishId, el, imPath)
+        {
+            var dsId = 'di-' + id;
+            var cCo = 'collapse-cat-' + dishId;
+            var scId = 'content-' + cCo;
+            alert(imPath)
+            if (imPath == "") {
+                imPath = "/Content/img/1.jpg"
+            }
+
+            isNot = $('#' + dsId).length == 0;
+            isSingle = $('#' + scId).children().length == 0;
+
+          
+            if ($('#' + scId).children().length == 0) {
+
+                if ($('#' + dsId).length == 0) {
+
+                    var cart = $('#cart-or');
+                    var dc = '#dish-card-n-' + id;
+                    // alert(dc)
+                    // alert($(dc).html())
+                    var imgtodrag = $(dc + ' .position-relative .card-img-top');
+                    alert(imgtodrag.attr('src'))
+
+                    if (imgtodrag) {
+                        var imgclone = imgtodrag.clone()
+                            .offset({
+                                top: imgtodrag.offset().top,
+                                left: imgtodrag.offset().left
+                            })
+                            .css({
+                                'opacity': '0.5',
+                                'position': 'absolute',
+                                'height': '150px',
+                                'width': '150px',
+                                'z-index': '100'
+                            })
+                            .appendTo($('body'))
+                            .animate({
+                                'top': cart.offset().top + 10,
+                                'left': cart.offset().left + 10,
+                                'width': 75,
+                                'height': 75
+                            }, 1000, 'easeInOutExpo');
+
+                        setTimeout(function () {
+                            cart.effect("shake", {
+                                times: 2
+                            }, 200);
+                        }, 1500);
+
+                        imgclone.animate({
+                            'width': 0,
+                            'height': 0
+                        }, function () {
+                            $(this).detach()
+                        });
+                    }
+
+                    var chg = "#gch-" + id;
+                    var garId = $(chg).find(":selected").val();
+                    var garName = '';
+                    if (garId == 0) {
+                        garName = 'Нет'
+                    } else {
+
+                        garName = $(chg).find(":selected").text();
+                    }
+
+                    var constCol = 'collapse-cat-' + dishId;
+
+                    //alert(catName)
+
+                    var isEqual = $("span:contains(" + catName + ")").last().length == 0;
+                    //alert($('.folder-name').contents().length)
+
+                    // alert(isEqual)
+
+                    if (isEqual) {
+
+                        var buttonCollapse = '<button class="btn btn-link p-0 folder-button-collapse" data-toggle="' + constCol + '"  data-target="#' + constCol + '" aria-expanded="true" aria-controls="' + constCol + '"><span class="icon-container"> <i class="simple-icon-arrow-down"></i></span><span class="folder-name">' + catName + '</span></button>';
+
+                        var contentCollapse = '<div id="' + constCol + '" class="collapse show" data-parent="#accordionSet"> <div class="list disable-text-selection"><div id="content-' + constCol + '" class="row"> </div></div></div>';
+
+                        var mb2 = '<div class="mb-2">' + buttonCollapse + contentCollapse + '</div>';
+
+                        var specId = 'content-' + constCol;
+
+                        $('#accordionSet').append(mb2);
+
+                        var imageDish = '<div class="d-flex align-self-stretch"> <img src="' + imPath + '" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
+
+                        var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dishName + '</p><p>' + 'Гарнир: ' + garName + '</p></div></div>'
+                        var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
+                        var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
+
+                        var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
+
+                        var c = '<input class="certain" id="garr-' + garId + '" type="hidden" value="' + garId + '"></input>'
+                        var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + c + '</div>'
+
+                        // cardDish.append(c);
+
+                        $('#' + specId).append(dishContainer)
+                    } else {
+
+                        var specId = 'content-' + constCol;
+                        var imageDish = '<div class="d-flex align-self-stretch"> <img src="' + imPath + '" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
+
+                        var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dishName + '</p><p>' + 'Гарнир: ' + garName + '</p></div></div>'
+                        var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
+                        var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
+
+                        var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
+
+                        var c = '<input class="certain" id="garr-' + garId + '" type="hidden" value="' + garId + '"></input>'
+                        var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + c + '</div>'
+
+
+                        var dId = 'di-' + id;
+                        if ($('#' + dId).length == 0) {
+                            $('#' + specId).append(dishContainer)
+                        } else {
+                            alert("Блюдо уже добавлено в заказ")
+                        }
+                    }
+
+                } else {
+                    showNotificationText('Блюдо уже добавлено в заказ!')
+                }
+            } else {
+                 showNotificationText('Можно добавлять только 1 блюдо из категории!')
+            }
+           
+
+        }
+
+
+        $("#endOrder").on('click', function () { 
+
+            var IDs = [];
+            var GarIds = [];
+            $("#accordionSet .sfl-item-container").each(function () { IDs.push(this.id.split('-')[1]); });
+
+            $("#accordionSet .certain").each(function () { GarIds.push(this.id.split('-')[1]); });
+
+            var descr = $("#desc").val();
+            //alert(GarIds)
+
+           // alert(IDs)
+            
+              $.ajax({
+                url: '/Orders/CreateJson',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    'IDs': IDs,
+                    'GarIds': GarIds,
+                    'descr': descr
+                },
+                success: function (result) {
+                  window.location.href = result.Url;
+                },
+                error: function () {
+                    console.log("Error while calling method '/Dishes/CreateJson'");
+                }
+            }); 
+        });
+   
+    </script>
+    
+    }

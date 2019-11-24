@@ -165,10 +165,16 @@
                     }
                     @if (User.IsInRole("employee"))
                     {
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Orders" ? "active" : "")">
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Index" ? "active" : "")">
                             <a href="/Orders">
                                 <i class="iconsminds-chef-hat"></i>
                                 <span>Меню на сегодня</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "OrdersHistory" ? "active" : "")">
+                            <a href="/OrdersHistory">
+                                <i class="iconsminds-monitor---tablet"></i>
+                                <span>Мои заказы</span>
                             </a>
                         </li>
                     }

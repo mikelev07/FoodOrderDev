@@ -50,6 +50,15 @@ namespace FoodOrder.Controllers
             return View(company.Employees);
         }
 
+        [Authorize(Roles = "employee")]
+        public async Task<ActionResult> OrdersHistory()
+        {
+            string userId = User.Identity.GetUserId();
+            List<Order> orders = await db.Orders.Include(c=>c.ChoosenDishes).Where(c => c.UserId == userId).ToListAsync();
+            
+            return View(orders);
+        }
+
         [Authorize(Roles = "admin,representative,cook, employee")]
         // GET: Orders
         public async Task<ActionResult> Index()

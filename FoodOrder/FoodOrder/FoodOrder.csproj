@@ -772,6 +772,7 @@
     <Content Include="Views\Orders\MyOrders.cshtml" />
     <Content Include="Views\Orders\IndexEmployeeSingle.cshtml" />
     <Content Include="Views\Orders\IndexEmployeePacks.cshtml" />
+    <Content Include="Views\Orders\OrdersHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

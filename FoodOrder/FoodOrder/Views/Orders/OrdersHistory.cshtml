@@ -1,0 +1,73 @@
+﻿@model IEnumerable<FoodOrder.Models.Order>
+
+@{
+    Layout = "~/Views/Shared/_LayoutSystem.cshtml";
+}
+
+
+<main>
+    <div class="container-fluid disable-text-selection">
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-2">
+                    <h1>Заказы клиентов</h1>
+
+                </div>
+            </div>
+            <div class="col-12">
+            <div class="row">
+                <div class="col-12 list" data-check-all="checkAll">
+                    @{ var a = 1;
+                        foreach (var i in Model)
+                        {
+
+                            <div class="card d-flex flex-row mb-3">
+                                <div class="d-flex flex-grow-1 min-width-zero">
+                                    <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+
+                                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
+                                            Заказ №@a
+                                        </a>
+
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">LLC Aligofren Incorporated</p>
+
+                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">01.04.2018</p>
+                                        <div class="w-15 w-xs-100">
+                                            <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-@a"
+                                               role="button" aria-expanded="true" aria-controls="collapseExample-@a">
+                                                Детали заказа
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
+                                        <input type="checkbox" class="custom-control-input">
+                                        <span class="custom-control-label">&nbsp;</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="collapse" id="collapseExample-@a">
+                                <div class="p-4 border mt-4">
+
+                                    <div class="row mb-4">
+                                        @foreach (var d in i.ChoosenDishes)
+                                        {
+                                            <div class="col-md-12 mb-4 pl-0 pr-0">
+                                                @d.DishName
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                            a = a + 1;
+                        }
+                    }
+
+                </div>
+            </div>
+                </div>
+
+        </div>
+    </div>
+</main>

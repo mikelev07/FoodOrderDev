@@ -70,6 +70,10 @@
                                                                                     <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
                                                                                 </a>
                                                                                 <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
+                                                                                <a role="button" class="btn-link" data-toggle="tooltip"
+                                                                                   data-placement="top" title="Пищевая ценность (на 100г): Белки - @dish.Proteins г. Жиры - @dish.Fats г. Углеводы - @dish.Carbonhydrates г. Килокалории @dish.Kilocalories ккал">
+                                                                                    <span style="color:#17d85b; font-size:16px;border-bottom:1px dashed black">Состав</span>
+                                                                                </a>
                                                                                 @if (dish.Garnishes.Count != 0)
                                                                                 {
                                                                                     <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
@@ -77,43 +81,43 @@
                                                                                         <span style="font-size:14px;border-bottom:1px dotted black">+ Добавить гарнир</span> <br />
                                                                                     </a>
                                                                                 }
-                                                                                    <a style="margin-top:15px" onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId', this, '@dish.ImagePath')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="bottom" data-align="center">
-                                                                                        <i class="iconsminds-add-cart"></i>
-                                                                                        В корзину
-                                                                                    </a>
-                                                                                    @if (dish.Garnishes.Count != 0)
-                                                                                    {
-                                                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
-                                                                                            <div class="mt-4">
-                                                                                                <p class="mb-0">
-                                                                                                    <div style="margin-bottom:5px">
-                                                                                                        <select id="gch-@dish.Id" class="form-control select2-single">
-                                                                                                            <option value="0" label="&nbsp;">Выберите гарнир...</option>
+                                                                                <a style="margin-top:15px" onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId', this, '@dish.ImagePath', '@dish.Proteins','@dish.Fats','@dish.Carbonhydrates','@dish.Kilocalories')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="bottom" data-align="center">
+                                                                                    <i class="iconsminds-add-cart"></i>
+                                                                                    В корзину
+                                                                                </a>
+                                                                                @if (dish.Garnishes.Count != 0)
+                                                                                {
+                                                                                    <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                                        <div class="mt-4">
+                                                                                            <p class="mb-0">
+                                                                                                <div style="margin-bottom:5px">
+                                                                                                    <select id="gch-@dish.Id" class="form-control select2-single">
+                                                                                                        <option value="0" label="&nbsp;">Выберите гарнир...</option>
 
-                                                                                                            @foreach (var a in dish.Garnishes)
-                                                                                                            {
-                                                                                                                <option value="@a.Id">@a.Name</option>
-                                                                                                            }
+                                                                                                        @foreach (var a in dish.Garnishes)
+                                                                                                        {
+                                                                                                            <option value="@a.Id">@a.Name</option>
+                                                                                                        }
 
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                <p class="list-item-heading mb-4 pt-1">
-                                                                                                    @*
-                            Пищевая ценность (на 100г):<br />
-                            Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
-                            Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
-                            Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
-                            <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
-                                                                                                    *@
-                                                                                                </p>
-                                                                                            </div>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            <p class="list-item-heading mb-4 pt-1">
+                                                                                                @*
+                        Пищевая ценность (на 100г):<br />
+                        Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                        Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                        Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                        <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                                                *@
+                                                                                            </p>
                                                                                         </div>
-                                                                                    }
+                                                                                    </div>
+                                                                                }
 
-                                                                                    <footer style="margin-top:10px">
-                                                                                        <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
-                                                                                    </footer>
-                                                                                </div>
+                                                                                <footer style="margin-top:10px">
+                                                                                    <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                </footer>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -167,7 +171,10 @@
                                                                                     <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
                                                                                 </a>
                                                                                 <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
-
+                                                                                <a role="button" class="btn-link" data-toggle="tooltip"
+                                                                                   data-placement="top" title="Пищевая ценность (на 100г): Белки - @dish.Proteins г. Жиры - @dish.Fats г. Углеводы - @dish.Carbonhydrates г. Килокалории @dish.Kilocalories ккал">
+                                                                                    <span style="color:#17d85b; font-size:16px;border-bottom:1px dashed black">Состав</span>
+                                                                                </a>
                                                                                 @if (dish.Garnishes.Count != 0)
                                                                                 {
                                                                                     <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
@@ -176,7 +183,7 @@
                                                                                     </a>
                                                                                 }
 
-                                                                                <a style="margin-top:15px" onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId',this,'@dish.ImagePath')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="bottom" data-align="center">
+                                                                                <a style="margin-top:15px" onclick="addInCart('@dish.Id', '@dish.DishCategory.Name', '@dish.Name', '@dish.DishCategoryId',this,'@dish.ImagePath','@dish.Proteins','@dish.Fats','@dish.Carbonhydrates','@dish.Kilocalories')" href="#" class="btn btn-outline-primary rounded notify-btn mb-1" data-from="bottom" data-align="center">
                                                                                     <i class="iconsminds-add-cart"></i>
                                                                                     В корзину
                                                                                 </a>
@@ -206,10 +213,10 @@
                                                                                     </div>
                                                                                 }
 
-                                                                                    <footer style="margin-top:10px">
-                                                                                        <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
-                                                                                    </footer>
-                                                                                </div>
+                                                                                <footer style="margin-top:10px">
+                                                                                    <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
+                                                                                </footer>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -276,14 +283,43 @@
 
                     </div>
                     <div class="separator"></div>
-                    <div style="margin-left:15px;margin-right:15px" class="form-group pt-0 pb-0 mt-4 ">
-                        <label>Итого БЖУ</label>
-                        <h3 class=""><span>100</span> г.</h3>
+                    
+
+                    <div style="margin-left:15px;margin-right:15px" class="form-group pt-0 pb-0 mt-4 mb-4">
+                       
+                        <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-cb"
+                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                            <span style="font-size:14px;border-bottom:1px dotted black">Итого БЖУ</span> <br />
+                        </a>
+
+                        <div class="collapse" id="collapseExample-cb">
+                            <div class="mt-4">
+                                <p class="list-item-heading mb-4 pt-1">
+                                    <b>Итоговая пищевая ценность</b><br />
+                                    Белки - <span id="dprot" class="dish-proteins">0</span> г<br />
+                                    Жиры - <span id="dfat" class="dish-fats">0</span> г<br />
+                                    Углеводы - <span id="dcarb" class="dish-carbonhydrates">0</span> г<br />
+                                    Килокалорий - <span id="dkil" class="dish-kilocalories">0</span> ккал
+                                </p>
+                            </div>
+                        </div>
+                        <br />
+
+                        <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-comment"
+                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                            <span style="font-size:14px;border-bottom:1px dotted black">+ Добавить комментарий</span> <br />
+                        </a>
+
+                        <div class="collapse" id="collapseExample-comment">
+                            <div class="mt-4">
+                                <p class="mb-0">
+                                    <textarea id="desc" class="form-control" rows="2"></textarea>
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
-                    <div style="margin-left:15px;margin-right:15px" class="form-group pt-0 pb-0 mb-4">
-                        <label>Комментарий</label>
-                        <textarea id="desc" class="form-control" rows="2"></textarea>
-                    </div>
+
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
@@ -300,19 +336,204 @@
 @section Scripts {
     
     <script>
+         var defaults = {
+            // Sets how many items can be selected from library. Set to -1 disable selection limit.
+            count: -1,
 
+            // Modal id from which items will be selected
+            libraryId: "#modal",
+
+            // Submit button class in library modal.
+            submitButtonClass: ".sfl-submit-pack",
+
+            // Container class for library item
+            itemContainerClass: ".sfl-item-container",
+
+            // Selected item template class
+            selectedItemClass: ".sfl-selected-item",
+
+            // Selected item template class to distinction
+            selectedItemClassActive: ".sfl-selected-item-active",
+
+            // Selected item template image class
+            selectedItemImageClass: ".sfl-selected-item-image",
+
+            // Selected item template label class
+            selectedItemLabelClass: ".sfl-selected-item-label",
+
+            // Selected item delete class
+            selectedItemDeleteClass: ".sfl-delete-item"
+        }
 
         $("body").on('click', '#togmod', function () { 
              $("#libraryModal").on("shown.bs.modal", function () { }).modal('show');
         });
 
+
+          $('#accordionSet').on('click', ".sfl-delete-item", function () {
+            
+            onDeleteClick(this);
+
+
+              var plugin = this;
+
        
-        function addInCart(id, catName, dishName, dishId, el, imPath)
+        var $self = $("#pch");
+        //  plugin.settings = $.extend({}, defaults, options, $self.data());
+
+        var $modal = $("#libraryModal");
+        var $itemContaines;
+        var $submitButton;
+        var $submitButtonLabel;
+        var $checkedItems;
+        var selectedItems;
+
+        function init() {
+            $itemContaines = $(defaults.itemContainerClass);
+            $submitButton = $modal.find(defaults.submitButtonClass);
+            $submitButtonLabel = $submitButton.html();
+            clearAllSelections();
+            $modal.modal($modal.data());
+            if (defaults.count == 1) {
+                hideCheckboxes();
+            } else {
+                showCheckboxes();
+            }
+            $submitButton.on("click", onSubmitHandler);
+            $modal.on(
+                "change",
+                defaults.itemContainerClass + " .custom-control-input",
+                checkChange
+            );
+            $modal.on('hidden.bs.modal', onModalHide);
+        }
+
+        $self.on("click", function (event) {
+            event.preventDefault();
+            init();
+        });
+
+        function checkChange(event) {
+            $checkedItems = $(
+                defaults.itemContainerClass + " .custom-control-input:checked"
+            ).parents(defaults.itemContainerClass);
+            if (defaults.count == 1) {
+                onSubmitHandler(null);
+                hideSelectButton();
+                return;
+            }
+            $submitButton.html(
+                $checkedItems.length > 0
+                    ? $submitButtonLabel + " (" + $checkedItems.length + ")"
+                    : $submitButtonLabel
+            );
+        }
+
+        function onSubmitHandler(event) {
+            event && event.preventDefault();
+            getDataFromDomItems($checkedItems);
+            appendSelectedItems();
+            $modal.modal("hide");
+        }
+
+      
+              function onDeleteClick(elem) {
+
+                  var n = $(".scount").text();
+                  if ((parseInt(n) - 1) != 0) {
+                      $(".scount").text(parseInt(n) - 1)
+                  } else {
+                      $(".scount").remove()
+                  }
+                  //alert($(elem).parents(defaults.itemContainerClass).parents(".row").find('.sfl-item-container').length)
+                  if ($(elem).parents(defaults.itemContainerClass).parents(".row").find('.sfl-item-container').length == 1) {
+                      $(elem).parents(defaults.itemContainerClass).parent().parent().parent().prev().remove();
+                      $(elem).parents(defaults.itemContainerClass).parent().parent().parent().remove()
+                  }
+           // $(this).parents(defaults.itemContainerClass).off("click", defaults.selectedItemDeleteClass, onDeleteClick);
+                  //alert( $(elem).parents(defaults.itemContainerClass).html())
+                  $(elem).parents(defaults.itemContainerClass).remove();
+              
+            //updateSelectedItemsByDom();
+            if (defaults.count == 1) {
+                showSelectButton()
+            }
+        }
+
+        function updateSelectedItemsByDom() {
+            var $grandParent = $self.parent().parent();
+            var $items = $grandParent.find(selectedItemClassActive);
+            getDataFromDomItems($items);
+        }
+
+        function getDataFromDomItems($items) {
+            selectedItems = [];
+            if (!$items) {
+                return;
+            }
+            $items.each(function () {
+                selectedItems.push($(this).data());
+            });
+        }
+
+        function onModalHide(event) {
+            $submitButton.html($submitButtonLabel);
+            $submitButton.off("click", onSubmitHandler);
+            $modal.off(
+                "change",
+                defaults.itemContainerClass + " .custom-control-input",
+                checkChange
+            );
+            $modal.off('hidden.bs.modal', onModalHide);
+        }
+
+        function hideCheckboxes() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-checkbox")
+                    .css("visibility", "hidden");
+            });
+        }
+
+        function showCheckboxes() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-checkbox")
+                    .css("visibility", "visible");
+            });
+        }
+
+        function clearAllSelections() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-control-input")
+                    .prop("checked", false);
+                $(this)
+                    .find(".active")
+                    .removeClass("active");
+            });
+        }
+
+        function hideSelectButton() {
+            $self.css("visibility", "hidden");
+        }
+
+        function showSelectButton() {
+            $self.css("visibility", "visible");
+        }
+
+        plugin.getData = function () {
+            return selectedItems || [];
+        }
+            });
+
+       
+        function addInCart(id, catName, dishName, dishId, el, imPath, prot, fats, cydro, kilo)
         {
             var dsId = 'di-' + id;
             var cCo = 'collapse-cat-' + dishId;
             var scId = 'content-' + cCo;
-            alert(imPath)
+            //alert(imPath)
             if (imPath == "") {
                 imPath = "/Content/img/1.jpg"
             }
@@ -320,8 +541,7 @@
             isNot = $('#' + dsId).length == 0;
             isSingle = $('#' + scId).children().length == 0;
 
-          
-            if ($('#' + scId).children().length == 0) {
+           // if ($('#' + scId).children().length == 0) {
 
                 if ($('#' + dsId).length == 0) {
 
@@ -330,7 +550,7 @@
                     // alert(dc)
                     // alert($(dc).html())
                     var imgtodrag = $(dc + ' .position-relative .card-img-top');
-                    alert(imgtodrag.attr('src'))
+                   // alert(imgtodrag.attr('src'))
 
                     if (imgtodrag) {
                         var imgclone = imgtodrag.clone()
@@ -379,14 +599,28 @@
 
                     var constCol = 'collapse-cat-' + dishId;
 
-                    //alert(catName)
-
                     var isEqual = $("span:contains(" + catName + ")").last().length == 0;
-                    //alert($('.folder-name').contents().length)
-
-                    // alert(isEqual)
-
+             
                     if (isEqual) {
+
+                        if ($(".scount").length == 0) {
+                            $("#csd").append("<span style='background-color: limegreen;color: white;padding: 2px 2px 2px 2px;' class='scount'>1</span>")
+                        } else {
+                            var n = $(".scount").text();
+                            $(".scount").text(parseInt(n) + 1)
+                        }
+
+                        var valProt = $('#dprot').text(); 
+                        $('#dprot').text(parseFloat(valProt) + parseFloat(prot));
+
+                        var valFats = $('#dfats').text();
+                        $('#dfats').text(parseFloat(valFats) + parseFloat(fats));
+
+                        var valCydro = $('#dcarb').text();
+                        $('#dcarb').text(parseFloat(valCydro) + parseFloat(cydro));
+
+                        var valKilo = $('#dkil').text();
+                        $('#dkil').text(parseFloat(valKilo) + parseFloat(kilo));
 
                         var buttonCollapse = '<button class="btn btn-link p-0 folder-button-collapse" data-toggle="' + constCol + '"  data-target="#' + constCol + '" aria-expanded="true" aria-controls="' + constCol + '"><span class="icon-container"> <i class="simple-icon-arrow-down"></i></span><span class="folder-name">' + catName + '</span></button>';
 
@@ -414,6 +648,21 @@
                         $('#' + specId).append(dishContainer)
                     } else {
 
+                        var n = $(".scount").text();
+                        $(".scount").text(parseInt(n) + 1)
+
+                        var valProt = $('#dprot').text(); 
+                        $('#dprot').text(parseFloat(valProt) + parseFloat(prot));
+
+                        var valFats = $('#dfats').text();
+                        $('#dfats').text(parseFloat(valFats) + parseFloat(fats));
+
+                        var valCydro = $('#dcarb').text();
+                        $('#dcarb').text(parseFloat(valCydro) + parseFloat(cydro));
+
+                        var valKilo = $('#dkil').text();
+                        $('#dkil').text(parseFloat(valKilo) + parseFloat(kilo));
+
                         var specId = 'content-' + constCol;
                         var imageDish = '<div class="d-flex align-self-stretch"> <img src="' + imPath + '" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
 
@@ -438,11 +687,7 @@
                 } else {
                     showNotificationText('Блюдо уже добавлено в заказ!')
                 }
-            } else {
-                 showNotificationText('Можно добавлять только 1 блюдо из категории!')
-            }
            
-
         }
 
 

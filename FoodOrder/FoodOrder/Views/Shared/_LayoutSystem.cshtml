@@ -34,6 +34,17 @@
         .custom-file-input:lang(en) ~ .custom-file-label::after {
             Content: "Нажмите сюда"
         }
+
+        .dishimgbox {
+            display: grid;
+            height: 100%;
+        }
+        .dishcenter-fit {
+            max-width: 100%;
+            max-height: 100vh;
+            margin: auto;
+        }
+
     </style>
 
 </head>
@@ -192,7 +203,7 @@
         </div>
 
     </div>
-
+ 
     @RenderBody()
 
     <script src="~/Scripts/system/vendor/jquery-3.3.1.min.js"></script>

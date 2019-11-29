@@ -201,6 +201,12 @@ namespace FoodOrder.Models
               .MapRightKey("PackId")
               .ToTable("DishPack"));
 
+            modelBuilder.Entity<Order>().HasMany(c => c.Packs)
+            .WithMany(s => s.Orders)
+            .Map(t => t.MapLeftKey("OrderId")
+            .MapRightKey("PackId")
+            .ToTable("OrderPack"));
+
         }
 
         public static ApplicationDbContext Create()

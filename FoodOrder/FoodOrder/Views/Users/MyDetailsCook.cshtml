@@ -6,6 +6,35 @@
     ViewBag.Title = " ";
 }
 
+<div style="display:none" id="preloader">
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+
+            <div class="txt-loading">
+                <img src="~/Content/img/load.gif" alt="">
+                Формируем блюдо...
+            </div>
+
+        </div>
+        <div class="loader">
+            <div class="row">
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <main>
     <div class="row">
         <div class="col-12">
@@ -381,22 +410,31 @@
                                                         {
                                                             <p class="list-item-heading  dish-garnish">Без гарнира</p>
                                                         }
-                                                        <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
-                                                           role="button" aria-expanded="true" aria-controls="collapseExample">
-                                                            <span style="font-size:16px;border-bottom:1px dotted black">Состав</span>
+
+                                                        @*
+                                                            <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                               role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                                <span style="font-size:16px;border-bottom:1px dotted black">Состав</span>
+                                                            </a>*@
+
+                                                        <a role="button" class="btn-link" data-toggle="tooltip"
+                                                           data-placement="top" title="Пищевая ценность (на 100г): Белки - @dish.Proteins г. Жиры - @dish.Fats г. Углеводы - @dish.Carbonhydrates г. Килокалории @dish.Kilocalories ккал">
+                                                            <span style="color:#17d85b; font-size:16px;border-bottom:1px dashed black">Состав</span>
                                                         </a>
-                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
-                                                            <div class="mt-4">
-                                                                <p class="mb-0">
-                                                                <p class="list-item-heading mb-4 pt-1">
-                                                                    Пищевая ценность (на 100г):<br />
-                                                                    Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
-                                                                    Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
-                                                                    Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
-                                                                    <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
-                                                                </p>
-                                                            </div>
-                                                        </div>
+
+                                                        @*
+                                                            <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                                <div class="mt-4">
+                                                                    <p class="mb-0">
+                                                                    <p class="list-item-heading mb-4 pt-1">
+                                                                        Пищевая ценность (на 100г):<br />
+                                                                        Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                                                                        Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                                                                        Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                                                                        <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                    </p>
+                                                                </div>
+                                                            </div>*@
 
                                                         <footer style="margin-top:10px">
                                                             <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
@@ -460,7 +498,7 @@
                                     {
 
                                         <div class="pack">
-                                            <h3>Пак №@a</h3>
+                                            <h3>Пак №@a (@i.Name)</h3>
 
                                             <div class="row list disable-text-selection">
                                                 @foreach (var d in i.Dishes)
@@ -470,7 +508,7 @@
                                                         <div class="card">
                                                             <div class="position-relative">
                                                                 <a href="">
-                                                                    <img class="card-img-top" src="@Url.Content(d.ImagePath ?? "~/Content/img/1.jpg") "
+                                                                    <img style="height:190.6px" class="card-img-top" src="@Url.Content(d.ImagePath ?? "~/Content/img/1.jpg") "
                                                                          alt="Фото блюда">
                                                                 </a>
                                                             </div>
@@ -481,7 +519,7 @@
                                                                             <p class="list-item-heading mb-4 pt-1">@d.Name</p>
                                                                         </a>
                                                                         <footer>
-                                                                            <p class="text-muted text-small mb-0 font-weight-light">@d.DateOfCreation</p>
+                                                                            <p class="text-muted text-small mb-0 font-weight-light">@d.DateOfCreation.ToShortDateString()</p>
                                                                         </footer>
                                                                     </div>
                                                                 </div>
@@ -498,6 +536,8 @@
                                 }
 
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -538,14 +578,14 @@
                                                         @foreach (var b in i.Dishes)
                                                         {
                                                             <div class="col-6 mb-1 sfl-item-container"
-                                                                 data-preview-path="../Content/img/chock.jpg"
+                                                                 data-preview-path="../Content/img/1.jpg"
                                                                  data-path="@b.Id"
                                                                  data-label="@b.Name"
                                                                  data-inp=""
                                                                  id="bigCard-@b.Id">
                                                                 <div class="card d-flex mb-2 p-0 media-thumb-container">
                                                                     <div class="d-flex align-self-stretch">
-                                                                        <img src="@Url.Content(b.ImagePath ?? "~/Content/img/chock.jpg")" alt="изображение"
+                                                                        <img src="@Url.Content(b.ImagePath ?? "~/Content/img/1.jpg")" alt="изображение"
                                                                              class="list-media-thumbnail responsive border-0" />
                                                                     </div>
                                                                     <div class="d-flex flex-grow-1 min-width-zero">
@@ -553,13 +593,13 @@
                                                                             <div class="w-100">
                                                                                 <p class="truncate mb-0">@b.Name</p>
                                                                                 @*  @if (a.HasGarnish)
-                                                                                {
-                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <p style="color:red" class="truncate mb-0">Нет гарнира</p>
-                                                                                }*@
+                                                            {
+                                                                <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p style="color:red" class="truncate mb-0">Нет гарнира</p>
+                                                            }*@
                                                                             </div>
                                                                         </div>
                                                                         <div id="garn-@b.Id" style="display:none"></div>
@@ -583,7 +623,10 @@
 
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label><strong>Название пака:</strong></label>
+                                <input id="pack-name" type="text" class="form-control" placeholder="Введите название">
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
                                 <button type="button" class="btn btn-primary sfl-submit-pack">Сформировать пак</button>
@@ -627,15 +670,15 @@
                                     </div>
 
                                     @*<div class="form-group" id="dish-creation-select-garnish" style="display:none">
-                                        <label>Вид гарнира</label>
-                                        <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
-                                            <option value="0" label="&nbsp;">Выберите гарнир</option>
-                                            @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
-                                            {
-                                                <option value="@garnish.Id">@garnish.Name</option>
-                                            }
-                                        </select>
-                                    </div>*@
+                                            <label>Вид гарнира</label>
+                                            <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
+                                                <option value="0" label="&nbsp;">Выберите гарнир</option>
+                                                @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
+                                                {
+                                                    <option value="@garnish.Id">@garnish.Name</option>
+                                                }
+                                            </select>
+                                        </div>*@
 
                                     <div class="form-group">
                                         <p><strong>Пищевая ценность (на 100г) :</strong></p>
@@ -678,6 +721,7 @@
 
 @section Scripts{
     <script type="text/javascript">
+
 
         function getInstruction() {
             var enjoyhint_instance = new EnjoyHint({
@@ -779,210 +823,220 @@
         var plugin = this;
 
         var defaults = {
-                        // Sets how many items can be selected from library. Set to -1 disable selection limit.
-                        count: -1,
+            // Sets how many items can be selected from library. Set to -1 disable selection limit.
+            count: -1,
 
-                        // Modal id from which items will be selected
-                        libraryId: "#modal",
+            // Modal id from which items will be selected
+            libraryId: "#modal",
 
-                        // Submit button class in library modal.
-                        submitButtonClass: ".sfl-submit-pack",
+            // Submit button class in library modal.
+            submitButtonClass: ".sfl-submit-pack",
 
-                        // Container class for library item
-                        itemContainerClass: ".sfl-item-container",
+            // Container class for library item
+            itemContainerClass: ".sfl-item-container",
 
-                        // Selected item template class
-                        selectedItemClass: ".sfl-selected-item",
+            // Selected item template class
+            selectedItemClass: ".sfl-selected-item",
 
-                        // Selected item template class to distinction
-                        selectedItemClassActive: ".sfl-selected-item-active",
+            // Selected item template class to distinction
+            selectedItemClassActive: ".sfl-selected-item-active",
 
-                        // Selected item template image class
-                        selectedItemImageClass: ".sfl-selected-item-image",
+            // Selected item template image class
+            selectedItemImageClass: ".sfl-selected-item-image",
 
-                        // Selected item template label class
-                        selectedItemLabelClass: ".sfl-selected-item-label",
+            // Selected item template label class
+            selectedItemLabelClass: ".sfl-selected-item-label",
 
-                        // Selected item delete class
-                        selectedItemDeleteClass: ".sfl-delete-item"
-                      }
-                      var $self = $("#pch");
-                    //  plugin.settings = $.extend({}, defaults, options, $self.data());
+            // Selected item delete class
+            selectedItemDeleteClass: ".sfl-delete-item"
+        }
+        var $self = $("#pch");
+        //  plugin.settings = $.extend({}, defaults, options, $self.data());
 
-                      var $modal = $("#libraryModal");
-                      var $itemContaines;
-                      var $submitButton;
-                      var $submitButtonLabel;
-                      var $checkedItems;
-                      var selectedItems;
+        var $modal = $("#libraryModal");
+        var $itemContaines;
+        var $submitButton;
+        var $submitButtonLabel;
+        var $checkedItems;
+        var selectedItems;
 
-                      function init() {
-                        $itemContaines = $(defaults.itemContainerClass);
-                        $submitButton = $modal.find(defaults.submitButtonClass);
-                        $submitButtonLabel = $submitButton.html();
-                        clearAllSelections();
-                        $modal.modal($modal.data());
-                        if (defaults.count == 1) {
-                          hideCheckboxes();
-                        } else {
-                          showCheckboxes();
-                        }
-                        $submitButton.on("click", onSubmitHandler);
-                        $modal.on(
-                          "change",
-                         defaults.itemContainerClass + " .custom-control-input",
-                          checkChange
-                        );
-                        $modal.on('hidden.bs.modal', onModalHide);
-                      }
+        function init() {
+            $itemContaines = $(defaults.itemContainerClass);
+            $submitButton = $modal.find(defaults.submitButtonClass);
+            $submitButtonLabel = $submitButton.html();
+            clearAllSelections();
+            $modal.modal($modal.data());
+            if (defaults.count == 1) {
+                hideCheckboxes();
+            } else {
+                showCheckboxes();
+            }
+            $submitButton.on("click", onSubmitHandler);
+            $modal.on(
+                "change",
+                defaults.itemContainerClass + " .custom-control-input",
+                checkChange
+            );
+            $modal.on('hidden.bs.modal', onModalHide);
+        }
 
-                      $self.on("click", function(event) {
-                        event.preventDefault();
-                        init();
-                      });
+        $self.on("click", function (event) {
+            event.preventDefault();
+            init();
+        });
 
-                      function checkChange(event) {
-                        $checkedItems = $(
-                         defaults.itemContainerClass + " .custom-control-input:checked"
-                        ).parents(defaults.itemContainerClass);
-                        if(defaults.count == 1) {
-                          onSubmitHandler(null);
-                          hideSelectButton();
-                          return;
-                        }
-                        $submitButton.html(
-                          $checkedItems.length > 0
-                            ? $submitButtonLabel + " (" + $checkedItems.length + ")"
-                            : $submitButtonLabel
-                        );
-                      }
+        function checkChange(event) {
+            $checkedItems = $(
+                defaults.itemContainerClass + " .custom-control-input:checked"
+            ).parents(defaults.itemContainerClass);
+            if (defaults.count == 1) {
+                onSubmitHandler(null);
+                hideSelectButton();
+                return;
+            }
+            $submitButton.html(
+                $checkedItems.length > 0
+                    ? $submitButtonLabel + " (" + $checkedItems.length + ")"
+                    : $submitButtonLabel
+            );
+        }
 
-                      function onSubmitHandler(event) {
-                        event && event.preventDefault();
-                        getDataFromDomItems($checkedItems);
-                        appendSelectedItems();
-                        $modal.modal("hide");
-                      }
+        function onSubmitHandler(event) {
+            event && event.preventDefault();
+            getDataFromDomItems($checkedItems);
+            appendSelectedItems();
+            $modal.modal("hide");
+        }
 
-                      function appendSelectedItems() {
-                       
-                        // var packList = '<div class="pack"><h3>Пак №1</h3><div class="row list disable-text-selection">' + dishC + '</div></div></br>';
+        function appendSelectedItems() {
 
-                          var idDs = [];
+            // var packList = '<div class="pack"><h3>Пак №1</h3><div class="row list disable-text-selection">' + dishC + '</div></div></br>';
 
-                          var d = ''
+            var idDs = [];
 
-                          for (var i = 0; i < selectedItems.length; i++) {
+            var d = ''
 
-                               var prev = selectedItems[i].previewPath;
-                               var name = selectedItems[i].label;
-                              var id = selectedItems[i].path;
-                              idDs.push(id);
-                              var cBody = '<div class="card-body"><div class="row"><div class="col-10"><a href=""> <p class="list-item-heading mb-4 pt-1">' + name + '</p></a><footer> <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p></footer></div></div></div>'
-                              var card = ' <div class="card"> <div class="position-relative"><a href="Pages.Product.Detail.html"><img class="card-img-top" src="' + prev + '" alt="Фото блюда"></a></div>' + cBody + '</div>'
-                              var dishC = '<div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">' + card + '</div>';
-                              d += dishC
-                           
-                          }
+            for (var i = 0; i < selectedItems.length; i++) {
 
-                          var coun = $("#cPack").text();
-                          $("#cPack").text(parseInt(coun) + 1);
-                   
-                          var packList = '<div class="pack"><h3>Пак №'+ $("#cPack").text() +'</h3><div class="row list disable-text-selection">' + d + '</div></div></br>';
+                var prev = selectedItems[i].previewPath;
+                var name = selectedItems[i].label;
+                var id = selectedItems[i].path;
+                idDs.push(id);
+                var cBody = '<div class="card-body"><div class="row"><div class="col-10"><a href=""> <p class="list-item-heading mb-4 pt-1">' + name + '</p></a><footer> <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p></footer></div></div></div>'
+                var card = ' <div class="card"> <div class="position-relative"><a href="Pages.Product.Detail.html"><img class="card-img-top" src="' + prev + '" alt="Фото блюда"></a></div>' + cBody + '</div>'
+                var dishC = '<div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">' + card + '</div>';
+                d += dishC
 
-                          $("#allPacks").prepend(packList);
+            }
 
-                             $.ajax({
-                                url: '/Dishes/CreatePack',
-                                type: 'POST',
-                                dataType: "json",
-                                data: {
-                                    'idDs': idDs,
-                                },
-                                success: function (result) {
-                                 // window.location.href = result.Url;
-                                },
-                                error: function () {
-                                    console.log("Error while calling method");
-                                }
-                            });   
-                      }
+            var coun = $("#cPack").text();
+            $("#cPack").text(parseInt(coun) + 1);
 
-                      function onDeleteClick(event) {
-                        event.preventDefault();
-                        $(this).parents(plugin.settings.selectedItemClass).off("click", plugin.settings.selectedItemDeleteClass, onDeleteClick);
-                        $(this).parents(plugin.settings.selectedItemClass).parent().remove();
-                        updateSelectedItemsByDom();
-                        if(plugin.settings.count == 1) {
-                          showSelectButton()
-                        }
-                      }
+            var packList = '<div class="pack"><h3>Пак №' + $("#cPack").text() + '</h3><div class="row list disable-text-selection">' + d + '</div></div></br>';
 
-                      function updateSelectedItemsByDom() {
-                        var $grandParent = $self.parent().parent();
-                        var $items = $grandParent.find(selectedItemClassActive);
-                        getDataFromDomItems($items);
-                      }
+            $("#allPacks").prepend(packList);
+            var namePack = $("#pack-name").val();
 
-                      function getDataFromDomItems($items) {
-                        selectedItems = [];
-                        if(!$items) {
-                          return;
-                        }
-                        $items.each(function() {
-                          selectedItems.push($(this).data());
-                        });
-                      }
+            $.ajax({
+                url: '/Dishes/CreatePack',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    'idDs': idDs,
+                    'Name': namePack
+                },
+                success: function (result) {
+                    // window.location.href = result.Url;
+                },
+                error: function () {
+                    console.log("Error while calling method");
+                }
+            });
 
-                      function onModalHide(event) {
-                        $submitButton.html($submitButtonLabel);
-                        $submitButton.off("click", onSubmitHandler);
-                        $modal.off(
-                            "change",
-                            defaults.itemContainerClass + " .custom-control-input",
-                          checkChange
-                        );
-                        $modal.off('hidden.bs.modal', onModalHide);
-                      }
+            $("#second-tab").trigger("click");
 
-                      function hideCheckboxes() {
-                        $itemContaines.each(function() {
-                          $(this)
-                            .find(".custom-checkbox")
-                            .css("visibility", "hidden");
-                        });
-                      }
+            $('html,body').animate({
+                scrollTop: $("#cPack").offset().top
+            },
+                'slow');
 
-                      function showCheckboxes() {
-                        $itemContaines.each(function() {
-                          $(this)
-                            .find(".custom-checkbox")
-                            .css("visibility", "visible");
-                        });
-                      }
+        }
 
-                      function clearAllSelections() {
-                        $itemContaines.each(function() {
-                          $(this)
-                            .find(".custom-control-input")
-                            .prop("checked", false);
-                          $(this)
-                            .find(".active")
-                            .removeClass("active");
-                        });
-                      }
+        function onDeleteClick(event) {
+            event.preventDefault();
+            $(this).parents(plugin.settings.selectedItemClass).off("click", plugin.settings.selectedItemDeleteClass, onDeleteClick);
+            $(this).parents(plugin.settings.selectedItemClass).parent().remove();
+            updateSelectedItemsByDom();
+            if (plugin.settings.count == 1) {
+                showSelectButton()
+            }
+        }
 
-                      function hideSelectButton() {
-                        $self.css("visibility", "hidden");
-                      }
+        function updateSelectedItemsByDom() {
+            var $grandParent = $self.parent().parent();
+            var $items = $grandParent.find(selectedItemClassActive);
+            getDataFromDomItems($items);
+        }
 
-                      function showSelectButton() {
-                        $self.css("visibility", "visible");
-                      }
+        function getDataFromDomItems($items) {
+            selectedItems = [];
+            if (!$items) {
+                return;
+            }
+            $items.each(function () {
+                selectedItems.push($(this).data());
+            });
+        }
 
-                      plugin.getData = function() {
-                        return selectedItems || [];
-                      }
+        function onModalHide(event) {
+            $submitButton.html($submitButtonLabel);
+            $submitButton.off("click", onSubmitHandler);
+            $modal.off(
+                "change",
+                defaults.itemContainerClass + " .custom-control-input",
+                checkChange
+            );
+            $modal.off('hidden.bs.modal', onModalHide);
+        }
+
+        function hideCheckboxes() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-checkbox")
+                    .css("visibility", "hidden");
+            });
+        }
+
+        function showCheckboxes() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-checkbox")
+                    .css("visibility", "visible");
+            });
+        }
+
+        function clearAllSelections() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-control-input")
+                    .prop("checked", false);
+                $(this)
+                    .find(".active")
+                    .removeClass("active");
+            });
+        }
+
+        function hideSelectButton() {
+            $self.css("visibility", "hidden");
+        }
+
+        function showSelectButton() {
+            $self.css("visibility", "visible");
+        }
+
+        plugin.getData = function () {
+            return selectedItems || [];
+        }
 
 
         $("#datcl").on('click', function () {
@@ -1042,8 +1096,10 @@
                 success: function (result) {
                     //с функции придет true, если такое блюдо уже есть, false - иначе
                     if (!result) {
+                       
                         //В зависимости от названия кнопки будет срабатывать создание или редактирование
                         if (buttonName == "Создать") {
+                             $("#preloader").show()
                             $.ajax({
                                 type: "POST",
                                 url: '/Dishes/CreateJson',
@@ -1103,16 +1159,12 @@
                                     var yyyy = dateToday.getFullYear();
                                     dateToday = dd + '.' + mm + '.' + yyyy;
 
+
+                                    
                                     dishHTML +=
-                                        '<a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample-d-' + newDish.id + '" role="button" aria-expanded="true" aria-controls="collapseExample">' +
-                                        'Подробнее</a>' +
-                                        '<div class="collapse" id="collapseExample-d-' + newDish.id + '"><div class="mt-4"><p class="mb-0">' +
-                                        '<p class="list-item-heading mb-4 pt-1">Пищевая ценность (на 100г):<br />' +
-                                        'Белки - <span class="dish-proteins">' + proteins + '</span> г<br />' +
-                                        'Жиры - <span class="dish-fats">' + fats + '</span> г<br />' +
-                                        'Углеводы - <span class="dish-carbonhydrates">' + carbonhydrates + '</span> г<br />' +
-                                        '<span class="dish-kilocalories">' + kilocalories + '</span> ккал </p>' +
-                                        '</div></div><footer style="margin-top:10px">' +
+                                        '<a role="button" class="btn-link" data-toggle="tooltip" data-placement="top" title="Пищевая ценность (на 100г): Белки - ' + proteins + ' г. Жиры - ' + fats + ' г. Углеводы - ' + carbonhydrates + ' г. Килокалории ' + kilocalories + ' ккал">' +
+                                         '<span style="color:#17d85b; font-size:16px;border-bottom:1px dashed black">Состав</span></a>'+
+                                    '<footer style="margin-top:10px">' +
                                         '<p class="text-muted text-small mb-0 font-weight-light">' + dateToday + '</p>' +
                                         '</footer></div></div></div></div></div>';
 
@@ -1120,6 +1172,13 @@
 
                                     //для скрытия модального окна
                                     $('#cancell-dish-creation').click();
+                                    $("#preloader").hide()
+                                    $("#first-tab").trigger("click");
+
+                                    $('html,body').animate({
+                                        scrollTop: $("#first-tab").offset().top
+                                    },
+                                        'slow');
                                 },
                                 error: function () {
                                     console.log("Error while calling method '/Dishes/CreateJson'");

@@ -152,7 +152,7 @@ namespace FoodOrder.Controllers
                 ViewData["Categories"] = categories;
                 ViewData["Garnishes"] = garnishes;
 
-                var menu = db.Menus.Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c => c.DateOfCreation.Day == DateTime.Now.Day).FirstOrDefault();
+                var menu = db.Menus.Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c => c.DateOfCreation.Day == DateTime.Now.Day && c.DateOfCreation.Month == DateTime.Now.Month).FirstOrDefault();
 
                 if (menu != null)
                 {

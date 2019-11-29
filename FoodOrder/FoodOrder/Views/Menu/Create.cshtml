@@ -117,7 +117,8 @@
 
                                     @foreach (FoodOrder.Models.DishCategory i in ViewBag.DishCategory)
                                     {
-
+                                        if (i.Name != "Гарниры")
+                                        {
                                         <div class="mb-2">
                                             <button class="btn btn-link p-0 folder-button-collapse" data-toggle="collapse"
                                                     data-target="#collapseOne-@i.Id" aria-expanded="true" aria-controls="collapseOne-@i.Id">
@@ -130,7 +131,7 @@
                                                 <div class="list disable-text-selection">
                                                     <div class="row">
                                                         @foreach (var a in i.Dishes)
-                                                        {
+                                    {
                                                             <div class="col-6 mb-1 sfl-item-container"
                                                                  data-preview-path="../Content/img/chock.jpg"
                                                                  data-path="@a.Id"
@@ -147,13 +148,13 @@
                                                                             <div class="w-100">
                                                                                 <p class="truncate mb-0">@a.Name</p>
                                                                                 @if (a.HasGarnish)
-                                                                                {
+                                    {
                                                                                     <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
-                                                                                }
-                                                                                else
-                                                                                {
+                                    }
+                                    else
+                                    {
                                                                                     @*<p style="color:red" class="truncate mb-0">Нет гарнира</p>*@
-                                                                                }
+                                    }
                                                                             </div>
                                                                         </div>
                                                                         <div id="garn-@a.Id" style="display:none"></div>
@@ -166,12 +167,13 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        }
+                                    }
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        }
 
                                     }
 
@@ -275,7 +277,6 @@
             }).get();
 
             
-
             $('#pacCo').text('(' + searchIDs.length + ' выбрано)');
             $('#packsIn').val(searchIDs);
            

@@ -4,16 +4,43 @@
     Layout = "~/Views/Shared/_LayoutSystem.cshtml";
 }
 
+<div style="display:none" id="preloader">
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="animation-preloader">
+
+            <div class="txt-loading">
+                <img src="~/Content/img/load.gif" alt="">
+                Готовим заказ...
+            </div>
+
+        </div>
+        <div class="loader">
+            <div class="row">
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <main>
     <div class="container-fluid disable-text-selection">
-        <div class="row">   
+        <div class="row">
             <div class="col-12">
                 <div class="mb-2">
                     <h1>Заказы клиентов</h1>
-                  
                 </div>
-
-               
 
                 <ul class="nav nav-tabs separator-tabs ml-0 mb-5" role="tablist">
                     <li class="nav-item">
@@ -56,6 +83,7 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
+
                                 <div class="tab-pane show active" id="firstDish" role="tabpanel" aria-labelledby="firstDish-tab">
                                     <div class="top-right-button-container">
                                         <div class="btn-group">
@@ -70,7 +98,7 @@
                                                 <span class="sr-only">Действия</span>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">Приготовлено</a>
+                                                <a id="doCook" class="dropdown-item" href="#">Приготовить</a>
                                             </div>
                                         </div>
                                     </div>
@@ -119,10 +147,10 @@
                                                             <th class="empty">&nbsp;</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        @foreach (var i in Model.DishStatistics)
+                                                    <tbody id="notReady">
+                                                        @foreach (var i in Model.DishStatistics.Where(s => s.IsReady == false))
                                                         {
-                                                            <tr>
+                                                            <tr id="@i.Id">
                                                                 <td>
                                                                     <p class="list-item-heading">@i.DishName</p>
                                                                 </td>
@@ -137,7 +165,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check">
-                                                                        <input type="checkbox" class="custom-control-input">
+                                                                        <input value="@i.Id" type="checkbox" class="custom-control-input">
                                                                         <span class="custom-control-label">&nbsp;</span>
                                                                     </label>
                                                                 </td>
@@ -151,10 +179,54 @@
                                     </div>
                                 </div>
 
-                                
-                                
+
+
                                 <div class="tab-pane fade" id="secondDish" role="tabpanel" aria-labelledby="secondDish-tab">
-                                        
+                                    <div class="row mb-4">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <table class="data-table data-table-scrollable responsive nowrap"
+                                                           data-order="[[ 1, &quot;desc&quot; ]]">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Название блюда</th>
+                                                                <th>Количество порций</th>
+                                                                <th>Категория блюда</th>
+                                                                <th>Статус</th>
+                                                                <th class="empty">&nbsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="Ready">
+                                                            @foreach (var i in Model.DishStatistics.Where(s => s.IsReady == true))
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        <p class="list-item-heading">@i.DishName</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="text-muted">@i.Count</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="text-muted">Основное блюдо</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="text-muted">@(i.IsReady == true ? "Приготовлено" : "Не приготовлено")</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check">
+                                                                            <input type="checkbox" class="custom-control-input">
+                                                                            <span class="custom-control-label">&nbsp;</span>
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                 </div>
@@ -164,14 +236,14 @@
 
                             </div>
 
-                            </div>
-
-
                         </div>
 
 
-
                     </div>
+
+
+
+                </div>
             </div>
 
             <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
@@ -180,7 +252,7 @@
                         <div class="card d-flex flex-row mb-3">
                             <div class="d-flex flex-grow-1 min-width-zero">
                                 <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                                    
+
                                     <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
                                         Заказ №1
                                     </a>
@@ -272,7 +344,46 @@
 
 
 
-      </div>
+    </div>
 </main>
 
+
+@section Scripts {
+
+    <script>
+
+        $("#doCook").on('click', function () {
+            $("#preloader").attr('display','')
+            var searchingTable = '#notReady';
+            var searchIDs = $(searchingTable + " input:checkbox:checked").map(function () {
+                return $(this).val();
+            }).get();
+
+            $.ajax({
+                url: '/Dishes/ChangeStatus',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    'IDs': searchIDs,
+                },
+                success: function (result) {
+                    for (var i = 0; i < searchIDs.length; i++) {
+                        $("#" + searchIDs[i]).remove()
+                    }
+                },
+                error: function () {
+                    console.log("Error while calling method");
+                }
+            });
+             $("#preloader").hide()
+
+        });
+
+
+
+    </script>
+
+
+
+}
 

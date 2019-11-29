@@ -77,6 +77,24 @@ namespace FoodOrder.Controllers
             return View(dish);
         }
 
+
+        public async Task<ActionResult> ChangeStatus(string[] IDs)
+        {
+            List<DishStatistic> orders = db.DishStatistics.Where(c => IDs.Contains(c.Id)).ToList();
+
+            for (var i = 0; i < orders.Count; i++)
+            {
+                var o = orders[i];
+                db.Entry(o).State = EntityState.Modified;
+                o.IsReady = true;
+            }
+            
+            await db.SaveChangesAsync();
+            //var redirectUrl = new UrlHelper(Request.RequestContext).Action("SucessOrder", "Orders");
+            return Json(true);
+        }
+
+
         // POST: Dishes/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -127,12 +145,13 @@ namespace FoodOrder.Controllers
         }
 
 
-        public async Task<ActionResult> CreatePack(string[] idDs)
+        public async Task<ActionResult> CreatePack(string[] idDs, string Name)
         {
             Pack pack = new Pack();
 
             var dishes = await db.Dishes.Where(b => idDs.Contains(b.Id)).ToListAsync();
             pack.Id = Guid.NewGuid().ToString("N");
+            pack.Name = Name;
             pack.DateOfCreation = DateTime.Now;
             pack.Dishes = dishes;
 

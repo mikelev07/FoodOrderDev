@@ -19,11 +19,15 @@ namespace FoodOrder.Models
         public string Description { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+
+        public string OrderSpecId { get; set; }
         public OrderStatus Status { get; set; }
         public double Price { get; set; }
         public ICollection<ChoosenDish> ChoosenDishes { get; set; }
+        public ICollection<Pack> Packs { get; set; }
         public Order()
         {
+            Packs = new List<Pack>();
             ChoosenDishes = new List<ChoosenDish>();
         }
     }
@@ -64,14 +68,17 @@ namespace FoodOrder.Models
     public class Pack
     {
         public string Id { get; set; }
+        public string Name { get; set; }
         public DateTime DateOfCreation { get; set; }
         public Menu Menu { get; set; }
         public string MenuId { get; set; }
         public ICollection<Dish> Dishes { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
         public Pack()
         {
             Dishes = new List<Dish>();
+            Orders = new List<Order>();
         }
     }
 

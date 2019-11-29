@@ -105,7 +105,8 @@
 
                                                                                                 </select>
                                                                                             </div>
-<p class="list-item-heading mb-4 pt-1">                                                      @*              
+                                                                                    <p class="list-item-heading mb-4 pt-1">                                                     
+                                                                                      @*              
                                                                                             Пищевая ценность (на 100г):<br />
                                                                                             Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
                                                                                             Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
@@ -285,9 +286,21 @@
                     </div>
                     
                     <div style="margin-left:10px;margin-right:10px" class="form-group pt-0 pb-0 mt-4 mb-4">
-                        <label>Комментарий</label>
-                        <textarea id="desc" class="form-control" rows="2"></textarea>
+                       
+                        <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-comment"
+                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                            <span style="font-size:14px;border-bottom:1px dotted black">+ Добавить комментарий</span> <br />
+                        </a>
+
+                        <div class="collapse" id="collapseExample-comment">
+                            <div class="mt-4">
+                                <p class="mb-0">
+                                    <textarea id="desc" class="form-control" rows="2"></textarea>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
@@ -311,6 +324,9 @@
 
 
         $('.add-to-cart').on('click', function () {
+
+           
+         
 
             var cart = $('#cart-or');
         var imgtodrag = $(this).parent('.item').find("img").eq(0);
@@ -351,8 +367,178 @@
     });
 
 
+        $('#accordionSet').on('click', ".sfl-delete-item", function () {
+            alert(1)
+            onDeleteClick();
+
+
+              var plugin = this;
+
+        var defaults = {
+            // Sets how many items can be selected from library. Set to -1 disable selection limit.
+            count: -1,
+
+            // Modal id from which items will be selected
+            libraryId: "#modal",
+
+            // Submit button class in library modal.
+            submitButtonClass: ".sfl-submit-pack",
+
+            // Container class for library item
+            itemContainerClass: ".sfl-item-container",
+
+            // Selected item template class
+            selectedItemClass: ".sfl-selected-item",
+
+            // Selected item template class to distinction
+            selectedItemClassActive: ".sfl-selected-item-active",
+
+            // Selected item template image class
+            selectedItemImageClass: ".sfl-selected-item-image",
+
+            // Selected item template label class
+            selectedItemLabelClass: ".sfl-selected-item-label",
+
+            // Selected item delete class
+            selectedItemDeleteClass: ".sfl-delete-item"
+        }
+        var $self = $("#pch");
+        //  plugin.settings = $.extend({}, defaults, options, $self.data());
+
+        var $modal = $("#libraryModal");
+        var $itemContaines;
+        var $submitButton;
+        var $submitButtonLabel;
+        var $checkedItems;
+        var selectedItems;
+
+        function init() {
+            $itemContaines = $(defaults.itemContainerClass);
+            $submitButton = $modal.find(defaults.submitButtonClass);
+            $submitButtonLabel = $submitButton.html();
+            clearAllSelections();
+            $modal.modal($modal.data());
+            if (defaults.count == 1) {
+                hideCheckboxes();
+            } else {
+                showCheckboxes();
+            }
+            $submitButton.on("click", onSubmitHandler);
+            $modal.on(
+                "change",
+                defaults.itemContainerClass + " .custom-control-input",
+                checkChange
+            );
+            $modal.on('hidden.bs.modal', onModalHide);
+        }
+
+        $self.on("click", function (event) {
+            event.preventDefault();
+            init();
+        });
+
+        function checkChange(event) {
+            $checkedItems = $(
+                defaults.itemContainerClass + " .custom-control-input:checked"
+            ).parents(defaults.itemContainerClass);
+            if (defaults.count == 1) {
+                onSubmitHandler(null);
+                hideSelectButton();
+                return;
+            }
+            $submitButton.html(
+                $checkedItems.length > 0
+                    ? $submitButtonLabel + " (" + $checkedItems.length + ")"
+                    : $submitButtonLabel
+            );
+        }
+
+        function onSubmitHandler(event) {
+            event && event.preventDefault();
+            getDataFromDomItems($checkedItems);
+            appendSelectedItems();
+            $modal.modal("hide");
+        }
 
       
+        function onDeleteClick() {
+            alert(1)
+            $(this).parents(defaults.selectedItemClass).off("click", defaults.selectedItemDeleteClass, onDeleteClick);
+            $(this).parents(defaults.selectedItemClass).parent().remove();
+            updateSelectedItemsByDom();
+            if (defaults.count == 1) {
+                showSelectButton()
+            }
+        }
+
+        function updateSelectedItemsByDom() {
+            var $grandParent = $self.parent().parent();
+            var $items = $grandParent.find(selectedItemClassActive);
+            getDataFromDomItems($items);
+        }
+
+        function getDataFromDomItems($items) {
+            selectedItems = [];
+            if (!$items) {
+                return;
+            }
+            $items.each(function () {
+                selectedItems.push($(this).data());
+            });
+        }
+
+        function onModalHide(event) {
+            $submitButton.html($submitButtonLabel);
+            $submitButton.off("click", onSubmitHandler);
+            $modal.off(
+                "change",
+                defaults.itemContainerClass + " .custom-control-input",
+                checkChange
+            );
+            $modal.off('hidden.bs.modal', onModalHide);
+        }
+
+        function hideCheckboxes() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-checkbox")
+                    .css("visibility", "hidden");
+            });
+        }
+
+        function showCheckboxes() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-checkbox")
+                    .css("visibility", "visible");
+            });
+        }
+
+        function clearAllSelections() {
+            $itemContaines.each(function () {
+                $(this)
+                    .find(".custom-control-input")
+                    .prop("checked", false);
+                $(this)
+                    .find(".active")
+                    .removeClass("active");
+            });
+        }
+
+        function hideSelectButton() {
+            $self.css("visibility", "hidden");
+        }
+
+        function showSelectButton() {
+            $self.css("visibility", "visible");
+        }
+
+        plugin.getData = function () {
+            return selectedItems || [];
+        }
+            });
+        
+
         function addInCart(id, catName, dishName, dishId, el) {
 
             var chg = "#gch-" + id;
@@ -383,7 +569,7 @@
                 var imageDish = '<div class="d-flex align-self-stretch"> <img src="~/Content/img/chock.jpg" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
 
                 var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dishName +'</p><p>'+ 'Гарнир: '+ garName +'</p></div></div>'
-                var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
+                var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
                 var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
 
                 var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
@@ -400,7 +586,7 @@
                 var imageDish = '<div class="d-flex align-self-stretch"> <img src="~/Content/img/chock.jpg" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
 
                 var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dishName + '</p><p>'+ 'Гарнир: '+ garName +'</p></div></div>'
-                var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" href="#" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
+                var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> <a style="margin-left:-25px" class="btn-link delete-library-item sfl-delete-item"> <i class="simple-icon-trash"></i> </a></label></div>'
                 var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
 
                 var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
@@ -415,6 +601,9 @@
                 } else {
                     alert("Блюдо уже добавлено в заказ")
                 }
+
+
+              
             }
             /*
           $.ajax({

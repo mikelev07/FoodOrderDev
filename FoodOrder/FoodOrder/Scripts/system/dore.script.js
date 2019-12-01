@@ -3036,6 +3036,49 @@ $.dore = function (element, options) {
         },
       });
 
+        var $dataTableRows = $("#datatableRows1").DataTable({
+            bLengthChange: false,
+            destroy: true,
+            info: false,
+            sDom: '<"row view-filter"<"col-sm-12"<"float-left"l><"float-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>',
+            pageLength: 10,
+            columns: [
+                { data: "Name" },
+                { data: "Sales" },
+                { data: "Stock" },
+                { data: "Category" },
+                { data: "Check" }
+            ],
+            language: {
+                paginate: {
+                    previous: "<i class='simple-icon-arrow-left'></i>",
+                    next: "<i class='simple-icon-arrow-right'></i>"
+                }
+            },
+            drawCallback: function () {
+                unCheckAllRows();
+                $("#checkAllDataTables").prop("checked", false);
+                $("#checkAllDataTables").prop("indeterminate", false).trigger("change");
+
+                $($(".dataTables_wrapper .pagination li:first-of-type"))
+                    .find("a")
+                    .addClass("prev");
+                $($(".dataTables_wrapper .pagination li:last-of-type"))
+                    .find("a")
+                    .addClass("next");
+                $(".dataTables_wrapper .pagination").addClass("pagination-sm");
+                var api = $(this).dataTable().api();
+                $("#pageCountDatatable span").html("Отображено " + parseInt(api.page.info().start + 1) + "-" + api.page.info().end + " из " + api.page.info().recordsTotal + " заказов");
+            }
+        });
+
+        $('#datatableRows1 tbody').on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+            var $checkBox = $(this).find(".custom-checkbox input");
+            $checkBox.prop("checked", !$checkBox.prop("checked")).trigger("change");
+            controlCheckAll();
+        });
+
       // Datatable with rows
       var $dataTableRows = $("#datatableRows").DataTable({
         bLengthChange: false,

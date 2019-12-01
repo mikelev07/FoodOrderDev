@@ -90,7 +90,25 @@ namespace FoodOrder.Controllers
         {
 
             var userId = User.Identity.GetUserId();
-            var user = await db.Users.Include(C => C.Company).Where(c => c.Id == userId).SingleOrDefaultAsync();
+            var user = await db.Users.Include(c=>c.Orders).Include(C => C.Company).Where(c => c.Id == userId).SingleOrDefaultAsync();
+
+            foreach (var i in user.Orders)
+            {
+                foreach (var a in i.ChoosenDishes)
+                {
+                    string g = a.DishName + a.GarinshName;
+                   // var asd = db.ChoosenDishes.Where(c=>c.GarinshName )
+                var q = db.ChoosenDishes.GroupBy(x => x.DishName)
+                    .Select(x => new {
+                        Count = x.Count(),
+                        Name = x.Key,
+                        ID = x.First().Id
+                    })
+                    .OrderByDescending(x => x.Count);
+
+                }
+            }
+
             return user.IsCheckInstruction;
         }
 
@@ -102,7 +120,7 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> MyDetails(ManageMessageId? message)
         {
             var userId = User.Identity.GetUserId();
-            var user = db.Users.Include(u=>u.Company).Where(c => c.Id == userId).SingleOrDefault();
+            var user = db.Users.Include(c=>c.Orders).Include(u=>u.Company).Where(c => c.Id == userId).SingleOrDefault();
 
 
             if (await UserManager.IsInRoleAsync(userId, "admin"))
@@ -144,7 +162,7 @@ namespace FoodOrder.Controllers
                 var garnishes = dishes.Where(d => d.DishCategoryId == "ZdesDolzhenBitGarnir");
 
                 ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
-                var l = db.Packs.Include(c => c.Dishes).ToList();
+                var l = db.Packs.Include(c => c.Dishes).OrderByDescending(c=>c.DateOfCreation).ToList();
                 ViewBag.Packs = l;
                 ViewBag.Count = l.Count;
 
@@ -152,7 +170,7 @@ namespace FoodOrder.Controllers
                 ViewData["Categories"] = categories;
                 ViewData["Garnishes"] = garnishes;
 
-                var menu = db.Menus.Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c => c.DateOfCreation.Day == DateTime.Now.Day && c.DateOfCreation.Month == DateTime.Now.Month).FirstOrDefault();
+                var menu = db.Menus.Where(c => c.DateOfCreation.Day == DateTime.UtcNow.Day).Include(m => m.Dishes.Select(y => y.Garnishes)).FirstOrDefault();
 
                 if (menu != null)
                 {
@@ -184,6 +202,13 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
+
+              
+                       // string g = a.DishName + a.GarinshName;
+                        // var asd = db.ChoosenDishes.Where(c=>c.GarinshName )
+                
+
+               
                 ViewBag.StatusMessage =
                        message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
                        : "";
@@ -235,6 +260,7 @@ namespace FoodOrder.Controllers
             if (await UserManager.IsInRoleAsync(userId, "representative"))
             {
                 var company = await db.Companies.Where(c => c.RepresentativeId == userId).FirstOrDefaultAsync();
+                
                 var cvm = new CompanyViewModel
                 {
                     Name = company.Name,

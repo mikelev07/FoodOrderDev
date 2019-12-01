@@ -12,6 +12,20 @@ namespace FoodOrder.Models
 
     }
 
+    public class CompanyDishStat
+    {
+        public string CompanyName { get; set; }
+        public List<StatGarnDish> statGarnDishes { get; set; }
+    }
+
+    public class StatGarnDish
+    {
+       // public string Id { get; set; }
+        public string Name { get; set; }
+        public int Count { get; set; }
+        public string OrderId { get; set; }
+    }
+
     public class Order
     {
         public string Id { get; set; }

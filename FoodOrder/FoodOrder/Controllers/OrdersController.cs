@@ -160,6 +160,58 @@ namespace FoodOrder.Controllers
                 var st = db.DishStatistics.ToList();
                 CookStatisticViewModel cookStatisticViewModel = new CookStatisticViewModel();
                 cookStatisticViewModel.DishStatistics = st;
+                var user = db.Users.Include(c => c.Orders).Include(c => c.Company).Where(c => c.Id == userId).FirstOrDefault();
+
+                List<CompanyDishStat> companyDishStats = new List<CompanyDishStat>();
+
+                var ls = db.Users.Where(c=>c.Roles.FirstOrDefault().RoleId == "9920bb40-43ab-44f1-9ef6-192891beea67")
+                                    .Include(c=>c.Company)
+                                    .Include(c=>c.Orders.Select(g=>g.ChoosenDishes)).ToList();
+                foreach (var u in ls)
+                {
+                    CompanyDishStat companyDishStat = new CompanyDishStat();
+                    companyDishStat.CompanyName = u.Company.Name;
+                    companyDishStat.statGarnDishes = new List<StatGarnDish>();
+
+                    foreach (var b in u.Orders)
+                    {
+                        var listOrderCount = b.ChoosenDishes
+                                .GroupBy(c => new { c.DishName, c.GarinshName })
+                                .Select(x => new StatGarnDish
+                                {
+                                    Count = x.Count(),
+                                    Name = x.Key.DishName + "-" + x.Key.GarinshName,
+                                })
+                                .OrderByDescending(x => x.Count);
+
+                       // foreach (var d in companyDishStat.statGarnDishes) {
+                            foreach (var e in listOrderCount.ToList())
+                            {
+                                if (!companyDishStat.statGarnDishes.Any(c=>c.Name == e.Name))
+                                {
+                                    companyDishStat.statGarnDishes.Add(e);
+                                } else
+                                {
+                                   foreach (var w in companyDishStat.statGarnDishes)
+                                    {
+                                        if (w.Name == e.Name)
+                                        {
+                                            w.Count++;   
+                                        }
+                                    }
+                                }
+                            }
+                        //}
+
+                    }
+                   
+                    companyDishStats.Add(companyDishStat);
+                }
+
+             
+
+                ViewBag.Stats = companyDishStats;
+
 
                 return View("IndexCook", cookStatisticViewModel);
             }

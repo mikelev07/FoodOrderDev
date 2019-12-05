@@ -7,13 +7,13 @@ namespace FoodOrder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class asdasdasdasd : IMigrationMetadata
+    public sealed partial class asdasd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(asdasdasdasd));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(asdasd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911230836160_asdasdasdasd"; }
+            get { return "201912040700371_asdasd"; }
         }
         
         string IMigrationMetadata.Source

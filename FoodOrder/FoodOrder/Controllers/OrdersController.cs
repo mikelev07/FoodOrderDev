@@ -54,7 +54,7 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> OrdersHistory()
         {
             string userId = User.Identity.GetUserId();
-            List<Order> orders = await db.Orders.Include(c=>c.ChoosenDishes).Where(c => c.UserId == userId).ToListAsync();
+            List<Order> orders = await db.Orders.Include(d=>d.Packs.Select(n=>n.Dishes)).Include(c=>c.ChoosenDishes).Where(c => c.UserId == userId).ToListAsync();
             
             return View(orders);
         }
@@ -83,7 +83,7 @@ namespace FoodOrder.Controllers
             }
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
-                var menu = db.Menus.Include(c=>c.Packs.Select(y => y.Dishes)).Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day && c.DateOfCreation.Month == DateTime.Now.Month).FirstOrDefault();
+                var menu = db.Menus.Include(c=>c.Packs.Select(y => y.Dishes)).Include(m => m.Dishes.Select(y => y.GarnishesForPacks)).Include(m => m.Dishes.Select(y => y.Garnishes)).Where(c=>c.DateOfCreation.Day == DateTime.Now.Day && c.DateOfCreation.Month == DateTime.Now.Month).FirstOrDefault();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
 
                 var user = db.Users.Include(c=>c.Company).Where(c => c.Id == userId).FirstOrDefault();
@@ -280,9 +280,14 @@ namespace FoodOrder.Controllers
             return View(order);
         }
 
-        public async Task<ActionResult> CreatePackOrderJson(string[] IDs, string descr)
+        public async Task<ActionResult> CreatePackOrderJson(string[] IDs, string descr, string ddd)
         {
             List<Pack> packs = db.Packs.Include(c => c.Dishes).Where(c => IDs.Contains(c.Id)).ToList();
+            var p = packs.FirstOrDefault();
+            db.Entry(p).State = EntityState.Modified;
+            var nd = db.Garnishes.Where(k => k.Id == ddd).FirstOrDefault().Name;
+            p.GarnishesForPacks = nd;
+            db.SaveChanges();
             
             var dateOfCreation = DateTime.UtcNow;
             string uid = User.Identity.GetUserId();
@@ -411,6 +416,7 @@ namespace FoodOrder.Controllers
             obj.Kilocalories = d.Kilocalories;
             obj.ImagePath = d.ImagePath;
             obj.Fats = d.Fats;
+            obj.Weight = d.Weight;
             obj.Carbonhydrates = d.Carbonhydrates;
             obj.GarinshName = g.Name;
             db.ChoosenDishes.Add(obj);
@@ -426,6 +432,7 @@ namespace FoodOrder.Controllers
             obj.Kilocalories = d.Kilocalories;
             obj.ImagePath = d.ImagePath;
             obj.Fats = d.Fats;
+            obj.Weight = d.Weight;
             obj.Carbonhydrates = d.Carbonhydrates;
             obj.GarinshName = null;
             db.ChoosenDishes.Add(obj);

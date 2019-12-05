@@ -88,9 +88,11 @@ namespace FoodOrder.Models
         public string MenuId { get; set; }
         public ICollection<Dish> Dishes { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public string GarnishesForPacks { get; set; }
 
         public Pack()
         {
+           
             Dishes = new List<Dish>();
             Orders = new List<Order>();
         }
@@ -120,6 +122,8 @@ namespace FoodOrder.Models
         public string DishCategoryName { get; set; }
         public double Proteins { get; set; }
         public double Fats { get; set; }
+
+        public double Weight { get; set; }
         public double Carbonhydrates { get; set; }
         public double Kilocalories { get; set; }
         public string ImagePath { get; set; }
@@ -139,6 +143,7 @@ namespace FoodOrder.Models
       //  public string GarnishId { get; set; }
       //  public Dish Garnish { get; set; }
         public double Proteins { get; set; }
+        public double Weight { get; set; }
         public double Fats { get; set; }
         public double Carbonhydrates { get; set; }
         public double Kilocalories { get; set; }
@@ -146,12 +151,18 @@ namespace FoodOrder.Models
         public double Price { get; set; }
 
         public ICollection<Garnish> Garnishes { get; set; }
+        public ICollection<Garnish> GarnishesForPacks { get; set; }
         public ICollection<Pack> Packs { get; set; }
+
+        public ICollection<Menu> Menus { get; set; }
 
         public Dish()
         {
+            GarnishesForPacks = new List<Garnish>();
             Garnishes = new List<Garnish>();
             Packs = new List<Pack>();
+            Menus = new List<Menu>();
+           
         }
 
     }

@@ -145,15 +145,39 @@ namespace FoodOrder.Controllers
         }
 
 
-        public async Task<ActionResult> CreatePack(string[] idDs, string Name)
+        public async Task<ActionResult> CreatePack(string[] idDs, string Name, string gds)
         {
+            var gfpas = new List<Garnish>();
+
+            var idpcks = gds.Split(',');
+            var gfpacks = db.Dishes.Where(c => gds.Contains(c.Id)).ToList();
+
+            foreach (var dd in gfpacks)
+            {
+                var obj = new Garnish();
+                obj.Id = dd.Id;
+                obj.Name = dd.Name;
+                db.Garnishes.Add(obj);
+                gfpas.Add(obj);
+            }
+
+            db.SaveChanges();
+
             Pack pack = new Pack();
 
             var dishes = await db.Dishes.Where(b => idDs.Contains(b.Id)).ToListAsync();
+
+            var secBl = dishes.Where(c => c.DishCategoryId == "2").FirstOrDefault();
+          
+            db.Entry(secBl).State = EntityState.Modified;
+            secBl.GarnishesForPacks = gfpas;
+            db.SaveChanges();
+
             pack.Id = Guid.NewGuid().ToString("N");
             pack.Name = Name;
             pack.DateOfCreation = DateTime.Now;
             pack.Dishes = dishes;
+            pack.GarnishesForPacks = gds;
 
             db.Packs.Add(pack);
             db.SaveChanges();
@@ -185,6 +209,8 @@ namespace FoodOrder.Controllers
             var dateOfCreation = DateTime.UtcNow;
             var category = await db.DishCategories.Where(d => d.Id == selectedType).FirstOrDefaultAsync();
             var categoryName = category.Name;
+
+            
 
             Dish dish = new Dish()
             {

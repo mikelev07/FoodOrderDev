@@ -69,11 +69,14 @@
                                                                                 <a>
                                                                                     <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
                                                                                 </a>
-                                                                                <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
+                                                                                @*<p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>*@
                                                                                 <a role="button" class="btn-link" data-toggle="tooltip"
                                                                                    data-placement="top" title="Пищевая ценность (на 100г): Белки - @dish.Proteins г. Жиры - @dish.Fats г. Углеводы - @dish.Carbonhydrates г. Килокалории @dish.Kilocalories ккал">
                                                                                     <span style="color:#17d85b; font-size:16px;border-bottom:1px dashed black">Состав</span>
                                                                                 </a>
+
+                                                                              
+
                                                                                 @if (dish.Garnishes.Count != 0)
                                                                                 {
                                                                                     <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
@@ -160,7 +163,7 @@
 
                                                                         </div>
                                                                         <a href="">
-                                                                            <img class="card-img-top" src="~/Content/img/1.jpg"
+                                                                            <img class="card-img-top" src="@Url.Content(dish.ImagePath ?? "~/Content/img/1.jpg")"
                                                                                  alt="Фото блюда">
                                                                         </a>
                                                                     </div>
@@ -170,7 +173,57 @@
                                                                                 <a>
                                                                                     <p class="list-item-heading  pt-1"><strong class="dish-name">@dish.Name</strong></p>
                                                                                 </a>
-                                                                                <p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>
+
+                                                                                <button id="brazz-@dish.Id" style="display:none" type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                                                                        data-target="#exampleModalPopovers-@dish.Id">
+                                                                                    Launch Demo Modal
+                                                                                </button>
+
+
+                                                                                <div id="exampleModalPopovers-@dish.Id" class="modal fade show" tabindex="-1" role="dialog"
+                                                                                     aria-hidden="true">
+                                                                                    <div class="modal-dialog" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title" id="exampleModalPopoversLabel">Вы хотите добавить гарнир?</h5>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">×</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+
+                                                                                                <h5>Гарнир на выбор</h5>
+                                                                                                <p>
+                                                                                                    @if (dish.Garnishes.Count != 0)
+                                                                                                    {
+                                                                                                    
+                                                                                                        <select id="gch1-@dish.Id" class="form-control select2-single">
+                                                                                                            <option value="0" label="&nbsp;">Выберите гарнир...</option>
+
+                                                                                                            @foreach (var a in dish.Garnishes)
+                                                                                                            {
+                                                                                                                <option value="@a.Id">@a.Name</option>
+                                                                                                            }
+
+                                                                                                        </select>
+                                                                                                        
+    
+                                                                                                    }
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-secondary"
+                                                                                                        data-dismiss="modal">
+                                                                                                    Не нужен
+                                                                                                </button>
+                                                                                                <button  data-dismiss="modal" type="button" class="yesbaby">Сохранить выбор</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                @*<p class="list-item-heading  dish-category-name">@dish.DishCategory.Name</p>*@
                                                                                 <a role="button" class="btn-link" data-toggle="tooltip"
                                                                                    data-placement="top" title="Пищевая ценность (на 100г): Белки - @dish.Proteins г. Жиры - @dish.Fats г. Углеводы - @dish.Carbonhydrates г. Килокалории @dish.Kilocalories ккал">
                                                                                     <span style="color:#17d85b; font-size:16px;border-bottom:1px dashed black">Состав</span>
@@ -336,6 +389,7 @@
 @section Scripts {
     
     <script>
+
          var defaults = {
             // Sets how many items can be selected from library. Set to -1 disable selection limit.
             count: -1,
@@ -588,15 +642,35 @@
                     }
 
                     var chg = "#gch-" + id;
+                     var chg1 = "#gch1-" + id;
                     var garId = $(chg).find(":selected").val();
                     var garName = '';
                     if (garId == 0) {
-                        garName = 'Нет'
+                        $("#brazz-" + id).trigger("click")
+
+                      $(".yesbaby").on("click", function() {
+                         garId = $(chg1).find(":selected").val();
+                          garName = $(chg1).find(":selected").text(); 
+                             gerDo(dishId, catName, dishName, dishId, el, imPath, prot, fats, cydro, kilo, garId, garName,id);
+                        });
+                           
+
+                        
                     } else {
 
                         garName = $(chg).find(":selected").text();
                     }
 
+                 
+
+                } else {
+                    showNotificationText('Блюдо уже добавлено в заказ!')
+                }
+           
+        }
+
+        function gerDo(dishId,catName,dishName, dishId, el, imPath, prot, fats, cydro, kilo,garId, garName,id) {
+            
                     var constCol = 'collapse-cat-' + dishId;
 
                     var isEqual = $("span:contains(" + catName + ")").last().length == 0;
@@ -683,11 +757,6 @@
                             alert("Блюдо уже добавлено в заказ")
                         }
                     }
-
-                } else {
-                    showNotificationText('Блюдо уже добавлено в заказ!')
-                }
-           
         }
 
 

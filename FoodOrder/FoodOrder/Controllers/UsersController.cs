@@ -159,18 +159,18 @@ namespace FoodOrder.Controllers
             {
                 var dishes = await db.Dishes.Include(d => d.DishCategory).ToListAsync();
                 var categories = await db.DishCategories.Include(d => d.Dishes).ToListAsync();
-                var garnishes = dishes.Where(d => d.DishCategoryId == "ZdesDolzhenBitGarnir");
-
+                DishCategory Granishlist = db.DishCategories.Include(d => d.Dishes).Where(c => c.Id == "ZdesDolzhenBitGarnir").FirstOrDefault();
+                ViewBag.Garnishes = Granishlist.Dishes.ToList();
                 ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
                 var l = db.Packs.Include(c => c.Dishes).OrderByDescending(c=>c.DateOfCreation).ToList();
                 ViewBag.Packs = l;
                 ViewBag.Count = l.Count;
+                ViewBag.DishCategory = db.DishCategories.Include(d => d.Dishes).ToList();
 
                 ViewData["Dishes"] = dishes;
                 ViewData["Categories"] = categories;
-                ViewData["Garnishes"] = garnishes;
-
-                var menu = db.Menus.Where(c => c.DateOfCreation.Day == DateTime.UtcNow.Day).Include(m => m.Dishes.Select(y => y.Garnishes)).FirstOrDefault();
+              
+                var menu = db.Menus.Where(c => c.DateOfCreation.Day == DateTime.UtcNow.Day).Include(m => m.Dishes.Select(y => y.Garnishes)).Include(c=>c.Packs).FirstOrDefault();
 
                 if (menu != null)
                 {
@@ -568,7 +568,7 @@ namespace FoodOrder.Controllers
             if (ModelState.IsValid)
             {
                 var user = await db.Users.Where(u => u.Id == uvm.Id).FirstOrDefaultAsync();
-                user.UserName = uvm.UserName;
+                user.UserName = uvm.Email;
                 user.Name = uvm.Name;
                 user.Surname = uvm.Surname;
                 user.Patronymic = uvm.Patronymic;

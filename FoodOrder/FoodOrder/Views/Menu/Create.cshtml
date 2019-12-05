@@ -33,7 +33,7 @@
                         <h5 class="mb-4">Форма создания</h5>
 
                         @using (Html.BeginForm("Create", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                        {
+{
                             @Html.AntiForgeryToken()
                     <form class="needs-validation tooltip-label-right" novalidate>
 
@@ -93,7 +93,7 @@
 
                         <button type="submit" class="btn btn-primary mb-0">Создать</button>
                     </form>
-                        }
+}
                     </div>
                 </div>
             </div>
@@ -116,9 +116,9 @@
                                 <div class="accordion" id="accordion">
 
                                     @foreach (FoodOrder.Models.DishCategory i in ViewBag.DishCategory)
-                                    {
-                                        if (i.Name != "Гарниры")
-                                        {
+{
+    if (i.Name != "Гарнир")
+    {
                                         <div class="mb-2">
                                             <button class="btn btn-link p-0 folder-button-collapse" data-toggle="collapse"
                                                     data-target="#collapseOne-@i.Id" aria-expanded="true" aria-controls="collapseOne-@i.Id">
@@ -130,10 +130,10 @@
                                             <div id="collapseOne-@i.Id" class="collapse show" data-parent="#accordion">
                                                 <div class="list disable-text-selection">
                                                     <div class="row">
-                                                        @foreach (var a in i.Dishes)
-                                    {
+                                                        @foreach (var a in i.Dishes.Where(c=>c.DishCategoryId != "ZdesDolzhenBitGarnir"))
+{
                                                             <div class="col-6 mb-1 sfl-item-container"
-                                                                 data-preview-path="../Content/img/chock.jpg"
+                                                                 data-preview-path="@Url.Content(a.ImagePath ?? "~/Content/img/1.jpg")"
                                                                  data-path="@a.Id"
                                                                  data-label="@a.Name"
                                                                  data-inp=""
@@ -148,34 +148,34 @@
                                                                             <div class="w-100">
                                                                                 <p class="truncate mb-0">@a.Name</p>
                                                                                 @if (a.HasGarnish)
-                                    {
+{
                                                                                     <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
-                                    }
-                                    else
-                                    {
+}
+else
+{
                                                                                     @*<p style="color:red" class="truncate mb-0">Нет гарнира</p>*@
-                                    }
+}
                                                                             </div>
                                                                         </div>
                                                                         <div id="garn-@a.Id" style="display:none"></div>
                                                                         <div class="custom-control custom-checkbox pl-1 pr-1 align-self-center">
-                                                                            <label class="custom-control custom-checkbox mb-0">
-                                                                                <input type="checkbox" class="custom-control-input">
+                                                                            <label class="custom-control custom-checkbox mb-0 ">
+                                                                                <input checked type="checkbox" class="custom-control-input">
                                                                                 <span class="custom-control-label"></span>
                                                                             </label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                    }
+}
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        }
+    }
 
-                                    }
+}
 
                                 </div>
                             </div>
@@ -220,8 +220,8 @@
                             </div>
                         </div>
                     </div>
-                }
-            }
+    }
+}
 
             <div class="modal fade bd-example-modal-sm-pack" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
@@ -235,17 +235,20 @@
                         </div>
                         <div class="modal-body">
                             <div id="table-pack" class="form-group">
-                                @foreach (FoodOrder.Models.Pack i in ViewBag.Packs)
+                                @{ var b = 1;
+                                foreach (FoodOrder.Models.Pack i in ViewBag.Packs)
                                 {
                                     <label for="dish-creation-garnish-checkbox">
-                                        <span> <input id="dish-creation-garnish-checkbox" value="@i.Id" type="checkbox" /> Пак </span>
+                                        <span> <input id="dish-creation-garnish-checkbox" value="@i.Id" type="checkbox" /> Пак№ @b (@i.Name) </span>
 
                                     </label> <br />
                                     foreach (var d in i.Dishes)
                                     {
-                                        <p>- @d.Name  </p>
+                                     <p>- @d.Name  </p>
+                                        }
+                                        b = b + 1;
                                     }
-                                }
+                                    }
                             </div>
                           
                         </div>

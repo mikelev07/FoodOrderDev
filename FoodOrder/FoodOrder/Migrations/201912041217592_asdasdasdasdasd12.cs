@@ -3,7 +3,7 @@ namespace FoodOrder.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class asdasdasdasd : DbMigration
+    public partial class asdasdasdasdasd12 : DbMigration
     {
         public override void Up()
         {

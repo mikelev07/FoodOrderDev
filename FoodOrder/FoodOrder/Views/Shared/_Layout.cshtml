@@ -74,7 +74,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                         <ul class="navbar-nav menu w_menu">
-                            <li class="nav-item dropdown submenu mega_menu mega_menu_two active">
+                            <li class="nav-item dropdown submenu mega_menu mega_menu_two">
                                 <a class="nav-link dropdown-toggle" href="serv" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     О сервисе
                                 </a>
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="nav_right_btn">
-                        <a id="orCl" style="margin-right:5px" href="ord" class="login_btn active menu_cus"><i style="margin-right:4px" class="ti-plus"></i>Подключить сервис</a>
+                        <a id="orCl" style="margin-right:5px" href="ord" class="login_btn active menu_cus"><i style="margin-right:4px" class="ti-phone"></i>Заказать звонок</a>
                         <a href="/Account/Login" class="login_btn active">Войти</a>
                     </div>
                 </div>
@@ -157,6 +157,8 @@
         $("#navbarSupportedContent > ul > li > a").click(function (e) {
             // Prevent a page reload when a link is pressed
             e.preventDefault();
+             $('#navbarSupportedContent > ul > li').removeClass('active');
+          $(this).parent().addClass('active')
             // Call the scroll function
             goToByScroll($(this).attr("href"));
         });

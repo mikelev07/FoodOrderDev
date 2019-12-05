@@ -91,8 +91,8 @@
                                             Действия
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Редактировать</a>
-                                            <a class="dropdown-item" href="#">Удалить</a>
+                                            <a class="dropdown-item" href="/Menu/Edit">Редактировать</a>
+                                            <a class="dropdown-item" href="/Menu/Delete">Удалить</a>
                                         </div>
                                     </div>
                                     <h5 class="mb-4">@Model.Menu.Name</h5>
@@ -152,6 +152,7 @@
                                                                                 {
                                                                                     <p class="list-item-heading  dish-garnish">Без гарнира</p>
                                                                                 }
+                                                                                <p class="list-item-heading mt-2" style="font-size:14px; margin-top:-15px">320 g</p>
                                                                                 <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
                                                                                    role="button" aria-expanded="true" aria-controls="collapseExample">
                                                                                     <span style="border-bottom:1px dotted black">Состав</span>
@@ -205,8 +206,8 @@
                                             Действия
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Редактировать</a>
-                                            <a class="dropdown-item" href="#">Удалить</a>
+                                            <a class="dropdown-item" href="/Menu/Edit">Редактировать</a>
+                                          
                                         </div>
                                     </div>
                                     <h5 class="mb-4">Паки</h5>
@@ -408,14 +409,14 @@
                                                         }
                                                         else
                                                         {
-                                                            <p class="list-item-heading  dish-garnish">Без гарнира</p>
+                                                           
                                                         }
 
                                                         @*
-                                                            <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
-                                                               role="button" aria-expanded="true" aria-controls="collapseExample">
-                                                                <span style="font-size:16px;border-bottom:1px dotted black">Состав</span>
-                                                            </a>*@
+                                                        <a class="btn-link" data-toggle="collapse" href="#collapseExample-d-@dish.Id"
+                                                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                                                            <span style="font-size:16px;border-bottom:1px dotted black">Состав</span>
+                                                        </a>*@
 
                                                         <a role="button" class="btn-link" data-toggle="tooltip"
                                                            data-placement="top" title="Пищевая ценность (на 100г): Белки - @dish.Proteins г. Жиры - @dish.Fats г. Углеводы - @dish.Carbonhydrates г. Килокалории @dish.Kilocalories ккал">
@@ -423,18 +424,18 @@
                                                         </a>
 
                                                         @*
-                                                            <div class="collapse" id="collapseExample-d-@dish.Id">
-                                                                <div class="mt-4">
-                                                                    <p class="mb-0">
-                                                                    <p class="list-item-heading mb-4 pt-1">
-                                                                        Пищевая ценность (на 100г):<br />
-                                                                        Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
-                                                                        Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
-                                                                        Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
-                                                                        <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
-                                                                    </p>
-                                                                </div>
-                                                            </div>*@
+                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                            <div class="mt-4">
+                                                                <p class="mb-0">
+                                                                <p class="list-item-heading mb-4 pt-1">
+                                                                    Пищевая ценность (на 100г):<br />
+                                                                    Белки - <span class="dish-proteins">@dish.Proteins</span> г<br />
+                                                                    Жиры - <span class="dish-fats">@dish.Fats</span> г<br />
+                                                                    Углеводы - <span class="dish-carbonhydrates">@dish.Carbonhydrates</span> г<br />
+                                                                    <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
+                                                                </p>
+                                                            </div>
+                                                        </div>*@
 
                                                         <footer style="margin-top:10px">
                                                             <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
@@ -556,29 +557,35 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+
                             </div>
 
                             <div class="modal-body scroll pt-0 pb-0 mt-4 mb-4">
                                 <div class="accordion" id="accordion">
-
+                                    <div class="form-group">
+                                        <label><strong>Название пака:</strong></label>
+                                        <input id="pack-name" type="text" class="form-control" placeholder="Введите название">
+                                    </div>
+                                    <input id="garnishesD" value="" type="hidden" />
                                     @foreach (FoodOrder.Models.DishCategory i in ViewBag.DishCategory)
                                     {
 
                                         <div class="mb-2">
                                             <button class="btn btn-link p-0 folder-button-collapse" data-toggle="collapse"
-                                                    data-target="#collapseOne-@i.Id" aria-expanded="true" aria-controls="collapseOne-@i.Id">
+                                                    data-target="#collapseOne-fe-@i.Id" aria-expanded="true" aria-controls="collapseOne-@i.Id">
                                                 <span class="icon-container">
                                                     <i class="simple-icon-arrow-down"></i>
                                                 </span>
                                                 <span class="folder-name">@i.Name</span>
                                             </button>
-                                            <div id="collapseOne-@i.Id" class="collapse show" data-parent="#accordion">
+                                            <div id="collapseOne-fe-@i.Id" class="collapse show" data-parent="#accordion">
                                                 <div class="list disable-text-selection">
                                                     <div class="row">
+
                                                         @foreach (var b in i.Dishes)
                                                         {
                                                             <div class="col-6 mb-1 sfl-item-container"
-                                                                 data-preview-path="../Content/img/1.jpg"
+                                                                 data-preview-path="@Url.Content(b.ImagePath ?? "~/Content/img/1.jpg")"
                                                                  data-path="@b.Id"
                                                                  data-label="@b.Name"
                                                                  data-inp=""
@@ -592,14 +599,14 @@
                                                                         <div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero">
                                                                             <div class="w-100">
                                                                                 <p class="truncate mb-0">@b.Name</p>
-                                                                                @*  @if (a.HasGarnish)
-                                                            {
-                                                                <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@a.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
-                                                            }
-                                                            else
-                                                            {
-                                                                <p style="color:red" class="truncate mb-0">Нет гарнира</p>
-                                                            }*@
+                                                                                @if (b.HasGarnish)
+                                                                                {
+                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@b.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
+                                                                                }
+                                                                                else
+                                                                                {
+
+                                                                                }
                                                                             </div>
                                                                         </div>
                                                                         <div id="garn-@b.Id" style="display:none"></div>
@@ -623,10 +630,7 @@
 
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label><strong>Название пака:</strong></label>
-                                <input id="pack-name" type="text" class="form-control" placeholder="Введите название">
-                            </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
                                 <button type="button" class="btn btn-primary sfl-submit-pack">Сформировать пак</button>
@@ -670,15 +674,15 @@
                                     </div>
 
                                     @*<div class="form-group" id="dish-creation-select-garnish" style="display:none">
-                                            <label>Вид гарнира</label>
-                                            <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
-                                                <option value="0" label="&nbsp;">Выберите гарнир</option>
-                                                @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
-                                                {
-                                                    <option value="@garnish.Id">@garnish.Name</option>
-                                                }
-                                            </select>
-                                        </div>*@
+                                        <label>Вид гарнира</label>
+                                        <select id="dish-creation-select-garnish" class="form-control select2-single" autocomplete="off">
+                                            <option value="0" label="&nbsp;">Выберите гарнир</option>
+                                            @foreach (Dish garnish in ViewData["Garnishes"] as IEnumerable<Dish>)
+                                            {
+                                                <option value="@garnish.Id">@garnish.Name</option>
+                                            }
+                                        </select>
+                                    </div>*@
 
                                     <div class="form-group">
                                         <p><strong>Пищевая ценность (на 100г) :</strong></p>
@@ -717,11 +721,53 @@
             </div>
         </div>
 
+        @foreach (FoodOrder.Models.DishCategory i in ViewBag.DishCategory)
+        {
+
+            foreach (var h in i.Dishes)
+            {
+                <div class="modal fade bd-example-modal-sm-@h.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Гарнир для блюда</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="table-@h.Id" class="form-group">
+                                    @foreach (FoodOrder.Models.Dish n in ViewBag.Garnishes)
+                                    {
+                                        <label for="dish-creation-garnish-checkbox">
+                                            <span> <input id="dish-creation-garnish-checkbox" value="@n.Id" type="checkbox" /> @n.Name </span>
+                                        </label> <br />
+                                    }
+
+                                </div>
+                                <button onclick="isCheckBoxedArray('@h.Id')" class="btn btn-outline-primary" data-dismiss="modal" aria-label="Close">Сохранить выбранные гарниры</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
 </main>
 
 @section Scripts{
     <script type="text/javascript">
 
+         function isCheckBoxedArray(id) {
+
+            var searchingTable = '#table-' + id;
+            var searchIDs = $(searchingTable + " input:checkbox:checked").map(function () {
+                return $(this).val();
+            }).get();
+
+             $("#garnishesD").val(searchIDs)
+    
+        }
 
         function getInstruction() {
             var enjoyhint_instance = new EnjoyHint({
@@ -923,7 +969,7 @@
                 var id = selectedItems[i].path;
                 idDs.push(id);
                 var cBody = '<div class="card-body"><div class="row"><div class="col-10"><a href=""> <p class="list-item-heading mb-4 pt-1">' + name + '</p></a><footer> <p class="text-muted text-small mb-0 font-weight-light">18.08.2019</p></footer></div></div></div>'
-                var card = ' <div class="card"> <div class="position-relative"><a href="Pages.Product.Detail.html"><img class="card-img-top" src="' + prev + '" alt="Фото блюда"></a></div>' + cBody + '</div>'
+                var card = ' <div class="card"> <div class="position-relative"><a href=""><img style="height:190.6px" class="card-img-top" src="' + prev + '" alt="Фото блюда"></a></div>' + cBody + '</div>'
                 var dishC = '<div class="col-xl-3 col-lg-4 col-12 col-sm-6 mb-4">' + card + '</div>';
                 d += dishC
 
@@ -931,7 +977,7 @@
 
             var coun = $("#cPack").text();
             $("#cPack").text(parseInt(coun) + 1);
-
+            var gds = $("#garnishesD").val();
             var packList = '<div class="pack"><h3>Пак №' + $("#cPack").text() + '</h3><div class="row list disable-text-selection">' + d + '</div></div></br>';
 
             $("#allPacks").prepend(packList);
@@ -943,7 +989,8 @@
                 dataType: "json",
                 data: {
                     'idDs': idDs,
-                    'Name': namePack
+                    'Name': namePack,
+                    'gds': gds
                 },
                 success: function (result) {
                     // window.location.href = result.Url;

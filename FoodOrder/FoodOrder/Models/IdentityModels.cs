@@ -183,17 +183,26 @@ namespace FoodOrder.Models
                 .WithMany(m => m.Orders)
                 .HasForeignKey(m => m.UserId)
                 .WillCascadeOnDelete(true);
+
             modelBuilder.Entity<User>()
                 .HasOptional(m=>m.Company)
                 .WithMany(m=>m.Employees)
                 .HasForeignKey(m=>m.CompanyId)
                 .WillCascadeOnDelete(true);
 
+         
             modelBuilder.Entity<Dish>().HasMany(c => c.Garnishes)
                   .WithMany(s => s.Dishes)
                   .Map(t => t.MapLeftKey("DishId")
                   .MapRightKey("GarnishId")
                   .ToTable("DishGarnish"));
+
+
+            modelBuilder.Entity<Dish>().HasMany(c => c.Menus)
+                 .WithMany(s => s.Dishes)
+                 .Map(t => t.MapLeftKey("DishId")
+                 .MapRightKey("MenuId")
+                 .ToTable("DishMenu"));
 
             modelBuilder.Entity<Dish>().HasMany(c => c.Packs)
               .WithMany(s => s.Dishes)

@@ -11,7 +11,7 @@
                 <h1>Заказы сотрудников</h1>
                 <div class="separator mb-5"></div>
             </div>
-            <div class="col-xl-6 col-lg-12 mb-4">
+            <div class="col-xl-12 col-lg-12 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Компания - @Model.FirstOrDefault().Company.Name</h5>
@@ -20,20 +20,24 @@
                             <thead>
                                 <tr>
                                     <th>Сотрудник</th>
-                                    <th>Количество заказов</th>
+                                    <th>Количество заказов за @DateTime.Now.ToShortDateString()</th>
+                                    <th>Количество заказов (Всего)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var employee in Model)
                                 {
-                                    <tr>
-                                        <td>
-                                            <p class="list-item-heading">@employee.UserName</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-muted">@employee.Orders.Count()</p>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <p class="list-item-heading">@employee.UserName</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-muted">@employee.Orders.Where(c=>c.DateOfCreation.Day == DateTime.UtcNow.Day).Count()</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-muted">@employee.Orders.Count()</p>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

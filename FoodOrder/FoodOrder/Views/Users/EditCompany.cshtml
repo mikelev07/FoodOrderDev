@@ -33,185 +33,202 @@
 
                             @Html.HiddenFor(m => m.Id, new { name = Model.Id, id = "Id" })
 
-                            <form class="needs-validation tooltip-label-right" novalidate>
+                    <form class="needs-validation tooltip-label-right" novalidate>
+                        <div class="form-group position-relative error-l-50">
+                            @Html.LabelFor(model => model.Name, "Название компании", htmlAttributes: new { @class = "control-label " })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="invalid-tooltip">
+                                Заполните название!
+                            </div>
+                        </div>
+
+                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
+                           role="button" aria-expanded="true" aria-controls="collapseExample">
+                            <i class="iconsminds-folder-add--"></i> Заполнить все реквизиты
+                        </a>
+
+                        <div class="collapse" id="collapseExample">
+                            <div class="form-group">
                                 <div class="form-group position-relative error-l-50">
-                                    @Html.LabelFor(model => model.Name, "Название компании", htmlAttributes: new { @class = "control-label " })
-                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.FullName, "Полное наименование компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
                                     <div class="invalid-tooltip">
-                                        Заполните название!
+                                        Укажите полное наименование компании!
                                     </div>
                                 </div>
 
-                                <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
-                                   role="button" aria-expanded="true" aria-controls="collapseExample">
-                                    <i class="iconsminds-folder-add--"></i> Заполнить все реквизиты
-                                </a>
-
-                                <div class="collapse" id="collapseExample">
-                                    <div class="form-group">
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.FullName, "Полное наименование компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите полное наименование компании!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.BIN_IIN, "БИН/ИИН компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.BIN_IIN, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите БИН или ИИН!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.IIK, "ИИК компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.IIK, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите ИИК!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.RNN, "РНН компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.RNN, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите РНН!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.BIK, "БИК компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.BIK, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите БИК!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.Bank, "Банковские реквизиты", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.Bank, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите реквизиты Банка!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.LegalAddress, "Юридический адрес компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.LegalAddress, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите юридический адрес!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.ActualAddress, "Фактический адрес компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.ActualAddress, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите фактический адрес!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.Director, "Директор компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.Director, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите директора компании!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.PhoneNumber, "Телефон компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите телефон компании!
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group position-relative error-l-50">
-                                            @Html.LabelFor(model => model.Email, "Электронная почта компании", htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                            <div class="invalid-tooltip">
-                                                Укажите электронную почту компании!
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
                                 <div class="form-group position-relative error-l-50">
-                                    @Html.LabelFor(model => model.Description, "Описание", htmlAttributes: new { @class = "control-label " })
-                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "2" })
-                                </div>
-
-                                <div class="form-group position-relative error-l-50">
-                                    @Html.LabelFor(model => model.Whatsapp, "Группа для Whatsapp")
-                                    @Html.EditorFor(model => model.Whatsapp, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-
-                                <div class="form-group position-relative error-l-50">
-                                    @Html.LabelFor(model => model.Telegram, "Группа для Telegram")
-                                    @Html.EditorFor(model => model.Telegram, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-
-                                <div class="form-group position-relative">
-                                    <label>Способ оплаты</label>
-                                    <br />
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        @foreach (TypeOfPayment paymentType in Enum.GetValues(typeof(TypeOfPayment)))
-                                        {
-
-                                            if (paymentType == Model.TypeOfPayment)
-                                            {
-                                                <label class="btn btn-primary active">
-                                                    <input type="radio" name="TypeOfPayment" value="@paymentType.GetHashCode()" id="@paymentType" checked required>
-                                                    @paymentType.ToString()
-                                                </label>
-                                            }
-                                            else
-                                            {
-                                                <label class="btn btn-primary">
-                                                    <input type="radio" name="TypeOfPayment" value="@paymentType.GetHashCode()" id="@paymentType">
-                                                    @paymentType.ToString()
-                                                </label>
-                                            }
-
-                                        }
-                                    </div>
+                                    @Html.LabelFor(model => model.BIN_IIN, "БИН/ИИН компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.BIN_IIN, new { htmlAttributes = new { @class = "form-control" } })
                                     <div class="invalid-tooltip">
-                                        Не выбран способ оплаты!
+                                        Укажите БИН или ИИН!
                                     </div>
                                 </div>
 
-                                <br />
-
-                                <div class="form-group position-relative">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="CompanyImageFile" value="CompanyImageFile" id="CompanyImageFile">
-                                            <label class="custom-file-label" for="CompanyImageFile">Выберите логотип</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br />
-
-                                <div class="form-group position-relative">
-                                    <div class="custom-control custom-checkbox mb-3 error-l-200">
-                                        <div class="checkbox">
-                                            <label>@Html.CheckBoxFor(x => Model.UnlimitedOrders)&nbsp;Неограниченные заказы для сотрудников</label>
-                                        </div>
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.IIK, "ИИК компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.IIK, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите ИИК!
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-offset-2">
-                                        <button type="submit" class="btn btn-primary mb-0">Подтвердить изменения</button>
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.RNN, "РНН компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.RNN, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите РНН!
                                     </div>
                                 </div>
 
-                            </form>
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.BIK, "БИК компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.BIK, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите БИК!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Bank, "Банковские реквизиты", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.Bank, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите реквизиты Банка!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.LegalAddress, "Юридический адрес компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.LegalAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите юридический адрес!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.ActualAddress, "Фактический адрес компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.ActualAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите фактический адрес!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Director, "Директор компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.Director, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите директора компании!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.PhoneNumber, "Телефон компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите телефон компании!
+                                    </div>
+                                </div>
+
+                                <div class="form-group position-relative error-l-50">
+                                    @Html.LabelFor(model => model.Email, "Электронная почта компании", htmlAttributes: new { @class = "control-label " })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    <div class="invalid-tooltip">
+                                        Укажите электронную почту компании!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group position-relative error-l-50">
+                            @Html.LabelFor(model => model.Description, "Описание", htmlAttributes: new { @class = "control-label " })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "2" })
+                        </div>
+
+                        <div class="form-group position-relative error-l-50">
+                            @Html.LabelFor(model => model.Whatsapp, "Группа для Whatsapp")
+                            @Html.EditorFor(model => model.Whatsapp, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group position-relative error-l-50">
+                            @Html.LabelFor(model => model.Telegram, "Группа для Telegram")
+                            @Html.EditorFor(model => model.Telegram, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        <div class="form-group position-relative">
+                            <label>Способ оплаты</label>
+                            <br />
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                @foreach (TypeOfPayment paymentType in Enum.GetValues(typeof(TypeOfPayment)))
+                                {
+
+                                    if (paymentType == Model.TypeOfPayment)
+                                    {
+                                        <label class="btn btn-primary active">
+                                            <input type="radio" name="TypeOfPayment" value="@paymentType.GetHashCode()" id="@paymentType" checked required>
+                                            @paymentType.ToString()
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="TypeOfPayment" value="@paymentType.GetHashCode()" id="@paymentType">
+                                            @paymentType.ToString()
+                                        </label>
+                                    }
+
+                                }
+                            </div>
+                            <div class="invalid-tooltip">
+                                Не выбран способ оплаты!
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="form-group position-relative">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="CompanyImageFile" value="CompanyImageFile" id="CompanyImageFile">
+                                    <label class="custom-file-label" for="CompanyImageFile">Выберите логотип</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="form-group position-relative">
+                            <label>Способ выбора меню</label>
+                            <div>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary active">
+                                        <input type="radio" name="PacksPicker" value="true" id="TypeOfPayment12" @(Model.PacksPicker == true? "checked":"") required> Неограниченный выбор
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" name="PacksPicker" value="false" @(Model.PacksPicker == false? "checked":"") id="TypeOfPayment23"> Выбор паками
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+
+
+                        <div class="form-group position-relative">
+                            <div class="custom-control custom-checkbox mb-3 error-l-200">
+                                <div class="checkbox">
+                                    <label>@Html.CheckBoxFor(x => Model.UnlimitedOrders)&nbsp;Неограниченные заказы для сотрудников</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2">
+                                <button type="submit" class="btn btn-primary mb-0">Подтвердить изменения</button>
+                            </div>
+                        </div>
+
+                    </form>
                         }
                     </div>
                 </div>

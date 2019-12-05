@@ -58,7 +58,7 @@
 
             <nav class="navbar navbar-expand-lg menu_two">
                 <div class="container">
-                    <img src="~/Content/img/logo.png" srcset="img/logo2x.png 2x" alt="logo">
+                    <img class="nere" src="~/Content/img/log1.jpg" srcset="img/logo2x.png 2x" alt="logo">
                     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="menu_toggle">
                             <span class="hamburger">
@@ -142,6 +142,19 @@
     <script src="~/Scripts/js/main.js"></script>
 
     <script>
+
+        var images = ['log2.jpg','log3.jpg','log4.jpg', 'log5.jpg','log1.jpg'],
+                index = 0, // starting index
+                maxImages = images.length - 1;
+            var timer = setInterval(function() {
+                var currentImage = images[index];
+                index = (index == maxImages) ? 0 : ++index;
+                $('.nere').fadeOut(200, function() {
+                    $('.nere').attr("src", '../Content/img/'+currentImage);
+                    $('.nere ').fadeIn(200);
+                });
+             }, 3000);
+
         function goToByScroll(id) {
             $('html,body').animate({
                 scrollTop: $("#" + id).offset().top

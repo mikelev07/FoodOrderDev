@@ -48,9 +48,9 @@
                             <div class="col-12 col-lg-5 col-xl-3 col-left">
                                 <div class="card mb-4">
                                     <div class="position-absolute card-top-buttons">
-                                        <button style="color:#17d85b" class="btn btn-outline-white icon-button ">
+                                        <a href="/Users/EditCompany/@company.Id" style="color:#17d85b" class="btn btn-outline-white icon-button ">
                                             <i class="simple-icon-pencil"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                     <img src="~/Content/img/pr1920.png" alt="Detail Picture" class="card-img-top" />
 
@@ -59,21 +59,21 @@
                                             <strong>@company.Name</strong>
                                         </h6>
                                         @*
-                                        <p class="text-muted text-small mb-2">Реквизиты</p>
-                                       
-                                        <p class="mb-3">
-                                            <strong>Полное название:</strong> @company.FullName<br />
-                                            <strong>БИН или ИИН:</strong> @company.BIN_IIN<br />
-                                            <strong>ИИК:</strong> @company.IIK<br />
-                                            <strong>РНН:</strong> @company.RNN<br />
-                                            <strong>ИИК:</strong> @company.BIK<br />
-                                            <strong>Банк:</strong> @company.Bank<br />
-                                            <strong>Юридический адрес:</strong> @company.LegalAddress<br />
-                                            <strong>Фактический адрес:</strong> @company.ActualAddress<br />
-                                            <strong>Директор:</strong> @company.Director<br />
-                                            <strong>Телефон:</strong> @company.PhoneNumber<br />
-                                            <strong>Email:</strong> @company.Email<br />
-                                        </p>*@
+        <p class="text-muted text-small mb-2">Реквизиты</p>
+
+        <p class="mb-3">
+            <strong>Полное название:</strong> @company.FullName<br />
+            <strong>БИН или ИИН:</strong> @company.BIN_IIN<br />
+            <strong>ИИК:</strong> @company.IIK<br />
+            <strong>РНН:</strong> @company.RNN<br />
+            <strong>ИИК:</strong> @company.BIK<br />
+            <strong>Банк:</strong> @company.Bank<br />
+            <strong>Юридический адрес:</strong> @company.LegalAddress<br />
+            <strong>Фактический адрес:</strong> @company.ActualAddress<br />
+            <strong>Директор:</strong> @company.Director<br />
+            <strong>Телефон:</strong> @company.PhoneNumber<br />
+            <strong>Email:</strong> @company.Email<br />
+        </p>*@
 
                                         <p class="text-muted text-small mb-2">Заказы для сотрудников</p>
                                         <p class="mb-3">
@@ -89,7 +89,29 @@
 
                                         <p class="text-muted text-small mb-2">Контакты</p>
                                         <div class="social-icons">
-                                            <p><a>Ссылка на Whatsapp</a></p>
+                                            <p>
+                                                <a data-toggle="collapse" href="#collapseExample-d-1"
+                                                   role="button" aria-expanded="true" aria-controls="collapseExample-d-1"><img style="width:30px" src="~/Content/img/Telegram-512.png" /></a>
+                                                <a data-toggle="collapse" href="#collapseExample-d-2"
+                                                   role="button" aria-expanded="true" aria-controls="collapseExample-d-2"><img style="width:45px" src="~/Content/img/Whatsapp-512.png" /></a>
+                                            </p>
+
+                                        </div>
+                                        <div class="collapse" id="collapseExample-d-2">
+                                            <div class="mt-4">
+                                                <p class="mb-0">
+                                                <p class="list-item-heading mb-4 pt-1">
+                                                    @company.Whatsapp
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="collapse" id="collapseExample-d-1">
+                                            <div class="mt-4">
+                                                <p class="mb-0">
+                                                <p class="list-item-heading mb-4 pt-1">
+                                                    @company.Telegram
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

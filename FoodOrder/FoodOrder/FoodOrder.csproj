@@ -193,41 +193,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperExtensions.cs" />
-    <Compile Include="Migrations\201912040700371_asdasd.cs" />
-    <Compile Include="Migrations\201912040700371_asdasd.Designer.cs">
-      <DependentUpon>201912040700371_asdasd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912040722333_asdasdaas.cs" />
-    <Compile Include="Migrations\201912040722333_asdasdaas.Designer.cs">
-      <DependentUpon>201912040722333_asdasdaas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912040740443_asdasdasdasdasdasd.cs" />
-    <Compile Include="Migrations\201912040740443_asdasdasdasdasdasd.Designer.cs">
-      <DependentUpon>201912040740443_asdasdasdasdasdasd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912040828456_asdasdasdasdasdasd112.cs" />
-    <Compile Include="Migrations\201912040828456_asdasdasdasdasdasd112.Designer.cs">
-      <DependentUpon>201912040828456_asdasdasdasdasdasd112.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912040957079_as1212as.cs" />
-    <Compile Include="Migrations\201912040957079_as1212as.Designer.cs">
-      <DependentUpon>201912040957079_as1212as.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912041009521_as1212asdasdasd.cs" />
-    <Compile Include="Migrations\201912041009521_as1212asdasdasd.Designer.cs">
-      <DependentUpon>201912041009521_as1212asdasdasd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912041012314_as1212asdasdasd112.cs" />
-    <Compile Include="Migrations\201912041012314_as1212asdasdasd112.Designer.cs">
-      <DependentUpon>201912041012314_as1212asdasdasd112.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912041041280_asdasdasd.cs" />
-    <Compile Include="Migrations\201912041041280_asdasdasd.Designer.cs">
-      <DependentUpon>201912041041280_asdasdasd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912041217592_asdasdasdasdasd12.cs" />
-    <Compile Include="Migrations\201912041217592_asdasdasdasdasd12.Designer.cs">
-      <DependentUpon>201912041217592_asdasdasdasdasd12.cs</DependentUpon>
+    <Compile Include="Migrations\201912051427554_asdasda.cs" />
+    <Compile Include="Migrations\201912051427554_asdasda.Designer.cs">
+      <DependentUpon>201912051427554_asdasda.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -336,6 +304,11 @@
     <Content Include="Content\img\icon_shape_two.png" />
     <Content Include="Content\img\kissmetrics.png" />
     <Content Include="Content\img\load.gif" />
+    <Content Include="Content\img\log1.jpg" />
+    <Content Include="Content\img\log2.jpg" />
+    <Content Include="Content\img\log3.jpg" />
+    <Content Include="Content\img\log4.jpg" />
+    <Content Include="Content\img\log5.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\menu.png" />
     <Content Include="Content\img\metorik.png" />
@@ -355,12 +328,14 @@
     <Content Include="Content\img\social-header.png" />
     <Content Include="Content\img\soup.png" />
     <Content Include="Content\img\tab.png" />
+    <Content Include="Content\img\Telegram-512.png" />
     <Content Include="Content\img\thumb-2.jpg" />
     <Content Include="Content\img\tree.png" />
     <Content Include="Content\img\triangle.png" />
     <Content Include="Content\img\un3.png" />
     <Content Include="Content\img\undraw.png" />
     <Content Include="Content\img\webhooks.png" />
+    <Content Include="Content\img\Whatsapp-512.png" />
     <Content Include="Content\system\css\dore.dark.green.css" />
     <Content Include="Content\system\css\dore.dark.green.min.css" />
     <Content Include="Content\system\css\dore.light.green.css" />
@@ -817,32 +792,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912040700371_asdasd.resx">
-      <DependentUpon>201912040700371_asdasd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912040722333_asdasdaas.resx">
-      <DependentUpon>201912040722333_asdasdaas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912040740443_asdasdasdasdasdasd.resx">
-      <DependentUpon>201912040740443_asdasdasdasdasdasd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912040828456_asdasdasdasdasdasd112.resx">
-      <DependentUpon>201912040828456_asdasdasdasdasdasd112.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912040957079_as1212as.resx">
-      <DependentUpon>201912040957079_as1212as.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912041009521_as1212asdasdasd.resx">
-      <DependentUpon>201912041009521_as1212asdasdasd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912041012314_as1212asdasdasd112.resx">
-      <DependentUpon>201912041012314_as1212asdasdasd112.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912041041280_asdasdasd.resx">
-      <DependentUpon>201912041041280_asdasdasd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912041217592_asdasdasdasdasd12.resx">
-      <DependentUpon>201912041217592_asdasdasdasdasd12.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912051427554_asdasda.resx">
+      <DependentUpon>201912051427554_asdasda.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

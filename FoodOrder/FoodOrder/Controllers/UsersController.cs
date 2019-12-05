@@ -203,12 +203,6 @@ namespace FoodOrder.Controllers
             if (await UserManager.IsInRoleAsync(userId, "employee"))
             {
 
-              
-                       // string g = a.DishName + a.GarinshName;
-                        // var asd = db.ChoosenDishes.Where(c=>c.GarinshName )
-                
-
-               
                 ViewBag.StatusMessage =
                        message == ManageMessageId.ChangePasswordSuccess ? "Ваш пароль изменен."
                        : "";
@@ -461,6 +455,14 @@ namespace FoodOrder.Controllers
             cvm.Id = Guid.NewGuid().ToString();
             var newRandomPassword = CreateRandomPassword();
             cvm.GeneratedPassword = newRandomPassword;
+
+            bool ch = cvm.PacksPicker == true ? true : false;
+            bool mh = true;
+            if (ch)
+            {
+                mh = false;
+            }  
+
             if (ModelState.IsValid)
             {
                 var dateTimeNow = DateTime.Now;
@@ -470,6 +472,8 @@ namespace FoodOrder.Controllers
                     Name = cvm.Name,
                     TypeOfPayment = cvm.TypeOfPayment,
                     UnlimitedOrders = cvm.UnlimitedOrders,
+                    PacksPicker = ch,
+                    SingleChoice = mh,
                     RegistrationDate = dateTimeNow,
                     Whatsapp = cvm?.Whatsapp,
                     Telegram = cvm?.Telegram,
@@ -596,6 +600,8 @@ namespace FoodOrder.Controllers
             {
                 return HttpNotFound();
             }
+          
+
             var cvm = new CompanyViewModel
             {
                 Id = company.Id,
@@ -604,10 +610,13 @@ namespace FoodOrder.Controllers
                 UnlimitedOrders = company.UnlimitedOrders,
                 Description = company.Description,
                 Whatsapp = company.Whatsapp,
+
                 Telegram = company.Telegram,
                 CompanyImagePath = company.CompanyImagePath,
                 FullName = company.FullName,
                 BIN_IIN = company.BIN_IIN,
+                SingleChoice = company.SingleChoice,
+                PacksPicker = company.PacksPicker,
                 IIK = company.IIK,
                 RNN = company.RNN,
                 BIK = company.BIK,
@@ -628,10 +637,17 @@ namespace FoodOrder.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditCompany([Bind(Include = 
             "Id,Name,TypeOfPayment,UnlimitedOrders,Description,Whatsapp,Telegram,CompanyImagePath,CompanyImageFile," +
-            "FullName,BIN_IIN, IIK, RNN,BIK,Bank,LegalAddress,ActualAddress,Director,PhoneNumber,Email")] CompanyViewModel cvm)
+            "FullName,BIN_IIN, IIK, RNN,BIK,Bank,LegalAddress,ActualAddress,Director,PhoneNumber,Email,SingleChoice,PacksPicker")] CompanyViewModel cvm)
         {
             string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
             string path = Server.MapPath("~/Files/" + fileName);
+
+            bool ch = cvm.PacksPicker == true ? true : false;
+            bool mh = true;
+            if (ch)
+            {
+                mh = false;
+            }
 
             if (ModelState.IsValid)
             {
@@ -641,6 +657,8 @@ namespace FoodOrder.Controllers
                 company.UnlimitedOrders = cvm.UnlimitedOrders;
                 company.Description = cvm.Description;
                 company.Whatsapp = cvm.Whatsapp;
+                company.PacksPicker = ch;
+                company.SingleChoice = mh;
                 company.Telegram = cvm.Telegram;
                 company.CompanyImagePath = "~/Files/" + fileName;
                 company.FullName = cvm.FullName;

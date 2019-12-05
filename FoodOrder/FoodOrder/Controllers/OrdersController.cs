@@ -71,7 +71,27 @@ namespace FoodOrder.Controllers
 
             if (await UserManager.IsInRoleAsync(userId, "admin"))
             {
-                var companies = await db.Companies.ToListAsync();
+                var companies = await db.Companies.Include(c=>c.Employees.Select(p=>p.Orders)).ToListAsync();
+
+                //var lerta = 0;
+                foreach (var i in companies)
+                {
+                    var lerta = 0;
+                    db.Entry(i).State = EntityState.Modified;
+                    var todayC = i.Employees;
+                    foreach (var t in todayC)
+                    {
+                        var part = t.Orders.Where(l=>l.DateOfCreation.Day==DateTime.UtcNow.Day).Count();
+                        lerta += part;
+                    }
+                    i.OrdersCountToday = lerta;
+                }
+
+                db.SaveChanges();
+
+                    //ViewBag.OrderCountToday = 1;
+
+               
                 return View("IndexAdmin", companies);
             }
             if (await UserManager.IsInRoleAsync(userId, "representative"))
@@ -386,6 +406,8 @@ namespace FoodOrder.Controllers
             string uid = User.Identity.GetUserId();
             User user = db.Users.Include(c=>c.Company).Where(c => c.Id == uid).FirstOrDefault();
             user.Company.OrdersCount++;
+            
+            
 
             Random random = new Random();
             int b = random.Next();

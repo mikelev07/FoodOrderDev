@@ -11,7 +11,7 @@
                 <h1>Заказы компаний</h1>
                 <div class="separator mb-5"></div>
             </div>
-            <div class="col-xl-6 col-lg-12 mb-4">
+            <div class="col-xl-12 col-lg-12 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <table class="data-table data-table-standard responsive nowrap"
@@ -19,20 +19,24 @@
                             <thead>
                                 <tr>
                                     <th>Компания</th>
-                                    <th>Количество заказов</th>
+                                    <th>Количество заказов за @DateTime.Now.ToShortDateString()</th>
+                                    <th>Количество заказов (Всего)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var company in Model)
                                 {
-                                    <tr>
-                                        <td>
-                                            <p class="list-item-heading"><a target="_blank" href="/Orders/Employees?companyId=@company.Id">@company.Name</a></p>
-                                        </td>
-                                        <td>
-                                            <p class="text-muted">@company.OrdersCount</p>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <p class="list-item-heading"><a target="_blank" href="/Orders/Employees?companyId=@company.Id">@company.Name</a></p>
+                                    </td>
+                                    <td>
+                                        <p class="text-muted">@company.OrdersCountToday</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-muted">@company.OrdersCount</p>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

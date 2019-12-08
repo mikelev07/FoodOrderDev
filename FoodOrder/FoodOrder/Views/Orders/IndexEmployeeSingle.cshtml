@@ -599,7 +599,19 @@
                     var dc = '#dish-card-n-' + id;
                     // alert(dc)
                     // alert($(dc).html())
-                    var imgtodrag = $(dc + ' .position-relative .card-img-top');
+                
+
+                    var chg = "#gch-" + id;
+                     var chg1 = "#gch1-" + id;
+                    var garId = $(chg).find(":selected").val();
+                    var garName = '';
+                    if (garId == 0) {
+                        $("#brazz-" + id).trigger("click")
+
+                      $(".yesbaby").on("click", function() {
+                         garId = $(chg1).find(":selected").val();
+                          garName = $(chg1).find(":selected").text(); 
+                              var imgtodrag = $(dc + ' .position-relative .card-img-top');
                    // alert(imgtodrag.attr('src'))
 
                     if (imgtodrag) {
@@ -636,21 +648,47 @@
                             $(this).detach()
                         });
                     }
-
-                    var chg = "#gch-" + id;
-                     var chg1 = "#gch1-" + id;
-                    var garId = $(chg).find(":selected").val();
-                    var garName = '';
-                    if (garId == 0) {
-                        $("#brazz-" + id).trigger("click")
-
-                      $(".yesbaby").on("click", function() {
-                         garId = $(chg1).find(":selected").val();
-                          garName = $(chg1).find(":selected").text(); 
                           gerDo(dishId, catName, dishName, dishId, el, imPath, prot, fats, cydro, kilo, garId, garName,id);
                         });
 
                         $("#dont").on("click", function () {
+                                var imgtodrag = $(dc + ' .position-relative .card-img-top');
+                   // alert(imgtodrag.attr('src'))
+
+                    if (imgtodrag) {
+                        var imgclone = imgtodrag.clone()
+                            .offset({
+                                top: imgtodrag.offset().top,
+                                left: imgtodrag.offset().left
+                            })
+                            .css({
+                                'opacity': '0.5',
+                                'position': 'absolute',
+                                'height': '150px',
+                                'width': '150px',
+                                'z-index': '100'
+                            })
+                            .appendTo($('body'))
+                            .animate({
+                                'top': cart.offset().top + 10,
+                                'left': cart.offset().left + 10,
+                                'width': 75,
+                                'height': 75
+                            }, 1000, 'easeInOutExpo');
+
+                        setTimeout(function () {
+                            cart.effect("shake", {
+                                times: 2
+                            }, 200);
+                        }, 1500);
+
+                        imgclone.animate({
+                            'width': 0,
+                            'height': 0
+                        }, function () {
+                            $(this).detach()
+                        });
+                    }
                          //garId = $(chg1).find(":selected").val();
                            garName = 'Нет'
                           gerDo(dishId, catName, dishName, dishId, el, imPath, prot, fats, cydro, kilo, garId, garName,id);

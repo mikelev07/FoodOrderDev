@@ -62,7 +62,7 @@
             </a>
         </div>
 
-        <div id="create-menu-popup" class="col-md-6 col-lg-4 mb-4">
+        <div id="create-menu-popup-1" class="col-md-6 col-lg-4 mb-4">
             <a id="datcl">
                 <div style="height:180px" class="card dashboard-sq-banner justify-content-end">
                     <div style="width:330px" class="card-body justify-content-end d-flex flex-column">
@@ -220,7 +220,7 @@
                                             <div style="border-bottom:1px solid #0080000f">
                                                 <button style="" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne-@i.Id"
                                                         aria-expanded="true" aria-controls="collapseOne">
-                                                    <span>Пак </span>
+                                                    <span>Пак (@i.Name) </span>
                                                     <span style="color:green" class="badge badge-light">@i.Dishes.Count</span>
                                                 </button>
 
@@ -423,8 +423,8 @@
                                                             <span style="color:#17d85b; font-size:16px;border-bottom:1px dashed black">Состав</span>
                                                         </a>
 
-                                                        @*
-                                                        <div class="collapse" id="collapseExample-d-@dish.Id">
+                                                        
+                                                        <div style="display:none" class="collapse" id="collapseExample-d-@dish.Id">
                                                             <div class="mt-4">
                                                                 <p class="mb-0">
                                                                 <p class="list-item-heading mb-4 pt-1">
@@ -435,7 +435,7 @@
                                                                     <span class="dish-kilocalories">@dish.Kilocalories</span> ккал
                                                                 </p>
                                                             </div>
-                                                        </div>*@
+                                                        </div>
 
                                                         <footer style="margin-top:10px">
                                                             <p class="text-muted text-small mb-0 font-weight-light">@dish.DateOfCreation.ToShortDateString()</p>
@@ -499,7 +499,7 @@
                                     {
 
                                         <div class="pack">
-                                            <h3>Пак №@a (@i.Name)</h3>
+                                            <h3>Пак (@i.Name)</h3>
 
                                             <div class="row list disable-text-selection">
                                                 @foreach (var d in i.Dishes)
@@ -564,7 +564,7 @@
                                 <div class="accordion" id="accordion">
                                     <div class="form-group">
                                         <label><strong>Название пака:</strong></label>
-                                        <input id="pack-name" type="text" class="form-control" placeholder="Введите название">
+                                        <input id="pack-name" type="text" class="form-control" required placeholder="Введите название">
                                     </div>
                                     <input id="garnishesD" value="" type="hidden" />
                                     @foreach (FoodOrder.Models.DishCategory i in ViewBag.DishCategory)
@@ -601,7 +601,7 @@
                                                                                 <p class="truncate mb-0">@b.Name</p>
                                                                                 @if (b.HasGarnish)
                                                                                 {
-                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-@b.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
+                                                                                    <a class="btn-link" href="#" style="color:green" data-toggle="modal" data-target=".bd-example-modal-sm-t-@b.Id"> <span style="border-bottom:1px dotted black">+ Гарнир</span></a>
                                                                                 }
                                                                                 else
                                                                                 {
@@ -726,7 +726,7 @@
 
             foreach (var h in i.Dishes)
             {
-                <div class="modal fade bd-example-modal-sm-@h.Id" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade bd-example-modal-sm-t-@h.Id" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -789,6 +789,34 @@
                     event: 'next',
                     showNext: true,
                     description: 'Вы можете добавлять новое блюдо!',
+                    skipButton: {
+                        text: 'Все знаю'
+                    },
+                    nextButton: {
+                        text: 'Далее'
+                    },
+                    shape: 'circle',
+                    radius: 220
+                },
+                  {
+                    selector: '#create-menu-popup',
+                    event: 'next',
+                    showNext: true,
+                    description: 'Создавайте меню!',
+                    skipButton: {
+                        text: 'Все знаю'
+                    },
+                    nextButton: {
+                        text: 'Далее'
+                    },
+                    shape: 'circle',
+                    radius: 220
+                },
+                    {
+                    selector: '#create-menu-popup-1',
+                    event: 'next',
+                    showNext: true,
+                    description: 'Составляйте паки из блюд!',
                     skipButton: {
                         text: 'Все знаю'
                     },
@@ -948,10 +976,14 @@
         }
 
         function onSubmitHandler(event) {
-            event && event.preventDefault();
-            getDataFromDomItems($checkedItems);
-            appendSelectedItems();
-            $modal.modal("hide");
+            if ($("#pack-name").val() != "") {
+                event && event.preventDefault();
+                getDataFromDomItems($checkedItems);
+                appendSelectedItems();
+                $modal.modal("hide");
+            } else {
+                showNotificationTextRight("Укажите название для пака")
+            }
         }
 
         function appendSelectedItems() {
@@ -978,7 +1010,7 @@
             var coun = $("#cPack").text();
             $("#cPack").text(parseInt(coun) + 1);
             var gds = $("#garnishesD").val();
-            var packList = '<div class="pack"><h3>Пак №' + $("#cPack").text() + '</h3><div class="row list disable-text-selection">' + d + '</div></div></br>';
+            var packList = '<div class="pack"><h3>Пак (' + $("#pack-name").val() + ')</h3><div class="row list disable-text-selection">' + d + '</div></div></br>';
 
             $("#allPacks").prepend(packList);
             var namePack = $("#pack-name").val();
@@ -1235,34 +1267,40 @@
                         else {
                             //Скрипт редактирования блюда
                             if (buttonName == "Редактировать") {
-                                data.append('id', editingDishId);
+                              
+                                //dataEd.append('id', editingDishId);
 
-                                //var files = document.getElementById('uploadFile').files;
-                                //if (files.length > 0) {
-                                //    if (window.FormData !== undefined) {
-                                //        var dataEd = new FormData();
-                                //        for (var x = 0; x < files.length; x++) {
-                                //            dataeEd.append("file" + x, files[x]);
-                                //        }
+                                var proteins = $("#dish-creation-proteins").val();
+                                var fats = $("#dish-creation-fats").val();
+                                var carbonhydrates = $("#dish-creation-carbonhydrates").val();
+                                var kilocalories = $("#dish-creation-kilocalories").val();
 
-                                //        dataEd.append('id', newDish.id)
-                                //        dataeEd.append('name', dishName);
-                                //        dataeEd.append('selectedType', selectedCategory);
-                                //        dataeEd.append('hasGarnish', hasGarnish);
-                                //        dataeEd.append('proteins', proteins);
-                                //        dataeEd.append('fats', fats);
-                                //        dataeEd.append('carbonhydrates', carbonhydrates);
-                                //        dataeEd.append('kilocalories', kilocalories);
+                                var files = document.getElementById('uploadFile').files;
+                                var dataEd = new FormData();
+                                if (files.length > 0) {
+                                   if (window.FormData !== undefined) {
+                                       
+                                       for (var x = 0; x < files.length; x++) {
+                                          dataEd.append("file" + x, files[x]);
+                                       }
+                                   }
+                                }
 
-                                //    }
-                                //}
+                                  dataEd.append('id', editingDishId)
+                                       dataEd.append('name', dishName);
+                                       dataEd.append('selectedType', selectedCategory);
+                                       dataEd.append('hasGarnish', hasGarnish);
+                                       dataEd.append('proteins', proteins);
+                                       dataEd.append('fats', fats);
+                                       dataEd.append('carbonhydrates', carbonhydrates);
+                                       dataEd.append('kilocalories', kilocalories);
 
                                 $.ajax({
                                     url: '/Dishes/EditJson',
                                     dataType: "json",
                                     contentType: false,
                                     processData: false,
-                                    data: data,
+                                    data: dataEd,
                                     type: 'POST',
                                     success: function (result) {
                                         var dishCardDiv = "#dish-card-" + editingDishId;
@@ -1325,6 +1363,7 @@
 
         //подтягиваем значения в поля формы создания блюда (на ней же редактирование будет)
         function EditDish(dishId, hasGarnish) {
+            alert(dishId)
             editingDishId = dishId;
 
             //меняем название заголовка и кнопки формы

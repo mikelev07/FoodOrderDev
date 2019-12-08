@@ -34,16 +34,14 @@
                     <div class="tab-pane show active" id="first" role="tabpanel" aria-labelledby="first-tab">
                         <div class="row">
 
-                            <div class="col-12 mb-5">
-                                <img style="height:50px" />
-                            </div>
+                            
                             <div class="col-12 col-lg-5 col-xl-4 col-left">
-                                <a href="img/profile-pic.jpg" class="lightbox">
+                               @* <a href="img/profile-pic.jpg" class="lightbox">
                                     <img alt="Profile" src="~/Content/img/profile-pic-p.png"
                                          class="img-thumbnail card-img social-profile-img">
-                                </a>
+                                </a>*@
 
-                                <div id="profEmplo" class="card mb-4">
+                                <div id="profEmplo" class="card">
                                     <div class="card-body">
                                         <div class="text-center pt-4">
                                             <p class="list-item-heading pt-2">@Model.Surname @Model.Name @Model.Patronymic</p>
@@ -55,8 +53,6 @@
                                         <p class="text-muted text-small mb-2">Название компании</p>
                                         <p class="mb-3">@Model.Company.Name</p>
 
-                                        <p class="text-muted text-small mb-2">Логин</p>
-                                        <p class="mb-3">@Model.UserName</p>
 
                                         <p class="text-muted text-small mb-2">Email</p>
                                         <p class="mb-3">@Model.Email</p>
@@ -65,20 +61,6 @@
                                         <p class="mb-3">@Model.PhoneNumber</p>
 
 
-                                        <p class="text-muted text-small mb-2">Контакты</p>
-                                        <div class="social-icons">
-                                            <ul class="list-unstyled list-inline">
-                                                <li class="list-inline-item">
-                                                    <a href="#"><i class="simple-icon-social-facebook"></i></a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="#"><i class="simple-icon-social-twitter"></i></a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="#"><i class="simple-icon-social-instagram"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +84,7 @@
         var enjoyhint_instance = new EnjoyHint({
 
             onStart: function () {
-              $("#sss").css('pointer-events','none');
+             
 		      $.ajax({
                 type: 'POST',
                 contentType: "application/json",
@@ -111,12 +93,8 @@
 
                 }
             });
-            },
-             onEnd: function () {
-                alert(1)
-                $("#sss").css('pointer-events','unset');
-		   
-          },
+            }
+             
            
 
         });
@@ -127,6 +105,20 @@
                     event: 'next',
                     showNext: true,
                     description: 'Здесь отображена информация вашего профиля!',
+                    skipButton: {
+                        text: 'Все знаю'
+                    },
+                    nextButton: {
+                        text: 'Далее'
+                    },
+                    shape: 'circle',
+                    radius: 220
+                },
+                  {
+                    selector: '#mmm',
+                    event: 'next',
+                    showNext: true,
+                    description: 'В данном разделе - меню на сегодня!',
                     skipButton: {
                         text: 'Все знаю'
                     },

@@ -54,7 +54,7 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> OrdersHistory()
         {
             string userId = User.Identity.GetUserId();
-            List<Order> orders = await db.Orders.Include(d=>d.Packs.Select(n=>n.Dishes)).Include(c=>c.ChoosenDishes).Where(c => c.UserId == userId).ToListAsync();
+            List<Order> orders = await db.Orders.Include(d=>d.Packs.Select(n=>n.Dishes)).Include(c=>c.ChoosenDishes).Where(c => c.UserId == userId).OrderByDescending(f=>f.DateOfCreation).ToListAsync();
             
             return View(orders);
         }
@@ -303,11 +303,22 @@ namespace FoodOrder.Controllers
         public async Task<ActionResult> CreatePackOrderJson(string[] IDs, string descr, string ddd)
         {
             List<Pack> packs = db.Packs.Include(c => c.Dishes).Where(c => IDs.Contains(c.Id)).ToList();
-            var p = packs.FirstOrDefault();
-            db.Entry(p).State = EntityState.Modified;
-            var nd = db.Garnishes.Where(k => k.Id == ddd).FirstOrDefault().Name;
-            p.GarnishesForPacks = nd;
-            db.SaveChanges();
+            if (ddd != "0")
+            {
+                var p = packs.FirstOrDefault();
+                db.Entry(p).State = EntityState.Modified;
+                var nd = db.Garnishes.Where(k => k.Id == ddd).FirstOrDefault().Name;
+                p.GarnishesForPacks = nd;
+                db.SaveChanges();
+            } else
+            {
+                var p = packs.FirstOrDefault();
+                db.Entry(p).State = EntityState.Modified;
+                var nd = "Без гарнира";
+                p.GarnishesForPacks = nd;
+                db.SaveChanges();
+
+            }
             
             var dateOfCreation = DateTime.UtcNow;
             string uid = User.Identity.GetUserId();

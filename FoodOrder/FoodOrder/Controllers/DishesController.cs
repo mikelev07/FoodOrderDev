@@ -147,18 +147,21 @@ namespace FoodOrder.Controllers
 
         public async Task<ActionResult> CreatePack(string[] idDs, string Name, string gds)
         {
-            var gfpas = new List<Garnish>();
+            var gfpas = new List<GarnishFor>();
 
             var idpcks = gds.Split(',');
             var gfpacks = db.Dishes.Where(c => gds.Contains(c.Id)).ToList();
 
             foreach (var dd in gfpacks)
             {
-                var obj = new Garnish();
+                var obj = new GarnishFor();
                 obj.Id = dd.Id;
                 obj.Name = dd.Name;
-                db.Garnishes.Add(obj);
-                gfpas.Add(obj);
+               
+                if (!db.GarnishFors.Any(c => c.Id == dd.Id))
+                {
+                    gfpas.Add(obj);
+                }
             }
 
             db.SaveChanges();
@@ -168,10 +171,14 @@ namespace FoodOrder.Controllers
             var dishes = await db.Dishes.Where(b => idDs.Contains(b.Id)).ToListAsync();
 
             var secBl = dishes.Where(c => c.DishCategoryId == "2").FirstOrDefault();
-          
-            db.Entry(secBl).State = EntityState.Modified;
-            secBl.GarnishesForPacks = gfpas;
-            db.SaveChanges();
+
+
+            if (secBl != null)
+            {
+                db.Entry(secBl).State = EntityState.Modified;
+                secBl.GarnishesForPacks = gfpas;
+                db.SaveChanges();
+            }
 
             pack.Id = Guid.NewGuid().ToString("N");
             pack.Name = Name;
@@ -242,7 +249,7 @@ namespace FoodOrder.Controllers
         public async Task<JsonResult> EditJson()
         {
             string dbImagePath;
-            if (Request.Files.Get(0).FileName != null)
+            if (Request.Files.Count != 0)
             {
                 string fileName = Path.GetFileName(Request.Files.Get(0).FileName);
                 string path = Server.MapPath("~/Files/" + fileName);

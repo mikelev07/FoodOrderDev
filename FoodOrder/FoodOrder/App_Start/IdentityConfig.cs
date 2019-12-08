@@ -20,14 +20,15 @@ namespace FoodOrder
         public Task SendAsync(IdentityMessage message)
         {
             // настройка логина, пароля отправителя
-            var from = "devfoodgithub@gmail.com";
+            var from = "info@tasty.group";
             var pass = "food1234AA";
             // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 25);
+            SmtpClient client = new SmtpClient("srv-wplesk01.ps.kz", 25);
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             client.Credentials = new System.Net.NetworkCredential(from, pass);
             client.EnableSsl = true;
+           // client.Timeout = 2000;
             // создаем письмо: message.Destination - адрес получателя
             var mail = new MailMessage(from, message.Destination);
             mail.Subject = message.Subject;

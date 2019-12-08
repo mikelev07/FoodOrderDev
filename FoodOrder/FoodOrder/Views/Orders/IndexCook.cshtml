@@ -194,7 +194,7 @@
                                                                 <th>Количество порций</th>
                                                                 <th>Категория блюда</th>
                                                                 <th>Статус</th>
-                                                                <th class="empty">&nbsp;</th>
+                                                               
                                                             </tr>
                                                         </thead>
                                                         <tbody id="Ready">
@@ -213,12 +213,7 @@
                                                                     <td>
                                                                         <p class="text-muted">@(i.IsReady == true ? "Приготовлено" : "Не приготовлено")</p>
                                                                     </td>
-                                                                    <td>
-                                                                        <label class="custom-control custom-checkbox mb-1 align-self-center data-table-rows-check">
-                                                                            <input type="checkbox" class="custom-control-input">
-                                                                            <span class="custom-control-label">&nbsp;</span>
-                                                                        </label>
-                                                                    </td>
+                                                                   
                                                                 </tr>
 }
                                                         </tbody>
@@ -314,7 +309,7 @@
                                                     <p class="mb-0 text-muted text-small w-15 w-xs-100">Информация</p>
                                                     <p class="mb-0 text-muted text-small w-15 w-xs-100">Статус</p>
                                                     <div class="w-15 w-xs-100">
-                                                        <span class="btn-link" data-toggle="collapse" href="#collapseExample-d-@a"
+                                                        <span style="border-bottom:1px dashed green" class="btn-link" data-toggle="collapse" href="#collapseExample-d-@a"
                                                               role="button" aria-expanded="true" aria-controls="collapseExample">Заказы</span>
                                                     </div>
                                                 </div>
@@ -325,31 +320,40 @@
                                             </div>
                                         </div>
                                     </div>
-                            <div class="col-12">
-                                    <div class="collapse" id="collapseExample-d-@a">
-                                        <div class="col-8">
-                                            @foreach (var v in i.statGarnDishes)
-                                            {
-                                            <div class="card d-flex flex-row mb-3">
-                                                <div class="d-flex flex-grow-1 min-width-zero">
-                                                    <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                                                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100 mt-0" href="">
+                                    <div class="col-12">
+                                        @if (i.statGarnDishes.Count != 0)
+                                        {
+                                            <div class="collapse" id="collapseExample-d-@a">
+                                                <div class="col-8">
+                                                    @foreach (var v in i.statGarnDishes)
+                                                    {
+                                                        <div class="card d-flex flex-row mb-3">
+                                                            <div class="d-flex flex-grow-1 min-width-zero">
+                                                                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100 mt-0" href="">
 
-                                                            <span class="align-middle d-inline-block">@v.Name</span>
-                                                        </a>
-                                                        <p class="mb-0 text-muted text-small w-15 w-xs-100">@v.Count</p>
-                                                        
-                                                    </div>
-                                                    <label class="custom-control custom-checkbox mb-1 align-self-center mr-4">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <span class="custom-control-label">&nbsp;</span>
-                                                    </label>
+                                                                        <span class="align-middle d-inline-block">@v.Name</span>
+                                                                    </a>
+                                                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">@v.Count</p>
+
+                                                                </div>
+                                                                <label class="custom-control custom-checkbox mb-1 align-self-center mr-4">
+                                                                    <input type="checkbox" class="custom-control-input">
+                                                                    <span class="custom-control-label">&nbsp;</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
-                                            }
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="collapse" id="collapseExample-d-@a">
+                                                <p>Компания еще не совершала заказов</p>
+                                            </div>
+                                        }
                                     </div>
-                                </div>
                                     a = a + 1;
                                 }
 
@@ -367,29 +371,8 @@
 
                         <div class="card d-flex flex-row mb-3">
 
-                            <div class="d-flex flex-grow-1 min-width-zero">
-                                <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                                    <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="">
-                                        Заказ №1
-                                    </a>
-
-                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">LLC Aligofren Incorporated</p>
-
-                                    <p class="mb-0 text-muted text-small w-15 w-xs-100">01.04.2018</p>
-
-                                    <div class="w-15 w-xs-100">
-                                        <a class="btn btn-primary mb-1" data-toggle="collapse" href="#collapseExample"
-                                           role="button" aria-expanded="true" aria-controls="collapseExample">
-                                            Детали заказа
-                                        </a>
-                                    </div>
-
-                                </div>
-                                <label class="custom-control custom-checkbox mb-1 align-self-center pr-4">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <span class="custom-control-label">&nbsp;</span>
-                                </label>
-                            </div>
+                           Блок на доработке...
+                           
                         </div>
 
                         <div class="collapse" id="collapseExample">

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Система</title>
+    <title>Tasty Gourmet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="~/Content/system/font/iconsmind-s/css/iconsminds.css" />
@@ -83,24 +83,7 @@
 
 
                 <div class="position-relative d-none d-sm-inline-block">
-                    <button class="header-icon btn btn-empty" type="button" id="iconMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        <i class="simple-icon-grid"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right mt-3  position-absolute" id="iconMenuDropdown">
-                        <a href="#" class="icon-menu-item">
-                            <i class="iconsminds-equalizer d-block"></i>
-                            <span>Настройки</span>
-                        </a>
 
-                        <a href="#" class="icon-menu-item">
-                            <i class="iconsminds-male-female d-block"></i>
-                            <span>Пользователи</span>
-                        </a>
-
-
-
-                    </div>
                 </div>
 
             </div>
@@ -108,13 +91,14 @@
             <div class="user d-inline-block">
                 <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                    <span class="name">Виктор</span>
-                   
+                    <span class="name">Профиль</span>
+                    <span>
+                        <img alt="Фото профиля" src="~/Content/img/profile-pic-p.png" />
+                    </span>
                 </button>
 
                 <div class="dropdown-menu dropdown-menu-right mt-3">
-                    <a class="dropdown-item" href="#">Аккаунт</a>
-                    <a class="dropdown-item" href="#">Настройки</a>
+
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                     {
                         @Html.AntiForgeryToken()
@@ -162,7 +146,7 @@
                     }
                     @if (User.IsInRole("employee"))
                     {
-                        <li class="">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
                             <a href="/Orders">
                                 <i class="iconsminds-chef-hat"></i>
                                 <span>Меню на сегодня</span>
@@ -171,8 +155,14 @@
                         <li id="cart-or" style="border:0" class="select-from-library-button sfl-multiple" data-library-id="#libraryModal" data-count="-1">
                             <a id="csd" href="#">
                                 <i class="iconsminds-shopping-cart"></i>
-                                
+
                                 <span>Корзина для заказа</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "OrdersHistory" ? "active" : "")">
+                            <a href="/Orders/OrdersHistory">
+                                <i class="iconsminds-monitor---tablet"></i>
+                                <span>Мои заказы</span>
                             </a>
                         </li>
                     }

@@ -186,6 +186,7 @@
                         </div>
 
                         <br />
+                        <input type="hidden" name="CompanyImagePath" value="@Model.CompanyImagePath" />
 
                         <div class="form-group position-relative">
                             <div class="input-group">
@@ -201,11 +202,11 @@
                             <label>Способ выбора меню</label>
                             <div>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-primary active">
-                                        <input type="radio" name="PacksPicker" value="true" id="TypeOfPayment12" @(Model.PacksPicker == true? "checked":"") required> Неограниченный выбор
+                                    <label class="btn btn-primary @(Model.SingleChoice == true? "active":"")">
+                                        <input type="radio" name="PacksPicker" value="true" id="TypeOfPayment12" @(Model.SingleChoice == true? "checked":"") required> Неограниченный выбор
                                     </label>
-                                    <label class="btn btn-primary">
-                                        <input type="radio" name="PacksPicker" value="false" @(Model.PacksPicker == false? "checked":"") id="TypeOfPayment23"> Выбор паками
+                                    <label class="btn btn-primary @(Model.PacksPicker == true? "active":"")">
+                                        <input type="radio" name="PacksPicker" value="false" @(Model.PacksPicker == true ? "checked":"") id="TypeOfPayment23"> Выбор паками
                                     </label>
                                 </div>
                             </div>

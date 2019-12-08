@@ -151,18 +151,43 @@ namespace FoodOrder.Models
         public double Price { get; set; }
 
         public ICollection<Garnish> Garnishes { get; set; }
-        public ICollection<Garnish> GarnishesForPacks { get; set; }
+        public ICollection<GarnishFor> GarnishesForPacks { get; set; }
         public ICollection<Pack> Packs { get; set; }
 
         public ICollection<Menu> Menus { get; set; }
 
         public Dish()
         {
-            GarnishesForPacks = new List<Garnish>();
+            GarnishesForPacks = new List<GarnishFor>();
             Garnishes = new List<Garnish>();
             Packs = new List<Pack>();
             Menus = new List<Menu>();
            
+        }
+
+    }
+
+
+    public class GarnishFP
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<Dish> Dishes { get; set; }
+        public GarnishFP()
+        {
+            Dishes = new List<Dish>();
+        }
+
+    }
+
+    public class GarnishFor
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<Dish> Dishes { get; set; }
+        public GarnishFor()
+        {
+            Dishes = new List<Dish>();
         }
 
     }

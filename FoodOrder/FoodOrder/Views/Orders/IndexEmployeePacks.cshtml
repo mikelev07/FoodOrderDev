@@ -55,14 +55,14 @@
                                                                                                 </a><br />
                                                                                                 @if (d.GarnishesForPacks.Count != 0)
                                                                                                 {
-                                                                                                    <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-d-@d.Id"
+                                                                                                    <a class="btn-link mb-4" data-toggle="collapse" href="#collapseExample-d-@i.Id"
                                                                                                        role="button" aria-expanded="true" aria-controls="collapseExample">
                                                                                                         <span style="font-size:14px;border-bottom:1px dotted black">+ Добавить гарнир</span> <br />
                                                                                                     </a>
                                                                                                 }
                                                                                                 @if (d.GarnishesForPacks.Count != 0)
                                                                                                 {
-                                                                                                    <div class="collapse" id="collapseExample-d-@d.Id">
+                                                                                                    <div class="collapse" id="collapseExample-d-@i.Id">
                                                                                                         <div class="mt-4">
                                                                                                             <p class="mb-0">
                                                                                                                 <div style="margin-bottom:5px">
@@ -170,8 +170,6 @@
             var dpNames = [];
             var dpImages = [];
 
-
-
             var jNames = $("#" + dishId).find('.dasdas');
             var jImages =  $("#" + dishId).find('.card-img-top');
            
@@ -180,36 +178,35 @@
                 dpNames.push(this.innerText.trim());
             });
 
-            alert(dpNames)
+            //alert(dpNames)
 
             jImages.each(function (index, element) {
                 dpImages.push(this.src);
             });
 
-            alert(dpImages)
+           // alert(dpImages)
 
                 var constCol = 'collapse-cat-' + dishId;
 
-                //alert(catName)
-          
-                var isEqual = $("span:contains(" + catName + ")").last().length == 0;
+                var isEqual = $("#accordionSet .mb-2").length == 0;
                 //alert($('.folder-name').contents().length)
          
                 // alert(isEqual)
-            if (!isEqual) {
+            if (isEqual) {
                 sendIds.push(dishId)
                 //alert(1)
-                   if ($(".scount").length == 0) {
-                            $("#csd").append("<span style='background-color: limegreen;color: white;padding: 2px 2px 2px 2px;' class='scount'>1</span>")
-                        } else {
-                            var n = $(".scount").text();
-                            $(".scount").text(parseInt(n) + 1)
+                if ($(".scount").length == 0) {
+                    $("#csd").append("<span style='background-color: limegreen;color: white;padding: 2px 2px 2px 2px;' class='scount'>1</span>")
+                } else {
+                    var n = $(".scount").text();
+                    $(".scount").text(parseInt(n) + 1)
                 }
+              
 
                 var fdg = $("#" + dishId).find('.select2-single').find(":selected").val();
                 var ndg = $("#" + dishId).find('.select2-single').find(":selected").text();
                 $("#sdfg").val(fdg);
-             
+
                 var buttonCollapse = '<button class="btn btn-link p-0 folder-button-collapse" data-toggle="' + constCol + '"  data-target="#' + constCol + '" aria-expanded="true" aria-controls="' + constCol + '"><span class="icon-container"> <i class="simple-icon-arrow-down"></i></span><span class="folder-name">' + catName + '</span></button>';
 
                 var contentCollapse = '<div id="' + constCol + '" class="collapse show" data-parent="#accordionSet"> <div class="list disable-text-selection"><div id="content-' + constCol + '" class="row"> </div></div></div>';
@@ -220,19 +217,22 @@
 
                 $('#accordionSet').append(mb2);
 
-                for (var i = 0,j = 0; i < dpNames.length,j < dpImages.length; i++,j++) {
-                   
-                        var imageDish = '<div class="d-flex align-self-stretch"> <img src="' + dpImages[j] + '" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
-                        var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dpNames[i] + '</p></div></div>'
-                        var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> </label></div>'
-                        var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
-                        var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
+                for (var i = 0, j = 0; i < dpNames.length, j < dpImages.length; i++ , j++) {
 
-                        var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + '</div>'
+                    var imageDish = '<div class="d-flex align-self-stretch"> <img src="' + dpImages[j] + '" alt="изображение" class="list-media-thumbnail responsive border-0" /></div>'
+                    var cardBody = '<div class="card-body pr-1 pt-2 pb-2 align-self-center d-flex min-width-zero"><div class="w-100"><p class="truncate mb-0">' + dpNames[i] + '</p></div></div>'
+                    var checkLab = '<div class="custom-control custom-checkbox pl-1 pr-1 align-self-center"> <label class="custom-control custom-checkbox mb-0"> </label></div>'
+                    var specCard = '<div class="d-flex flex-grow-1 min-width-zero">' + cardBody + checkLab + '</div>'
+                    var cardDish = '<div class="card d-flex mb-2 p-0 media-thumb-container">' + imageDish + specCard + '</div>';
 
-                        $('#' + specId).append(dishContainer)
-                    }
-                
+                    var dishContainer = '<div id="di-' + id + '" class="col-6 mb-1 sfl-item-container" data-preview-path="~/Content/img/chock.jpg"data-path="chock.jpg" data-label="chock.jpg">' + cardDish + '</div>'
+
+                    $('#' + specId).append(dishContainer)
+                      isSingle = false;
+                }
+
+            } else {
+                showNotificationText("Пак уже добавлен")
             }
              @* else {
 
@@ -284,7 +284,7 @@
           
             var descr = $("#desc").val();
             var ddd = $("#sdfg").val();
-          
+            alert(IDs)
               $.ajax({
                 url: '/Orders/CreatePackOrderJson',
                 type: 'POST',

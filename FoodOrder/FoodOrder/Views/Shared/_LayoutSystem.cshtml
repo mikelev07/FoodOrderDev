@@ -103,15 +103,14 @@
             <div class="user d-inline-block">
                 <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                    <span class="name">Виктор</span>
+                    <span class="name">Профиль</span>
                     <span>
                         <img alt="Фото профиля" src="~/Content/img/profile-pic-p.png" />
                     </span>
                 </button>
 
                 <div class="dropdown-menu dropdown-menu-right mt-3">
-                    <a class="dropdown-item" href="#">Аккаунт</a>
-                    <a class="dropdown-item" href="#">Настройки</a>
+                  
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                     {
                         @Html.AntiForgeryToken()
@@ -159,7 +158,7 @@
                     }
                     @if (User.IsInRole("employee"))
                     {
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Index" ? "active" : "")">
+                        <li id="mmm" class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Index" ? "active" : "")">
                             <a href="/Orders">
                                 <i class="iconsminds-chef-hat"></i>
                                 <span>Меню на сегодня</span>

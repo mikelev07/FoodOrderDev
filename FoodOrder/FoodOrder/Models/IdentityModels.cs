@@ -151,8 +151,8 @@ namespace FoodOrder.Models
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; }
 
-  
-
+        public string NewInfo { get; set; }
+            
         public User()
         {
             Orders = new List<Order>();
@@ -197,6 +197,11 @@ namespace FoodOrder.Models
                   .MapRightKey("GarnishId")
                   .ToTable("DishGarnish"));
 
+            modelBuilder.Entity<Dish>().HasMany(c => c.GarnishesForPacks)
+            .WithMany(s => s.Dishes)
+            .Map(t => t.MapLeftKey("DishId")
+            .MapRightKey("GarnishForId")
+            .ToTable("DishGarnishFor"));
 
             modelBuilder.Entity<Dish>().HasMany(c => c.Menus)
                  .WithMany(s => s.Dishes)
@@ -231,6 +236,8 @@ namespace FoodOrder.Models
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Pack> Packs { get; set; }
         public DbSet<Garnish> Garnishes { get; set; }
+
+        public DbSet<GarnishFor> GarnishFors { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
 

@@ -423,7 +423,7 @@ namespace FoodOrder.Controllers
                         oldpass = newRandomPassword
                     },
                       protocol: Request.Url.Scheme);
-                    var res = "Представитель компании создал ваш профиль на сайте foodorder.somee.com - для завершения регистрации перейдите по ссылке: <a href=\""
+                    var res = "Представитель компании создал ваш профиль на сайте tasty.group - для завершения регистрации перейдите по ссылке: <a href=\""
                                                        + callbackUrl + "\">завершить регистрацию</a>";
                     await UserManager.SendEmailAsync(user.Id, "Заполнить профиль", res);
                     await UserManager.AddToRoleAsync(user.Id, "employee");
@@ -528,8 +528,8 @@ namespace FoodOrder.Controllers
 
         public async Task<JsonResult> SendSpecEmail(string id, string genPass)
         {
-            var res = "Заходите на сайт foodorder.somee.com, Ваш логин на сайте такой же как и ваша почта, Ваш пароль: " + genPass;
-            await UserManager.SendEmailAsync(id, "Проверка электронной почты", res);
+            var res = "Заходите на сайт tasty.group, Ваш логин на сайте такой же как и ваша почта, Ваш пароль: " + genPass;
+            await UserManager.SendEmailAsync(id, "Ваш логин", res);
 
             return Json(true);
         }
@@ -610,7 +610,6 @@ namespace FoodOrder.Controllers
                 UnlimitedOrders = company.UnlimitedOrders,
                 Description = company.Description,
                 Whatsapp = company.Whatsapp,
-
                 Telegram = company.Telegram,
                 CompanyImagePath = company.CompanyImagePath,
                 FullName = company.FullName,
@@ -639,10 +638,19 @@ namespace FoodOrder.Controllers
             "Id,Name,TypeOfPayment,UnlimitedOrders,Description,Whatsapp,Telegram,CompanyImagePath,CompanyImageFile," +
             "FullName,BIN_IIN, IIK, RNN,BIK,Bank,LegalAddress,ActualAddress,Director,PhoneNumber,Email,SingleChoice,PacksPicker")] CompanyViewModel cvm)
         {
-            string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
-            string path = Server.MapPath("~/Files/" + fileName);
 
-            bool ch = cvm.PacksPicker == true ? true : false;
+           
+                string fileName = Path.GetFileName(cvm.CompanyImageFile?.FileName);
+                string path = Server.MapPath("~/Files/" + fileName);
+            if (cvm.CompanyImageFile != null)
+            {
+                cvm.CompanyImageFile.SaveAs(path);
+            } else
+            {
+                fileName = Path.GetFileName(cvm.CompanyImagePath);
+            }
+
+            bool ch = cvm.PacksPicker == true ? false : true;
             bool mh = true;
             if (ch)
             {
@@ -672,13 +680,13 @@ namespace FoodOrder.Controllers
                 company.Director = cvm.Director;
                 company.PhoneNumber = cvm.PhoneNumber;
                 company.Email = cvm.Email;
-                cvm.CompanyImageFile.SaveAs(path);
+               
                 db.Entry(company).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("MyDetails", "Users");
             }
 
-            cvm.CompanyImageFile.SaveAs(path);
+         
 
             return View(cvm);
         }
